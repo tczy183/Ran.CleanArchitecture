@@ -1,0 +1,67 @@
+﻿version: '3.8'
+name: ran
+
+networks:
+  ran:
+    driver: bridge
+
+services:
+  
+  mysql-master:
+    image: mysql:8.0.37
+    container_name: mysql-master
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: ran
+      MYSQL_PASSWORD: ran
+      MYSQL_DATABASE: quartznet
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./sql-scripts/master_init.sql:/docker-entrypoint-initdb.d/master_init.sql
+      - ./sql-scripts/quartz_init.sql:/docker-entrypoint-initdb.d/quartz_init.sql
+    command:
+      --character-set-server=utf8mb4
+      --lower_case_table_names=1
+      --server-id=1
+      --log-bin=mysql-bin
+      --gtid-mode=ON
+      --enforce-gtid-consistency=TRUE
+    networks:
+      - ran
+  mysql-slave:
+    image: mysql:8.0.37
+    container_name: mysql-slave
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./sql-scripts/slave_init.sql:/docker-entrypoint-initdb.d/slave_init.sql
+    command:
+      --character-set-server=utf8mb4
+      --lower_case_table_names=1
+      --server-id=2
+      --log-bin=mysql-bin
+      --relay-log=slave-relay-bin
+      --read-only=1
+      --gtid-mode=ON
+      --enforce-gtid-consistency=TRUE
+    networks:
+      - ran
+    depends_on:
+      - mysql-master
+  
+  web:
+    image: web
+    build:
+      context: .
+      dockerfile: src/Web/Dockerfile
+    depends_on:
+      - mysql-master
+      - mysql-slave
+    networks:
+      - ran
+

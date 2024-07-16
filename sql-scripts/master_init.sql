@@ -1,0 +1,3 @@
+GRANT
+REPLICATION
+SLAVE ON *.* TO 'ran'@'%';
