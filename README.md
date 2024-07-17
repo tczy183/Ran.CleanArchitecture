@@ -1,4 +1,4 @@
-# Sinva.CleanArchitecture
+# Ran.CleanArchitecture
 
 ## License
 
