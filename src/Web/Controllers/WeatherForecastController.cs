@@ -8,20 +8,14 @@ namespace Web.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class WeatherForecastController(ILogger<WeatherForecastController> logger, IMediator mediator)
+    : ControllerBase
 {
-    private readonly ILogger<WeatherForecastController> _logger;
-    private readonly IMediator _mediator;
-
-    public WeatherForecastController(ILogger<WeatherForecastController> logger,IMediator mediator)
-    {
-        _logger = logger;
-        _mediator = mediator;
-    }
+    private readonly ILogger<WeatherForecastController> _logger = logger;
 
     [HttpGet(Name = "GetWeatherForecast")]
     public async Task<IEnumerable<WeatherForecast>> Get()
     {
-        return await _mediator.Send(new GetWeatherForecastsQuery());
+        return await mediator.Send(new GetWeatherForecastsQuery());
     }
 }

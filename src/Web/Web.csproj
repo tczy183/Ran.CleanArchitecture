@@ -20,6 +20,7 @@
         <Content Include="..\..\.dockerignore">
             <Link>.dockerignore</Link>
         </Content>
+        <Content Remove="Logs\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -31,6 +32,18 @@
       <Reference Include="Microsoft.AspNetCore.Mvc.Core">
         <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.6\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Logs\**" />
     </ItemGroup>
 
 </Project>

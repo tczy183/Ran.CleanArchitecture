@@ -25,7 +25,7 @@ try
     Log.Information("Current Host Environment-【{EnvironmentEnvironmentName}】", builder.Environment.EnvironmentName);
     Log.Information("Current Host SelfUrl-【{SelfUrl}】", builder.Configuration["App:SelfUrl"]);
 
-    builder.Host.UseAutofac()
+    builder.Host.AddAppSettingsSecretsJson().UseAutofac()
         .UseSerilog();
     await builder.Services.AddApplicationAsync<WebModule>();
     var app = builder.Build();
