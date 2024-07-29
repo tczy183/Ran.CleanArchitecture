@@ -3,13 +3,15 @@
 using Volo.Abp;
 using Volo.Abp.AspNetCore;
 using Volo.Abp.Autofac;
+using Volo.Abp.EventBus;
 using Volo.Abp.Modularity;
 
 namespace Web;
 
 [DependsOn(typeof(InfrastructureModule),
     typeof(AbpAutofacModule),
-    typeof(AbpAspNetCoreModule)
+    typeof(AbpAspNetCoreModule),
+    typeof(AbpEventBusModule)
 )]
 public class WebModule : AbpModule
 {
