@@ -1,0 +1,14 @@
+#!/bin/bash
+# 定义允许的提交前缀
+ALLOWED_PREFIXES="^(feat|fix|style|perf|refactor|revert|test|docs|chore|workflow|ci|types|wip): "
+
+# 获取提交消息
+MESSAGE=$(cat "$1")
+
+# 检查提交消息是否符合前缀格式
+if [[ ! $MESSAGE =~ $ALLOWED_PREFIXES ]]; then
+    echo "提交消息不符合规范。请以以下前缀之一开头："
+    echo "feat, fix, style, perf, refactor, revert, test, docs, chore, workflow, ci, types, wip"
+    echo "格式示例: feat: 增加新功能"
+    exit 1
+fi

@@ -1,0 +1,55 @@
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "System": "Information",
+        "Microsoft": "Information",
+        "Microsoft.EntityFrameworkCore": "Warning",
+        "DotNetCore": "Information"
+      }
+    },
+    "Enrich": [
+      "FromLogContext",
+      "WithProcessId",
+      "WithThreadId",
+      "WithEnvironmentName",
+      "WithMachineName",
+      "WithApplicationName"
+    ],
+    "WriteTo": [
+      {
+        "Name": "Async",
+        "Args": {
+          "configure": [
+            {
+              "Name": "Console",
+              "Args": {
+                "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] [{ProcessId}] [{SourceContext}] [{ThreadId}] - {Message:lj}{NewLine}{Exception}"
+              }
+            },
+            {
+              "Name": "File",
+              "Args": {
+                "path": "Logs/log-.txt",
+                "rollingInterval": "Day",
+                "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] [{ProcessId}] [{SourceContext}] [{ThreadId}] - {Message:lj}{NewLine}{Exception}"
+              }
+            },
+            {
+              "Name": "Elasticsearch",
+              "Args": {
+                "nodeUris": "http://localhost:9200",
+                "indexFormat": "sineva-imdts-httpapi-host-{0:yyyy.MM.dd}",
+                "restrictedToMinimumLevel": "Information",
+                "autoRegisterTemplate": true,
+                "inlineFields": true,
+                "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] [{ProcessId}] [{SourceContext}] [{ThreadId}] - {Message:lj}{NewLine}{Exception}"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

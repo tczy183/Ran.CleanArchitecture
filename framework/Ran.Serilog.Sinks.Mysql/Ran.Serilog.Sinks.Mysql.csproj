@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFrameworks>netstandent2.0;netstandent2.1</TargetFrameworks>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MySql.Data" />
+      <PackageReference Include="Serilog.Sinks.Async" />
+    </ItemGroup>
+
+</Project>

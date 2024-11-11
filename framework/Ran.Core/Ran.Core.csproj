@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Ran.DenpendencyInjection.Abstractions\Ran.DenpendencyInjection.Abstractions.csproj" />
+    </ItemGroup>
+
+</Project>

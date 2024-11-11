@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\Ran.EventBus.Abstractions\Ran.EventBus.Abstractions.csproj"/>
+    </ItemGroup>
+</Project>
