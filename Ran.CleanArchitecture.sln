@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution Items", "solution 
 								Directory.Build.props = Directory.Build.props
 								Directory.Packages.props = Directory.Packages.props
 								README.md = README.md
-					            README.cn.md = README.cn.md
+					READMECN.md = READMECN.md
 				EndProjectSection
 EndProject
 

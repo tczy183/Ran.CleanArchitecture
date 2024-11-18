@@ -1,6 +1,5 @@
 ﻿DDD-CleanArchitecture
 =====================
-[English](./README.md) | 简体中文
 
 ## 项目介绍
 DDD-CleanArchitecture 是一个基于领域驱动设计和干净架构的项目模板，用于快速构建项目。

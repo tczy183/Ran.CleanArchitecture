@@ -1,6 +1,5 @@
 DDD-CleanArchitecture
 =====================
-English | [简体中文](./README.cn.md)
 
 ## Project Introduction
 DDD-CleanArchitecture is a project template based on Domain-Driven Design and Clean Architecture for quickly building projects.
