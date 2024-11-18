@@ -35,17 +35,6 @@
                 "rollingInterval": "Day",
                 "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] [{ProcessId}] [{SourceContext}] [{ThreadId}] - {Message:lj}{NewLine}{Exception}"
               }
-            },
-            {
-              "Name": "Elasticsearch",
-              "Args": {
-                "nodeUris": "http://localhost:9200",
-                "indexFormat": "sineva-imdts-httpapi-host-{0:yyyy.MM.dd}",
-                "restrictedToMinimumLevel": "Information",
-                "autoRegisterTemplate": true,
-                "inlineFields": true,
-                "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] [{ProcessId}] [{SourceContext}] [{ThreadId}] - {Message:lj}{NewLine}{Exception}"
-              }
             }
           ]
         }

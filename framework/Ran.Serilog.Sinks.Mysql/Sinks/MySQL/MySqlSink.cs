@@ -2,31 +2,32 @@
 using System.Text;
 using MySql.Data.MySqlClient;
 using Ran.Serilog.Sinks.Mysql.Sinks;
+using Ran.Serilog.Sinks.Mysql.Sinks.EventArgs;
 using Serilog.Core;
 using Serilog.Debugging;
 using Serilog.Events;
 
-namespace Ran.Serilog.Sinks.Mysql.Sinks;
+namespace Ran.Serilog.Sinks.Mysql;
 
 internal class MySqlSink : BatchProvider, ILogEventSink
 {
-    private readonly string _connectionString;
-    private readonly bool _storeTimestampInUtc;
-    private readonly string _tableName;
+    private readonly MySqlOption _option;
 
-    public MySqlSink(
-        string connectionString,
-        string tableName = "Logs",
-        bool storeTimestampInUtc = false,
+    public MySqlSink(MySqlOption option,
         uint batchSize = 100) : base((int)batchSize)
     {
-        ArgumentNullException.ThrowIfNull(connectionString, nameof(connectionString));
-        _connectionString = connectionString;
-        _tableName = tableName;
-        _storeTimestampInUtc = storeTimestampInUtc;
+        ArgumentNullException.ThrowIfNull(option, nameof(option));
+        _option = option;
+        ArgumentNullException.ThrowIfNull(option.ConnectionString, nameof(option.ConnectionString));
+        ArgumentNullException.ThrowIfNull(option.TableName, nameof(option.TableName));
 
-        var sqlConnection = GetSqlConnection();
-        CreateTable(sqlConnection);
+        if (_option.NeedAutoCreateTable)
+        {
+            var sqlConnection = GetSqlConnection();
+            CreateTable(sqlConnection);
+            _option.NeedAutoCreateTable = false;
+            _option.OnCreateTable?.Invoke(new CreateTableEventArgs());
+        }
     }
 
     public void Emit(LogEvent logEvent)
@@ -38,7 +39,7 @@ internal class MySqlSink : BatchProvider, ILogEventSink
     {
         try
         {
-            var conn = new MySqlConnection(_connectionString);
+            var conn = new MySqlConnection(_option.ConnectionString);
             conn.Open();
 
             return conn;
@@ -54,7 +55,7 @@ internal class MySqlSink : BatchProvider, ILogEventSink
     private MySqlCommand GetInsertCommand(MySqlConnection sqlConnection)
     {
         var tableCommandBuilder = new StringBuilder();
-        tableCommandBuilder.Append($"INSERT INTO  {_tableName} (");
+        tableCommandBuilder.Append($"INSERT INTO  {_option.TableName} (");
         tableCommandBuilder.Append("Timestamp, Level, Template, Message, Exception, Properties) ");
         tableCommandBuilder.Append("VALUES (@ts, @level,@template, @msg, @ex, @prop)");
 
@@ -70,15 +71,15 @@ internal class MySqlSink : BatchProvider, ILogEventSink
 
         return cmd;
     }
-    
-    
+
 
     private void CreateTable(MySqlConnection sqlConnection)
     {
         try
         {
             var tableCommandBuilder = new StringBuilder();
-            tableCommandBuilder.Append($"CREATE TABLE IF NOT EXISTS {_tableName} (");
+            tableCommandBuilder.Append($"CREATE TABLE IF NOT EXISTS {_option.TableName} (");
+            
             tableCommandBuilder.Append("id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,");
             tableCommandBuilder.Append("Timestamp VARCHAR(100),");
             tableCommandBuilder.Append("Level VARCHAR(15),");
@@ -112,7 +113,7 @@ internal class MySqlSink : BatchProvider, ILogEventSink
                 var logMessageString = new StringWriter(new StringBuilder());
                 logEvent.RenderMessage(logMessageString);
 
-                insertCommand.Parameters["@ts"].Value = _storeTimestampInUtc
+                insertCommand.Parameters["@ts"].Value = _option.StoreTimestampInUtc
                     ? logEvent.Timestamp.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.fffzzz")
                     : logEvent.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fffzzz");
 

@@ -8,8 +8,7 @@ var configuration = new ConfigurationBuilder()
     .Build();
 
 Log.Logger = new LoggerConfiguration()
-    // .ReadFrom.Configuration(configuration)
-    .WriteTo.SQLite("Logs.db")
+    .ReadFrom.Configuration(configuration)
     .CreateLogger();
 
 try
