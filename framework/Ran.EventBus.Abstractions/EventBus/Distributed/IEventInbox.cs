@@ -4,7 +4,10 @@ public interface IEventInbox
 {
     Task EnqueueAsync(IncomingEventInfo incomingEvent);
 
-    Task<List<IncomingEventInfo>> GetWaitingEventsAsync(int maxCount, CancellationToken cancellationToken = default);
+    Task<List<IncomingEventInfo>> GetWaitingEventsAsync(
+        int maxCount,
+        CancellationToken cancellationToken = default
+    );
 
     Task MarkAsProcessedAsync(Guid id);
 

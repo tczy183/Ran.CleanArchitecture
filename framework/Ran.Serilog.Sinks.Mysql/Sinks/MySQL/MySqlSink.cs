@@ -13,8 +13,8 @@ internal class MySqlSink : BatchProvider, ILogEventSink
 {
     private readonly MySqlOption _option;
 
-    public MySqlSink(MySqlOption option,
-        uint batchSize = 100) : base((int)batchSize)
+    public MySqlSink(MySqlOption option, uint batchSize = 100)
+        : base((int)batchSize)
     {
         ArgumentNullException.ThrowIfNull(option, nameof(option));
         _option = option;
@@ -72,14 +72,13 @@ internal class MySqlSink : BatchProvider, ILogEventSink
         return cmd;
     }
 
-
     private void CreateTable(MySqlConnection sqlConnection)
     {
         try
         {
             var tableCommandBuilder = new StringBuilder();
             tableCommandBuilder.Append($"CREATE TABLE IF NOT EXISTS {_option.TableName} (");
-            
+
             tableCommandBuilder.Append("id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,");
             tableCommandBuilder.Append("Timestamp VARCHAR(100),");
             tableCommandBuilder.Append("Level VARCHAR(15),");
@@ -121,9 +120,8 @@ internal class MySqlSink : BatchProvider, ILogEventSink
                 insertCommand.Parameters["@template"].Value = logEvent.MessageTemplate.ToString();
                 insertCommand.Parameters["@msg"].Value = logMessageString;
                 insertCommand.Parameters["@ex"].Value = logEvent.Exception?.ToString();
-                insertCommand.Parameters["@prop"].Value = logEvent.Properties.Count > 0
-                    ? logEvent.Properties.Json()
-                    : string.Empty;
+                insertCommand.Parameters["@prop"].Value =
+                    logEvent.Properties.Count > 0 ? logEvent.Properties.Json() : string.Empty;
 
                 await insertCommand.ExecuteNonQueryAsync().ConfigureAwait(false);
             }

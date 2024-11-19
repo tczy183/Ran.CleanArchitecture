@@ -14,19 +14,18 @@ public class ApplicationManager : IApplicationManager
 
     public IReadOnlyList<IModuleDescriptor> Modules { get; }
 
-    public ApplicationManager(
-        Type startupModuleType,
-        IServiceCollection services)
+    public ApplicationManager(Type startupModuleType, IServiceCollection services)
     {
-        if (services == null) throw new ArgumentNullException(nameof(services));
-        StartupModuleType = startupModuleType ?? throw new ArgumentNullException(nameof(startupModuleType));
+        if (services == null)
+            throw new ArgumentNullException(nameof(services));
+        StartupModuleType =
+            startupModuleType ?? throw new ArgumentNullException(nameof(startupModuleType));
 
         services.TryAddSingleton<IApplicationManager>(this);
         services.TryAddSingleton<IModuleLoader>(new ModuleLoader());
         Modules = LoadModules(services);
         ConfigureConfigureServices(services);
     }
-
 
     public void ConfigureConfigureServices(IServiceCollection services)
     {
@@ -40,8 +39,11 @@ public class ApplicationManager : IApplicationManager
             catch (Exception ex)
             {
                 throw new Exception(
-                    "An error occurred during PreConfigureServices phase of the module " +
-                    moduleDescriptor.ModuleType.AssemblyQualifiedName + ". See the inner exception for details.", ex);
+                    "An error occurred during PreConfigureServices phase of the module "
+                        + moduleDescriptor.ModuleType.AssemblyQualifiedName
+                        + ". See the inner exception for details.",
+                    ex
+                );
             }
         }
 
@@ -54,8 +56,11 @@ public class ApplicationManager : IApplicationManager
             catch (Exception ex)
             {
                 throw new Exception(
-                    "An error occurred during ConfigureServices phase of the module " +
-                    moduleDescriptor.ModuleType.AssemblyQualifiedName + ". See the inner exception for details.", ex);
+                    "An error occurred during ConfigureServices phase of the module "
+                        + moduleDescriptor.ModuleType.AssemblyQualifiedName
+                        + ". See the inner exception for details.",
+                    ex
+                );
             }
         }
 
@@ -68,16 +73,24 @@ public class ApplicationManager : IApplicationManager
             catch (Exception ex)
             {
                 throw new Exception(
-                    "An error occurred during PostConfigureServices phase of the module " +
-                    moduleDescriptor.ModuleType.AssemblyQualifiedName + ". See the inner exception for details.", ex);
+                    "An error occurred during PostConfigureServices phase of the module "
+                        + moduleDescriptor.ModuleType.AssemblyQualifiedName
+                        + ". See the inner exception for details.",
+                    ex
+                );
             }
         }
     }
 
-    public void Configure(IApplicationBuilder applicationBuilder,IEndpointRouteBuilder endpointRouteBuilder)
+    public void Configure(
+        IApplicationBuilder applicationBuilder,
+        IEndpointRouteBuilder endpointRouteBuilder
+    )
     {
-        var context =
-            new ApplicationInitializationContext(applicationBuilder,endpointRouteBuilder);
+        var context = new ApplicationInitializationContext(
+            applicationBuilder,
+            endpointRouteBuilder
+        );
         foreach (var moduleDescriptor in Modules)
         {
             try
@@ -87,8 +100,11 @@ public class ApplicationManager : IApplicationManager
             catch (Exception ex)
             {
                 throw new Exception(
-                    "An error occurred during PreConfigure phase of the module " +
-                    moduleDescriptor.ModuleType.AssemblyQualifiedName + ". See the inner exception for details.", ex);
+                    "An error occurred during PreConfigure phase of the module "
+                        + moduleDescriptor.ModuleType.AssemblyQualifiedName
+                        + ". See the inner exception for details.",
+                    ex
+                );
             }
         }
 
@@ -101,8 +117,11 @@ public class ApplicationManager : IApplicationManager
             catch (Exception ex)
             {
                 throw new Exception(
-                    "An error occurred during Configure phase of the module " +
-                    moduleDescriptor.ModuleType.AssemblyQualifiedName + ". See the inner exception for details.", ex);
+                    "An error occurred during Configure phase of the module "
+                        + moduleDescriptor.ModuleType.AssemblyQualifiedName
+                        + ". See the inner exception for details.",
+                    ex
+                );
             }
         }
 
@@ -115,16 +134,24 @@ public class ApplicationManager : IApplicationManager
             catch (Exception ex)
             {
                 throw new Exception(
-                    "An error occurred during PostConfigure phase of the module " +
-                    moduleDescriptor.ModuleType.AssemblyQualifiedName + ". See the inner exception for details.", ex);
+                    "An error occurred during PostConfigure phase of the module "
+                        + moduleDescriptor.ModuleType.AssemblyQualifiedName
+                        + ". See the inner exception for details.",
+                    ex
+                );
             }
         }
     }
 
-    public void Shutdown(IApplicationBuilder applicationBuilder,IEndpointRouteBuilder endpointRouteBuilder)
+    public void Shutdown(
+        IApplicationBuilder applicationBuilder,
+        IEndpointRouteBuilder endpointRouteBuilder
+    )
     {
-        var context =
-            new ApplicationInitializationContext(applicationBuilder,endpointRouteBuilder);
+        var context = new ApplicationInitializationContext(
+            applicationBuilder,
+            endpointRouteBuilder
+        );
         var modules = Modules.Reverse().ToList();
         foreach (var moduleDescriptor in modules)
         {
@@ -135,17 +162,21 @@ public class ApplicationManager : IApplicationManager
             catch (Exception ex)
             {
                 throw new Exception(
-                    "An error occurred during Shutdown phase of the module  " +
-                    moduleDescriptor.ModuleType.AssemblyQualifiedName + ". See the inner exception for details.", ex);
+                    "An error occurred during Shutdown phase of the module  "
+                        + moduleDescriptor.ModuleType.AssemblyQualifiedName
+                        + ". See the inner exception for details.",
+                    ex
+                );
             }
         }
     }
 
-    private IReadOnlyList<IModuleDescriptor> LoadModules(
-        IServiceCollection services)
+    private IReadOnlyList<IModuleDescriptor> LoadModules(IServiceCollection services)
     {
-        var moduleLoader = (IModuleLoader)services.FirstOrDefault(p => p.ServiceType == typeof(IModuleLoader))
-            ?.ImplementationInstance!;
+        var moduleLoader = (IModuleLoader)
+            services
+                .FirstOrDefault(p => p.ServiceType == typeof(IModuleLoader))
+                ?.ImplementationInstance!;
         return moduleLoader?.LoadModules(services, StartupModuleType);
     }
 }

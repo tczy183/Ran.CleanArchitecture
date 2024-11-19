@@ -8,11 +8,10 @@ namespace Ran.Core.Ran.Modularity;
 
 public class ApplicationInitializationContext(
     IApplicationBuilder applicationBuilder,
-    IEndpointRouteBuilder endpointRouteBuilder)
-    : IApplicationInitializationContext
+    IEndpointRouteBuilder endpointRouteBuilder
+) : IApplicationInitializationContext
 {
     public IApplicationBuilder ApplicationBuilder { get; } = applicationBuilder;
     public IEndpointRouteBuilder EndpointRouteBuilder { get; } = endpointRouteBuilder;
     public IServiceProvider ServiceProvider { get; } = applicationBuilder.ApplicationServices;
-    
 }

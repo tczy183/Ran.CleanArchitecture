@@ -13,7 +13,11 @@ public static class StringExtensions
     /// <summary>
     /// Adds a char to end of given string if it does not ends with the char.
     /// </summary>
-    public static string EnsureEndsWith(this string str, char c, StringComparison comparisonType = StringComparison.Ordinal)
+    public static string EnsureEndsWith(
+        this string str,
+        char c,
+        StringComparison comparisonType = StringComparison.Ordinal
+    )
     {
         Check.NotNull(str, nameof(str));
 
@@ -28,7 +32,11 @@ public static class StringExtensions
     /// <summary>
     /// Adds a char to beginning of given string if it does not starts with the char.
     /// </summary>
-    public static string EnsureStartsWith(this string str, char c, StringComparison comparisonType = StringComparison.Ordinal)
+    public static string EnsureStartsWith(
+        this string str,
+        char c,
+        StringComparison comparisonType = StringComparison.Ordinal
+    )
     {
         Check.NotNull(str, nameof(str));
 
@@ -69,7 +77,9 @@ public static class StringExtensions
 
         if (str.Length < len)
         {
-            throw new ArgumentException("len argument can not be bigger than given string's length!");
+            throw new ArgumentException(
+                "len argument can not be bigger than given string's length!"
+            );
         }
 
         return str.Substring(0, len);
@@ -130,7 +140,11 @@ public static class StringExtensions
     /// <param name="postFixes">one or more postfix.</param>
     /// <returns>Modified string or the same string if it has not any of given postfixes</returns>
     [ContractAnnotation("null <= str:null")]
-    public static string RemovePostFix(this string str, StringComparison comparisonType, params string[] postFixes)
+    public static string RemovePostFix(
+        this string str,
+        StringComparison comparisonType,
+        params string[] postFixes
+    )
     {
         if (str.IsNullOrEmpty())
         {
@@ -173,7 +187,11 @@ public static class StringExtensions
     /// <param name="preFixes">one or more prefix.</param>
     /// <returns>Modified string or the same string if it has not any of given prefixes</returns>
     [ContractAnnotation("null <= str:null")]
-    public static string RemovePreFix(this string str, StringComparison comparisonType, params string[] preFixes)
+    public static string RemovePreFix(
+        this string str,
+        StringComparison comparisonType,
+        params string[] preFixes
+    )
     {
         if (str.IsNullOrEmpty())
         {
@@ -196,7 +214,12 @@ public static class StringExtensions
         return str;
     }
 
-    public static string ReplaceFirst(this string str, string search, string replace, StringComparison comparisonType = StringComparison.Ordinal)
+    public static string ReplaceFirst(
+        this string str,
+        string search,
+        string replace,
+        StringComparison comparisonType = StringComparison.Ordinal
+    )
     {
         Check.NotNull(str, nameof(str));
 
@@ -235,7 +258,9 @@ public static class StringExtensions
 
         if (str.Length < len)
         {
-            throw new ArgumentException("len argument can not be bigger than given string's length!");
+            throw new ArgumentException(
+                "len argument can not be bigger than given string's length!"
+            );
         }
 
         return str.Substring(str.Length - len, len);
@@ -281,7 +306,11 @@ public static class StringExtensions
     /// <param name="handleAbbreviations">set true to if you want to convert 'XYZ' to 'xyz'.</param>
     /// <returns>camelCase of the string</returns>
     [ContractAnnotation("null <= str:null")]
-    public static string ToCamelCase(this string str, bool useCurrentCulture = false, bool handleAbbreviations = false)
+    public static string ToCamelCase(
+        this string str,
+        bool useCurrentCulture = false,
+        bool handleAbbreviations = false
+    )
     {
         if (string.IsNullOrWhiteSpace(str))
         {
@@ -298,7 +327,8 @@ public static class StringExtensions
             return useCurrentCulture ? str.ToLower() : str.ToLowerInvariant();
         }
 
-        return (useCurrentCulture ? char.ToLower(str[0]) : char.ToLowerInvariant(str[0])) + str.Substring(1);
+        return (useCurrentCulture ? char.ToLower(str[0]) : char.ToLowerInvariant(str[0]))
+            + str.Substring(1);
     }
 
     /// <summary>
@@ -317,7 +347,11 @@ public static class StringExtensions
 
         return useCurrentCulture
             ? Regex.Replace(str, "[a-z][A-Z]", m => m.Value[0] + " " + char.ToLower(m.Value[1]))
-            : Regex.Replace(str, "[a-z][A-Z]", m => m.Value[0] + " " + char.ToLowerInvariant(m.Value[1]));
+            : Regex.Replace(
+                str,
+                "[a-z][A-Z]",
+                m => m.Value[0] + " " + char.ToLowerInvariant(m.Value[1])
+            );
     }
 
     /// <summary>
@@ -337,7 +371,11 @@ public static class StringExtensions
 
         return useCurrentCulture
             ? Regex.Replace(str, "[a-z][A-Z]", m => m.Value[0] + "-" + char.ToLower(m.Value[1]))
-            : Regex.Replace(str, "[a-z][A-Z]", m => m.Value[0] + "-" + char.ToLowerInvariant(m.Value[1]));
+            : Regex.Replace(
+                str,
+                "[a-z][A-Z]",
+                m => m.Value[0] + "-" + char.ToLowerInvariant(m.Value[1])
+            );
     }
 
     /// <summary>
@@ -445,7 +483,8 @@ public static class StringExtensions
             return useCurrentCulture ? str.ToUpper() : str.ToUpperInvariant();
         }
 
-        return (useCurrentCulture ? char.ToUpper(str[0]) : char.ToUpperInvariant(str[0])) + str.Substring(1);
+        return (useCurrentCulture ? char.ToUpper(str[0]) : char.ToUpperInvariant(str[0]))
+            + str.Substring(1);
     }
 
     /// <summary>

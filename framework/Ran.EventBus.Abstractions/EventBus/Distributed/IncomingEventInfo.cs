@@ -8,7 +8,6 @@ public class IncomingEventInfo
 {
     public static int MaxEventNameLength { get; set; } = 256;
 
-
     public Guid Id { get; }
 
     public string MessageId { get; } = default!;
@@ -19,16 +18,15 @@ public class IncomingEventInfo
 
     public DateTime CreationTime { get; }
 
-    protected IncomingEventInfo()
-    {
-    }
+    protected IncomingEventInfo() { }
 
     public IncomingEventInfo(
         Guid id,
         string messageId,
         string eventName,
         byte[] eventData,
-        DateTime creationTime)
+        DateTime creationTime
+    )
     {
         Id = id;
         MessageId = messageId;

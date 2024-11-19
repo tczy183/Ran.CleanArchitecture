@@ -1,7 +1,3 @@
-
 namespace Ran.DenpendencyInjection;
 
-public interface ITransientDependency
-{
-
-}
+public interface ITransientDependency { }

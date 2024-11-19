@@ -2,11 +2,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Ran.Core.Ran.Exceptions;
 
-public class BusinessException : Exception,
-    IBusinessException,
-    IHasErrorCode,
-    IHasErrorDetails,
-    IHasLogLevel
+public class BusinessException
+    : Exception,
+        IBusinessException,
+        IHasErrorCode,
+        IHasErrorDetails,
+        IHasLogLevel
 {
     public string? Code { get; set; }
 
@@ -19,7 +20,8 @@ public class BusinessException : Exception,
         string? message = null,
         string? details = null,
         Exception? innerException = null,
-        LogLevel logLevel = LogLevel.Warning)
+        LogLevel logLevel = LogLevel.Warning
+    )
         : base(message, innerException)
     {
         Code = code;

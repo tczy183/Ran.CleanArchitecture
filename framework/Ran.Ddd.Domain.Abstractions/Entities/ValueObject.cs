@@ -12,7 +12,8 @@ public abstract class ValueObject
         return left is null || left.Equals(right!);
     }
 
-    protected static bool NotEqualOperator(ValueObject left, ValueObject right) => !EqualOperator(left, right);
+    protected static bool NotEqualOperator(ValueObject left, ValueObject right) =>
+        !EqualOperator(left, right);
 
     protected abstract IEnumerable<object> GetAtomicValues();
 
@@ -29,7 +30,7 @@ public abstract class ValueObject
         }
 
         var other = (ValueObject)obj;
-        
+
         using var thisValues = GetAtomicValues().GetEnumerator();
         using var otherValues = other.GetAtomicValues().GetEnumerator();
         while (thisValues.MoveNext() && otherValues.MoveNext())
@@ -52,7 +53,6 @@ public abstract class ValueObject
     /// 根据原子值生成哈希值
     /// </summary>
     /// <returns></returns>
-    public override int GetHashCode() => GetAtomicValues()
-        .Select(x => x.GetHashCode())
-        .Aggregate((x, y) => x ^ y);
+    public override int GetHashCode() =>
+        GetAtomicValues().Select(x => x.GetHashCode()).Aggregate((x, y) => x ^ y);
 }

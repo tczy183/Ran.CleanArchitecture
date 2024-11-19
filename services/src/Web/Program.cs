@@ -7,9 +7,7 @@ var configuration = new ConfigurationBuilder()
     .AddJsonFile("serilog.json", optional: true, reloadOnChange: true)
     .Build();
 
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(configuration)
-    .CreateLogger();
+Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
 
 try
 {

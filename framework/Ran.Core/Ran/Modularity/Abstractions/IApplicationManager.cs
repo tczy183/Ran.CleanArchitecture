@@ -9,6 +9,12 @@ namespace Ran.Core.Ran.Modularity.Abstractions;
 public interface IApplicationManager
 {
     void ConfigureConfigureServices(IServiceCollection services);
-    void Configure(IApplicationBuilder applicationBuilder,IEndpointRouteBuilder endpointRouteBuilder);
-    void Shutdown(IApplicationBuilder applicationBuilder,IEndpointRouteBuilder endpointRouteBuilder);
+    void Configure(
+        IApplicationBuilder applicationBuilder,
+        IEndpointRouteBuilder endpointRouteBuilder
+    );
+    void Shutdown(
+        IApplicationBuilder applicationBuilder,
+        IEndpointRouteBuilder endpointRouteBuilder
+    );
 }

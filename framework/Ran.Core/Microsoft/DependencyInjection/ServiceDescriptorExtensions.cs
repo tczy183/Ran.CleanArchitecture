@@ -14,7 +14,10 @@ public static class ServiceDescriptorExtensions
     /// <returns>
     /// The appropriate implementation instance from the service descriptor.
     /// </returns>
-    public static object? NormalizedImplementationInstance(this ServiceDescriptor descriptor) => descriptor.IsKeyedService ? descriptor.KeyedImplementationInstance : descriptor.ImplementationInstance;
+    public static object? NormalizedImplementationInstance(this ServiceDescriptor descriptor) =>
+        descriptor.IsKeyedService
+            ? descriptor.KeyedImplementationInstance
+            : descriptor.ImplementationInstance;
 
     /// <summary>
     /// Normalizes the implementation type data between keyed and not keyed services.
@@ -25,5 +28,8 @@ public static class ServiceDescriptorExtensions
     /// <returns>
     /// The appropriate implementation type from the service descriptor.
     /// </returns>
-    public static Type? NormalizedImplementationType(this ServiceDescriptor descriptor) => descriptor.IsKeyedService ? descriptor.KeyedImplementationType : descriptor.ImplementationType;
+    public static Type? NormalizedImplementationType(this ServiceDescriptor descriptor) =>
+        descriptor.IsKeyedService
+            ? descriptor.KeyedImplementationType
+            : descriptor.ImplementationType;
 }

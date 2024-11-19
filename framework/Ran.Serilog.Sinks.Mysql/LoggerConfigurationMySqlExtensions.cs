@@ -38,23 +38,34 @@ public static class LoggerConfigurationMySqlExtensions
         Action<CreateTableEventArgs> onCreateTable = null,
         uint batchSize = 100,
         LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
-        LoggingLevelSwitch levelSwitch = null)
+        LoggingLevelSwitch levelSwitch = null
+    )
     {
         ArgumentNullException.ThrowIfNull(loggerConfiguration);
 
-        var option = GetOption(connectionString, formatProvider, tableName, failureCallback, columnOptions,
+        var option = GetOption(
+            connectionString,
+            formatProvider,
+            tableName,
+            failureCallback,
+            columnOptions,
             needAutoCreateTable,
-            storeTimestampInUtc, onCreateTable);
+            storeTimestampInUtc,
+            onCreateTable
+        );
 
         if (batchSize is < 1 or > 1000)
-            throw new ArgumentOutOfRangeException("[batchSize] argument must be between 1 and 1000 inclusive");
+            throw new ArgumentOutOfRangeException(
+                "[batchSize] argument must be between 1 and 1000 inclusive"
+            );
 
         try
         {
             return loggerConfiguration.Sink(
                 new MySqlSink(option, batchSize),
                 restrictedToMinimumLevel,
-                levelSwitch);
+                levelSwitch
+            );
         }
         catch (Exception ex)
         {
@@ -72,7 +83,8 @@ public static class LoggerConfigurationMySqlExtensions
         IDictionary<string, ColumnWriterBase>? columnOptions,
         bool needAutoCreateTable,
         bool storeTimestampInUtc,
-        Action<CreateTableEventArgs> onCreateTable)
+        Action<CreateTableEventArgs> onCreateTable
+    )
     {
         return new MySqlOption
         {
@@ -83,7 +95,7 @@ public static class LoggerConfigurationMySqlExtensions
             ColumnOptions = columnOptions ?? new Dictionary<string, ColumnWriterBase>(),
             NeedAutoCreateTable = needAutoCreateTable,
             StoreTimestampInUtc = storeTimestampInUtc,
-            OnCreateTable = onCreateTable
+            OnCreateTable = onCreateTable,
         };
     }
 }

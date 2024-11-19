@@ -12,7 +12,10 @@ public static class ServiceCollectionExtensions
         ConfigureServiceCollection(service, typeof(T));
     }
 
-    public static void ConfigureServiceCollection(this IServiceCollection service, Type startupModuleType)
+    public static void ConfigureServiceCollection(
+        this IServiceCollection service,
+        Type startupModuleType
+    )
     {
         ApplicationManagerFactory.CreateApplication(startupModuleType, service);
     }

@@ -5,9 +5,11 @@ using Ran.Core.System.Collections;
 
 namespace Ran.Core.Ran.Exceptions;
 
-public class RanValidationException : RanException, IHasLogLevel,
-    IHasValidationErrors,
-    IExceptionWithSelfLogging
+public class RanValidationException
+    : RanException,
+        IHasLogLevel,
+        IHasValidationErrors,
+        IExceptionWithSelfLogging
 {
     /// <summary>
     /// Detailed list of validation errors for this exception.
@@ -20,25 +22,29 @@ public class RanValidationException : RanException, IHasLogLevel,
     /// </summary>
     public LogLevel LogLevel { get; set; }
 
-    public RanValidationException(string message) : base(message)
+    public RanValidationException(string message)
+        : base(message)
     {
         ValidationErrors = new List<ValidationResult>();
         LogLevel = LogLevel.Warning;
     }
 
-    public RanValidationException(IList<ValidationResult> validationErrors) : base("Validation error")
+    public RanValidationException(IList<ValidationResult> validationErrors)
+        : base("Validation error")
     {
         ValidationErrors = validationErrors;
         LogLevel = LogLevel.Warning;
     }
 
-    public RanValidationException(string message, Exception innerException) : base(message, innerException)
+    public RanValidationException(string message, Exception innerException)
+        : base(message, innerException)
     {
         ValidationErrors = new List<ValidationResult>();
         LogLevel = LogLevel.Warning;
     }
 
-    public RanValidationException(string message, IList<ValidationResult> validationErrors) : base(message)
+    public RanValidationException(string message, IList<ValidationResult> validationErrors)
+        : base(message)
     {
         ValidationErrors = validationErrors;
         LogLevel = LogLevel.Warning;

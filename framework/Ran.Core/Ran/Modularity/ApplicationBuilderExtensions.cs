@@ -10,15 +10,20 @@ namespace Ran.Core.Ran.Modularity;
 public static class ApplicationBuilderExtensions
 {
     //新增endpointRouteBuilder参数,兼容net8以后的MinimalAPI
-    public static void BuildApplicationBuilder(this IApplicationBuilder applicationBuilder,
-        IEndpointRouteBuilder endpointRouteBuilder)
+    public static void BuildApplicationBuilder(
+        this IApplicationBuilder applicationBuilder,
+        IEndpointRouteBuilder endpointRouteBuilder
+    )
     {
-        var application = applicationBuilder.ApplicationServices.GetRequiredService<IApplicationManager>();
+        var application =
+            applicationBuilder.ApplicationServices.GetRequiredService<IApplicationManager>();
 
         application.Configure(applicationBuilder, endpointRouteBuilder);
 
-        var requiredService = applicationBuilder.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-        requiredService.ApplicationStopping.Register(() =>
-            application.Shutdown(applicationBuilder, endpointRouteBuilder));
+        var requiredService =
+            applicationBuilder.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+        requiredService.ApplicationStopping.Register(
+            () => application.Shutdown(applicationBuilder, endpointRouteBuilder)
+        );
     }
 }

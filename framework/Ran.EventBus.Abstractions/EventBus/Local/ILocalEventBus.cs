@@ -1,5 +1,3 @@
 ﻿namespace Ran.EventBus.Abstractions.EventBus.Local;
 
-public interface ILocalEventBus : IEventBus
-{
-}
+public interface ILocalEventBus : IEventBus { }

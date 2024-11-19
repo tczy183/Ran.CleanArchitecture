@@ -2,7 +2,4 @@
 
 namespace Domain;
 
-public class DomainModule:BaseModule
-{
-    
-}
+public class DomainModule : BaseModule { }

@@ -22,7 +22,10 @@ public static class ReflectionHelper
 
         foreach (var interfaceType in givenTypeInfo.GetInterfaces())
         {
-            if (interfaceType.GetTypeInfo().IsGenericType && interfaceType.GetGenericTypeDefinition() == genericType)
+            if (
+                interfaceType.GetTypeInfo().IsGenericType
+                && interfaceType.GetGenericTypeDefinition() == genericType
+            )
             {
                 return true;
             }
@@ -44,7 +47,11 @@ public static class ReflectionHelper
         return result;
     }
 
-    private static void AddImplementedGenericTypes(List<Type> result, Type givenType, Type genericType)
+    private static void AddImplementedGenericTypes(
+        List<Type> result,
+        Type givenType,
+        Type genericType
+    )
     {
         var givenTypeInfo = givenType.GetTypeInfo();
 
@@ -55,7 +62,10 @@ public static class ReflectionHelper
 
         foreach (var interfaceType in givenTypeInfo.GetInterfaces())
         {
-            if (interfaceType.GetTypeInfo().IsGenericType && interfaceType.GetGenericTypeDefinition() == genericType)
+            if (
+                interfaceType.GetTypeInfo().IsGenericType
+                && interfaceType.GetGenericTypeDefinition() == genericType
+            )
             {
                 result.AddIfNotContains(interfaceType);
             }
@@ -77,13 +87,20 @@ public static class ReflectionHelper
     /// <param name="memberInfo">MemberInfo</param>
     /// <param name="defaultValue">Default value (null as default)</param>
     /// <param name="inherit">Inherit attribute from base classes</param>
-    public static TAttribute? GetSingleAttributeOrDefault<TAttribute>(MemberInfo memberInfo, TAttribute? defaultValue = default, bool inherit = true)
+    public static TAttribute? GetSingleAttributeOrDefault<TAttribute>(
+        MemberInfo memberInfo,
+        TAttribute? defaultValue = default,
+        bool inherit = true
+    )
         where TAttribute : Attribute
     {
         //Get attribute on the member
         if (memberInfo.IsDefined(typeof(TAttribute), inherit))
         {
-            return memberInfo.GetCustomAttributes(typeof(TAttribute), inherit).Cast<TAttribute>().First();
+            return memberInfo
+                .GetCustomAttributes(typeof(TAttribute), inherit)
+                .Cast<TAttribute>()
+                .First();
         }
 
         return defaultValue;
@@ -97,12 +114,20 @@ public static class ReflectionHelper
     /// <param name="memberInfo">MemberInfo</param>
     /// <param name="defaultValue">Default value (null as default)</param>
     /// <param name="inherit">Inherit attribute from base classes</param>
-    public static TAttribute? GetSingleAttributeOfMemberOrDeclaringTypeOrDefault<TAttribute>(MemberInfo memberInfo, TAttribute? defaultValue = default, bool inherit = true)
+    public static TAttribute? GetSingleAttributeOfMemberOrDeclaringTypeOrDefault<TAttribute>(
+        MemberInfo memberInfo,
+        TAttribute? defaultValue = default,
+        bool inherit = true
+    )
         where TAttribute : class
     {
         return memberInfo.GetCustomAttributes(true).OfType<TAttribute>().FirstOrDefault()
-               ?? memberInfo.DeclaringType?.GetTypeInfo().GetCustomAttributes(true).OfType<TAttribute>().FirstOrDefault()
-               ?? defaultValue;
+            ?? memberInfo
+                .DeclaringType?.GetTypeInfo()
+                .GetCustomAttributes(true)
+                .OfType<TAttribute>()
+                .FirstOrDefault()
+            ?? defaultValue;
     }
 
     /// <summary>
@@ -111,12 +136,17 @@ public static class ReflectionHelper
     /// <typeparam name="TAttribute">Type of the attribute</typeparam>
     /// <param name="memberInfo">MemberInfo</param>
     /// <param name="inherit">Inherit attribute from base classes</param>
-    public static IEnumerable<TAttribute> GetAttributesOfMemberOrDeclaringType<TAttribute>(MemberInfo memberInfo, bool inherit = true)
+    public static IEnumerable<TAttribute> GetAttributesOfMemberOrDeclaringType<TAttribute>(
+        MemberInfo memberInfo,
+        bool inherit = true
+    )
         where TAttribute : class
     {
         var customAttributes = memberInfo.GetCustomAttributes(true).OfType<TAttribute>();
-        var declaringTypeCustomAttributes =
-            memberInfo.DeclaringType?.GetTypeInfo().GetCustomAttributes(true).OfType<TAttribute>();
+        var declaringTypeCustomAttributes = memberInfo
+            .DeclaringType?.GetTypeInfo()
+            .GetCustomAttributes(true)
+            .OfType<TAttribute>();
         return declaringTypeCustomAttributes != null
             ? customAttributes.Concat(declaringTypeCustomAttributes).Distinct()
             : customAttributes;
@@ -160,7 +190,12 @@ public static class ReflectionHelper
     /// <summary>
     /// Sets value of a property by it's full path on given object
     /// </summary>
-    internal static void SetValueByPath(object obj, Type objectType, string propertyPath, object value)
+    internal static void SetValueByPath(
+        object obj,
+        Type objectType,
+        string propertyPath,
+        object value
+    )
     {
         var currentType = objectType;
         PropertyInfo property;
@@ -191,7 +226,6 @@ public static class ReflectionHelper
         property.SetValue(obj, value);
     }
 
-
     /// <summary>
     /// Get all the constant values in the specified type (including the base type).
     /// </summary>
@@ -210,9 +244,14 @@ public static class ReflectionHelper
                 return;
             }
 
-            constants.AddRange(targetType.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
-                .Where(x => x.IsLiteral && !x.IsInitOnly)
-                .Select(x => x.GetValue(null)!.ToString()!));
+            constants.AddRange(
+                targetType
+                    .GetFields(
+                        BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy
+                    )
+                    .Where(x => x.IsLiteral && !x.IsInitOnly)
+                    .Select(x => x.GetValue(null)!.ToString()!)
+            );
 
             var nestedTypes = targetType.GetNestedTypes(BindingFlags.Public);
 

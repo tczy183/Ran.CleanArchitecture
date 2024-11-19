@@ -2,7 +2,4 @@
 
 namespace Ran.Ddd.Domain.Abstractions;
 
-public class DomainAbstractionModule:BaseModule
-{
-    
-}
+public class DomainAbstractionModule : BaseModule { }

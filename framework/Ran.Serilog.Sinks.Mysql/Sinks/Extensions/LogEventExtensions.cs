@@ -15,7 +15,8 @@ internal static class LogEventExtensions
     internal static IDictionary<string, object> Dictionary(
         this LogEvent logEvent,
         bool storeTimestampInUtc = false,
-        IFormatProvider? formatProvider = null)
+        IFormatProvider? formatProvider = null
+    )
     {
         return ConvertToDictionary(logEvent, storeTimestampInUtc, formatProvider);
     }
@@ -26,13 +27,15 @@ internal static class LogEventExtensions
     }
 
     internal static IDictionary<string, object> Dictionary(
-        this IReadOnlyDictionary<string, LogEventPropertyValue> properties)
+        this IReadOnlyDictionary<string, LogEventPropertyValue> properties
+    )
     {
         return ConvertToDictionary(properties);
     }
 
     private static IDictionary<string, object> ConvertToDictionary(
-        IReadOnlyDictionary<string, LogEventPropertyValue> properties)
+        IReadOnlyDictionary<string, LogEventPropertyValue> properties
+    )
     {
         var expObject = new Dictionary<string, object>();
         foreach (var property in properties)
@@ -44,14 +47,16 @@ internal static class LogEventExtensions
     private static IDictionary<string, object> ConvertToDictionary(
         LogEvent logEvent,
         bool storeTimestampInUtc,
-        IFormatProvider? formatProvider = null)
+        IFormatProvider? formatProvider = null
+    )
     {
         var eventObject = new Dictionary<string, object>();
         eventObject.Add(
             "Timestamp",
             storeTimestampInUtc
                 ? logEvent.Timestamp.ToUniversalTime().ToString("o")
-                : logEvent.Timestamp.ToString("o"));
+                : logEvent.Timestamp.ToString("o")
+        );
 
         eventObject.Add("LogLevel", logEvent.Level.ToString());
         eventObject.Add("LogMessageTemplate", logEvent.MessageTemplate.Text);
@@ -69,33 +74,53 @@ internal static class LogEventExtensions
             case ScalarValue scalarValue:
                 return scalarValue.Value;
             case IReadOnlyDictionary<string, LogEventPropertyValue> readOnlyDictionary:
-                IDictionary<string, object> dictionary = (IDictionary<string, object>)new ExpandoObject();
+                IDictionary<string, object> dictionary =
+                    (IDictionary<string, object>)new ExpandoObject();
                 foreach (string key in readOnlyDictionary.Keys)
                     dictionary.Add(key, Simplify(readOnlyDictionary[key]));
                 return (object)dictionary;
             case SequenceValue sequenceValue:
-                return (object)sequenceValue.Elements
-                    .Select<LogEventPropertyValue, object>(
-                        new Func<LogEventPropertyValue, object>(Simplify)).ToArray<object>();
+                return (object)
+                    sequenceValue
+                        .Elements.Select<LogEventPropertyValue, object>(
+                            new Func<LogEventPropertyValue, object>(Simplify)
+                        )
+                        .ToArray<object>();
             case StructureValue structureValue:
 
                 try
                 {
                     if (structureValue.TypeTag == null)
-                        return (object)structureValue.Properties.ToDictionary<LogEventProperty, string, object>(
-                            (Func<LogEventProperty, string>)(p => p.Name),
-                            (Func<LogEventProperty, object>)(p => Simplify(p.Value)));
-                    if (!structureValue.TypeTag.StartsWith("DictionaryEntry") &&
-                        !structureValue.TypeTag.StartsWith("KeyValuePair"))
-                        return (object)structureValue.Properties.ToDictionary<LogEventProperty, string, object>(
-                            (Func<LogEventProperty, string>)(p => p.Name),
-                            (Func<LogEventProperty, object>)(p => Simplify(p.Value)));
+                        return (object)
+                            structureValue.Properties.ToDictionary<
+                                LogEventProperty,
+                                string,
+                                object
+                            >(
+                                (Func<LogEventProperty, string>)(p => p.Name),
+                                (Func<LogEventProperty, object>)(p => Simplify(p.Value))
+                            );
+                    if (
+                        !structureValue.TypeTag.StartsWith("DictionaryEntry")
+                        && !structureValue.TypeTag.StartsWith("KeyValuePair")
+                    )
+                        return (object)
+                            structureValue.Properties.ToDictionary<
+                                LogEventProperty,
+                                string,
+                                object
+                            >(
+                                (Func<LogEventProperty, string>)(p => p.Name),
+                                (Func<LogEventProperty, object>)(p => Simplify(p.Value))
+                            );
                     object? obj = Simplify(structureValue.Properties[0].Value);
                     if (obj == null)
                         return null;
                     var expandoObject = new ExpandoObject();
-                    ((IDictionary<string, object?>)expandoObject).Add(obj.ToString(),
-                        Simplify(structureValue.Properties[1].Value));
+                    ((IDictionary<string, object?>)expandoObject).Add(
+                        obj.ToString(),
+                        Simplify(structureValue.Properties[1].Value)
+                    );
                     return (object)expandoObject;
                 }
                 catch (Exception ex)

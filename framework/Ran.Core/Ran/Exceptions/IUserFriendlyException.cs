@@ -1,5 +1,3 @@
 namespace Ran.Core.Ran.Exceptions;
 
-public interface IUserFriendlyException : IBusinessException
-{
-}
+public interface IUserFriendlyException : IBusinessException { }

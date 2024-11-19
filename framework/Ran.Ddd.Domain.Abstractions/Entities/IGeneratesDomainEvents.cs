@@ -8,5 +8,5 @@ public interface IGeneratesDomainEvents
 
     void ClearLocalEvents();
 
-    void ClearDistributedEvents();  
+    void ClearDistributedEvents();
 }

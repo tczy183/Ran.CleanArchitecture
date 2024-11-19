@@ -6,5 +6,5 @@ public enum DistributedEventSource
 
     Inbox,
 
-    Outbox
+    Outbox,
 }

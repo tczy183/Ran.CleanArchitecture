@@ -6,16 +6,11 @@ namespace Ran.Core.Ran.Localization;
 
 public static class CultureHelper
 {
-      public static IDisposable Use([NotNull] string culture, string? uiCulture = null)
+    public static IDisposable Use([NotNull] string culture, string? uiCulture = null)
     {
         Check.NotNull(culture, nameof(culture));
 
-        return Use(
-            new CultureInfo(culture),
-            uiCulture == null
-                ? null
-                : new CultureInfo(uiCulture)
-        );
+        return Use(new CultureInfo(culture), uiCulture == null ? null : new CultureInfo(uiCulture));
     }
 
     public static IDisposable Use([NotNull] CultureInfo culture, CultureInfo? uiCulture = null)
@@ -28,12 +23,15 @@ public static class CultureHelper
         CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = uiCulture ?? culture;
 
-        return new DisposeAction<ValueTuple<CultureInfo, CultureInfo>>(static (state) =>
-        {
-            var (currentCulture, currentUiCulture) = state;
-            CultureInfo.CurrentCulture = currentCulture;
-            CultureInfo.CurrentUICulture = currentUiCulture;
-        }, (currentCulture, currentUiCulture));
+        return new DisposeAction<ValueTuple<CultureInfo, CultureInfo>>(
+            static (state) =>
+            {
+                var (currentCulture, currentUiCulture) = state;
+                CultureInfo.CurrentCulture = currentCulture;
+                CultureInfo.CurrentUICulture = currentUiCulture;
+            },
+            (currentCulture, currentUiCulture)
+        );
     }
 
     public static bool IsRtl => CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
@@ -61,9 +59,7 @@ public static class CultureHelper
         return new CultureInfo(cultureName).Parent.Name;
     }
 
-    public static bool IsCompatibleCulture(
-        string sourceCultureName,
-        string targetCultureName)
+    public static bool IsCompatibleCulture(string sourceCultureName, string targetCultureName)
     {
         if (sourceCultureName == targetCultureName)
         {

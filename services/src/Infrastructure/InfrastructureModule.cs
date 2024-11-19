@@ -5,7 +5,4 @@ using Ran.Core.Ran.Modularity.Attributes;
 namespace Infrastructure;
 
 [DependsOn(typeof(ApplicationModule))]
-public class InfrastructureModule:BaseModule
-{
-    
-}
+public class InfrastructureModule : BaseModule { }

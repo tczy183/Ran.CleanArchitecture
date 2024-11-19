@@ -60,7 +60,11 @@ public static class TypeExtensions
     /// <param name="type">The type to get its base classes.</param>
     /// <param name="stoppingType">A type to stop going to the deeper base classes. This type will be be included in the returned array</param>
     /// <param name="includeObject">True, to include the standard <see cref="object"/> type in the returned array.</param>
-    public static Type[] GetBaseClasses([NotNull] this Type type, Type stoppingType, bool includeObject = true)
+    public static Type[] GetBaseClasses(
+        [NotNull] this Type type,
+        Type stoppingType,
+        bool includeObject = true
+    )
     {
         Check.NotNull(type, nameof(type));
 
@@ -73,7 +77,8 @@ public static class TypeExtensions
         [NotNull] List<Type> types,
         Type? type,
         bool includeObject,
-        Type? stoppingType = null)
+        Type? stoppingType = null
+    )
     {
         if (type == null || type == stoppingType)
         {

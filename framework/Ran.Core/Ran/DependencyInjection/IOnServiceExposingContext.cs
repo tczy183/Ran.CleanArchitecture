@@ -1,4 +1,3 @@
-
 namespace Ran.Core.Ran.DependencyInjection;
 
 public interface IOnServiceExposingContext

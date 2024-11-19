@@ -8,7 +8,8 @@ namespace Ran.Ddd.Domain.Abstractions.Repositories;
 /// </summary>
 /// <typeparam name="TEntity">实体类型</typeparam>
 /// <typeparam name="TKey">主键类型</typeparam>
-public interface IRepository<TEntity, in TKey> where TEntity : notnull, Entity<TKey>
+public interface IRepository<TEntity, in TKey>
+    where TEntity : notnull, Entity<TKey>
     where TKey : notnull
 {
     /// <summary>
@@ -31,7 +32,11 @@ public interface IRepository<TEntity, in TKey> where TEntity : notnull, Entity<T
     /// <param name="autoSave">自动保存</param>
     /// <param name="cancellationToken">取消操作token</param>
     /// <returns></returns>
-    Task<TEntity> AddAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
+    Task<TEntity> AddAsync(
+        TEntity entity,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// 批量添加实体到仓储
@@ -48,8 +53,11 @@ public interface IRepository<TEntity, in TKey> where TEntity : notnull, Entity<T
     /// <param name="autoSave">自动保存</param>
     /// <param name="cancellationToken">取消操作token</param>
     /// <returns></returns>
-    Task AddRangeAsync(IEnumerable<TEntity> entities, bool autoSave = false,
-        CancellationToken cancellationToken = default);
+    Task AddRangeAsync(
+        IEnumerable<TEntity> entities,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// 更新实体
@@ -66,7 +74,11 @@ public interface IRepository<TEntity, in TKey> where TEntity : notnull, Entity<T
     /// <param name="autoSave">自动保存</param>
     /// <param name="cancellationToken">取消操作token</param>
     /// <returns></returns>
-    Task<TEntity> UpdateAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
+    Task<TEntity> UpdateAsync(
+        TEntity entity,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// 删除实体
@@ -83,22 +95,29 @@ public interface IRepository<TEntity, in TKey> where TEntity : notnull, Entity<T
     /// <param name="autoSave">自动保存</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<bool> RemoveAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
+    Task<bool> RemoveAsync(
+        TEntity entity,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="predicate"></param>
     /// <param name="includeDetails"></param>
     /// <param name="propertySelectors"></param>
     /// <param name="sorting"></param>
     /// <returns></returns>
-    IEnumerable<TEntity> GetEntityList(Expression<Func<TEntity, bool>>? predicate = null, bool includeDetails = false,
+    IEnumerable<TEntity> GetEntityList(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool includeDetails = false,
         Expression<Func<TEntity, object>>[]? propertySelectors = null,
-        string sorting = "");
+        string sorting = ""
+    );
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="predicate"></param>
     /// <param name="includeDetails"></param>
@@ -106,12 +125,16 @@ public interface IRepository<TEntity, in TKey> where TEntity : notnull, Entity<T
     /// <param name="sorting"></param>
     /// <param name="cancellationToken">取消操作token</param>
     /// <returns></returns>
-    Task<IEnumerable<TEntity>> GetEntityListAsync(Expression<Func<TEntity, bool>>? predicate = null,
-        bool includeDetails = false, Expression<Func<TEntity, object>>[]? propertySelectors = null, string sorting = "",
-        CancellationToken cancellationToken = default);
+    Task<IEnumerable<TEntity>> GetEntityListAsync(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool includeDetails = false,
+        Expression<Func<TEntity, object>>[]? propertySelectors = null,
+        string sorting = "",
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="predicate"></param>
     /// <param name="includeDetails"></param>
@@ -121,12 +144,18 @@ public interface IRepository<TEntity, in TKey> where TEntity : notnull, Entity<T
     /// <param name="sorting"></param>
     /// <param name="isPaging"></param>
     /// <returns></returns>
-    IEnumerable<TEntity> GetPagedEntityList(Expression<Func<TEntity, bool>>? predicate = null,
-        bool includeDetails = false, Expression<Func<TEntity, object>>[]? propertySelectors = null,
-        int pageIndex = 1, int pageSize = 20, string sorting = "", bool isPaging = true);
+    IEnumerable<TEntity> GetPagedEntityList(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool includeDetails = false,
+        Expression<Func<TEntity, object>>[]? propertySelectors = null,
+        int pageIndex = 1,
+        int pageSize = 20,
+        string sorting = "",
+        bool isPaging = true
+    );
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="predicate"></param>
     /// <param name="includeDetails"></param>
@@ -137,10 +166,16 @@ public interface IRepository<TEntity, in TKey> where TEntity : notnull, Entity<T
     /// <param name="isPaging"></param>
     /// <param name="cancellationToken">取消操作token</param>
     /// <returns></returns>
-    Task<IEnumerable<TEntity>> GetPagedEntityListAsync(Expression<Func<TEntity, bool>>? predicate = null,
-        bool includeDetails = false, Expression<Func<TEntity, object>>[]? propertySelectors = null,
-        int pageIndex = 1, int pageSize = 20, string sorting = "", bool isPaging = true,
-        CancellationToken cancellationToken = default);
+    Task<IEnumerable<TEntity>> GetPagedEntityListAsync(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool includeDetails = false,
+        Expression<Func<TEntity, object>>[]? propertySelectors = null,
+        int pageIndex = 1,
+        int pageSize = 20,
+        string sorting = "",
+        bool isPaging = true,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// 根据主键删除实体
@@ -157,7 +192,11 @@ public interface IRepository<TEntity, in TKey> where TEntity : notnull, Entity<T
     /// <param name="autoSave">自动保存</param>
     /// <param name="cancellationToken">取消操作token</param>
     /// <returns></returns>
-    Task<int> DeleteByIdAsync(TKey id, bool autoSave = false, CancellationToken cancellationToken = default);
+    Task<int> DeleteByIdAsync(
+        TKey id,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// 多个主键删除实体
@@ -174,7 +213,11 @@ public interface IRepository<TEntity, in TKey> where TEntity : notnull, Entity<T
     /// <param name="autoSave">自动保存</param>
     /// <param name="cancellationToken">取消操作token</param>
     /// <returns></returns>
-    Task<bool> DeleteByIdsAsync(TKey[] keys, bool autoSave = false, CancellationToken cancellationToken = default);
+    Task<bool> DeleteByIdsAsync(
+        TKey[] keys,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// 根据ID获取实体
@@ -191,5 +234,9 @@ public interface IRepository<TEntity, in TKey> where TEntity : notnull, Entity<T
     /// <param name="includeDetails">是否级联</param>
     /// <param name="cancellationToken">取消操作token</param>
     /// <returns></returns>
-    Task<TEntity?> GetAsync(TKey id, bool includeDetails = false, CancellationToken cancellationToken = default);
+    Task<TEntity?> GetAsync(
+        TKey id,
+        bool includeDetails = false,
+        CancellationToken cancellationToken = default
+    );
 }

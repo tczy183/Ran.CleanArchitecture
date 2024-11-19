@@ -63,7 +63,7 @@ public static class SqlTypeHelper
             MySqlDbType.Geometry => "GEOMETRY",
             MySqlDbType.UInt16 => "SMALLINT",
             MySqlDbType.UInt24 => "MEDIUMINT",
-            _ => throw new ArgumentOutOfRangeException(nameof(dbType), dbType, null)
+            _ => throw new ArgumentOutOfRangeException(nameof(dbType), dbType, null),
         };
     }
 }

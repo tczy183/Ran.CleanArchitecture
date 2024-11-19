@@ -6,9 +6,7 @@ namespace Ran.Core.Ran.Collections;
 /// <summary>
 /// A shortcut for <see cref="TypeList{TBaseType}"/> to use object as base type.
 /// </summary>
-public class TypeList : TypeList<object>, ITypeList
-{
-}
+public class TypeList : TypeList<object>, ITypeList { }
 
 /// <summary>
 /// Extends <see cref="List{Type}"/> to add restriction a specific base type.
@@ -53,12 +51,14 @@ public class TypeList<TBaseType> : ITypeList<TBaseType>
     }
 
     /// <inheritdoc/>
-    public void Add<T>() where T : TBaseType
+    public void Add<T>()
+        where T : TBaseType
     {
         _typeList.Add(typeof(T));
     }
 
-    public bool TryAdd<T>() where T : TBaseType
+    public bool TryAdd<T>()
+        where T : TBaseType
     {
         if (Contains<T>())
         {
@@ -90,7 +90,8 @@ public class TypeList<TBaseType> : ITypeList<TBaseType>
     }
 
     /// <inheritdoc/>
-    public bool Contains<T>() where T : TBaseType
+    public bool Contains<T>()
+        where T : TBaseType
     {
         return Contains(typeof(T));
     }
@@ -102,7 +103,8 @@ public class TypeList<TBaseType> : ITypeList<TBaseType>
     }
 
     /// <inheritdoc/>
-    public void Remove<T>() where T : TBaseType
+    public void Remove<T>()
+        where T : TBaseType
     {
         _typeList.Remove(typeof(T));
     }
@@ -148,7 +150,8 @@ public class TypeList<TBaseType> : ITypeList<TBaseType>
         {
             throw new ArgumentException(
                 $"Given type ({item.AssemblyQualifiedName}) should be instance of {typeof(TBaseType).AssemblyQualifiedName} ",
-                nameof(item));
+                nameof(item)
+            );
         }
     }
 }

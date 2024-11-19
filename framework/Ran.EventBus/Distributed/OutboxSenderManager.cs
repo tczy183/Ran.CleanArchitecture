@@ -5,7 +5,7 @@ using Ran.EventBus.Abstractions.EventBus.Distributed;
 
 namespace Ran.EventBus.Distributed;
 
-public class OutboxSenderManager: IBackgroundWorker
+public class OutboxSenderManager : IBackgroundWorker
 {
     protected DistributedEventBusOptions Options { get; }
     protected IServiceProvider ServiceProvider { get; }
@@ -13,7 +13,8 @@ public class OutboxSenderManager: IBackgroundWorker
 
     public OutboxSenderManager(
         IOptions<DistributedEventBusOptions> options,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider
+    )
     {
         ServiceProvider = serviceProvider;
         Options = options.Value;

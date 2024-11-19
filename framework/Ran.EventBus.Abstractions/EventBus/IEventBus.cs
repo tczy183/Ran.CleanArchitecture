@@ -47,7 +47,7 @@ public interface IEventBus
     /// <param name="eventType">Event type</param>
     /// <param name="handler">Object to handle the event</param>
     IDisposable Subscribe(Type eventType, IEventHandler handler);
-    
+
     IDisposable Subscribe<TEvent>(IEventHandler<TEvent> handler)
         where TEvent : class;
 

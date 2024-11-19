@@ -1,5 +1,6 @@
 namespace Ran.Ddd.Domain.Abstractions.Entities;
 
-public interface IAggregateRoot<TKey> : IEntity<TKey>, IHasConcurrencyStamp, IGeneratesDomainEvents
-{
-}
+public interface IAggregateRoot<TKey>
+    : IEntity<TKey>,
+        IHasConcurrencyStamp,
+        IGeneratesDomainEvents { }

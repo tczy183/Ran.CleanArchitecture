@@ -1,5 +1,3 @@
 namespace Ran.DenpendencyInjection;
 
-public interface IScopedDependency
-{
-}
+public interface IScopedDependency { }

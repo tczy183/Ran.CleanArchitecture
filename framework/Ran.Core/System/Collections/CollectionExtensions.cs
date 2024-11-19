@@ -40,7 +40,10 @@ public static class CollectionExtensions
     /// <param name="items">Item to check and add</param>
     /// <typeparam name="T">Type of the items in the collection</typeparam>
     /// <returns>Returns the added items.</returns>
-    public static IEnumerable<T> AddIfNotContains<T>(this ICollection<T> source, IEnumerable<T> items)
+    public static IEnumerable<T> AddIfNotContains<T>(
+        this ICollection<T> source,
+        IEnumerable<T> items
+    )
     {
         // Check.NotNull(source, nameof(source));
 
@@ -68,7 +71,11 @@ public static class CollectionExtensions
     /// <param name="itemFactory">A factory that returns the item</param>
     /// <typeparam name="T">Type of the items in the collection</typeparam>
     /// <returns>Returns True if added, returns False if not.</returns>
-    public static bool AddIfNotContains<T>(this ICollection<T> source, [global::System.Diagnostics.CodeAnalysis.NotNull] Func<T, bool> predicate, [global::System.Diagnostics.CodeAnalysis.NotNull] Func<T> itemFactory)
+    public static bool AddIfNotContains<T>(
+        this ICollection<T> source,
+        [global::System.Diagnostics.CodeAnalysis.NotNull] Func<T, bool> predicate,
+        [global::System.Diagnostics.CodeAnalysis.NotNull] Func<T> itemFactory
+    )
     {
         // Check.NotNull(source, nameof(source));
         // Check.NotNull(predicate, nameof(predicate));
@@ -108,7 +115,10 @@ public static class CollectionExtensions
     /// <typeparam name="T">Type of the items in the collection</typeparam>
     /// <param name="source">The collection</param>
     /// <param name="items">Items to be removed from the list</param>
-    public static void RemoveAll<T>([global::System.Diagnostics.CodeAnalysis.NotNull] this ICollection<T> source, IEnumerable<T> items)
+    public static void RemoveAll<T>(
+        [global::System.Diagnostics.CodeAnalysis.NotNull] this ICollection<T> source,
+        IEnumerable<T> items
+    )
     {
         foreach (var item in items)
         {

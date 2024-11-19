@@ -8,7 +8,8 @@ public static class ApplicationManagerFactory
 {
     public static IApplicationManager CreateApplication(
         Type startupModuleType,
-        IServiceCollection services)
+        IServiceCollection services
+    )
     {
         return new ApplicationManager(startupModuleType, services);
     }

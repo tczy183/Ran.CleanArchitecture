@@ -10,29 +10,44 @@ namespace Ran.Core.BackgroundWorkers;
 
 public static class BackgroundWorkersApplicationInitializationContextExtensions
 {
-    public async static Task<IApplicationInitializationContext> AddBackgroundWorkerAsync<TWorker>([NotNull] this IApplicationInitializationContext context, CancellationToken cancellationToken = default)
+    public static async Task<IApplicationInitializationContext> AddBackgroundWorkerAsync<TWorker>(
+        [NotNull] this IApplicationInitializationContext context,
+        CancellationToken cancellationToken = default
+    )
         where TWorker : IBackgroundWorker
     {
         Check.NotNull(context, nameof(context));
 
-        await context.AddBackgroundWorkerAsync(typeof(TWorker), cancellationToken: cancellationToken);
+        await context.AddBackgroundWorkerAsync(
+            typeof(TWorker),
+            cancellationToken: cancellationToken
+        );
 
         return context;
     }
 
-    public async static Task<IApplicationInitializationContext> AddBackgroundWorkerAsync([NotNull] this IApplicationInitializationContext context, [NotNull] Type workerType, CancellationToken cancellationToken = default)
+    public static async Task<IApplicationInitializationContext> AddBackgroundWorkerAsync(
+        [NotNull] this IApplicationInitializationContext context,
+        [NotNull] Type workerType,
+        CancellationToken cancellationToken = default
+    )
     {
         Check.NotNull(context, nameof(context));
         Check.NotNull(workerType, nameof(workerType));
 
         if (!workerType.IsAssignableTo<IBackgroundWorker>())
         {
-            throw new RanException($"Given type ({workerType.AssemblyQualifiedName}) must implement the {typeof(IBackgroundWorker).AssemblyQualifiedName} interface, but it doesn't!");
+            throw new RanException(
+                $"Given type ({workerType.AssemblyQualifiedName}) must implement the {typeof(IBackgroundWorker).AssemblyQualifiedName} interface, but it doesn't!"
+            );
         }
 
-        await context.ServiceProvider
-            .GetRequiredService<IBackgroundWorkerManager>()
-            .AddAsync((IBackgroundWorker)context.ServiceProvider.GetRequiredService(workerType), cancellationToken);
+        await context
+            .ServiceProvider.GetRequiredService<IBackgroundWorkerManager>()
+            .AddAsync(
+                (IBackgroundWorker)context.ServiceProvider.GetRequiredService(workerType),
+                cancellationToken
+            );
 
         return context;
     }

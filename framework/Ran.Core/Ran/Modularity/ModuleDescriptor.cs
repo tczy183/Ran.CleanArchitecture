@@ -26,8 +26,12 @@ public class ModuleDescriptor : IModuleDescriptor
             var dependedModule = modules.FirstOrDefault(m => m.ModuleType == dependedModuleType);
             if (dependedModule == null)
             {
-                throw new Exception("Could not find a depended module " + dependedModuleType.AssemblyQualifiedName +
-                                    " for " + ModuleType.AssemblyQualifiedName);
+                throw new Exception(
+                    "Could not find a depended module "
+                        + dependedModuleType.AssemblyQualifiedName
+                        + " for "
+                        + ModuleType.AssemblyQualifiedName
+                );
             }
 
             _dependencies.Add(dependedModule);

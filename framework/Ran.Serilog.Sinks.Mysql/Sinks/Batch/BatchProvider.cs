@@ -20,7 +20,8 @@ internal abstract class BatchProvider : IDisposable
     private readonly Task _timerTask;
     private readonly Task _batchTask;
     private readonly Task _eventPumpTask;
-    private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+    private readonly CancellationTokenSource _cancellationTokenSource =
+        new CancellationTokenSource();
     private readonly AutoResetEvent _timerResetEvent = new AutoResetEvent(false);
     private readonly SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1, 1);
 
@@ -54,7 +55,9 @@ internal abstract class BatchProvider : IDisposable
                 }
                 else
                 {
-                    SelfLog.WriteLine($"Retrying after {_transientThresholdSpan.TotalSeconds} seconds...");
+                    SelfLog.WriteLine(
+                        $"Retrying after {_transientThresholdSpan.TotalSeconds} seconds..."
+                    );
 
                     await Task.Delay(_transientThresholdSpan).ConfigureAwait(false);
 
@@ -70,12 +73,8 @@ internal abstract class BatchProvider : IDisposable
                 }
             }
         }
-        catch (InvalidOperationException)
-        {
-        }
-        catch (OperationCanceledException)
-        {
-        }
+        catch (InvalidOperationException) { }
+        catch (OperationCanceledException) { }
         catch (Exception ex)
         {
             SelfLog.WriteLine(ex.Message);
@@ -106,12 +105,8 @@ internal abstract class BatchProvider : IDisposable
                 }
             }
         }
-        catch (InvalidOperationException)
-        {
-        }
-        catch (OperationCanceledException)
-        {
-        }
+        catch (InvalidOperationException) { }
+        catch (OperationCanceledException) { }
         catch (Exception ex)
         {
             SelfLog.WriteLine(ex.Message);
@@ -129,7 +124,8 @@ internal abstract class BatchProvider : IDisposable
                 return;
             }
 
-            var logEventBatchSize = _logEventBatch.Count >= _batchSize ? _batchSize : _logEventBatch.Count;
+            var logEventBatchSize =
+                _logEventBatch.Count >= _batchSize ? _batchSize : _logEventBatch.Count;
             var logEventList = new List<LogEvent>();
 
             for (var i = 0; i < logEventBatchSize; i++)
@@ -145,12 +141,8 @@ internal abstract class BatchProvider : IDisposable
                 _batchEventsCollection.Add(logEventList);
             }
         }
-        catch (InvalidOperationException)
-        {
-        }
-        catch (OperationCanceledException)
-        {
-        }
+        catch (InvalidOperationException) { }
+        catch (OperationCanceledException) { }
         finally
         {
             if (!_cancellationTokenSource.IsCancellationRequested)
@@ -230,7 +222,10 @@ internal abstract class BatchProvider : IDisposable
                 SelfLog.WriteLine($"Sending batch of {eventBatch.Count} logs");
             }
 
-            Task.WaitAll(new[] { _eventPumpTask, _batchTask, _timerTask }, TimeSpan.FromSeconds(60));
+            Task.WaitAll(
+                new[] { _eventPumpTask, _batchTask, _timerTask },
+                TimeSpan.FromSeconds(60)
+            );
         }
         catch (Exception ex)
         {

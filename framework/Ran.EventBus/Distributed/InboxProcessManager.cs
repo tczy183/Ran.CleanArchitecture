@@ -15,7 +15,8 @@ public class InboxProcessManager : IBackgroundWorker
 
     public InboxProcessManager(
         IOptions<DistributedEventBusOptions> options,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider
+    )
     {
         ServiceProvider = serviceProvider;
         Options = options.Value;

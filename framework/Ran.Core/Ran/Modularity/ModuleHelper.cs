@@ -12,6 +12,7 @@ public static class ModuleHelper
         AddModules(moduleTypes, startupModuleType);
         return moduleTypes;
     }
+
     public static List<Type> FindDependedModuleTypes(Type moduleType)
     {
         BaseModule.CheckModuleType(moduleType);

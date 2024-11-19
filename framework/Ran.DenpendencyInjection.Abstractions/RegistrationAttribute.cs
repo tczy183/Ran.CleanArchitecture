@@ -20,7 +20,5 @@ public class RegistrationAttribute : Attribute
         Type = type;
     }
 
-    public RegistrationAttribute()
-    {
-    }
+    public RegistrationAttribute() { }
 }

@@ -1,6 +1,3 @@
 namespace Ran.Core.Ran.DependencyInjection;
 
-public class ServiceExposingActionList : List<Action<IOnServiceExposingContext>>
-{
-
-}
+public class ServiceExposingActionList : List<Action<IOnServiceExposingContext>> { }

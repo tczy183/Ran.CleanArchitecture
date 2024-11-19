@@ -1,13 +1,9 @@
 namespace Ran.EventBus.Abstractions.EventBus;
 
-
-
 /// <summary>
 /// Indirect base interface for all event handlers.
 /// </summary>
-public interface IEventHandler
-{
-}
+public interface IEventHandler { }
 
 public interface IEventHandler<in TEvent> : IEventHandler
 {

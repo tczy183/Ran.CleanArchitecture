@@ -22,13 +22,17 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         return GetDbSet().AsQueryable();
     }
 
-    protected virtual
-        private IQueryable<TEntity> WithDetails(Expression<Func<TEntity, object>>[]? propertySelectors = null)
+    private protected virtual IQueryable<TEntity> WithDetails(
+        Expression<Func<TEntity, object>>[]? propertySelectors = null
+    )
     {
         var query = GetQueryable();
         return propertySelectors == null
             ? query
-            : propertySelectors.Aggregate(query, (current, propertySelector) => current.Include(propertySelector));
+            : propertySelectors.Aggregate(
+                query,
+                (current, propertySelector) => current.Include(propertySelector)
+            );
     }
 
     public TEntity Add(TEntity entity, bool autoSave = false)
@@ -40,8 +44,11 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         return entityEntry.Entity;
     }
 
-    public async Task<TEntity> AddAsync(TEntity entity, bool autoSave = false,
-        CancellationToken cancellationToken = default)
+    public async Task<TEntity> AddAsync(
+        TEntity entity,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    )
     {
         var entityEntry = await GetDbSet().AddAsync(entity, cancellationToken);
         if (autoSave)
@@ -57,8 +64,11 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
             DbContext.SaveChanges();
     }
 
-    public async Task AddRangeAsync(IEnumerable<TEntity> entities, bool autoSave = false,
-        CancellationToken cancellationToken = default)
+    public async Task AddRangeAsync(
+        IEnumerable<TEntity> entities,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    )
     {
         await GetDbSet().AddRangeAsync(entities, cancellationToken);
         if (autoSave)
@@ -73,8 +83,11 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         return entityEntry.Entity;
     }
 
-    public async Task<TEntity> UpdateAsync(TEntity entity, bool autoSave = false,
-        CancellationToken cancellationToken = default)
+    public async Task<TEntity> UpdateAsync(
+        TEntity entity,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    )
     {
         var entityEntry = GetDbSet().Update(entity);
         if (autoSave)
@@ -90,8 +103,11 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         return true;
     }
 
-    public async Task<bool> RemoveAsync(TEntity entity, bool autoSave = false,
-        CancellationToken cancellationToken = default)
+    public async Task<bool> RemoveAsync(
+        TEntity entity,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    )
     {
         GetDbSet().Remove(entity);
         if (autoSave)
@@ -99,8 +115,12 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         return true;
     }
 
-    public IEnumerable<TEntity> GetEntityList(Expression<Func<TEntity, bool>>? predicate = null,
-        bool includeDetails = false, Expression<Func<TEntity, object>>[]? propertySelectors = null, string sorting = "")
+    public IEnumerable<TEntity> GetEntityList(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool includeDetails = false,
+        Expression<Func<TEntity, object>>[]? propertySelectors = null,
+        string sorting = ""
+    )
     {
         var query = includeDetails ? WithDetails(propertySelectors) : GetQueryable();
 
@@ -113,9 +133,13 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         return query.ToList();
     }
 
-    public async Task<IEnumerable<TEntity>> GetEntityListAsync(Expression<Func<TEntity, bool>>? predicate = null,
-        bool includeDetails = false, Expression<Func<TEntity, object>>[]? propertySelectors = null, string sorting = "",
-        CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<TEntity>> GetEntityListAsync(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool includeDetails = false,
+        Expression<Func<TEntity, object>>[]? propertySelectors = null,
+        string sorting = "",
+        CancellationToken cancellationToken = default
+    )
     {
         var query = includeDetails ? WithDetails(propertySelectors) : GetQueryable();
 
@@ -128,9 +152,15 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         return await query.ToListAsync(cancellationToken);
     }
 
-    public IEnumerable<TEntity> GetPagedEntityList(Expression<Func<TEntity, bool>>? predicate = null,
-        bool includeDetails = false, Expression<Func<TEntity, object>>[]? propertySelectors = null, int pageIndex = 1,
-        int pageSize = 20, string sorting = "", bool isPaging = true)
+    public IEnumerable<TEntity> GetPagedEntityList(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool includeDetails = false,
+        Expression<Func<TEntity, object>>[]? propertySelectors = null,
+        int pageIndex = 1,
+        int pageSize = 20,
+        string sorting = "",
+        bool isPaging = true
+    )
     {
         var query = includeDetails ? WithDetails(propertySelectors) : GetQueryable();
 
@@ -146,9 +176,16 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         return query.ToList();
     }
 
-    public async Task<IEnumerable<TEntity>> GetPagedEntityListAsync(Expression<Func<TEntity, bool>>? predicate = null,
-        bool includeDetails = false, Expression<Func<TEntity, object>>[]? propertySelectors = null, int pageIndex = 1,
-        int pageSize = 20, string sorting = "", bool isPaging = true, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<TEntity>> GetPagedEntityListAsync(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool includeDetails = false,
+        Expression<Func<TEntity, object>>[]? propertySelectors = null,
+        int pageIndex = 1,
+        int pageSize = 20,
+        string sorting = "",
+        bool isPaging = true,
+        CancellationToken cancellationToken = default
+    )
     {
         var query = includeDetails ? WithDetails(propertySelectors) : GetQueryable();
 
@@ -177,8 +214,11 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         return 1;
     }
 
-    public async Task<int> DeleteByIdAsync(TKey id, bool autoSave = false,
-        CancellationToken cancellationToken = default)
+    public async Task<int> DeleteByIdAsync(
+        TKey id,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    )
     {
         var entity = await GetAsync(id, cancellationToken: cancellationToken);
         if (entity == null)
@@ -204,10 +244,15 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         return true;
     }
 
-    public async Task<bool> DeleteByIdsAsync(TKey[] keys, bool autoSave = false,
-        CancellationToken cancellationToken = default)
+    public async Task<bool> DeleteByIdsAsync(
+        TKey[] keys,
+        bool autoSave = false,
+        CancellationToken cancellationToken = default
+    )
     {
-        var entities = await GetDbSet().Where(e => keys.Contains(e.Id)).ToListAsync(cancellationToken);
+        var entities = await GetDbSet()
+            .Where(e => keys.Contains(e.Id))
+            .ToListAsync(cancellationToken);
         if (entities.Count == 0)
             return false;
 
@@ -220,11 +265,16 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
 
     public TEntity? Get(TKey id, bool includeDetails = false)
     {
-        return includeDetails ? WithDetails().FirstOrDefault(e => e.Id.Equals(id)) : GetDbSet().Find(id);
+        return includeDetails
+            ? WithDetails().FirstOrDefault(e => e.Id.Equals(id))
+            : GetDbSet().Find(id);
     }
 
-    public async Task<TEntity?> GetAsync(TKey id, bool includeDetails = false,
-        CancellationToken cancellationToken = default)
+    public async Task<TEntity?> GetAsync(
+        TKey id,
+        bool includeDetails = false,
+        CancellationToken cancellationToken = default
+    )
     {
         return includeDetails
             ? await WithDetails().FirstOrDefaultAsync(e => e.Id.Equals(id), cancellationToken)

@@ -12,7 +12,8 @@ namespace Ran.Core.Ran.Modularity;
 public static class ApplicationConfigureServiceContextExtensions
 {
     public static IApplicationBuilder GetApplicationBuilder(
-        this IApplicationInitializationContext context)
+        this IApplicationInitializationContext context
+    )
     {
         return context.ApplicationBuilder;
     }
@@ -23,7 +24,8 @@ public static class ApplicationConfigureServiceContextExtensions
     }
 
     public static IWebHostEnvironment? GetEnvironmentOrNull(
-        this IApplicationInitializationContext context)
+        this IApplicationInitializationContext context
+    )
     {
         return context.ServiceProvider.GetService<IWebHostEnvironment>();
     }
@@ -37,8 +39,10 @@ public static class ApplicationConfigureServiceContextExtensions
     {
         return context.ServiceProvider.GetRequiredService<ILoggerFactory>();
     }
-    
-    public static IEndpointRouteBuilder GetEndpointRouteBuilder(this IApplicationInitializationContext context)
+
+    public static IEndpointRouteBuilder GetEndpointRouteBuilder(
+        this IApplicationInitializationContext context
+    )
     {
         return context.EndpointRouteBuilder;
     }

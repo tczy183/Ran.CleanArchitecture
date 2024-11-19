@@ -9,11 +9,16 @@ public class ModuleLoader : IModuleLoader
     {
         var moduleDescriptors = CreateModuleDescriptors(services, startupModuleType);
 
-        var startupDependedModule = moduleDescriptors.FirstOrDefault(m => m.ModuleType == startupModuleType);
+        var startupDependedModule = moduleDescriptors.FirstOrDefault(m =>
+            m.ModuleType == startupModuleType
+        );
         return SortByModuleDescriptor(startupDependedModule).Cast<IModuleDescriptor>().ToArray();
     }
 
-    private List<ModuleDescriptor> CreateModuleDescriptors(IServiceCollection services, Type startupModuleType)
+    private List<ModuleDescriptor> CreateModuleDescriptors(
+        IServiceCollection services,
+        Type startupModuleType
+    )
     {
         var moduleDescriptors = new List<ModuleDescriptor>();
         var allModules = ModuleHelper.FindAllModuleTypes(startupModuleType);
@@ -40,10 +45,12 @@ public class ModuleLoader : IModuleLoader
         return sorted;
     }
 
-    private void SortByDependenciesVisit(IModuleDescriptor item,
+    private void SortByDependenciesVisit(
+        IModuleDescriptor item,
         Func<IModuleDescriptor, IEnumerable<IModuleDescriptor>> getDependencies,
         List<IModuleDescriptor> sorted,
-        Dictionary<IModuleDescriptor, bool> visited)
+        Dictionary<IModuleDescriptor, bool> visited
+    )
     {
         var alreadyVisited = visited.TryGetValue(item, out var inProcess);
         if (alreadyVisited)
