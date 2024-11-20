@@ -1,0 +1,67 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Text;
+
+namespace Ran.Dependencies.Geterators.Extensions;
+
+[ExcludeFromCodeCoverage]
+public static class EnumerableExtensions
+{
+    public static string ToDelimitedString<T>(this IEnumerable<T> values)
+    {
+        return values.ToDelimitedString(",");
+    }
+
+    public static string ToDelimitedString<T>(this IEnumerable<T>? values, string delimiter)
+    {
+        if (values is null)
+            return string.Empty;
+
+        var sb = new StringBuilder();
+        foreach (var i in values)
+        {
+            if (sb.Length > 0)
+                sb.Append(delimiter ?? ",");
+            sb.Append(i);
+        }
+
+        return sb.ToString();
+    }
+
+    public static string ToDelimitedString(this IEnumerable<string>? values)
+    {
+        return values.ToDelimitedString(",");
+    }
+
+    public static string ToDelimitedString(this IEnumerable<string>? values, string? delimiter)
+    {
+        return values.ToDelimitedString(delimiter, null);
+    }
+
+    public static string ToDelimitedString(
+        this IEnumerable<string>? values,
+        string? delimiter,
+        Func<string, string>? escapeDelimiter
+    )
+    {
+        if (values is null)
+            return string.Empty;
+
+        delimiter ??= ",";
+
+        var sb = new StringBuilder();
+        foreach (var value in values)
+        {
+            if (sb.Length > 0)
+                sb.Append(delimiter);
+
+            var v =
+                escapeDelimiter != null
+                    ? escapeDelimiter(value ?? string.Empty)
+                    : value ?? string.Empty;
+
+            sb.Append(v);
+        }
+
+        return sb.ToString();
+    }
+}
