@@ -1,0 +1,34 @@
+<Project>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        
+        <Authors>张阳</Authors>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Description>基于DDD领域驱动</Description>
+        <PackageProjectUrl>https://github.com/tczy183/Ran.CleanArchitecture.git</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/tczy183/Ran.CleanArchitecture.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <VersionPrefix>1.0.0</VersionPrefix>
+        <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+        <AssemblyVersion>$(VersionPrefix).0</AssemblyVersion>
+        <FileVersion>$(VersionPrefix).0</FileVersion>
+        <Version>$(VersionPrefix).0</Version>
+
+    </PropertyGroup>
+
+    <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' != '.NETStandard'">
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <!--    <ItemGroup>-->
+    <!--        <FrameworkReference Include="Microsoft.AspNetCore.App"/>-->
+    <!--    </ItemGroup>-->
+
+    <ItemGroup Condition="'$(Configuration)' == 'Release'">
+        <PackageReference Include="ConfigureAwait.Fody" PrivateAssets="All"/>
+        <PackageReference Include="Fody" PrivateAssets="All"/>
+    </ItemGroup>
+</Project>
