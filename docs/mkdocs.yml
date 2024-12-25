@@ -1,6 +1,7 @@
 site_name: Ran.CleanArchitecture
+site_url: https://tczy183.com/Ran.CleanArchitecture/
 docs_dir: "content"
-copyright: Copyright &copy; 2024 zhangyang # 左下角的版权声明
+copyright: Copyright &copy; 2024 tczy183 # 左下角的版权声明
 
 repo_name: "GitHub"
 repo_url: "https://github.com/tczy183/Ran.CleanArchitecture"
@@ -12,37 +13,29 @@ nav:
       - 项目结构: started/project-structure.md
       - 开发流程: started/development-process.md
 
-# Extensions
 markdown_extensions:
-  - markdown.extensions.admonition
-  - markdown.extensions.codehilite:
-      guess_lang: true
-      linenums: false
-  - markdown.extensions.def_list
-  - markdown.extensions.footnotes
-  - markdown.extensions.meta
-  - markdown.extensions.toc:
-      permalink: true
-  - pymdownx.arithmatex
-  - pymdownx.betterem:
-      smart_enable: all
-  - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.details
-  - pymdownx.emoji:
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - attr_list # allows to add HTML/CSS attributes to almost every Markdown element, useful for e.g. aligning an image to the left/right (can't do centre though! use md_in_html instead)
+  - md_in_html # allows to add markdown within HTML elements, useful for e.g. adding image captions or centering an image
+
+  - pymdownx.betterem # Wider support to markdown symbols
+  
+  # Code syntax highlighting
+  - pymdownx.highlight:
+      anchor_linenums: true
   - pymdownx.inlinehilite
-  - pymdownx.keys
-  - pymdownx.magiclink:
-      repo_url_shorthand: true
-      user: netcorepal
-      repo: netcorepal-cloud-framework
-  - pymdownx.mark
-  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.tabbed: # enables Content tabs.
+      alternate_style: true
+  - pymdownx.superfences # allows to add markdown to Content tabs. See https://squidfunk.github.io/mkdocs-material/reference/content-tabs/#embedded-content
+
+  # Mathjax support
+  - pymdownx.arithmatex:
+      generic: true
+
+  # Call-outs and note boxes ('admonition')
+  - admonition
+  - pymdownx.details
   - pymdownx.superfences
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - pymdownx.tilde
 
 theme:
   name: material
@@ -55,23 +48,36 @@ theme:
     - navigation.prune #导航修剪
     - navigation.top #导航顶部
   language: zh
-  palette:
-    # Palette toggle for automatic mode
-    - media: "(prefers-color-scheme)"
-      toggle:
-        icon: material/brightness-auto
-        name: Switch to light mode
-    
-    # Palette toggle for light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    
-    # Palette toggle for dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      toggle:
-        icon: material/brightness-4
-        name: Switch to system preference
+  theme:
+    palette:
+
+      # Palette toggle for automatic mode
+      - media: "(prefers-color-scheme)"
+        toggle:
+          icon: material/brightness-auto
+          name: Switch to light mode
+
+      # Palette toggle for light mode
+      - media: "(prefers-color-scheme: light)"
+        scheme: default
+        toggle:
+          icon: material/brightness-7
+          name: Switch to dark mode
+
+      # Palette toggle for dark mode
+      - media: "(prefers-color-scheme: dark)"
+        scheme: slate
+        toggle:
+          icon: material/brightness-4
+          name: Switch to system preference
+
+plugins:
+  - search
+  - awesome-pages # allows to customise the ordering of pages.
+  - git-revision-date-localized: # Displays date created/modified on the page. The below configurations are bugged, so only date modified works.
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/tczy183
+      name: tczy183 on Github
