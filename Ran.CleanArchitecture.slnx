@@ -1,4 +1,16 @@
 ﻿<Solution>
+  <Folder Name="/docs/">
+    <File Path="docs\mkdocs.yml" />
+  </Folder>
+  <Folder Name="/docs/content/">
+    <File Path="docs\content\index.md" />
+    <File Path="docs\content\about.md" />
+  </Folder>
+  <Folder Name="/docs/content/started/">
+    <File Path="docs\content\started\development-process.md" />
+    <File Path="docs\content\started\getting-started.md" />
+    <File Path="docs\content\started\project-structure.md" />
+  </Folder>
   <Folder Name="/framework/">
     <Project Path="framework\Ran.Core\Ran.Core.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.Ddd.Application.Abstractions\Ran.Ddd.Application.Abstractions.csproj" Type="Classic C#" />
@@ -6,8 +18,6 @@
     <Project Path="framework\Ran.Ddd.Domain.Abstractions\Ran.Ddd.Domain.Abstractions.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.Ddd.Domain\Ran.Ddd.Domain.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.Ddd.EntityFramework\Ran.Ddd.EntityFramework.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.Dependencies.Attributes\Ran.Dependencies.Attributes.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.Dependencies.Geterators\Ran.Dependencies.Geterators.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.EventBus.Abstractions\Ran.EventBus.Abstractions.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.EventBus\Ran.EventBus.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.Serilog.Sinks.Mysql\Ran.Serilog.Sinks.Mysql.csproj" Type="Classic C#" />
@@ -20,9 +30,7 @@
     <Project Path="services\src\Infrastructure\Infrastructure.csproj" Type="Classic C#" />
     <Project Path="services\src\Web\Web.csproj" Type="Classic C#" />
   </Folder>
-  <Folder Name="/services/test/">
-    <Project Path="services\test\SourceGeneratorTest\SourceGeneratorTest.csproj" Type="Classic C#" />
-  </Folder>
+  <Folder Name="/services/test/" />
   <Folder Name="/solution Items/">
     <File Path=".gitignore" />
     <File Path="Directory.Build.props" />

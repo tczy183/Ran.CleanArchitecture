@@ -6,8 +6,11 @@ repo_name: "GitHub"
 repo_url: "https://github.com/tczy183/Ran.CleanArchitecture"
 
 nav:
-  - Home: index.md
-  - About: about.md
+  - 首页: index.md
+  - 入门:
+      - 创建项目: started/getting-started.md
+      - 项目结构: started/project-structure.md
+      - 开发流程: started/development-process.md
 
 # Extensions
 markdown_extensions:
@@ -43,3 +46,32 @@ markdown_extensions:
 
 theme:
   name: material
+  features:
+    - navigation.instant #即时加载
+    - navigation.tabs  #导航选项卡
+    - navigation.tabs.sticky #粘性导航标签
+    - navigation.sections #导航部分
+    - navigation.expand #导航展开
+    - navigation.prune #导航修剪
+    - navigation.top #导航顶部
+  language: zh
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
