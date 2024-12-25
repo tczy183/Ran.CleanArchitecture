@@ -1,0 +1,45 @@
+site_name: Ran.CleanArchitecture
+docs_dir: "content"
+copyright: Copyright &copy; 2024 zhangyang # 左下角的版权声明
+
+repo_name: "GitHub"
+repo_url: "https://github.com/tczy183/Ran.CleanArchitecture"
+
+nav:
+  - Home: index.md
+  - About: about.md
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite:
+      guess_lang: true
+      linenums: false
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: netcorepal
+      repo: netcorepal-cloud-framework
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+theme:
+  name: material

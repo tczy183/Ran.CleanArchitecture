@@ -49,6 +49,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ran.Ddd.EntityFramework", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ran.Serilog.Sinks.Mysql", "framework\Ran.Serilog.Sinks.Mysql\Ran.Serilog.Sinks.Mysql.csproj", "{A55CF8B5-6F30-4BFB-900D-F70C04EA9024}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{90A5B0CD-CA4D-4484-8E77-B1871F4B60A2}"
+	ProjectSection(SolutionItems) = preProject
+		docs\mkdocs.yml = docs\mkdocs.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{FF8F18CF-B298-4A4B-9EB4-0ED5030A40DB}"
+	ProjectSection(SolutionItems) = preProject
+		docs\docs\index.md = docs\content\index.md
+		docs\content\about.md = docs\content\about.md
+	EndProjectSection
+EndProject
 
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -128,5 +139,6 @@ Global
 		{0D7A8002-C59B-4BB6-BBF4-1714A936D19D} = {DCB0B7DC-319D-4A73-BB4D-DDEFC0FE1220}
 		{540EF44D-260C-491B-BDAD-E5B318611029} = {DCB0B7DC-319D-4A73-BB4D-DDEFC0FE1220}
 		{A55CF8B5-6F30-4BFB-900D-F70C04EA9024} = {DCB0B7DC-319D-4A73-BB4D-DDEFC0FE1220}
+		{FF8F18CF-B298-4A4B-9EB4-0ED5030A40DB} = {90A5B0CD-CA4D-4484-8E77-B1871F4B60A2}
 	EndGlobalSection
 EndGlobal
