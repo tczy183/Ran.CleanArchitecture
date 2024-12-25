@@ -37,5 +37,6 @@
     <File Path="Directory.Packages.props" />
     <File Path="README.md" />
     <File Path="README_CN.md" />
+    <File Path="global.json" />
   </Folder>
 </Solution>
