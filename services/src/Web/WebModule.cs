@@ -62,6 +62,7 @@ public class WebModule : BaseModule
                         .ToArray();
                     return forecast;
                 }
+                
             )
             .WithName("GetWeatherForecast")
             .WithOpenApi();
