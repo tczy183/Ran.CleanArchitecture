@@ -1,6 +1,7 @@
 ﻿using Ran.Serilog.Sinks.Mysql.Sinks;
 using Ran.Serilog.Sinks.Mysql.Sinks.ColumnWriters;
 using Ran.Serilog.Sinks.Mysql.Sinks.EventArgs;
+using Ran.Serilog.Sinks.Mysql.Sinks.MySQL;
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Core;
@@ -83,7 +84,7 @@ public static class LoggerConfigurationMySqlExtensions
         IDictionary<string, ColumnWriterBase>? columnOptions,
         bool needAutoCreateTable,
         bool storeTimestampInUtc,
-        Action<CreateTableEventArgs> onCreateTable
+        Action<CreateTableEventArgs>? onCreateTable
     )
     {
         return new MySqlOption

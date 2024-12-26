@@ -1,13 +1,11 @@
-﻿using System.Collections.Concurrent;
-using System.Text;
+﻿using System.Text;
 using MySql.Data.MySqlClient;
-using Ran.Serilog.Sinks.Mysql.Sinks;
 using Ran.Serilog.Sinks.Mysql.Sinks.EventArgs;
 using Serilog.Core;
 using Serilog.Debugging;
 using Serilog.Events;
 
-namespace Ran.Serilog.Sinks.Mysql;
+namespace Ran.Serilog.Sinks.Mysql.Sinks.MySQL;
 
 internal class MySqlSink : BatchProvider, ILogEventSink
 {
@@ -35,7 +33,7 @@ internal class MySqlSink : BatchProvider, ILogEventSink
         PushEvent(logEvent);
     }
 
-    private MySqlConnection? GetSqlConnection()
+    private MySqlConnection GetSqlConnection()
     {
         try
         {
@@ -48,7 +46,7 @@ internal class MySqlSink : BatchProvider, ILogEventSink
         {
             SelfLog.WriteLine(ex.Message);
 
-            return null;
+            throw;
         }
     }
 

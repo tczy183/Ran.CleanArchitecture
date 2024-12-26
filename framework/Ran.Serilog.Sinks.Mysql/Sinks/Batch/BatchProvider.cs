@@ -130,7 +130,7 @@ internal abstract class BatchProvider : IDisposable
 
             for (var i = 0; i < logEventBatchSize; i++)
             {
-                if (_logEventBatch.TryDequeue(out LogEvent logEvent))
+                if (_logEventBatch.TryDequeue(out LogEvent? logEvent))
                 {
                     logEventList.Add(logEvent);
                 }

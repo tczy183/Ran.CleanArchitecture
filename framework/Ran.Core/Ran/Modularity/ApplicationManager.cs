@@ -177,6 +177,6 @@ public class ApplicationManager : IApplicationManager
             services
                 .FirstOrDefault(p => p.ServiceType == typeof(IModuleLoader))
                 ?.ImplementationInstance!;
-        return moduleLoader?.LoadModules(services, StartupModuleType);
+        return moduleLoader?.LoadModules(services, StartupModuleType)!;
     }
 }
