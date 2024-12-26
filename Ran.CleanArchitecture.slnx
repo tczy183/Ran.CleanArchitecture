@@ -38,5 +38,6 @@
     <File Path="README.md" />
     <File Path="README_CN.md" />
     <File Path="global.json" />
+      <File Path=".editorconfig" />
   </Folder>
 </Solution>
