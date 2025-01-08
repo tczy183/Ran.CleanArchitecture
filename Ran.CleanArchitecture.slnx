@@ -12,6 +12,8 @@
     <File Path="docs\content\started\project-structure.md" />
   </Folder>
   <Folder Name="/framework/">
+    <Project Path="framework\Quartz.EntityFrameworkCore.MySql\Quartz.EntityFrameworkCore.MySql.csproj" Type="Classic C#" />
+    <Project Path="framework\Quartz.EntityFrameworkCore\Quartz.EntityFrameworkCore.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.Core\Ran.Core.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.Ddd.Application.Abstractions\Ran.Ddd.Application.Abstractions.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.Ddd.Application\Ran.Ddd.Application.csproj" Type="Classic C#" />
@@ -38,6 +40,6 @@
     <File Path="README.md" />
     <File Path="README_CN.md" />
     <File Path="global.json" />
-      <File Path=".editorconfig" />
+    <File Path=".editorconfig" />
   </Folder>
 </Solution>
