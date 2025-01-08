@@ -70,6 +70,6 @@ public class RanValidationException
             validationErrors.AppendLine(validationResult.ErrorMessage + memberNames);
         }
 
-        logger.Log(LogLevel, validationErrors.ToString()!);
+        logger.Log(LogLevel,"Validation errors: {ValidationErrors}", validationErrors);
     }
 }
