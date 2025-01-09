@@ -22,6 +22,7 @@
     <Project Path="framework\Ran.Ddd.EntityFramework\Ran.Ddd.EntityFramework.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.EventBus.Abstractions\Ran.EventBus.Abstractions.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.EventBus\Ran.EventBus.csproj" Type="Classic C#" />
+    <Project Path="framework\Ran.Generators\Ran.Generators.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.Serilog.Sinks.Mysql\Ran.Serilog.Sinks.Mysql.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/modules/" />
