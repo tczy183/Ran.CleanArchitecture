@@ -42,5 +42,6 @@
     <File Path="README_CN.md" />
     <File Path="global.json" />
     <File Path=".editorconfig" />
+    <File Path="nuget.config" />
   </Folder>
 </Solution>

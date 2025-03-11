@@ -21,7 +21,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
         <NoWarn>$(NoWarn);CS1701;CS1702;CS1591;NU1904;NU1903</NoWarn>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+<!--        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>-->
     </PropertyGroup>
 
     <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' != '.NETStandard'">

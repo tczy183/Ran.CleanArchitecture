@@ -16,6 +16,7 @@ public class WebModule : BaseModule
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         context.Services.AddEndpointsApiExplorer();
         context.Services.AddSwaggerGen();
+        context.Services.AutoRegisterFromRanCore();
     }
 
     public override void OnApplicationInitialization(IApplicationInitializationContext context)
@@ -73,3 +74,4 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
