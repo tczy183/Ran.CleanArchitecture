@@ -1,6 +1,5 @@
 ﻿using System.Dynamic;
 using System.Text.Json;
-using Microsoft.Extensions.Logging;
 using Serilog.Events;
 
 namespace Ran.Serilog.Sinks.Mysql;

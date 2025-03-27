@@ -1,6 +1,5 @@
 ﻿using Application;
-using Ran.Core.Ran.Modularity;
-using Ran.Core.Ran.Modularity.Attributes;
+using Ran.Core.Modularity;
 
 namespace Infrastructure;
 

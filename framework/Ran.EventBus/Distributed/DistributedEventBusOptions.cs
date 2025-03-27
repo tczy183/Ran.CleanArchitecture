@@ -1,4 +1,4 @@
-﻿using Ran.Core.Ran.Collections;
+﻿using Ran.Core.Collections;
 using Ran.EventBus.Abstractions.EventBus;
 using Ran.EventBus.Abstractions.EventBus.Distributed;
 

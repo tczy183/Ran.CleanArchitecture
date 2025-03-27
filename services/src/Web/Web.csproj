@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\framework\Ran.EventBus\Ran.EventBus.csproj"/>
     <ProjectReference Include="..\..\..\framework\Ran.Serilog.Sinks.Mysql\Ran.Serilog.Sinks.Mysql.csproj"/>
+    <ProjectReference Include="..\..\..\framework\src\Ran.Core.AspNetCore\Ran.Core.AspNetCore.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj"/>
     <ProjectReference Include="..\Application\Application.csproj"/>
   </ItemGroup>

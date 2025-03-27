@@ -1,4 +1,6 @@
-using Ran.Core.Ran.Modularity;
+using Ran.Core.AspNetCore.Extensions.Builder;
+using Ran.Core.Extensions.DependencyInjection;
+using Ran.Core.Modularity;
 using Serilog;
 using Web;
 
@@ -15,10 +17,10 @@ try
     var builder = WebApplication.CreateBuilder(args);
     builder.Host.UseSerilog();
 
-    builder.Services.ConfigureServiceCollection<WebModule>();
+    await builder.Services.AddApplicationAsync<WebModule>();
     var app = builder.Build();
-    app.BuildApplicationBuilder(app);
-    app.Run();
+    await app.InitializeApplicationAsync();
+    await app.RunAsync(); 
 }
 catch (Exception e)
 {

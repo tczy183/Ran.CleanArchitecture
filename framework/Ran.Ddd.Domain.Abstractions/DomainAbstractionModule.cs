@@ -1,4 +1,5 @@
-﻿using Ran.Core.Ran.Modularity;
+﻿
+using Ran.Core.Modularity;
 
 namespace Ran.Ddd.Domain.Abstractions;
 

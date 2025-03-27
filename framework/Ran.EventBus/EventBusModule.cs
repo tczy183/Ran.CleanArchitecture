@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Ran.Core.Application;
 using Ran.Core.BackgroundWorkers;
-using Ran.Core.Ran.Modularity;
-using Ran.Core.Ran.Modularity.Abstractions;
-using Ran.Core.Ran.Modularity.Attributes;
-using Ran.Core.Ran.Reflection;
-using Ran.Core.System.Collections;
+using Ran.Core.Extensions.DependencyInjection;
+using Ran.Core.Modularity;
+using Ran.Core.Utils.Collections;
+using Ran.Core.Utils.Reflections;
 using Ran.EventBus.Abstractions;
 using Ran.EventBus.Abstractions.EventBus.Distributed;
 using Ran.EventBus.Abstractions.EventBus.Local;
@@ -16,13 +16,14 @@ namespace Ran.EventBus;
 [DependsOn(typeof(EventBusAbstractionsModule))]
 public class EventBusModule : BaseModule
 {
-    public override void PreConfigureServices(IApplicationConfigureServiceContext context)
+  
+    public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         AddEventHandlers(context.Services);
     }
 
     public override async Task OnApplicationInitializationAsync(
-        IApplicationInitializationContext context
+        ApplicationInitializationContext context
     )
     {
         await context.AddBackgroundWorkerAsync<OutboxSenderManager>();

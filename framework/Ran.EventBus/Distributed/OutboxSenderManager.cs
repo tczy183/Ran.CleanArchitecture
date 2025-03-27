@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Ran.Core.Ran.BackgroundWorkers;
+using Ran.Core.BackgroundWorkers;
 using Ran.EventBus.Abstractions.EventBus.Distributed;
 
 namespace Ran.EventBus.Distributed;

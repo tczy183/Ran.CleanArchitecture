@@ -1,6 +1,5 @@
-﻿using Ran.Core.Ran;
-using Ran.Core.Ran.Data;
-using Ran.Core.System.Collections;
+﻿
+using Ran.Core.Utils.System;
 
 namespace Ran.EventBus.Abstractions.EventBus.Distributed;
 
@@ -30,7 +29,7 @@ public class IncomingEventInfo
     {
         Id = id;
         MessageId = messageId;
-        EventName = Check.NotNullOrWhiteSpace(eventName, nameof(eventName), MaxEventNameLength);
+        EventName = CheckHelper.NotNullOrWhiteSpace(eventName, nameof(eventName), MaxEventNameLength);
         EventData = eventData;
         CreationTime = creationTime;
     }

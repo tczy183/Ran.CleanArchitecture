@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Ran.Core.Ran;
+using Ran.Core.Utils.System;
 
 namespace Ran.EventBus.Abstractions.EventBus.Distributed;
 
@@ -12,7 +12,7 @@ public class InboxConfig
     public string DatabaseName
     {
         get => _databaseName;
-        set => _databaseName = Check.NotNullOrWhiteSpace(value, nameof(DatabaseName));
+        set => _databaseName = CheckHelper.NotNullOrWhiteSpace(value, nameof(DatabaseName));
     }
 
     [NotNull]
@@ -32,6 +32,6 @@ public class InboxConfig
 
     public InboxConfig([NotNull] string name)
     {
-        Name = Check.NotNullOrWhiteSpace(name, nameof(name));
+        Name = CheckHelper.NotNullOrWhiteSpace(name, nameof(name));
     }
 }
