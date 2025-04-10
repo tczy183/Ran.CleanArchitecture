@@ -6,8 +6,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-        <NoWarn>$(NoWarn);CS1701;CS1702;CS1591;NU1904;NU1903</NoWarn>
-        <!--        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>-->
+    </PropertyGroup>
+    
+    <PropertyGroup Label="CodeAnalysis">
+        <AnalysisLevel>latest</AnalysisLevel>
+        <AnalysisMode>All</AnalysisMode>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     </PropertyGroup>
 
     <PropertyGroup Label="Version">
@@ -27,5 +33,12 @@
     <ItemGroup Condition="'$(Configuration)' == 'Release'">
         <PackageReference Include="ConfigureAwait.Fody" PrivateAssets="All"/>
         <PackageReference Include="Fody" PrivateAssets="All"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="SonarAnalyzer.CSharp">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 </Project>
