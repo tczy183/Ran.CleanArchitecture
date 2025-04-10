@@ -11,6 +11,9 @@
     <File Path="docs\content\started\getting-started.md" />
     <File Path="docs\content\started\project-structure.md" />
   </Folder>
+  <Folder Name=".github/workflows/">
+    <File Path=".github\workflows\doc.yml" />
+  </Folder>
   <Folder Name="/framework/">
     <Project Path="framework\Quartz.EntityFrameworkCore.MySql\Quartz.EntityFrameworkCore.MySql.csproj" Type="Classic C#" />
     <Project Path="framework\Quartz.EntityFrameworkCore\Quartz.EntityFrameworkCore.csproj" Type="Classic C#" />
