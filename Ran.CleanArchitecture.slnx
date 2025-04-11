@@ -15,7 +15,7 @@
   </Folder>
   <Folder Name="/docs/content/zh/" />
   <Folder Name="/docs/content/zh/quick-start/" >
-        <File Path="docs\content\zh\quick-start\quick-start.md" />
+    <File Path="docs\content\zh\quick-start\quick-start.md" />
   </Folder>
   <Folder Name="/framework/">
     <Project Path="framework\Quartz.EntityFrameworkCore.MySql\Quartz.EntityFrameworkCore.MySql.csproj" Type="Classic C#" />
