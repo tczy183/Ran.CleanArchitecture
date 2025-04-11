@@ -78,9 +78,9 @@ extra:
 nav:
   - 首页: index.md
   - 中文文档:
-      - 入门
+      - 入门:
           - 创建项目: zh/quick-start/quick-start.md
   - English Docs:
-      - Getting Started
+      - Getting Started:
           - Create Project: en/quick-start/quick-start.md
   - 关于: about.md
