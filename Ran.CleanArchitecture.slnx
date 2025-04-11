@@ -9,10 +9,11 @@
     <File Path="docs\content\index.md" />
     <File Path="docs\content\about.md" />
   </Folder>
-  <Folder Name="/docs/content/started/">
-    <File Path="docs\content\started\development-process.md" />
-    <File Path="docs\content\started\getting-started.md" />
-    <File Path="docs\content\started\project-structure.md" />
+  <Folder Name="/docs/content/en/" >
+    <File Path="docs\content\en\quick-start.md" />
+  </Folder>
+  <Folder Name="/docs/content/zh/" >
+    <File Path="docs\content\zh\quick-start.md" />
   </Folder>
   <Folder Name="/framework/">
     <Project Path="framework\Quartz.EntityFrameworkCore.MySql\Quartz.EntityFrameworkCore.MySql.csproj" Type="Classic C#" />
