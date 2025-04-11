@@ -22,7 +22,7 @@ public static class DateTimeFormatExtensions
     /// <returns></returns>
     public static long GetDateToTimeStamp(this DateTime dateTime)
     {
-        var ts = dateTime - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+        var ts = dateTime - DateTime.UnixEpoch;
         return Convert.ToInt64(ts.TotalSeconds);
     }
 
@@ -33,7 +33,7 @@ public static class DateTimeFormatExtensions
     /// <returns></returns>
     public static DateTime GetDayMinDate(this DateTime dateTime)
     {
-        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0);
+        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0,DateTimeKind.Local);
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public static class DateTimeFormatExtensions
     /// <returns></returns>
     public static DateTime GetDayMaxDate(this DateTime dateTime)
     {
-        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59);
+        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59,DateTimeKind.Local);
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ public static class DateTimeFormatExtensions
         var diffDay = dayInMonth - firstWeekEndDay;
         diffDay = diffDay > 0 ? diffDay : 1;
         // 当前是第几周，若整除7就减一天
-        return (diffDay % 7 == 0 ? (diffDay / 7) - 1 : diffDay / 7) + 1 + (dayInMonth > firstWeekEndDay ? 1 : 0);
+        return (diffDay % 7 == 0 ? diffDay / 7 - 1 : diffDay / 7) + 1 + (dayInMonth > firstWeekEndDay ? 1 : 0);
     }
 
     /// <summary>
@@ -165,10 +165,10 @@ public static class DateTimeFormatExtensions
         const int Dd = Hh * 24;
 
         var day = ms / Dd;
-        var hour = (ms - (day * Dd)) / Hh;
-        var minute = (ms - (day * Dd) - (hour * Hh)) / Mi;
-        var second = (ms - (day * Dd) - (hour * Hh) - (minute * Mi)) / Ss;
-        var milliSecond = ms - (day * Dd) - (hour * Hh) - (minute * Mi) - (second * Ss);
+        var hour = (ms - day * Dd) / Hh;
+        var minute = (ms - day * Dd - hour * Hh) / Mi;
+        var second = (ms - day * Dd - hour * Hh - minute * Mi) / Ss;
+        var milliSecond = ms - day * Dd - hour * Hh - minute * Mi - second * Ss;
 
         // 天
         var sDay = day < 10 ? "0" + day : string.Empty + day;
@@ -241,9 +241,9 @@ public static class DateTimeFormatExtensions
                         : dep.TotalDays < 7
                             ? (int)dep.TotalDays + "天前"
                             : dep.TotalDays is >= 7 and < 30
-                                ? ((int)dep.TotalDays / 7) + "周前"
+                                ? (int)dep.TotalDays / 7 + "周前"
                                 : dep.TotalDays is >= 30 and < 365
-                                    ? ((int)dep.TotalDays / 30) + "个月前"
+                                    ? (int)dep.TotalDays / 30 + "个月前"
                                     : now.Year - value.Year + "年前";
     }
 
@@ -263,7 +263,7 @@ public static class DateTimeFormatExtensions
 
             if (thisValue.Contains('-') || thisValue.Contains('/'))
             {
-                return DateTime.Parse(thisValue);
+                return DateTime.Parse(thisValue, CultureInfo.CurrentCulture);
             }
 
             var length = thisValue.Length;

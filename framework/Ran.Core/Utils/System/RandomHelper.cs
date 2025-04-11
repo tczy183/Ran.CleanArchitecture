@@ -5,9 +5,6 @@
 /// </summary>
 public static class RandomHelper
 {
-    // 默认随机数生成器
-    private static readonly Random Rnd = new();
-
     private static readonly Lock ObjLock = new();
 
     /// <summary>
@@ -27,7 +24,7 @@ public static class RandomHelper
         {
             for (var i = 0; i < length; i++)
             {
-                _ = result.Append(source[Rnd.Next(0, source.Length)]);
+                _ = result.Append(source[RandomNumberGenerator.GetInt32(0, source.Length)]);
             }
         }
 
@@ -44,7 +41,7 @@ public static class RandomHelper
     {
         lock (ObjLock)
         {
-            return Rnd.Next(minValue, maxValue);
+            return RandomNumberGenerator.GetInt32(minValue, maxValue);
         }
     }
 
@@ -60,7 +57,7 @@ public static class RandomHelper
     {
         lock (ObjLock)
         {
-            return Rnd.Next(maxValue);
+            return RandomNumberGenerator.GetInt32(maxValue);
         }
     }
 
@@ -72,7 +69,7 @@ public static class RandomHelper
     {
         lock (ObjLock)
         {
-            return Rnd.Next();
+            return RandomNumberGenerator.GetInt32(int.MaxValue);
         }
     }
 

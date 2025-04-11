@@ -122,7 +122,7 @@ public static class ReflectionHelper
         return memberInfo.GetCustomAttributes(true).OfType<TAttribute>().FirstOrDefault()
                ?? memberInfo
                    .DeclaringType?.GetTypeInfo()
-                   .GetCustomAttributes(true)
+                   .GetCustomAttributes(inherit)
                    .OfType<TAttribute>()
                    .FirstOrDefault()
                ?? defaultValue;
@@ -143,7 +143,7 @@ public static class ReflectionHelper
         var customAttributes = memberInfo.GetCustomAttributes(true).OfType<TAttribute>();
         var declaringTypeCustomAttributes = memberInfo
             .DeclaringType?.GetTypeInfo()
-            .GetCustomAttributes(true)
+            .GetCustomAttributes(inherit)
             .OfType<TAttribute>();
         return declaringTypeCustomAttributes != null
             ? customAttributes.Concat(declaringTypeCustomAttributes).Distinct()
@@ -209,19 +209,19 @@ public static class ReflectionHelper
 
         if (properties.Length == 1)
         {
-            property = objectType.GetProperty(properties.First())!;
+            property = objectType.GetProperty(properties[0])!;
             property.SetValue(obj, value);
             return;
         }
 
-        for (int i = 0; i < properties.Length - 1; i++)
+        for (var i = 0; i < properties.Length - 1; i++)
         {
             property = currentType.GetProperty(properties[i])!;
             obj = property.GetValue(obj, null)!;
             currentType = property.PropertyType;
         }
 
-        property = currentType.GetProperty(properties.Last())!;
+        property = currentType.GetProperty(properties[^1])!;
         property.SetValue(obj, value);
     }
 
@@ -236,7 +236,7 @@ public static class ReflectionHelper
 
         var publicConstants = new List<string>();
 
-        void Recursively(List<string> constants, Type targetType, int currentDepth)
+        static void Recursively(List<string> constants, Type targetType, int currentDepth)
         {
             if (currentDepth > maxRecursiveParameterValidationDepth)
             {

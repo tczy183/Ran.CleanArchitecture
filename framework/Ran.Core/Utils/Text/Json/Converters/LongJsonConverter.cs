@@ -57,13 +57,10 @@ public class LongJsonConverter : JsonConverter<long>
     /// <param name="options"></param>
     public override void Write(Utf8JsonWriter writer, long value, JsonSerializerOptions options)
     {
-        if (_isMax17)
+        if (_isMax17 && value > 99999999999999999)
         {
-            if (value > 99999999999999999)
-            {
-                writer.WriteStringValue(value.ToString());
-                return;
-            }
+            writer.WriteStringValue(value.ToString());
+            return;
         }
 
         writer.WriteNumberValue(value);

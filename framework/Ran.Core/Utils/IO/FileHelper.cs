@@ -116,7 +116,7 @@ public static class FileHelper
     {
         if (!File.Exists(filePath))
         {
-            _ = File.Create(filePath);
+            using var _ = File.Create(filePath);
         }
     }
 
@@ -167,7 +167,7 @@ public static class FileHelper
         // 删除文件
         File.Delete(filePath);
         // 重新创建该文件
-        _ = File.Create(filePath);
+        using var _ = File.Create(filePath);
     }
 
     #endregion 文件操作

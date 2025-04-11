@@ -417,7 +417,7 @@ public static partial class StringExtensions
     {
         return str is null
             ? null
-            : str == string.Empty || maxLength == 0
+            : string.IsNullOrEmpty(str) || maxLength == 0
                 ? string.Empty
                 : str.Length <= maxLength
                     ? str

@@ -23,7 +23,6 @@ dotnet_sort_system_directives_first = true
 # this. and Me. preferences
 dotnet_style_qualification_for_event = false:error
 dotnet_style_qualification_for_field = false:error
-
 dotnet_style_qualification_for_method = false:error
 dotnet_style_qualification_for_property = false:error
 
@@ -71,9 +70,9 @@ csharp_style_expression_bodied_lambdas = true:none
 csharp_style_expression_bodied_local_functions = true:error
 csharp_prefer_system_threading_lock = true:suggestion
 csharp_style_conditional_delegate_call = true:error
-csharp_style_var_for_built_in_types = true:error
+csharp_style_var_for_built_in_types = false:error
 csharp_style_var_when_type_is_apparent = true:error
-csharp_style_var_elsewhere = true:error
+csharp_style_var_elsewhere = false:error
 csharp_space_around_binary_operators = before_and_after
 csharp_prefer_static_local_function = true:error
 csharp_style_prefer_readonly_struct = true:suggestion
@@ -121,7 +120,7 @@ dotnet_code_quality_unused_parameters = all:error
 #### C# Coding Conventions ####
 
 # Namespace preferences
-csharp_style_namespace_declarations= file_scoped:error
+csharp_style_namespace_declarations = file_scoped:error
 
 # var preferences
 csharp_style_var_elsewhere = true:error
@@ -148,7 +147,7 @@ csharp_style_conditional_delegate_call = true:error
 
 # Modifier preferences
 csharp_prefer_static_local_function = true:error
-csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async
+csharp_preferred_modifier_order = public, private, protected, internal, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, volatile, async
 
 # Code-block preferences
 csharp_prefer_braces = true:error
@@ -173,9 +172,9 @@ csharp_using_directive_placement = outside_namespace:error
 #### C# Formatting Rules ####
 
 # New line preferences
-csharp_new_line_before_catch =true
-csharp_new_line_before_else =true
-csharp_new_line_before_finally =true
+csharp_new_line_before_catch = true
+csharp_new_line_before_else = true
+csharp_new_line_before_finally = true
 csharp_new_line_before_members_in_anonymous_types = false,
 csharp_new_line_before_members_in_object_initializers = false,
 csharp_new_line_before_open_brace = all
@@ -296,6 +295,9 @@ dotnet_diagnostic.CA1040.severity = none
 # CA1051: Do not declare visible instance fields
 dotnet_diagnostic.CA1051.severity = none
 
+# CA1055: Uri return values should not be strings
+dotnet_diagnostic.CA1055.severity = none
+
 # CA1056: URI-like properties should not be strings
 dotnet_diagnostic.CA1056.severity = none
 
@@ -304,6 +306,15 @@ dotnet_diagnostic.CA1062.severity = none
 
 # CA1063: Implement IDisposable Correctly
 dotnet_diagnostic.CA1063.severity = none
+
+# CA1065: Do not raise exceptions in unexpected locations
+dotnet_diagnostic.CA1065.severity = none
+
+# CA1304: Specify CultureInfo
+dotnet_diagnostic.CA1304.severity = none
+
+# CA1305: Specify IFormatProvider
+dotnet_diagnostic.CA1305.severity = none
 
 # CA1307: Specify StringComparison for clarity
 dotnet_diagnostic.CA1307.severity = none
@@ -314,11 +325,18 @@ dotnet_diagnostic.CA1308.severity = none
 # CA1309: Use ordinal StringComparison
 dotnet_diagnostic.CA1309.severity = none
 
+# CA1310: Specify StringComparison for P/Invoke string arguments
+dotnet_diagnostic.CA1310.severity = none
+
 # CA1311: Specify a culture or use an invariant version
 dotnet_diagnostic.CA1311.severity = none
 
 # CA1515: Consider making public types internal
 dotnet_diagnostic.CA1515.severity = none
+
+# 禁用缺少 XML 注释的警告
+
+dotnet_diagnostic.CS1591.severity = none
 
 # CA1700: Do not name enum values 'Reserved'
 dotnet_diagnostic.CA1700.severity = none
@@ -331,6 +349,12 @@ dotnet_diagnostic.CA1711.severity = none
 
 # CA1716: Identifiers should not match keywords
 dotnet_diagnostic.CA1716.severity = none
+
+# CA1720: Identifiers should not contain type names
+dotnet_diagnostic.CA1720.severity = none
+
+# CA1721: Property names should not match get methods
+dotnet_diagnostic.CA1721.severity = none
 
 # CA1724: Type names should not match namespaces
 dotnet_diagnostic.CA1724.severity = none
@@ -380,6 +404,9 @@ dotnet_diagnostic.CA2326.severity = none
 # CA2326: Do not use insecure JsonSerializerSettings
 dotnet_diagnostic.CA2327.severity = none
 
+# CA5401: 对称加密使用非默认初始化向量，该向量可能是可重复的
+dotnet_diagnostic.CA5401.severity = none
+
 # CS8600: Converting null literal or possible null value to non-nullable type.
 dotnet_diagnostic.CS8600.severity = none
 
@@ -408,11 +435,17 @@ dotnet_diagnostic.IDE0290.severity = none
 # S112: General or reserved exceptions should never be thrown
 dotnet_diagnostic.S112.severity = none
 
+# S125: Sections of code should not be commented out
+dotnet_diagnostic.S125.severity = none
+
 # S1075: URIs should not be hardcoded
 dotnet_diagnostic.S1075.severity = none
 
 # S2094: Utility classes should not have public constructors
 dotnet_diagnostic.S1118.severity = none
+
+# S1135: Complete the task associated to this 'TODO' comment
+dotnet_diagnostic.S1135.severity = none
 
 # S1144: Unused private types or members should be removed
 dotnet_diagnostic.S1144.severity = none
@@ -420,11 +453,17 @@ dotnet_diagnostic.S1144.severity = none
 # S2094: Classes should not be empty
 dotnet_diagnostic.S2094.severity = none
 
+# S2326: Do not use TypeNameHandling values other than None
+dotnet_diagnostic.S2326.severity = none
+
 # S2365: Properties should not make collection or array copies
 dotnet_diagnostic.S2365.severity = none
 
 # S3267: Loops should be simplified with "LINQ" expressions
 dotnet_diagnostic.S3267.severity = none
+
+# S3358: Extract this nested ternary operation into an independent statement.
+dotnet_diagnostic.S3358.severity = none
 
 # S3881: "IDisposable" should be implemented correctly
 dotnet_diagnostic.S3881.severity = none
@@ -432,8 +471,12 @@ dotnet_diagnostic.S3881.severity = none
 # S4136: Method overloads should be grouped together
 dotnet_diagnostic.S4136.severity = none
 
+# S6561: DateTime and DateTimeOffset should not be compared to DateTimeKind
+dotnet_diagnostic.S6561.severity = none
+
 # S6605: Collection-specific "Exists" method should be used instead of the "Any" extension
 dotnet_diagnostic.S6605.severity = none
+
 dotnet_style_require_accessibility_modifiers = for_non_interface_members:error
 end_of_line = crlf
 dotnet_style_qualification_for_field = false:error
@@ -464,3 +507,5 @@ dotnet_style_prefer_compound_assignment = true:error
 dotnet_style_prefer_collection_expression = when_types_loosely_match:suggestion
 dotnet_style_predefined_type_for_locals_parameters_members = true:error
 dotnet_style_predefined_type_for_member_access = true:error
+
+

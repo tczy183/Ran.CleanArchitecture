@@ -11,18 +11,10 @@ public abstract class BaseModule : IPreConfigureServices, IModule, IPostConfigur
     IOnPreApplicationInitialization, IOnApplicationInitialization, IOnPostApplicationInitialization,
     IOnApplicationShutdown
 {
-    private ServiceConfigurationContext? _serviceConfigurationContext;
-
     /// <summary>
     /// 服务配置上下文
     /// </summary>
-    protected internal ServiceConfigurationContext ServiceConfigurationContext
-    {
-        get => _serviceConfigurationContext ??
-               throw new UserFriendlyException(
-                   $"{nameof(ServiceConfigurationContext)}只能在{nameof(ConfigureServices)}、{nameof(PreConfigureServices)}和{nameof(PostConfigureServices)}方法中使用。");
-        internal set => _serviceConfigurationContext = value;
-    }
+    protected internal ServiceConfigurationContext ServiceConfigurationContext { get; set; }
 
     /// <summary>
     /// 是否跳过自动服务注册

@@ -1,4 +1,6 @@
-﻿namespace Ran.Core.Options;
+﻿using Ran.Core.Utils.Text;
+
+namespace Ran.Core.Options;
 
 /// <summary>
 /// 选项工厂
@@ -69,7 +71,7 @@ public class OptionsFactory<TOptions> : IOptionsFactory<TOptions> where TOptions
             {
                 namedSetup.Configure(name, options);
             }
-            else if (name == string.Empty)
+            else if (name.IsNullOrWhiteSpace())
             {
                 setup.Configure(options);
             }

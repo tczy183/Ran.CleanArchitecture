@@ -56,7 +56,7 @@ public static class RsaHelper
     {
         using var rsa = RSA.Create();
         rsa.ImportRSAPublicKey(publicKeyBytes, out _);
-        return rsa.Encrypt(plainBytes, RSAEncryptionPadding.Pkcs1);
+        return rsa.Encrypt(plainBytes, RSAEncryptionPadding.OaepSHA256);
     }
 
     /// <summary>

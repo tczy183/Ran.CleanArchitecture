@@ -48,7 +48,7 @@ public static class FieldInfoExtensions
     public static string GetThemeValue(this FieldInfo field)
     {
         var themeValue = ThemeType.Default.ToString().ToLower();
-        if (field.GetCustomAttribute(typeof(EnumThemeAttribute), false) is EnumThemeAttribute theme)
+        if (field.GetCustomAttribute<EnumThemeAttribute>(false) is EnumThemeAttribute theme)
         {
             themeValue = theme.Theme;
         }

@@ -120,7 +120,7 @@ public class ApplicationBase : IApplication
     /// <param name="services"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    private IReadOnlyList<IModuleDescriptor> LoadModules(IServiceCollection services,
+    private IModuleDescriptor[] LoadModules(IServiceCollection services,
         ApplicationCreationOptions options)
     {
         return services.GetSingletonInstance<IModuleLoader>()
@@ -215,9 +215,9 @@ public class ApplicationBase : IApplication
 
         foreach (var module in Modules)
         {
-            if (module.Instance is BaseModule xihanModule)
+            if (module.Instance is BaseModule baseModule)
             {
-                xihanModule.ServiceConfigurationContext = context;
+                baseModule.ServiceConfigurationContext = context;
             }
         }
 
@@ -284,9 +284,9 @@ public class ApplicationBase : IApplication
 
         foreach (var module in Modules)
         {
-            if (module.Instance is BaseModule xihanModule)
+            if (module.Instance is BaseModule baseModule)
             {
-                xihanModule.ServiceConfigurationContext = null!;
+                baseModule.ServiceConfigurationContext = null!;
             }
         }
 
@@ -308,9 +308,9 @@ public class ApplicationBase : IApplication
 
         foreach (var module in Modules)
         {
-            if (module.Instance is BaseModule xihanModule)
+            if (module.Instance is BaseModule baseModule)
             {
-                xihanModule.ServiceConfigurationContext = context;
+                baseModule.ServiceConfigurationContext = context;
             }
         }
 
@@ -377,9 +377,9 @@ public class ApplicationBase : IApplication
 
         foreach (var module in Modules)
         {
-            if (module.Instance is BaseModule xihanModule)
+            if (module.Instance is BaseModule baseModule)
             {
-                xihanModule.ServiceConfigurationContext = null!;
+                baseModule.ServiceConfigurationContext = null!;
             }
         }
 

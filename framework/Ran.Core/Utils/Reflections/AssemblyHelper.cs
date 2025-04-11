@@ -94,12 +94,9 @@ public static class AssemblyHelper
         Queue<Assembly> assembliesToCheck = new();
         assembliesToCheck.Enqueue(rootAssembly);
 
-        if (skipSystemAssemblies && IsSystemAssembly(rootAssembly))
+        if (skipSystemAssemblies && IsSystemAssembly(rootAssembly) && IsValid(rootAssembly))
         {
-            if (IsValid(rootAssembly))
-            {
-                _ = returnAssemblies.Add(rootAssembly);
-            }
+            _ = returnAssemblies.Add(rootAssembly);
         }
 
         while (assembliesToCheck.Count != 0)
@@ -560,7 +557,7 @@ public static class AssemblyHelper
     /// <returns></returns>
     private static bool IsSystemAssembly(string assemblyPath)
     {
-        var assembly = Assembly.LoadFrom(assemblyPath);
+        var assembly = Assembly.Load(assemblyPath);
         return IsSystemAssembly(assembly);
     }
 
@@ -624,7 +621,7 @@ public static class AssemblyHelper
 
         try
         {
-            assembly = Assembly.LoadFile(assemblyPath);
+            assembly = Assembly.Load(assemblyPath);
         }
         catch (BadImageFormatException ex)
         {
@@ -644,12 +641,12 @@ public static class AssemblyHelper
 /// <summary>
 /// 程序集相等性
 /// </summary>
-internal class AssemblyEquality : EqualityComparer<Assembly>
+internal sealed class AssemblyEquality : EqualityComparer<Assembly>
 {
     public override bool Equals(Assembly? x, Assembly? y)
     {
-        return (x is null && y is null) || (x is not null && y is not null &&
-                                            AssemblyName.ReferenceMatchesDefinition(x.GetName(), y.GetName()));
+        return x is null && y is null || x is not null && y is not null &&
+            AssemblyName.ReferenceMatchesDefinition(x.GetName(), y.GetName());
     }
 
     public override int GetHashCode(Assembly obj)
@@ -666,10 +663,10 @@ public record NuGetPackage
     /// <summary>
     /// 程序集名称
     /// </summary>
-    public string PackageName = string.Empty;
+    public string PackageName { get; set; } = string.Empty;
 
     /// <summary>
     /// 程序集版本
     /// </summary>
-    public string PackageVersion = string.Empty;
+    public string PackageVersion { get; set; } = string.Empty;
 }

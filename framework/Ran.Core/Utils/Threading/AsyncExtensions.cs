@@ -26,7 +26,7 @@ public static class AsyncExtensions
     public static bool IsTaskOrTaskOfT(this Type type)
     {
         return type == typeof(Task) ||
-               (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>));
+               type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>);
     }
 
     /// <summary>

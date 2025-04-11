@@ -1,7 +1,7 @@
 namespace Ran.EventBus.Abstractions.EventBus.Local;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-public class LocalEventHandlerOrderAttribute(int order) : Attribute
+public sealed class LocalEventHandlerOrderAttribute(int order) : Attribute
 {
     /// <summary>
     /// Handlers execute in ascending numeric value of the Order property.

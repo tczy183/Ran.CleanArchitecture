@@ -2,7 +2,7 @@
 
 public static class QuartzModelBuilderMySqlExtensions
 {
-    public static QuartzModelBuilder UseMySql(this QuartzModelBuilder builder, string prefix = "QRTZ_")
+    public static IQuartzModelBuilder UseMySql(this IQuartzModelBuilder builder, string prefix = "QRTZ_")
     {
         builder.UseEntityTypeConfigurations(context =>
         {

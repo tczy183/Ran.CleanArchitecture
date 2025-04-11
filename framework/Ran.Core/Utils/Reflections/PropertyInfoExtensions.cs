@@ -32,12 +32,9 @@ public static class PropertyInfoExtensions
             return memberExpression.Member.Name;
         }
 
-        if (keySelector.Body is UnaryExpression unaryExpression)
+        if (keySelector.Body is UnaryExpression { Operand: MemberExpression operand })
         {
-            if (unaryExpression.Operand is MemberExpression operand)
-            {
-                return operand.Member.Name;
-            }
+            return operand.Member.Name;
         }
 
         throw new InvalidOperationException("无法从键选择器中获取属性名称。");

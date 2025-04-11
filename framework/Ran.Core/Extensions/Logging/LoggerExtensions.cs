@@ -21,30 +21,30 @@ public static class LoggerExtensions
         switch (logLevel)
         {
             case LogLevel.Critical:
-                logger.LogCritical("{message}", message);
+                logger.LogCritical("{Message}", message);
                 break;
 
             case LogLevel.Error:
-                logger.LogError("{message}", message);
+                logger.LogError("{Message}", message);
                 break;
 
             case LogLevel.Warning:
-                logger.LogWarning("{message}", message);
+                logger.LogWarning("{Message}", message);
                 break;
 
             case LogLevel.Information:
-                logger.LogInformation("{message}", message);
+                logger.LogInformation("{Message}", message);
                 break;
 
             case LogLevel.Trace:
-                logger.LogTrace("{message}", message);
+                logger.LogTrace("{Message}", message);
                 break;
 
             // LogLevel.Debug || LogLevel.None
-            case LogLevel.Debug:
-            case LogLevel.None:
+            // case LogLevel.Debug:
+            // case LogLevel.None:
             default:
-                logger.LogDebug("{message}", message);
+                logger.LogDebug("{Message}", message);
                 break;
         }
     }
@@ -61,30 +61,30 @@ public static class LoggerExtensions
         switch (logLevel)
         {
             case LogLevel.Critical:
-                logger.LogCritical("{exception}{message}", exception, message);
+                logger.LogCritical("{Exception}{Message}", exception, message);
                 break;
 
             case LogLevel.Error:
-                logger.LogError("{exception}{message}", exception, message);
+                logger.LogError("{Exception}{Message}", exception, message);
                 break;
 
             case LogLevel.Warning:
-                logger.LogWarning("{exception}{message}", exception, message);
+                logger.LogWarning("{Exception}{Message}", exception, message);
                 break;
 
             case LogLevel.Information:
-                logger.LogInformation("{exception}{message}", exception, message);
+                logger.LogInformation("{Exception}{Message}", exception, message);
                 break;
 
             case LogLevel.Trace:
-                logger.LogTrace("{exception}{message}", exception, message);
+                logger.LogTrace("{Exception}{Message}", exception, message);
                 break;
 
             // LogLevel.Debug || LogLevel.None
-            case LogLevel.Debug:
-            case LogLevel.None:
+            // case LogLevel.Debug:
+            // case LogLevel.None:
             default:
-                logger.LogDebug("{exception}{message}", exception, message);
+                logger.LogDebug("{Exception}{Message}", exception, message);
                 break;
         }
     }

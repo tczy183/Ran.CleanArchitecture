@@ -3,4 +3,4 @@
 /// <summary>
 /// 常规注册器列表
 /// </summary>
-internal class ConventionalRegistrarList : List<IConventionalRegistrar>;
+internal sealed class ConventionalRegistrarList : List<IConventionalRegistrar>;

@@ -39,7 +39,9 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
     {
         var entityEntry = GetDbSet().Add(entity);
         if (autoSave)
+        {
             DbContext.SaveChanges();
+        }
 
         return entityEntry.Entity;
     }
@@ -52,7 +54,9 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
     {
         var entityEntry = await GetDbSet().AddAsync(entity, cancellationToken);
         if (autoSave)
+        {
             await DbContext.SaveChangesAsync(cancellationToken);
+        }
 
         return entityEntry.Entity;
     }
@@ -61,7 +65,9 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
     {
         GetDbSet().AddRange(entities);
         if (autoSave)
+        {
             DbContext.SaveChanges();
+        }
     }
 
     public async Task AddRangeAsync(
@@ -72,14 +78,19 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
     {
         await GetDbSet().AddRangeAsync(entities, cancellationToken);
         if (autoSave)
+        {
             await DbContext.SaveChangesAsync(cancellationToken);
+        }
     }
 
     public TEntity Update(TEntity entity, bool autoSave = false)
     {
         var entityEntry = GetDbSet().Update(entity);
         if (autoSave)
+        {
             DbContext.SaveChanges();
+        }
+
         return entityEntry.Entity;
     }
 
@@ -91,7 +102,10 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
     {
         var entityEntry = GetDbSet().Update(entity);
         if (autoSave)
+        {
             await DbContext.SaveChangesAsync(cancellationToken);
+        }
+
         return entityEntry.Entity;
     }
 
@@ -99,7 +113,10 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
     {
         GetDbSet().Remove(entity);
         if (autoSave)
+        {
             DbContext.SaveChanges();
+        }
+
         return true;
     }
 
@@ -111,7 +128,10 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
     {
         GetDbSet().Remove(entity);
         if (autoSave)
+        {
             await DbContext.SaveChangesAsync(cancellationToken);
+        }
+
         return true;
     }
 
@@ -125,10 +145,14 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         var query = includeDetails ? WithDetails(propertySelectors) : GetQueryable();
 
         if (predicate != null)
+        {
             query = query.Where(predicate);
+        }
 
         if (!string.IsNullOrWhiteSpace(sorting))
+        {
             query = query.OrderBy(sorting);
+        }
 
         return query.ToList();
     }
@@ -144,10 +168,14 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         var query = includeDetails ? WithDetails(propertySelectors) : GetQueryable();
 
         if (predicate != null)
+        {
             query = query.Where(predicate);
+        }
 
         if (!string.IsNullOrWhiteSpace(sorting))
+        {
             query = query.OrderBy(sorting);
+        }
 
         return await query.ToListAsync(cancellationToken);
     }
@@ -165,13 +193,19 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         var query = includeDetails ? WithDetails(propertySelectors) : GetQueryable();
 
         if (predicate != null)
+        {
             query = query.Where(predicate);
+        }
 
         if (!string.IsNullOrWhiteSpace(sorting))
+        {
             query = query.OrderBy(sorting);
+        }
 
         if (isPaging)
+        {
             query = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+        }
 
         return query.ToList();
     }
@@ -190,13 +224,19 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
         var query = includeDetails ? WithDetails(propertySelectors) : GetQueryable();
 
         if (predicate != null)
+        {
             query = query.Where(predicate);
+        }
 
         if (!string.IsNullOrWhiteSpace(sorting))
+        {
             query = query.OrderBy(sorting);
+        }
 
         if (isPaging)
+        {
             query = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+        }
 
         return await query.ToListAsync(cancellationToken);
     }
@@ -205,11 +245,15 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
     {
         var entity = Get(id);
         if (entity == null)
+        {
             return 0;
+        }
 
         GetDbSet().Remove(entity);
         if (autoSave)
+        {
             DbContext.SaveChanges();
+        }
 
         return 1;
     }
@@ -222,11 +266,15 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
     {
         var entity = await GetAsync(id, cancellationToken: cancellationToken);
         if (entity == null)
+        {
             return 0;
+        }
 
         GetDbSet().Remove(entity);
         if (autoSave)
+        {
             await DbContext.SaveChangesAsync(cancellationToken);
+        }
 
         return 1;
     }
@@ -235,11 +283,15 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
     {
         var entities = GetDbSet().Where(e => keys.Contains(e.Id)).ToList();
         if (entities.Count == 0)
+        {
             return false;
+        }
 
         GetDbSet().RemoveRange(entities);
         if (autoSave)
+        {
             DbContext.SaveChanges();
+        }
 
         return true;
     }
@@ -254,11 +306,15 @@ public class EfCoreRepository<TEntity, TKey, TDbContext>(TDbContext context)
             .Where(e => keys.Contains(e.Id))
             .ToListAsync(cancellationToken);
         if (entities.Count == 0)
+        {
             return false;
+        }
 
         GetDbSet().RemoveRange(entities);
         if (autoSave)
+        {
             await DbContext.SaveChangesAsync(cancellationToken);
+        }
 
         return true;
     }

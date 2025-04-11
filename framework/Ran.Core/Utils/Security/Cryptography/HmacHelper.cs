@@ -93,7 +93,9 @@ public static class HmacHelper
     {
         return algorithm switch
         {
+#pragma warning disable CA5350
             "HMACSHA1" => new HMACSHA1(key),
+#pragma warning restore CA5350
             "HMACSHA256" => new HMACSHA256(key),
             "HMACSHA384" => new HMACSHA384(key),
             "HMACSHA512" => new HMACSHA512(key),

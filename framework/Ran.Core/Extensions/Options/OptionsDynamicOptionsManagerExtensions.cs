@@ -39,7 +39,7 @@ public static class OptionsDynamicOptionsManagerExtensions
     /// <typeparam name="T"></typeparam>
     /// <param name="options"></param>
     /// <returns></returns>
-    /// <exception cref="XiHanException"></exception>
+    /// <exception cref="UserFriendlyException"></exception>
     private static DynamicOptionsManager<T> ToDynamicOptions<T>(this IOptions<T> options)
         where T : class
     {

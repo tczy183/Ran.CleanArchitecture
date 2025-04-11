@@ -5,7 +5,7 @@
 /// </summary>
 /// <remarks><see cref="FlagsAttribute"/> 是为了方便使用位运算</remarks>
 [Flags]
-public enum ApplicationServiceTypes : byte
+public enum ApplicationServiceTypes
 {
     /// <summary>
     /// 仅应用服务，不包含集成服务<see cref="IntegrationServiceAttribute"/>

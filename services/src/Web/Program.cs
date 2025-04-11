@@ -1,6 +1,5 @@
 using Ran.Core.AspNetCore.Extensions.Builder;
 using Ran.Core.Extensions.DependencyInjection;
-using Ran.Core.Modularity;
 using Serilog;
 using Web;
 
@@ -20,7 +19,7 @@ try
     await builder.Services.AddApplicationAsync<WebModule>();
     var app = builder.Build();
     await app.InitializeApplicationAsync();
-    await app.RunAsync(); 
+    await app.RunAsync();
 }
 catch (Exception e)
 {
@@ -28,5 +27,5 @@ catch (Exception e)
 }
 finally
 {
-    Log.CloseAndFlush();
+    await Log.CloseAndFlushAsync();
 }

@@ -39,6 +39,7 @@ public class ModuleManager : IModuleManager, ISingletonDependency
     /// <returns></returns>
     public virtual async Task InitializeModulesAsync(ApplicationInitializationContext context)
     {
+        _logger.LogDebug("开始初始化模块...");
         foreach (var contributor in _lifecycleContributors)
         {
             foreach (var module in _moduleContainer.Modules)
@@ -55,6 +56,7 @@ public class ModuleManager : IModuleManager, ISingletonDependency
                 }
             }
         }
+        _logger.LogDebug("模块初始化完成。");
     }
 
     /// <summary>
@@ -64,6 +66,7 @@ public class ModuleManager : IModuleManager, ISingletonDependency
     /// <returns></returns>
     public void InitializeModules(ApplicationInitializationContext context)
     {
+        _logger.LogDebug("开始初始化模块...");
         foreach (var contributor in _lifecycleContributors)
         {
             foreach (var module in _moduleContainer.Modules)
@@ -80,6 +83,7 @@ public class ModuleManager : IModuleManager, ISingletonDependency
                 }
             }
         }
+        _logger.LogDebug("模块初始化完成。");
     }
 
     /// <summary>
@@ -89,6 +93,7 @@ public class ModuleManager : IModuleManager, ISingletonDependency
     /// <returns></returns>
     public virtual async Task ShutdownModulesAsync(ApplicationShutdownContext context)
     {
+        _logger.LogDebug("开始关闭模块...");
         var modules = _moduleContainer.Modules.Reverse().ToList();
 
         foreach (var contributor in _lifecycleContributors)
@@ -107,6 +112,7 @@ public class ModuleManager : IModuleManager, ISingletonDependency
                 }
             }
         }
+        _logger.LogDebug("模块关闭完成。");
     }
 
     /// <summary>
@@ -116,6 +122,7 @@ public class ModuleManager : IModuleManager, ISingletonDependency
     /// <returns></returns>
     public void ShutdownModules(ApplicationShutdownContext context)
     {
+        _logger.LogDebug("开始关闭模块...");
         var modules = _moduleContainer.Modules.Reverse().ToList();
 
         foreach (var contributor in _lifecycleContributors)
@@ -134,5 +141,6 @@ public class ModuleManager : IModuleManager, ISingletonDependency
                 }
             }
         }
+        _logger.LogDebug("模块关闭完成。");
     }
 }

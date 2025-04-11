@@ -5,7 +5,7 @@ public static class ModelBuilderExtensions
 {
     public static ModelBuilder AddQuartz(
         this ModelBuilder modelBuilder,
-        Action<QuartzModelBuilder>? configure)
+        Action<IQuartzModelBuilder>? configure)
     {
         var model = new QuartzModel();
         configure?.Invoke(new DefaultQuartzModelBuilder(model));

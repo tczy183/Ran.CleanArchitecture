@@ -6,7 +6,7 @@ namespace Ran.Core.Aspects;
 /// <summary>
 /// 横切关注点
 /// </summary>
-public class CrossCuttingConcerns
+public static class CrossCuttingConcerns
 {
     /// <summary>
     /// 添加已应用的横切关注点

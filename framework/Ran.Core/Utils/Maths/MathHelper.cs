@@ -159,7 +159,7 @@ public static class MathHelper
     /// <param name="numbers"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static double Average(IEnumerable<double>? numbers)
+    public static double Average(double[]? numbers)
     {
         return numbers is null || !numbers.Any() ? throw new ArgumentException("集合不能为空。") : numbers.Average();
     }
@@ -170,7 +170,7 @@ public static class MathHelper
     /// <param name="numbers"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static double Median(IEnumerable<double> numbers)
+    public static double Median(double[]? numbers)
     {
         if (numbers is null || !numbers.Any())
         {
@@ -180,7 +180,7 @@ public static class MathHelper
         var sorted = numbers.OrderBy(n => n).ToArray();
         var count = sorted.Length;
 
-        return count % 2 == 0 ? (sorted[(count / 2) - 1] + sorted[count / 2]) / 2 : sorted[count / 2];
+        return count % 2 == 0 ? (sorted[count / 2 - 1] + sorted[count / 2]) / 2 : sorted[count / 2];
     }
 
     /// <summary>
@@ -189,7 +189,7 @@ public static class MathHelper
     /// <param name="numbers"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static double Variance(IEnumerable<double>? numbers)
+    public static double Variance(double[]? numbers)
     {
         if (numbers is null || !numbers.Any())
         {
@@ -205,7 +205,7 @@ public static class MathHelper
     /// </summary>
     /// <param name="numbers"></param>
     /// <returns></returns>
-    public static double StandardDeviation(IEnumerable<double>? numbers)
+    public static double StandardDeviation(double[]? numbers)
     {
         return Sqrt(Variance(numbers));
     }

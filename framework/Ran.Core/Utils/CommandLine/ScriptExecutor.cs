@@ -115,7 +115,7 @@ public static class ScriptExecutor
             {
                 if (e.Data is not null)
                 {
-                    _ = output.AppendLine(e.Data);
+                    output.AppendLine(e.Data);
                 }
             };
 
@@ -123,7 +123,7 @@ public static class ScriptExecutor
             {
                 if (e.Data is not null)
                 {
-                    _ = error.AppendLine(e.Data);
+                    error.AppendLine(e.Data);
                 }
             };
 

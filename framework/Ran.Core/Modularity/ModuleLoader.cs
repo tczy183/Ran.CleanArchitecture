@@ -138,7 +138,7 @@ public class ModuleLoader : IModuleLoader
     protected virtual void SetDependencies(List<ModuleDescriptor> modules, ModuleDescriptor module)
     {
         foreach (var dependedModule in ModuleHelper.FindDependedModuleTypes(module.Type).Select(dependedModuleType =>
-                     modules.FirstOrDefault(m => m.Type == dependedModuleType) ??
+                     modules.Find(m => m.Type == dependedModuleType) ??
                      throw new Exception(
                          $"在 {module.Type.AssemblyQualifiedName} 无法找到依赖的模块 {dependedModuleType.AssemblyQualifiedName}！")))
         {

@@ -18,12 +18,9 @@ public class DecimalJsonConverter : JsonConverter<decimal>
         {
             return reader.GetDecimal();
         }
-        else if (reader.TokenType == JsonTokenType.String)
+        else if (reader.TokenType == JsonTokenType.String && decimal.TryParse(reader.GetString(), out var value))
         {
-            if (decimal.TryParse(reader.GetString(), out var value))
-            {
-                return value;
-            }
+            return value;
         }
 
         return 0;

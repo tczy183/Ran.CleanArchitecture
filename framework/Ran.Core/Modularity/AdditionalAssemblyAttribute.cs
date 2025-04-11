@@ -4,7 +4,7 @@
 /// 附加程序集特性
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-public class AdditionalAssemblyAttribute : Attribute, IAdditionalModuleAssemblyProvider
+public sealed class AdditionalAssemblyAttribute : Attribute, IAdditionalModuleAssemblyProvider
 {
     /// <summary>
     /// 程序集类型
@@ -24,7 +24,7 @@ public class AdditionalAssemblyAttribute : Attribute, IAdditionalModuleAssemblyP
     /// 获取程序集
     /// </summary>
     /// <returns></returns>
-    public virtual Assembly[] GetAssemblies()
+    public Assembly[] GetAssemblies()
     {
         return TypesInAssemblies.Select(t => t.Assembly).Distinct().ToArray();
     }

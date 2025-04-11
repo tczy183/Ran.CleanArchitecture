@@ -24,7 +24,7 @@ public static class ServiceCollectionConfigurationExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    /// <exception cref="XiHanException"></exception>
+    /// <exception cref="UserFriendlyException"></exception>
     public static IConfiguration GetConfiguration(this IServiceCollection services)
     {
         return services.GetConfigurationOrNull() ??

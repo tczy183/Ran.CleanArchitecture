@@ -18,12 +18,9 @@ public class IntJsonConverter : JsonConverter<int>
         {
             return reader.GetInt32();
         }
-        else if (reader.TokenType == JsonTokenType.String)
+        else if (reader.TokenType == JsonTokenType.String && int.TryParse(reader.GetString(), out var value))
         {
-            if (int.TryParse(reader.GetString(), out var value))
-            {
-                return value;
-            }
+            return value;
         }
 
         return 0;

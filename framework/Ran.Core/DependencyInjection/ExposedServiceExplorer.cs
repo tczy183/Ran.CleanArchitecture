@@ -5,7 +5,7 @@ namespace Ran.Core.DependencyInjection;
 /// <summary>
 /// 暴露服务探测器
 /// </summary>
-public class ExposedServiceExplorer
+public static class ExposedServiceExplorer
 {
     /// <summary>
     /// 默认暴露服务特性

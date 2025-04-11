@@ -90,7 +90,7 @@ public static class ModuleHelper
         if (moduleTypes.Contains(moduleType))
         {
             // 构造当前节点的前缀和分支符号
-            var nodeContainsLine = (prefix == "" ? "" : prefix + (isLast ? "└─ " : "├─ ")) + moduleType.Namespace +
+            var nodeContainsLine = (string.IsNullOrEmpty(prefix) ? "" : prefix + (isLast ? "└─ " : "├─ ")) + moduleType.Namespace +
                                    "(此模块之前已加载)";
             LogHelper.Handle(nodeContainsLine);
             //logger?.LogInformation(nodeContainsLine);
@@ -98,7 +98,7 @@ public static class ModuleHelper
         }
 
         // 构造当前节点的前缀和分支符号
-        var nodeLine = (prefix == "" ? "" : prefix + (isLast ? "└─ " : "├─ ")) + moduleType.Namespace;
+        var nodeLine = (string.IsNullOrEmpty(prefix) ? "" : prefix + (isLast ? "└─ " : "├─ ")) + moduleType.Namespace;
         LogHelper.Handle(nodeLine);
         //logger?.LogInformation(nodeLine);
 

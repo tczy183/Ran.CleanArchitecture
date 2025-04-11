@@ -17,12 +17,12 @@ public static class CollectionPropertySortor<T>
     /// <param name="keyName">键名称</param>
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedEnumerable<T> OrderBy(IEnumerable<T> source, string keyName, SortDirectionEnum sortDirection)
+    public static IOrderedEnumerable<T> OrderBy(IEnumerable<T> source, string keyName, SortDirection sortDirection)
     {
         var keySelectorExpression = SortConditionParser<T>.GetSortConditionParser(keyName);
         var keySelector = keySelectorExpression;
 
-        return sortDirection == SortDirectionEnum.Asc
+        return sortDirection == SortDirection.Asc
             ? source.OrderBy(keySelector.Compile())
             : source.OrderByDescending(keySelector.Compile());
     }
@@ -61,12 +61,12 @@ public static class CollectionPropertySortor<T>
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
     public static IOrderedEnumerable<T> ThenBy(IOrderedEnumerable<T> source, string keyName,
-        SortDirectionEnum sortDirection)
+        SortDirection sortDirection)
     {
         var keySelectorExpression = SortConditionParser<T>.GetSortConditionParser(keyName);
         var keySelector = keySelectorExpression;
 
-        return sortDirection == SortDirectionEnum.Asc
+        return sortDirection == SortDirection.Asc
             ? source.ThenBy(keySelector.Compile())
             : source.ThenByDescending(keySelector.Compile());
     }
@@ -105,14 +105,17 @@ public static class CollectionPropertySortor<T>
     /// <returns>排序后的数据</returns>
     public static IOrderedEnumerable<T> OrderBy(IEnumerable<T> source, IEnumerable<SortConditionDto> sortConditions)
     {
+        // 将 sortConditions 转换为列表以避免多次枚举
+        var sortConditionsList = sortConditions.ToList();
+
         // 按优先级升序排列排序条件
-        sortConditions = sortConditions.OrderBy(x => x.SortPriority);
+        sortConditionsList = sortConditionsList.OrderBy(x => x.SortPriority).ToList();
 
         // 按优先级依次应用排序
-        var firstCondition = sortConditions.First();
+        var firstCondition = sortConditionsList[0];
         var orderedSource = OrderBy(source, firstCondition);
 
-        foreach (var sortCondition in sortConditions.Skip(1))
+        foreach (var sortCondition in sortConditionsList.Skip(1))
         {
             orderedSource = ThenBy(orderedSource, sortCondition);
         }
@@ -128,14 +131,15 @@ public static class CollectionPropertySortor<T>
     /// <returns>排序后的数据</returns>
     public static IOrderedEnumerable<T> OrderBy(IEnumerable<T> source, IEnumerable<SortConditionDto<T>> sortConditions)
     {
+        var sortConditionList = sortConditions.ToList();
         // 按优先级升序排列排序条件
-        sortConditions = sortConditions.OrderBy(x => x.SortPriority);
+        sortConditionList = sortConditionList.OrderBy(x => x.SortPriority).ToList();
 
         // 按优先级依次应用排序
-        var firstCondition = sortConditions.First();
+        var firstCondition = sortConditionList[0];
         var orderedSource = OrderBy(source, firstCondition);
 
-        foreach (var sortCondition in sortConditions.Skip(1))
+        foreach (var sortCondition in sortConditionList.Skip(1))
         {
             orderedSource = ThenBy(orderedSource, sortCondition);
         }
@@ -154,12 +158,12 @@ public static class CollectionPropertySortor<T>
     /// <param name="keyName">键名称</param>
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedQueryable<T> OrderBy(IQueryable<T> source, string keyName, SortDirectionEnum sortDirection)
+    public static IOrderedQueryable<T> OrderBy(IQueryable<T> source, string keyName, SortDirection sortDirection)
     {
         var keySelectorExpression = SortConditionParser<T>.GetSortConditionParser(keyName);
         var keySelector = keySelectorExpression;
 
-        return sortDirection == SortDirectionEnum.Asc
+        return sortDirection == SortDirection.Asc
             ? source.OrderBy(keySelector)
             : source.OrderByDescending(keySelector);
     }
@@ -198,12 +202,12 @@ public static class CollectionPropertySortor<T>
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
     public static IOrderedQueryable<T> ThenBy(IOrderedQueryable<T> source, string keyName,
-        SortDirectionEnum sortDirection)
+        SortDirection sortDirection)
     {
         var keySelectorExpression = SortConditionParser<T>.GetSortConditionParser(keyName);
         var keySelector = keySelectorExpression;
 
-        return sortDirection == SortDirectionEnum.Asc
+        return sortDirection == SortDirection.Asc
             ? source.ThenBy(keySelector)
             : source.ThenByDescending(keySelector);
     }
@@ -243,6 +247,7 @@ public static class CollectionPropertySortor<T>
     public static IOrderedQueryable<T> OrderBy(IQueryable<T> source, IEnumerable<SortConditionDto> sortConditions)
     {
         // 按优先级升序排列排序条件
+#pragma warning disable CA1851
         sortConditions = sortConditions.OrderBy(x => x.SortPriority);
 
         // 按优先级依次应用排序
@@ -253,7 +258,7 @@ public static class CollectionPropertySortor<T>
         {
             orderedSource = ThenBy(orderedSource, sortCondition);
         }
-
+#pragma warning restore CA1851
         return orderedSource;
     }
 
@@ -265,6 +270,7 @@ public static class CollectionPropertySortor<T>
     /// <returns>排序后的数据</returns>
     public static IOrderedQueryable<T> OrderBy(IQueryable<T> source, IEnumerable<SortConditionDto<T>> sortConditions)
     {
+#pragma warning disable CA1851
         // 按优先级升序排列排序条件
         sortConditions = sortConditions.OrderBy(x => x.SortPriority);
 
@@ -276,7 +282,7 @@ public static class CollectionPropertySortor<T>
         {
             orderedSource = ThenBy(orderedSource, sortCondition);
         }
-
+#pragma warning restore CA1851
         return orderedSource;
     }
 

@@ -3,11 +3,11 @@
 /// <summary>
 /// 异步读写锁
 /// </summary>
-public class AsyncReaderWriterLock
+public class AsyncReaderWriterLock : IDisposable
 {
     private readonly SemaphoreSlim _readerSemaphore = new(1, 1);
     private readonly SemaphoreSlim _writerSemaphore = new(1, 1);
-    private int _readerCount = 0;
+    private int _readerCount;
 
     /// <summary>
     /// 初始化异步读写锁
@@ -55,12 +55,9 @@ public class AsyncReaderWriterLock
 
         try
         {
-            if (++_readerCount == 1)
+            if (++_readerCount == 1 && !await _writerSemaphore.WaitAsync(timeout))
             {
-                if (!await _writerSemaphore.WaitAsync(timeout))
-                {
-                    throw new TimeoutException("未能在超时时间内获取写锁以阻止写入。");
-                }
+                throw new TimeoutException("未能在超时时间内获取写锁以阻止写入。");
             }
         }
         finally
@@ -123,7 +120,7 @@ public class AsyncReaderWriterLock
         _ = _writerSemaphore.Release();
     }
 
-    private class Releaser : IDisposable
+    public class Releaser : IDisposable
     {
         private readonly AsyncReaderWriterLock _lock;
         private readonly bool _isWriter;
@@ -153,6 +150,13 @@ public class AsyncReaderWriterLock
 
             _disposed = true;
         }
+    }
+
+    public void Dispose()
+    {
+        _readerSemaphore.Dispose();
+        _writerSemaphore.Dispose();
+        GC.SuppressFinalize(this);
     }
 
     #endregion 释放器
