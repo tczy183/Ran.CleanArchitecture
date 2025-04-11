@@ -6,7 +6,7 @@ namespace Ran.Core.DependencyInjection;
 /// 暴露键值服务特性
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-public class ExposeKeyedServiceAttribute<TServiceType> : Attribute, IExposedKeyedServiceTypesProvider
+public sealed class ExposeKeyedServiceAttribute<TServiceType> : Attribute, IExposedKeyedServiceTypesProvider
     where TServiceType : class
 {
     /// <summary>
@@ -18,7 +18,7 @@ public class ExposeKeyedServiceAttribute<TServiceType> : Attribute, IExposedKeye
     /// 构造函数
     /// </summary>
     /// <param name="serviceKey"></param>
-    /// <exception cref="XiHanException"></exception>
+    /// <exception cref="UserFriendlyException"></exception>
     public ExposeKeyedServiceAttribute(object serviceKey)
     {
         if (serviceKey is null)

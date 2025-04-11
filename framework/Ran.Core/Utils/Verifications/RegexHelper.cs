@@ -1,4 +1,6 @@
-﻿namespace Ran.Core.Utils.Verifications;
+﻿using Ran.Core.Utils.Text;
+
+namespace Ran.Core.Utils.Verifications;
 
 /// <summary>
 /// 字符验证帮助类
@@ -82,8 +84,8 @@ public static partial class RegexHelper
     public static bool IsNumberPeople18(string checkValue)
     {
         // 数字验证
-        if (long.TryParse(checkValue[..17], out var n) == false || n < Math.Pow(10, 16) ||
-            long.TryParse(checkValue.Replace('x', '0').Replace('X', '0'), out _) == false)
+        if (long.TryParse(checkValue[..17], out var n) || n < Math.Pow(10, 16) ||
+            long.TryParse(checkValue.Replace('x', '0').Replace('X', '0'), out _))
         {
             return false;
         }
@@ -98,7 +100,7 @@ public static partial class RegexHelper
 
         // 生日验证
         var birth = checkValue.Substring(6, 8).Insert(6, "-").Insert(4, "-");
-        if (!DateTime.TryParse(birth, out _))
+        if (!DateTime.TryParse(birth, CultureInfo.InvariantCulture, DateTimeStyles.None,out _))
         {
             return false;
         }
@@ -126,7 +128,7 @@ public static partial class RegexHelper
     public static bool IsNumberPeople15(string checkValue)
     {
         // 数字验证
-        if (long.TryParse(checkValue, out var n) == false || n < Math.Pow(10, 14))
+        if (long.TryParse(checkValue, out var n) || n < Math.Pow(10, 14))
         {
             return false;
         }
@@ -141,7 +143,7 @@ public static partial class RegexHelper
 
         // 生日验证
         var birth = checkValue.Substring(6, 6).Insert(4, "-").Insert(2, "-");
-        return DateTime.TryParse(birth, out _);
+        return DateTime.TryParse(birth,CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
     }
 
     #endregion 是否身份证
@@ -426,7 +428,7 @@ public static partial class RegexHelper
     {
         try
         {
-            return DateTime.TryParse(checkValue, out _);
+            return DateTime.TryParse(checkValue,CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
         }
         catch
         {
@@ -479,7 +481,7 @@ public static partial class RegexHelper
         try
         {
             var checkValueArg = checkValue.Split('.');
-            if (string.Empty != checkValue && checkValue.Length < 16 && checkValueArg.Length == 4)
+            if (checkValue.IsNullOrWhiteSpace() && checkValue.Length < 16 && checkValueArg.Length == 4)
             {
                 for (var i = 0; i < 4; i++)
                 {

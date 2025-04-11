@@ -81,10 +81,7 @@ public readonly struct ServiceIdentifier : IEquatable<ServiceIdentifier>
     /// <param name="left"></param>
     /// <param name="right"></param>
     /// <returns></returns>
-    public static bool operator ==(ServiceIdentifier left, ServiceIdentifier right)
-    {
-        return left.Equals(right);
-    }
+    public static bool operator ==(ServiceIdentifier left, ServiceIdentifier right) => left.Equals(right);
 
     /// <summary>
     /// 不相等操作符
@@ -92,8 +89,5 @@ public readonly struct ServiceIdentifier : IEquatable<ServiceIdentifier>
     /// <param name="left"></param>
     /// <param name="right"></param>
     /// <returns></returns>
-    public static bool operator !=(ServiceIdentifier left, ServiceIdentifier right)
-    {
-        return !(left == right);
-    }
+    public static bool operator !=(ServiceIdentifier left, ServiceIdentifier right) => !(left == right);
 }

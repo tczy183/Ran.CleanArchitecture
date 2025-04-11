@@ -1,8 +1,8 @@
 ﻿namespace Quartz.EntityFrameworkCore;
 
-public class DefaultQuartzModelBuilder(QuartzModel model) : QuartzModelBuilder
+public class DefaultQuartzModelBuilder(QuartzModel model) : IQuartzModelBuilder
 {
-    public QuartzModelBuilder UseEntityTypeConfigurations(
+    public IQuartzModelBuilder UseEntityTypeConfigurations(
         Action<EntityTypeConfigurationContext> entityTypeConfigurations)
     {
         model.EntityTypeConfigurations = entityTypeConfigurations;

@@ -187,8 +187,8 @@ public class DateTimeRange
         get
         {
             var now = DateTime.Now;
-            return new DateTimeRange(new DateTime(now.Year - 1, 1, 1),
-                new DateTime(now.Year, 1, 1).AddMilliseconds(-1));
+            return new DateTimeRange(new DateTime(now.Year - 1, 1, 1, 0, 0, 0, DateTimeKind.Local),
+                new DateTime(now.Year, 1, 1, 0, 0, 0, DateTimeKind.Local).AddMilliseconds(-1));
         }
     }
 
@@ -200,8 +200,8 @@ public class DateTimeRange
         get
         {
             var now = DateTime.Now;
-            return new DateTimeRange(new DateTime(now.Year, 1, 1),
-                new DateTime(now.Year + 1, 1, 1).AddMilliseconds(-1));
+            return new DateTimeRange(new DateTime(now.Year, 1, 1, 0, 0, 0, DateTimeKind.Local),
+                new DateTime(now.Year + 1, 1, 1, 0, 0, 0, DateTimeKind.Local).AddMilliseconds(-1));
         }
     }
 
@@ -213,8 +213,8 @@ public class DateTimeRange
         get
         {
             var now = DateTime.Now;
-            return new DateTimeRange(new DateTime(now.Year + 1, 1, 1),
-                new DateTime(now.Year + 2, 1, 1).AddMilliseconds(-1));
+            return new DateTimeRange(new DateTime(now.Year + 1, 1, 1, 0, 0, 0, DateTimeKind.Local),
+                new DateTime(now.Year + 2, 1, 1, 0, 0, 0, DateTimeKind.Local).AddMilliseconds(-1));
         }
     }
 

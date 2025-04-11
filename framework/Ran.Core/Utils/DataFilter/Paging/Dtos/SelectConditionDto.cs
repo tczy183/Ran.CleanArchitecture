@@ -25,7 +25,7 @@ public class SelectConditionDto
     /// <param name="selectField">字段名称</param>
     /// <param name="criteriaValue">条件值</param>
     /// <param name="selectCompare">选择比较</param>
-    public SelectConditionDto(string selectField, object? criteriaValue, SelectCompareEnum selectCompare)
+    public SelectConditionDto(string selectField, object? criteriaValue, SelectCompare selectCompare)
     {
         SelectField = selectField;
         CriteriaValue = criteriaValue;
@@ -40,7 +40,7 @@ public class SelectConditionDto
     /// <param name="criteriaValue">条件值</param>
     /// <param name="selectCompare">选择比较</param>
     public SelectConditionDto(bool isKeywords, string selectField, object? criteriaValue,
-        SelectCompareEnum selectCompare)
+        SelectCompare selectCompare)
     {
         IsKeywords = isKeywords;
         SelectField = selectField;
@@ -66,7 +66,7 @@ public class SelectConditionDto
     /// <summary>
     /// 选择比较，默认为等于
     /// </summary>
-    public SelectCompareEnum SelectCompare { get; set; } = SelectCompareEnum.Equal;
+    public SelectCompare SelectCompare { get; set; } = SelectCompare.Equal;
 }
 
 /// <summary>
@@ -74,8 +74,12 @@ public class SelectConditionDto
 /// </summary>
 /// <typeparam name="T">列表元素类型</typeparam>
 [Serializable]
+#pragma warning disable S2326
 public class SelectConditionDto<T> : SelectConditionDto
+#pragma warning restore S2326
 {
+    
+    
     /// <summary>
     /// 使用选择字段名称和选择值，初始化一个<see cref="SelectConditionDto"/>类型的新实例
     /// </summary>
@@ -92,7 +96,7 @@ public class SelectConditionDto<T> : SelectConditionDto
     /// <param name="selectField">字段名称</param>
     /// <param name="criteriaValue">条件值</param>
     /// <param name="selectCompare">选择比较</param>
-    public SelectConditionDto(string selectField, object? criteriaValue, SelectCompareEnum selectCompare)
+    public SelectConditionDto(string selectField, object? criteriaValue, SelectCompare selectCompare)
         : base(selectField, criteriaValue!, selectCompare)
     {
     }
@@ -105,7 +109,7 @@ public class SelectConditionDto<T> : SelectConditionDto
     /// <param name="criteriaValue">条件值</param>
     /// <param name="selectCompare">选择比较</param>
     public SelectConditionDto(bool isKeywords, string selectField, object? criteriaValue,
-        SelectCompareEnum selectCompare)
+        SelectCompare selectCompare)
         : base(isKeywords, selectField, criteriaValue!, selectCompare)
     {
     }

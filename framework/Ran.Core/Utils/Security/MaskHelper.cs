@@ -259,4 +259,9 @@ public static partial class MaskHelper
 
     [GeneratedRegex("(.{1}).*")]
     private static partial Regex RegexDefault();
+
+    public static string MaskUrlParams(Uri url)
+    {
+        throw new NotImplementedException();
+    }
 }

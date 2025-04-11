@@ -5,18 +5,9 @@ namespace Ran.EventBus.Abstractions.EventBus.Distributed;
 
 public class InboxConfig
 {
-    [NotNull]
     public string Name { get; }
 
-    [NotNull]
-    public string DatabaseName
-    {
-        get => _databaseName;
-        set => _databaseName = CheckHelper.NotNullOrWhiteSpace(value, nameof(DatabaseName));
-    }
-
-    [NotNull]
-    private string _databaseName = default!;
+    public string DatabaseName { get; set; } = default!;
 
     public Type ImplementationType { get; set; } = default!;
 

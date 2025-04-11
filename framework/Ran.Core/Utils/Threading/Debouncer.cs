@@ -36,7 +36,7 @@ public class Debouncer : IDisposable
                     {
                         action();
                     }
-                });
+                }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
         }
     }
 

@@ -175,7 +175,7 @@ public static class Base32
             return string.Empty;
         }
 
-        StringBuilder sb = new(((bytes.Length * 8) + 4) / 5);
+        StringBuilder sb = new((bytes.Length * 8 + 4) / 5);
 
         var bitCount = 0;
         var accumulatedBits = 0;
@@ -199,11 +199,10 @@ public static class Base32
             return sb.ToString();
         }
 
-        {
-            const int Mask = 0x1f;
-            var currentBase32Value = accumulatedBits & Mask;
-            _ = sb.Append(Base32Alphabet[currentBase32Value]);
-        }
+
+        const int mask = 0x1f;
+        var currentBase32ValueDemo = accumulatedBits & mask;
+        _ = sb.Append(Base32Alphabet[currentBase32ValueDemo]);
 
         return sb.ToString();
     }

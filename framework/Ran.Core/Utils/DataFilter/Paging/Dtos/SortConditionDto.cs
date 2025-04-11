@@ -34,7 +34,7 @@ public class SortConditionDto
     /// </summary>
     /// <param name="sortField">字段名称</param>
     /// <param name="sortDirection">排序方式</param>
-    public SortConditionDto(string sortField, SortDirectionEnum sortDirection)
+    public SortConditionDto(string sortField, SortDirection sortDirection)
     {
         SortField = sortField;
         SortDirection = sortDirection;
@@ -46,7 +46,7 @@ public class SortConditionDto
     /// <param name="sortField">字段名称</param>
     /// <param name="sortPriority">排序优先级</param>
     /// <param name="sortDirection">排序方式</param>
-    public SortConditionDto(string sortField, int sortPriority, SortDirectionEnum sortDirection)
+    public SortConditionDto(string sortField, int sortPriority, SortDirection sortDirection)
     {
         SortField = sortField;
         SortPriority = sortPriority;
@@ -56,17 +56,17 @@ public class SortConditionDto
     /// <summary>
     /// 排序字段名称
     /// </summary>
-    public string SortField { get; set; } = string.Empty;
+    public string SortField { get; set; }
 
     /// <summary>
     /// 排序优先级，数值越小优先级越高，默认为0，即最高优先级
     /// </summary>
-    public int SortPriority { get; set; } = 0;
+    public int SortPriority { get; set; }
 
     /// <summary>
     /// 排序方向，默认为升序
     /// </summary>
-    public SortDirectionEnum SortDirection { get; set; } = SortDirectionEnum.Asc;
+    public SortDirection SortDirection { get; set; } = SortDirection.Asc;
 }
 
 /// <summary>
@@ -100,7 +100,7 @@ public class SortConditionDto<T> : SortConditionDto
     /// </summary>
     /// <param name="keySelector">属性选择器</param>
     /// <param name="sortDirection">排序方式</param>
-    public SortConditionDto(Expression<Func<T, object>> keySelector, SortDirectionEnum sortDirection)
+    public SortConditionDto(Expression<Func<T, object>> keySelector, SortDirection sortDirection)
         : base(keySelector.GetPropertyName(), sortDirection)
     {
     }
@@ -111,7 +111,7 @@ public class SortConditionDto<T> : SortConditionDto
     /// <param name="keySelector">属性选择器</param>
     /// <param name="sortPriority">排序优先级</param>
     /// <param name="sortDirection">排序方式</param>
-    public SortConditionDto(Expression<Func<T, object>> keySelector, int sortPriority, SortDirectionEnum sortDirection)
+    public SortConditionDto(Expression<Func<T, object>> keySelector, int sortPriority, SortDirection sortDirection)
         : base(keySelector.GetPropertyName(), sortPriority, sortDirection)
     {
     }

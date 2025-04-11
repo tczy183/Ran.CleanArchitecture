@@ -354,7 +354,9 @@ public static class ListExtensions
             }
 
             // 标记为已处理
+#pragma warning disable S4143
             visited[item] = false;
+#pragma warning restore S4143
             sorted.Add(item);
         }
     }

@@ -16,7 +16,9 @@ public static class HashHelper
     public static string Sha1(string data)
     {
         // 创建 SHA256 加密算法实例，将字符串数据转换为字节数组，并生成相应的哈希值
+#pragma warning disable CA5350
         var hashBytes = SHA1.HashData(Encoding.UTF8.GetBytes(data));
+#pragma warning restore CA5350
         return Convert.ToHexString(hashBytes);
     }
 
@@ -63,7 +65,9 @@ public static class HashHelper
     /// <returns>生成的哈希值</returns>
     public static string Md5(string input)
     {
+#pragma warning disable CA5351
         var hashBytes = MD5.HashData(Encoding.UTF8.GetBytes(input));
+#pragma warning restore CA5351
         return Convert.ToHexString(hashBytes);
     }
 
@@ -85,7 +89,9 @@ public static class HashHelper
     /// <returns>生成的哈希值</returns>
     public static string StreamMd5(Stream stream)
     {
+#pragma warning disable CA5351
         var hashBytes = MD5.HashData(stream);
+#pragma warning restore CA5351
         return Convert.ToHexString(hashBytes);
     }
 
@@ -107,7 +113,9 @@ public static class HashHelper
     /// <returns></returns>
     public static string ByteMd5(byte[] data)
     {
+#pragma warning disable CA5351
         var hashBytes = MD5.HashData(data);
+#pragma warning restore CA5351
         return Convert.ToHexString(hashBytes);
     }
 

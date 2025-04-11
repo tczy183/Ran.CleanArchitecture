@@ -22,7 +22,7 @@ public static class PageExtensions
     /// <param name="selectCompare">查询比较</param>
     /// <returns>选择后的数据</returns>
     public static IEnumerable<T> Where<T>(this IEnumerable<T> source, string selectField, object? criteriaValue,
-        SelectCompareEnum selectCompare = SelectCompareEnum.Equal)
+        SelectCompare selectCompare = SelectCompare.Equal)
     {
         return CollectionPropertySelector<T>.Where(source, selectField, criteriaValue, selectCompare);
     }
@@ -88,7 +88,7 @@ public static class PageExtensions
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
     public static IOrderedEnumerable<T> OrderBy<T>(this IEnumerable<T> source, string sortField,
-        SortDirectionEnum sortDirection)
+        SortDirection sortDirection)
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortField, sortDirection);
     }
@@ -127,7 +127,7 @@ public static class PageExtensions
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
     public static IOrderedEnumerable<T> ThenBy<T>(this IOrderedEnumerable<T> source, string sortField,
-        SortDirectionEnum sortDirection)
+        SortDirection sortDirection)
     {
         return CollectionPropertySortor<T>.ThenBy(source, sortField, sortDirection);
     }
@@ -358,7 +358,7 @@ public static class PageExtensions
     /// <param name="selectCompare">查询比较</param>
     /// <returns>选择后的数据</returns>
     public static IQueryable<T> Where<T>(this IQueryable<T> source, string selectField, object? criteriaValue,
-        SelectCompareEnum selectCompare = SelectCompareEnum.Equal)
+        SelectCompare selectCompare = SelectCompare.Equal)
     {
         return CollectionPropertySelector<T>.Where(source, selectField, criteriaValue, selectCompare);
     }
@@ -424,7 +424,7 @@ public static class PageExtensions
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
     public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string sortField,
-        SortDirectionEnum sortDirection)
+        SortDirection sortDirection)
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortField, sortDirection);
     }
@@ -463,7 +463,7 @@ public static class PageExtensions
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
     public static IOrderedQueryable<T> ThenBy<T>(this IOrderedQueryable<T> source, string sortField,
-        SortDirectionEnum sortDirection)
+        SortDirection sortDirection)
     {
         return CollectionPropertySortor<T>.ThenBy(source, sortField, sortDirection);
     }

@@ -4,7 +4,7 @@
 /// 枚举主题特性
 /// </summary>
 [AttributeUsage(AttributeTargets.Enum | AttributeTargets.Field)]
-public class EnumThemeAttribute : Attribute
+public sealed class EnumThemeAttribute : Attribute
 {
     /// <summary>
     /// 主题

@@ -203,7 +203,7 @@ public abstract class ConventionalRegistrarBase : IConventionalRegistrar
                 ? null
                 : allExposingKeyedServiceTypes.Any(t => t.ServiceType == implementationType)
                     ? implementationType
-                    : allExposingKeyedServiceTypes.FirstOrDefault(
+                    : allExposingKeyedServiceTypes.Find(
                         t => t.ServiceType != exposingServiceType && exposingServiceType.IsAssignableFrom(t.ServiceType)
                     ).ServiceType;
     }

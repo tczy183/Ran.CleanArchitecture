@@ -3,7 +3,7 @@
 /// <summary>
 /// 密码强度检测器
 /// </summary>
-public class PasswordStrengthChecker
+public static class PasswordStrengthChecker
 {
     private static readonly List<string> WeakPasswords =
     [
@@ -119,9 +119,8 @@ public class PasswordStrengthChecker
             _ = characterPool.Append(SpecialCharacters);
         }
 
-        var random = new Random();
         return new string(Enumerable.Range(0, length)
-            .Select(_ => characterPool[random.Next(characterPool.Length)])
+            .Select(_ => characterPool[RandomNumberGenerator.GetInt32(characterPool.Length)])
             .ToArray());
     }
 }

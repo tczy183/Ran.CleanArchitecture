@@ -8,5 +8,5 @@ public interface IOnServiceActivatedContext
     /// <summary>
     /// 实例
     /// </summary>
-    public object Instance { get; }
+    object Instance { get; }
 }

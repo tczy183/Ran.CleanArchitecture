@@ -4,7 +4,7 @@
 /// 集成服务特性
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
-public class IntegrationServiceAttribute : Attribute
+public sealed class IntegrationServiceAttribute : Attribute
 {
     /// <summary>
     /// 是否已定义或已继承

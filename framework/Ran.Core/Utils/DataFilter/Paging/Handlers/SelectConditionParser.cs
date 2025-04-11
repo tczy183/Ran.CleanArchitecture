@@ -4,16 +4,20 @@ using Ran.Core.Utils.Reflections;
 
 namespace Ran.Core.Utils.DataFilter.Paging.Handlers;
 
+internal static class SelectConditionParserCache
+{
+    /// <summary>
+    /// 键选择器缓存
+    /// </summary>
+    public static readonly ConcurrentDictionary<string, MemberExpression> Cache = new();
+}
+
 /// <summary>
 /// 选择条件解析器
 /// </summary>
 /// <typeparam name="T">实体类型</typeparam>
 public static class SelectConditionParser<T>
 {
-    /// <summary>
-    /// 键选择器缓存
-    /// </summary>
-    private static readonly ConcurrentDictionary<string, MemberExpression> SelectConditionMemberParserCache = new();
 
     /// <summary>
     /// 获取选择条件解析器
@@ -45,19 +49,19 @@ public static class SelectConditionParser<T>
     /// <param name="selectCompare">比较操作</param>
     /// <returns>生成的 Lambda 表达式</returns>
     public static Expression<Func<T, bool>> GetSelectConditionParser(string propertyName, object? value,
-        SelectCompareEnum selectCompare)
+        SelectCompare selectCompare)
     {
         var type = typeof(T);
         var key = $"{typeof(T).FullName}.{propertyName}.{selectCompare}";
 
         var param = Expression.Parameter(type);
 
-        if (!SelectConditionMemberParserCache.TryGetValue(key, out var propertyAccess))
+        if (!SelectConditionParserCache.Cache.TryGetValue(key, out var propertyAccess))
         {
             var property = type.GetPropertyInfo(propertyName);
             propertyAccess = Expression.MakeMemberAccess(param, property);
 
-            _ = SelectConditionMemberParserCache.TryAdd(key, propertyAccess);
+            _ = SelectConditionParserCache.Cache.TryAdd(key, propertyAccess);
         }
 
         // 生成比较表达式
@@ -78,27 +82,27 @@ public static class SelectConditionParser<T>
     /// <returns>生成的比较表达式 </returns>
     /// <exception cref="NotSupportedException"></exception>
     private static Expression GenerateComparison(MemberExpression propertyAccess, object? value,
-        SelectCompareEnum selectCompare)
+        SelectCompare selectCompare)
     {
         var constant = Expression.Constant(value);
 
         return selectCompare switch
         {
             // 单值比较
-            SelectCompareEnum.Equal => Expression.Equal(propertyAccess, constant),
-            SelectCompareEnum.Greater => Expression.GreaterThan(propertyAccess, constant),
-            SelectCompareEnum.GreaterEqual => Expression.GreaterThanOrEqual(propertyAccess, constant),
-            SelectCompareEnum.Less => Expression.LessThan(propertyAccess, constant),
-            SelectCompareEnum.LessEqual => Expression.LessThanOrEqual(propertyAccess, constant),
-            SelectCompareEnum.NotEqual => Expression.NotEqual(propertyAccess, constant),
+            SelectCompare.Equal => Expression.Equal(propertyAccess, constant),
+            SelectCompare.Greater => Expression.GreaterThan(propertyAccess, constant),
+            SelectCompare.GreaterEqual => Expression.GreaterThanOrEqual(propertyAccess, constant),
+            SelectCompare.Less => Expression.LessThan(propertyAccess, constant),
+            SelectCompare.LessEqual => Expression.LessThanOrEqual(propertyAccess, constant),
+            SelectCompare.NotEqual => Expression.NotEqual(propertyAccess, constant),
 
             // 集合比较
-            SelectCompareEnum.Contains => GenerateContainsExpression(propertyAccess, value),
-            SelectCompareEnum.InWithContains => GenerateInWithContainsExpression(propertyAccess, value),
-            SelectCompareEnum.InWithEqual => GenerateInWithEqualExpression(propertyAccess, value),
+            SelectCompare.Contains => GenerateContainsExpression(propertyAccess, value),
+            SelectCompare.InWithContains => GenerateInWithContainsExpression(propertyAccess, value),
+            SelectCompare.InWithEqual => GenerateInWithEqualExpression(propertyAccess, value),
 
             // 区间比较
-            SelectCompareEnum.Between => GenerateBetweenExpression(propertyAccess, value),
+            SelectCompare.Between => GenerateBetweenExpression(propertyAccess, value),
 
             _ => throw new NotSupportedException($"不支持的比较操作：{selectCompare}")
         };

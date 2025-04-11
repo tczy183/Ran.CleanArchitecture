@@ -4,7 +4,7 @@
 /// 类型依赖特性
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-public class DependsOnAttribute : Attribute, IDependedTypesProvider
+public sealed class DependsOnAttribute : Attribute, IDependedTypesProvider
 {
     /// <summary>
     /// 依赖类型集合
@@ -24,7 +24,7 @@ public class DependsOnAttribute : Attribute, IDependedTypesProvider
     /// 获取依赖类型
     /// </summary>
     /// <returns></returns>
-    public virtual Type[] GetDependedTypes()
+    public Type[] GetDependedTypes()
     {
         return DependedTypes;
     }

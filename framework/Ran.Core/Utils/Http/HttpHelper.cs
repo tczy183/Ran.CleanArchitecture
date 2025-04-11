@@ -27,7 +27,7 @@ public static class HttpHelper
     /// <returns></returns>
     public static async Task<T?> GetAsync<T>(string url, Dictionary<string, string>? headers = null)
     {
-        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        using var request = new HttpRequestMessage(HttpMethod.Get, url);
         AddHeaders(request, headers);
 
         var response = await HttpClient.SendAsync(request);
@@ -45,7 +45,8 @@ public static class HttpHelper
     public static async Task<T?> PostAsync<T>(string url, object? data = null,
         Dictionary<string, string>? headers = null)
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = SerializeJson(data) };
+        using var request = new HttpRequestMessage(HttpMethod.Post, url);
+        request.Content = SerializeJson(data);
         AddHeaders(request, headers);
 
         var response = await HttpClient.SendAsync(request);
@@ -63,7 +64,8 @@ public static class HttpHelper
     public static async Task<T?> PutAsync<T>(string url, object? data = null,
         Dictionary<string, string>? headers = null)
     {
-        var request = new HttpRequestMessage(HttpMethod.Put, url) { Content = SerializeJson(data) };
+        using var request = new HttpRequestMessage(HttpMethod.Put, url);
+        request.Content = SerializeJson(data);
         AddHeaders(request, headers);
 
         var response = await HttpClient.SendAsync(request);
@@ -79,7 +81,7 @@ public static class HttpHelper
     /// <returns></returns>
     public static async Task<T?> DeleteAsync<T>(string url, Dictionary<string, string>? headers = null)
     {
-        var request = new HttpRequestMessage(HttpMethod.Delete, url);
+        using var request = new HttpRequestMessage(HttpMethod.Delete, url);
         AddHeaders(request, headers);
 
         var response = await HttpClient.SendAsync(request);
@@ -139,6 +141,26 @@ public static class HttpHelper
 
         var responseData = await response.Content.ReadAsStringAsync();
         return typeof(T) == typeof(string) ? (T)(object)responseData : JsonSerializer.Deserialize<T>(responseData);
+    }
+
+    public static Task<T?> GetAsync<T>(Uri url, Dictionary<string, string>? headers = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static Task<T?> PostAsync<T>(Uri url, object? data = null, Dictionary<string, string>? headers = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static Task<T?> PutAsync<T>(Uri url, object? data = null, Dictionary<string, string>? headers = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static Task<T?> DeleteAsync<T>(Uri url, Dictionary<string, string>? headers = null)
+    {
+        throw new NotImplementedException();
     }
 
     #endregion 私有方法

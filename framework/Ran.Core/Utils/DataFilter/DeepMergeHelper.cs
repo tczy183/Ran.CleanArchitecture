@@ -109,9 +109,9 @@ public static class DeepMergeHelper
     private static bool CanMerge(object? target, object? source)
     {
         return target is not null && source is not null &&
-               ((IsMergeableCollection(target) && IsMergeableCollection(source)) ||
-                (IsDictionary(target) && IsDictionary(source)) ||
-                (IsComplexObject(target) && IsComplexObject(source) && target.GetType() == source.GetType()));
+               (IsMergeableCollection(target) && IsMergeableCollection(source) ||
+                IsDictionary(target) && IsDictionary(source) ||
+                IsComplexObject(target) && IsComplexObject(source) && target.GetType() == source.GetType());
     }
 
     /// <summary>
@@ -200,11 +200,11 @@ public static class DeepMergeHelper
         var type = value.GetType();
 
         // 数组或实现了泛型集合接口的类型
-        return type.IsArray || (type.IsGenericType && (
+        return type.IsArray || type.IsGenericType && (
             typeof(IList<>).IsAssignableFrom(type.GetGenericTypeDefinition()) ||
             typeof(ICollection<>).IsAssignableFrom(type.GetGenericTypeDefinition()) ||
             typeof(IEnumerable<>).IsAssignableFrom(type.GetGenericTypeDefinition())
-        ));
+        );
     }
 
     /// <summary>
@@ -212,7 +212,7 @@ public static class DeepMergeHelper
     /// </summary>
     private static bool IsDictionary(object? value)
     {
-        return value is not null and IDictionary;
+        return value is IDictionary;
     }
 
     /// <summary>

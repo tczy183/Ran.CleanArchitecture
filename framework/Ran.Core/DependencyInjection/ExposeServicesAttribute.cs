@@ -7,7 +7,7 @@ namespace Ran.Core.DependencyInjection;
 /// 暴露服务特性
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-public class ExposeServicesAttribute : Attribute, IExposedServiceTypesProvider
+public sealed class ExposeServicesAttribute : Attribute, IExposedServiceTypesProvider
 {
     private const string DefaultInterfaceNameInitial = "I";
 

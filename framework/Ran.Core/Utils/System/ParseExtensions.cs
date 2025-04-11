@@ -283,8 +283,8 @@ public static class ParseExtensions
     /// <returns></returns>
     public static bool IsNotEmptyOrNull(this object? thisValue)
     {
-        return thisValue is not null && thisValue.ParseToString() != string.Empty &&
-               thisValue.ParseToString() != string.Empty &&
+        return thisValue is not null && !string.IsNullOrEmpty(thisValue.ParseToString()) &&
+               !string.IsNullOrEmpty(thisValue.ParseToString()) &&
                thisValue.ParseToString() != "undefined" && thisValue.ParseToString() != "null";
     }
 
@@ -320,7 +320,7 @@ public static class ParseExtensions
     public static DateTime ParseToDateTime(this object? thisValue)
     {
         var reveal = DateTime.MinValue;
-        if (thisValue is not null && thisValue != DBNull.Value && DateTime.TryParse(thisValue.ToString(), out reveal))
+        if (thisValue is not null && thisValue != DBNull.Value && DateTime.TryParse(thisValue.ToString(), CultureInfo.CurrentCulture, out reveal))
         {
             reveal = Convert.ToDateTime(thisValue);
         }
@@ -337,7 +337,7 @@ public static class ParseExtensions
     public static DateTime ParseToDateTime(this object? thisValue, DateTime errorValue)
     {
         return thisValue is not null && thisValue != DBNull.Value &&
-               DateTime.TryParse(thisValue.ToString(), out var reveal)
+               DateTime.TryParse(thisValue.ToString(), CultureInfo.CurrentCulture, out var reveal)
             ? reveal
             : errorValue;
     }
@@ -354,7 +354,7 @@ public static class ParseExtensions
     public static DateTimeOffset ParseToDateTimeOffset(this object? thisValue)
     {
         return thisValue is not null && thisValue != DBNull.Value &&
-               DateTimeOffset.TryParse(thisValue.ToString(), out var reveal)
+               DateTimeOffset.TryParse(thisValue.ToString(), CultureInfo.CurrentCulture, out var reveal)
             ? reveal
             : DateTimeOffset.MinValue;
     }
@@ -368,7 +368,7 @@ public static class ParseExtensions
     public static DateTimeOffset ParseToDateTimeOffset(this object? thisValue, DateTimeOffset errorValue)
     {
         return thisValue is not null && thisValue != DBNull.Value &&
-               DateTimeOffset.TryParse(thisValue.ToString(), out var reveal)
+               DateTimeOffset.TryParse(thisValue.ToString(), CultureInfo.CurrentCulture, out var reveal)
             ? reveal
             : errorValue;
     }
@@ -440,11 +440,11 @@ public static class ParseExtensions
         {
             // 找到所有的没有此特性、或有此特性但忽略字段的属性
             var item = (objDynamic as object).GetType().GetProperties()
-                .Where(prop => !prop.HasAttribute<TAttribute>() || (prop.HasAttribute<TAttribute>() &&
+                .Where(prop => !prop.HasAttribute<TAttribute>() || prop.HasAttribute<TAttribute>() &&
                                                                     !(Attribute.GetCustomAttribute(prop,
                                                                             typeof(TAttribute)) as TAttribute)!
                                                                         .GetPropertyValue<TAttribute, bool>(
-                                                                            "IsIgnore")))
+                                                                            "IsIgnore"))
                 .ToDictionary(prop => prop.Name, prop => prop.GetValue(objDynamic, null));
 
             yield return item;

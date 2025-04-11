@@ -4,4 +4,4 @@
 /// 禁用属性注入特性
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property)]
-public class DisablePropertyInjectionAttribute : Attribute;
+public sealed class DisablePropertyInjectionAttribute : Attribute;

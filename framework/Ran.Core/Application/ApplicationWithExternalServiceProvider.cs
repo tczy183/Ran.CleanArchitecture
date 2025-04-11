@@ -5,7 +5,7 @@ namespace Ran.Core.Application;
 /// <summary>
 /// 具有外部服务的应用提供器
 /// </summary>
-internal class ApplicationWithExternalServiceProvider : ApplicationBase, IApplicationWithExternalServiceProvider
+internal sealed class ApplicationWithExternalServiceProvider : ApplicationBase, IApplicationWithExternalServiceProvider
 {
     /// <summary>
     /// 构造函数

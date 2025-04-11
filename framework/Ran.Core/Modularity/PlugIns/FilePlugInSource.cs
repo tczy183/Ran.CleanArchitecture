@@ -27,7 +27,7 @@ public class FilePlugInSource : IPlugInSource
     /// 获取模块
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="XiHanException"></exception>
+    /// <exception cref="UserFriendlyException"></exception>
     public Type[] GetModules()
     {
         List<Type> modules = [];

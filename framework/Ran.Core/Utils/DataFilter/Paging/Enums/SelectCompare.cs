@@ -3,7 +3,7 @@
 /// <summary>
 /// 选择比较枚举
 /// </summary>
-public enum SelectCompareEnum
+public enum SelectCompare
 {
     #region 单值比较
 

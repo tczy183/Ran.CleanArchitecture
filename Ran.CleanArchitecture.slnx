@@ -1,4 +1,7 @@
 ﻿<Solution>
+  <Folder Name=".github/workflows/">
+    <File Path=".github\workflows\doc.yml" />
+  </Folder>
   <Folder Name="/docs/">
     <File Path="docs\mkdocs.yml" />
   </Folder>
@@ -11,9 +14,6 @@
     <File Path="docs\content\started\getting-started.md" />
     <File Path="docs\content\started\project-structure.md" />
   </Folder>
-  <Folder Name=".github/workflows/">
-    <File Path=".github\workflows\doc.yml" />
-  </Folder>
   <Folder Name="/framework/">
     <Project Path="framework\Quartz.EntityFrameworkCore.MySql\Quartz.EntityFrameworkCore.MySql.csproj" Type="Classic C#" />
     <Project Path="framework\Quartz.EntityFrameworkCore\Quartz.EntityFrameworkCore.csproj" Type="Classic C#" />
@@ -25,8 +25,6 @@
     <Project Path="framework\Ran.Ddd.EntityFramework\Ran.Ddd.EntityFramework.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.EventBus.Abstractions\Ran.EventBus.Abstractions.csproj" Type="Classic C#" />
     <Project Path="framework\Ran.EventBus\Ran.EventBus.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.Generators\Ran.Generators.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.Serilog.Sinks.Mysql\Ran.Serilog.Sinks.Mysql.csproj" Type="Classic C#" />
     <Project Path="framework\src\Ran.Core.AspNetCore\Ran.Core.AspNetCore.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/modules/" />

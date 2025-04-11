@@ -81,8 +81,8 @@ public static class ServiceCollectionCommonExtensions
         foreach (var service in services)
         {
             var factoryInterface = service.NormalizedImplementationInstance()?.GetType()
-                .GetTypeInfo().GetInterfaces()
-                .FirstOrDefault(i =>
+                .GetTypeInfo().GetInterfaces().ToList()
+                .Find(i =>
                     i.GetTypeInfo().IsGenericType && i.GetGenericTypeDefinition() == typeof(IServiceProviderFactory<>));
 
             if (factoryInterface is null)
@@ -107,7 +107,7 @@ public static class ServiceCollectionCommonExtensions
     /// <param name="services"></param>
     /// <param name="builderAction"></param>
     /// <returns></returns>
-    /// <exception cref="XiHanException"></exception>
+    /// <exception cref="UserFriendlyException"></exception>
     public static IServiceProvider BuildServiceProviderFromFactory<TContainerBuilder>(this IServiceCollection services,
         Action<TContainerBuilder>? builderAction = null) where TContainerBuilder : notnull
     {

@@ -93,9 +93,14 @@ public static class DictionaryExtensions
     public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
         Func<TKey, TValue> factory)
     {
-        return dictionary.TryGetValue(key, out var obj) ? obj : dictionary[key] = factory(key);
+        return dictionary.TryGetValue(key, out var obj) ? obj : AddValue(dictionary, key, factory);
     }
-
+    private static TValue AddValue<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> factory)
+    {
+        var value = factory(key);
+        dictionary[key] = value;
+        return value;
+    }
     /// <summary>
     /// 使用给定的键从字典中获取值。如果找不到，则使用工厂方法创建并添加值
     /// </summary>

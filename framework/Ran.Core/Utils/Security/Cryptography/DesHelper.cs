@@ -37,8 +37,14 @@ public static class DesHelper
     /// <returns></returns>
     public static string EncryptBytes(byte[] plainBytes, byte[] keyBytes, byte[] ivBytes)
     {
+#pragma warning disable S5547
+#pragma warning disable CA5351
         using var des = DES.Create();
+#pragma warning restore CA5351
+#pragma warning restore S5547
+#pragma warning disable CA5390
         des.Key = keyBytes;
+#pragma warning restore CA5390
         des.IV = ivBytes;
 
         var encryptor = des.CreateEncryptor();
@@ -74,8 +80,14 @@ public static class DesHelper
     /// <returns></returns>
     public static string DecryptBytes(byte[] encryptedBytes, byte[] keyBytes, byte[] ivBytes)
     {
+#pragma warning disable S5547
+#pragma warning disable CA5351
         using var des = DES.Create();
+#pragma warning restore CA5351
+#pragma warning restore S5547
+#pragma warning disable CA5390
         des.Key = keyBytes;
+#pragma warning restore CA5390
         des.IV = ivBytes;
 
         var decryptor = des.CreateDecryptor();

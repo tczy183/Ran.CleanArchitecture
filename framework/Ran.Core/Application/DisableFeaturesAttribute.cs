@@ -4,7 +4,7 @@
 /// 禁用功能特性
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
-public class DisableFeaturesAttribute : Attribute
+public sealed class DisableFeaturesAttribute : Attribute
 {
     /// <summary>
     /// 将不会为该类注册任何拦截器
