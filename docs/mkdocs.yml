@@ -1,20 +1,10 @@
 site_name: Ran.CleanArchitecture
 site_url: https://tczy183.com/Ran.CleanArchitecture/
 docs_dir: "content"
-copyright: Copyright &copy; 2024 tczy183 # 左下角的版权声明
+copyright: Copyright &copy; 2025 tczy183 # 左下角的版权声明
 
-repo_name: "Ran.CleanArchitecture"
+repo_name: "Github"
 repo_url: "https://github.com/tczy183/Ran.CleanArchitecture"
-
-nav:
-  - 首页: index.md
-  - 中文文档:
-      - 入门
-        - 创建项目: zh/quick-start/quick-start.md
-  - English Docs:
-      - Getting Started
-        - Create Project: en/quick-start/quick-start.md
-  - 关于: about.md
 
 markdown_extensions:
   - attr_list # allows to add HTML/CSS attributes to almost every Markdown element, useful for e.g. aligning an image to the left/right (can't do centre though! use md_in_html instead)
@@ -84,3 +74,13 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/tczy183
       name: tczy183 on Github
+
+nav:
+  - 首页: index.md
+  - 中文文档:
+      - 入门
+          - 创建项目: zh/quick-start/quick-start.md
+  - English Docs:
+      - Getting Started
+          - Create Project: en/quick-start/quick-start.md
+  - 关于: about.md
