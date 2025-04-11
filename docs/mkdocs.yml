@@ -10,7 +10,10 @@ nav:
   - 首页: index.md
   - 中文文档:
       - 入门
-        - 创建项目: zh/getting-started.md
+        - 创建项目: zh/getting-start.md
+  - English Docs:
+      - Getting Started
+        - Create Project: en/getting-start.md
 
 markdown_extensions:
   - attr_list # allows to add HTML/CSS attributes to almost every Markdown element, useful for e.g. aligning an image to the left/right (can't do centre though! use md_in_html instead)
