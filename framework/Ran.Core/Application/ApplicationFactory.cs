@@ -19,7 +19,7 @@ public static class ApplicationFactory
         Action<ApplicationCreationOptions>? optionsAction = null)
         where TStartupModule : IModule
     {
-        var app = Create<TStartupModule>(options =>
+        var app = await CreateAsync<TStartupModule>(options =>
         {
             options.SkipConfigureServices = true;
             optionsAction?.Invoke(options);
@@ -89,7 +89,7 @@ public static class ApplicationFactory
         Action<ApplicationCreationOptions>? optionsAction = null)
         where TStartupModule : IModule
     {
-        var app = Create<TStartupModule>(services, options =>
+        var app = await CreateAsync<TStartupModule>(services, options =>
         {
             options.SkipConfigureServices = true;
             optionsAction?.Invoke(options);

@@ -16,7 +16,7 @@ namespace Ran.EventBus;
 [DependsOn(typeof(EventBusAbstractionsModule))]
 public class EventBusModule : BaseModule
 {
-  
+
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         AddEventHandlers(context.Services);

@@ -1,5 +1,5 @@
-﻿using Ran.Core.Utils.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Ran.Core.Utils.Attributes;
 
 namespace Ran.Core.Utils.Reflections;
 

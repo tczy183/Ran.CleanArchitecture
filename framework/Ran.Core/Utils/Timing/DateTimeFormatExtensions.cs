@@ -33,7 +33,7 @@ public static class DateTimeFormatExtensions
     /// <returns></returns>
     public static DateTime GetDayMinDate(this DateTime dateTime)
     {
-        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0,DateTimeKind.Local);
+        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Local);
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public static class DateTimeFormatExtensions
     /// <returns></returns>
     public static DateTime GetDayMaxDate(this DateTime dateTime)
     {
-        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59,DateTimeKind.Local);
+        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, DateTimeKind.Local);
     }
 
     /// <summary>

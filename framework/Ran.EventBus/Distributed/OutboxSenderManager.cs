@@ -5,21 +5,14 @@ using Ran.EventBus.Abstractions.EventBus.Distributed;
 
 namespace Ran.EventBus.Distributed;
 
-public class OutboxSenderManager : IBackgroundWorker
+public class OutboxSenderManager(
+    IOptions<DistributedEventBusOptions> options,
+    IServiceProvider serviceProvider)
+    : IBackgroundWorker
 {
-    protected DistributedEventBusOptions Options { get; }
-    protected IServiceProvider ServiceProvider { get; }
-    protected List<IOutboxSender> Senders { get; }
-
-    public OutboxSenderManager(
-        IOptions<DistributedEventBusOptions> options,
-        IServiceProvider serviceProvider
-    )
-    {
-        ServiceProvider = serviceProvider;
-        Options = options.Value;
-        Senders = new List<IOutboxSender>();
-    }
+    protected DistributedEventBusOptions Options { get; } = options.Value;
+    protected IServiceProvider ServiceProvider { get; } = serviceProvider;
+    protected List<IOutboxSender> Senders { get; } = new();
 
     public async Task StartAsync(CancellationToken cancellationToken = default)
     {

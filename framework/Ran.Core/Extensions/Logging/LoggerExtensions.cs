@@ -61,30 +61,30 @@ public static class LoggerExtensions
         switch (logLevel)
         {
             case LogLevel.Critical:
-                logger.LogCritical("{Exception}{Message}", exception, message);
+                logger.LogCritical(exception, "发生致命错误：{Message}", message);
                 break;
 
             case LogLevel.Error:
-                logger.LogError("{Exception}{Message}", exception, message);
+                logger.LogError(exception, "发生致命错误：{Message}", message);
                 break;
 
             case LogLevel.Warning:
-                logger.LogWarning("{Exception}{Message}", exception, message);
+                logger.LogWarning(exception, "发生致命错误：{Message}", message);
                 break;
 
             case LogLevel.Information:
-                logger.LogInformation("{Exception}{Message}", exception, message);
+                logger.LogInformation(exception, "发生致命错误：{Message}", message);
                 break;
 
             case LogLevel.Trace:
-                logger.LogTrace("{Exception}{Message}", exception, message);
+                logger.LogTrace(exception, "发生致命错误：{Message}", message);
                 break;
 
             // LogLevel.Debug || LogLevel.None
             // case LogLevel.Debug:
             // case LogLevel.None:
             default:
-                logger.LogDebug("{Exception}{Message}", exception, message);
+                logger.LogDebug(exception, "发生致命错误：{Message}", message);
                 break;
         }
     }

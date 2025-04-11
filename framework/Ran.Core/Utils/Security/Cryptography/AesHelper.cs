@@ -15,7 +15,7 @@ public static class AesHelper
     private const int BlockSize = 128;
 
     // 迭代次数
-    private const int Iterations = 10000;
+    private const int Iterations = 100_000;
 
     /// <summary>
     /// 加密方法
@@ -63,7 +63,7 @@ public static class AesHelper
         using var aes = Aes.Create();
         aes.Key = keyBytes;
         aes.IV = ivBytes;
-        
+
         // 加密算法
         using MemoryStream ms = new();
         using CryptoStream cs = new(ms, aes.CreateEncryptor(), CryptoStreamMode.Write);

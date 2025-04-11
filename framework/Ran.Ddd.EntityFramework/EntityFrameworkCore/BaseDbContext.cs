@@ -3,4 +3,5 @@
 namespace Ran.Ddd.EntityFramework.EntityFrameworkCore;
 
 public abstract class BaseDbContext<TDbContext> : DbContext
-    where TDbContext : DbContext { }
+    where TDbContext : DbContext
+{ }
