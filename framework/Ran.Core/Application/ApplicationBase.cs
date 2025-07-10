@@ -96,7 +96,7 @@ public class ApplicationBase : IApplication
     /// 记录初始化日志
     /// </summary>
     /// <param name="serviceProvider"></param>
-    private void WriteInitLogs(IServiceProvider serviceProvider)
+    private static void WriteInitLogs(IServiceProvider serviceProvider)
     {
         var logger = serviceProvider.GetService<ILogger<ApplicationBase>>();
         if (logger is null)

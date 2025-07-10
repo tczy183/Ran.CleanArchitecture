@@ -51,7 +51,7 @@ public class ExceptionNotifier : IExceptionNotifier, ITransientDependency
             }
             catch (Exception ex)
             {
-                Logger.LogWarning("抛出{AssemblyQualifiedName}类型异常。",
+                Logger.LogWarning(ex, "抛出{AssemblyQualifiedName}类型异常。",
                     exceptionSubscriber.GetType().AssemblyQualifiedName);
                 Logger.LogException(ex, LogLevel.Warning);
             }

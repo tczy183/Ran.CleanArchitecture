@@ -1,4 +1,4 @@
-namespace Ran.Ddd.Domain.Abstractions.Entities;
+namespace Ran.Ddd.Domain.Abstractions.Tenant;
 
 public interface ITenant<TKey>
 {

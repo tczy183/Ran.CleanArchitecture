@@ -5,21 +5,14 @@ using Ran.EventBus.Abstractions.EventBus.Distributed;
 
 namespace Ran.EventBus.Distributed;
 
-public class InboxProcessManager : IBackgroundWorker
+public class InboxProcessManager(
+    IOptions<DistributedEventBusOptions> options,
+    IServiceProvider serviceProvider)
+    : IBackgroundWorker
 {
-    protected DistributedEventBusOptions Options { get; }
-    protected IServiceProvider ServiceProvider { get; }
-    protected List<IInboxProcessor> Processors { get; }
-
-    public InboxProcessManager(
-        IOptions<DistributedEventBusOptions> options,
-        IServiceProvider serviceProvider
-    )
-    {
-        ServiceProvider = serviceProvider;
-        Options = options.Value;
-        Processors = new List<IInboxProcessor>();
-    }
+    protected DistributedEventBusOptions Options { get; } = options.Value;
+    protected IServiceProvider ServiceProvider { get; } = serviceProvider;
+    protected List<IInboxProcessor> Processors { get; } = new();
 
     public async Task StartAsync(CancellationToken cancellationToken = default)
     {

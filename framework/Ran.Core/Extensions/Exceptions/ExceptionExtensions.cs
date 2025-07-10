@@ -1,5 +1,5 @@
-﻿using Ran.Core.Exceptions.Handling.Abstracts;
-using System.Runtime.ExceptionServices;
+﻿using System.Runtime.ExceptionServices;
+using Ran.Core.Exceptions.Handling.Abstracts;
 
 namespace Ran.Core.Extensions.Exceptions;
 

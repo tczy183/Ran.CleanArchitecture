@@ -1,7 +1,7 @@
 ﻿namespace Ran.Ddd.Domain.Abstractions.Tenant;
 
 [Flags]
-public enum MultiTenancySides 
+public enum MultiTenancySides
 {
     /// <summary>
     /// Tenant side.
