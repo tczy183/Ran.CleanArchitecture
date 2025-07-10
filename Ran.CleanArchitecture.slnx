@@ -40,6 +40,7 @@
         <Project Path="framework/src/Ran.EventBus/Ran.EventBus.csproj"/>
         <Project Path="framework/src/Ran.Core.AspNetCore/Ran.Core.AspNetCore.csproj"/>
         <Project Path="framework/src/Ran.BackgroundWorker/Ran.BackgroundWorker.csproj"/>
+        <Project Path="framework/src/Ran.BackgroundJob/Ran.BackgroundJob.csproj"/>
         <Project Path="framework/src/Ran.Ddd.Application.Abstraction/Ran.Ddd.Application.Abstraction.csproj"/>
         <Project Path="framework/src/Ran.Ddd.Domain.Abstraction/Ran.Ddd.Domain.Abstraction.csproj"/>
     </Folder>
