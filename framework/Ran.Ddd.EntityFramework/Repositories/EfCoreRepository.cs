@@ -1,8 +1,8 @@
 ﻿using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Ran.Ddd.Domain.Abstractions.Entities;
-using Ran.Ddd.Domain.Abstractions.Repositories;
+using Ran.Ddd.Domain.Abstraction.Entities;
+using Ran.Ddd.Domain.Abstraction.Repositories;
 
 namespace Ran.Ddd.EntityFramework.Repositories;
 

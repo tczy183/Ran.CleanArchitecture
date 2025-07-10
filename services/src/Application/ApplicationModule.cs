@@ -1,7 +1,5 @@
-﻿using Domain;
-using Ran.Core.Modularity;
+﻿namespace Application;
 
-namespace Application;
+[DependsOn(typeof(DomainModule),typeof(DddApplicationModule), typeof(ApplicationAbstractionModule))]
+public class ApplicationModule : DddModule { }
 
-[DependsOn(typeof(DomainModule))]
-public class ApplicationModule : BaseModule { }

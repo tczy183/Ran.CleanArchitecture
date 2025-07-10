@@ -2,4 +2,4 @@
 
 namespace Ran.EventBus.Abstractions;
 
-public class EventBusAbstractionsModule : BaseModule { }
+public class EventBusAbstractionsModule : DddModule { }

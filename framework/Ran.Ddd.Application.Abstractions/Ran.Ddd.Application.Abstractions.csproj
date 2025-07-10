@@ -1,5 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\Ran.Ddd.Domain.Abstractions\Ran.Ddd.Domain.Abstractions.csproj" />
-  </ItemGroup>
-</Project>

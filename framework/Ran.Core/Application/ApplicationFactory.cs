@@ -89,13 +89,7 @@ public static class ApplicationFactory
         Action<ApplicationCreationOptions>? optionsAction = null)
         where TStartupModule : IModule
     {
-        var app = await CreateAsync<TStartupModule>(services, options =>
-        {
-            options.SkipConfigureServices = true;
-            optionsAction?.Invoke(options);
-        });
-        await app.ConfigureServicesAsync();
-        return app;
+        return await CreateAsync(typeof(TStartupModule), services, optionsAction);
     }
 
     /// <summary>
@@ -110,7 +104,7 @@ public static class ApplicationFactory
         IServiceCollection services,
         Action<ApplicationCreationOptions>? optionsAction = null)
     {
-        ApplicationWithExternalServiceProvider app = new(startupModuleType, services, options =>
+        var app = new ApplicationWithExternalServiceProvider(startupModuleType, services, options =>
         {
             options.SkipConfigureServices = true;
             optionsAction?.Invoke(options);

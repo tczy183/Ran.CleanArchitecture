@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\framework\Ran.Core\Ran.Core.csproj" />
+      <ProjectReference Include="..\..\..\framework\Ran.Ddd.Application.Abstraction\Ran.Ddd.Application.Abstraction.csproj" />
+      <ProjectReference Include="..\DomainAbstraction\DomainAbstraction.csproj" />
+    </ItemGroup>
+
+</Project>
