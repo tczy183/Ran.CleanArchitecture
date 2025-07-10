@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\Quartz.EntityFrameworkCore\Quartz.EntityFrameworkCore.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql"/>
+    </ItemGroup>
+
+</Project>

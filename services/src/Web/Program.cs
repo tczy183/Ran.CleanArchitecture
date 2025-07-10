@@ -5,7 +5,7 @@ using Web;
 
 var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("serilog.json", optional: true, reloadOnChange: true)
+    .AddJsonFile("serilog.json", true, true)
     .Build();
 
 Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();

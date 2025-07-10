@@ -1,17 +1,18 @@
 ﻿using Application;
 using Infrastructure;
 using Ran.Core.Application;
+using Ran.Core.AspNetCore;
 using Ran.Core.AspNetCore.Extensions;
 using Ran.Core.Extensions.DependencyInjection;
 using Ran.Core.Modularity;
-using Ran.EventBus;
 
 namespace Web;
 
 [DependsOn(
     typeof(ApplicationModule),
-    typeof(InfrastructureModule)
-    )]
+    typeof(InfrastructureModule),
+    typeof(AspNetCoreModule)
+)]
 public class WebModule : DddModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -21,12 +22,12 @@ public class WebModule : DddModule
         context.Services.AddEndpointsApiExplorer();
         context.Services.AddControllers().AddControllersAsServices();
         context.Services.AddSwaggerGen();
-        context.Services.AddObjectAccessor<IApplicationBuilder>();
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         var app = context.GetApplicationBuilder();
+        // var builder = context.GetEndpointRouteBuilder();
         var env = context.GetEnvironment();
 
         // Configure the HTTP request pipeline.
@@ -39,6 +40,8 @@ public class WebModule : DddModule
         app.UseHttpsRedirection();
         app.UseRouting();
         // app.UseAuthorization();
+        // builder.MapGet("/", () => "Hello World!");
+
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();

@@ -1,31 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-  <ItemGroup>
-    <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions"/>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
-    <PackageReference Include="Serilog.AspNetCore"/>
-    <PackageReference Include="Serilog.Enrichers.Environment"/>
-    <PackageReference Include="Serilog.Enrichers.Process"/>
-    <PackageReference Include="Serilog.Enrichers.Thread"/>
-    <PackageReference Include="Serilog.Sinks.Async"/>
-    <PackageReference Include="Serilog.Sinks.SQLite"/>
-    <PackageReference Include="Swashbuckle.AspNetCore"/>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\framework\Ran.EventBus\Ran.EventBus.csproj"/>
-    <ProjectReference Include="..\..\..\framework\src\Ran.Core.AspNetCore\Ran.Core.AspNetCore.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj"/>
-    <ProjectReference Include="..\Application\Application.csproj"/>
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
+        <PackageReference Include="Serilog.AspNetCore"/>
+        <PackageReference Include="Serilog.Enrichers.Environment"/>
+        <PackageReference Include="Serilog.Enrichers.Process"/>
+        <PackageReference Include="Serilog.Enrichers.Thread"/>
+        <PackageReference Include="Serilog.Sinks.Async"/>
+        <PackageReference Include="Serilog.Sinks.SQLite"/>
+        <PackageReference Include="Swashbuckle.AspNetCore"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\framework\src\Ran.Core.AspNetCore\Ran.Core.AspNetCore.csproj" />
+        <ProjectReference Include="..\Infrastructure\Infrastructure.csproj"/>
+        <ProjectReference Include="..\Application\Application.csproj"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="..\..\..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="..\..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
+    </ItemGroup>
 
-  <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0 and '$(IsCrossTargetingBuild)' == 'true'">
-    <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High"/>
-    <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" WorkingDirectory="..\..\.."/>
-  </Target>
+    <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" Condition="'$(HUSKY)' != 0 and '$(IsCrossTargetingBuild)' == 'true'">
+        <Exec Command="dotnet tool restore" StandardOutputImportance="Low" StandardErrorImportance="High"/>
+        <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="High" WorkingDirectory="..\..\.."/>
+    </Target>
 </Project>

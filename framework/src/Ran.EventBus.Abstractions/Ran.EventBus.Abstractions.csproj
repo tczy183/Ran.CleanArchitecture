@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Ran.Core\Ran.Core.csproj"/>
+    </ItemGroup>
+
+</Project>

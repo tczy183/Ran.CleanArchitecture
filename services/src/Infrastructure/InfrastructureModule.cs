@@ -1,7 +1,6 @@
-﻿using Application;
-using Ran.Core.Modularity;
-
-namespace Infrastructure;
+﻿namespace Infrastructure;
 
 [DependsOn(typeof(ApplicationModule))]
-public class InfrastructureModule : DddModule { }
+public class InfrastructureModule : DddModule
+{
+}

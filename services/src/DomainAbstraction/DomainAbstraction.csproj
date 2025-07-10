@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\framework\Ran.Ddd.Domain.Abstraction\Ran.Ddd.Domain.Abstraction.csproj" />
+        <ProjectReference Include="..\..\..\framework\src\Ran.Ddd.Domain.Abstraction\Ran.Ddd.Domain.Abstraction.csproj"/>
     </ItemGroup>
 
 </Project>

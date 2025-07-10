@@ -5,12 +5,14 @@
 A `tactical` framework for `Domain-Driven Design` based on `ASP.NET Core`.
 
 核心特性：
+
 + 领域驱动设计实践支持
 + CQRS
 + Event Driven
 + 分布式事务（事件处理的最终一致性）
 + 多租户
 + 多环境（灰度发布）
+
 ## 愿景
 
 随着 .NET
