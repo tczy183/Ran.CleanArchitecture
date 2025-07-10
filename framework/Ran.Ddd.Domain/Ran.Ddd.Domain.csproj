@@ -3,6 +3,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ran.Ddd.Domain.Abstractions\Ran.Ddd.Domain.Abstractions.csproj" />
+    <ProjectReference Include="..\Ran.Ddd.Domain.Abstraction\Ran.Ddd.Domain.Abstraction.csproj" />
   </ItemGroup>
 </Project>

@@ -96,7 +96,7 @@ public class ApplicationBase : IApplication
     /// 记录初始化日志
     /// </summary>
     /// <param name="serviceProvider"></param>
-    private void WriteInitLogs(IServiceProvider serviceProvider)
+    private static void WriteInitLogs(IServiceProvider serviceProvider)
     {
         var logger = serviceProvider.GetService<ILogger<ApplicationBase>>();
         if (logger is null)
@@ -215,7 +215,7 @@ public class ApplicationBase : IApplication
 
         foreach (var module in Modules)
         {
-            if (module.Instance is BaseModule baseModule)
+            if (module.Instance is DddModule baseModule)
             {
                 baseModule.ServiceConfigurationContext = context;
             }
@@ -241,7 +241,7 @@ public class ApplicationBase : IApplication
         // ConfigureServices
         foreach (var module in Modules)
         {
-            if (module.Instance is BaseModule { SkipAutoServiceRegistration: false })
+            if (module.Instance is DddModule { SkipAutoServiceRegistration: false })
             {
                 foreach (var assembly in module.AllAssemblies)
                 {
@@ -284,7 +284,7 @@ public class ApplicationBase : IApplication
 
         foreach (var module in Modules)
         {
-            if (module.Instance is BaseModule baseModule)
+            if (module.Instance is DddModule baseModule)
             {
                 baseModule.ServiceConfigurationContext = null!;
             }
@@ -308,7 +308,7 @@ public class ApplicationBase : IApplication
 
         foreach (var module in Modules)
         {
-            if (module.Instance is BaseModule baseModule)
+            if (module.Instance is DddModule baseModule)
             {
                 baseModule.ServiceConfigurationContext = context;
             }
@@ -334,7 +334,7 @@ public class ApplicationBase : IApplication
         // ConfigureServices
         foreach (var module in Modules)
         {
-            if (module.Instance is BaseModule { SkipAutoServiceRegistration: false })
+            if (module.Instance is DddModule { SkipAutoServiceRegistration: false })
             {
                 foreach (var assembly in module.AllAssemblies)
                 {
@@ -377,7 +377,7 @@ public class ApplicationBase : IApplication
 
         foreach (var module in Modules)
         {
-            if (module.Instance is BaseModule baseModule)
+            if (module.Instance is DddModule baseModule)
             {
                 baseModule.ServiceConfigurationContext = null!;
             }

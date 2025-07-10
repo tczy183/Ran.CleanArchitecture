@@ -1,5 +1,6 @@
-﻿using Ran.Core.Modularity;
+﻿namespace Domain;
 
-namespace Domain;
-
-public class DomainModule : BaseModule { }
+[DependsOn(typeof(DddDomainAbstractionModule), typeof(DomainAbstractionModule))]
+public class DomainModule : DddModule
+{
+}

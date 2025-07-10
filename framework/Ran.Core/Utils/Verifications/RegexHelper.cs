@@ -100,7 +100,7 @@ public static partial class RegexHelper
 
         // 生日验证
         var birth = checkValue.Substring(6, 8).Insert(6, "-").Insert(4, "-");
-        if (!DateTime.TryParse(birth, CultureInfo.InvariantCulture, DateTimeStyles.None,out _))
+        if (!DateTime.TryParse(birth, CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
         {
             return false;
         }
@@ -143,7 +143,7 @@ public static partial class RegexHelper
 
         // 生日验证
         var birth = checkValue.Substring(6, 6).Insert(4, "-").Insert(2, "-");
-        return DateTime.TryParse(birth,CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
+        return DateTime.TryParse(birth, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
     }
 
     #endregion 是否身份证
@@ -428,7 +428,7 @@ public static partial class RegexHelper
     {
         try
         {
-            return DateTime.TryParse(checkValue,CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
+            return DateTime.TryParse(checkValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
         }
         catch
         {

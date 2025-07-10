@@ -90,17 +90,22 @@ public static class ModuleHelper
         if (moduleTypes.Contains(moduleType))
         {
             // 构造当前节点的前缀和分支符号
-            var nodeContainsLine = (string.IsNullOrEmpty(prefix) ? "" : prefix + (isLast ? "└─ " : "├─ ")) + moduleType.Namespace +
+            var nodeContainsLine = (string.IsNullOrEmpty(prefix) ? "" : prefix + (isLast ? "└─ " : "├─ ")) +
+                                   moduleType.Namespace +
                                    "(此模块之前已加载)";
-            LogHelper.Handle(nodeContainsLine);
-            //logger?.LogInformation(nodeContainsLine);
+            // LogHelper.Handle(nodeContainsLine);
+#pragma warning disable CA2254
+            logger?.LogInformation(nodeContainsLine);
+#pragma warning restore CA2254
             return;
         }
 
         // 构造当前节点的前缀和分支符号
         var nodeLine = (string.IsNullOrEmpty(prefix) ? "" : prefix + (isLast ? "└─ " : "├─ ")) + moduleType.Namespace;
-        LogHelper.Handle(nodeLine);
-        //logger?.LogInformation(nodeLine);
+        // LogHelper.Handle(nodeLine);
+#pragma warning disable CA2254
+        logger?.LogInformation(nodeLine);
+#pragma warning restore CA2254
 
         moduleTypes.Add(moduleType);
 

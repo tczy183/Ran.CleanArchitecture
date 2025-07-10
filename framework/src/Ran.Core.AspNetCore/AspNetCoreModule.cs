@@ -5,7 +5,7 @@ using Ran.Core.Modularity;
 
 namespace Ran.Core.AspNetCore;
 
-public class AspNetCoreModule : BaseModule
+public class AspNetCoreModule : DddModule
 {
     /// <summary>
     /// 服务配置前

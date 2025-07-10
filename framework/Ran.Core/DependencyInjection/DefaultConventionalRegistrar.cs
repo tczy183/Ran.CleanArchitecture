@@ -31,12 +31,12 @@ public class DefaultConventionalRegistrar : ConventionalRegistrarBase
         TriggerServiceExposing(services, type, exposedServiceAndKeyedServiceTypes);
 
         foreach (var serviceDescriptor in from exposedServiceType in exposedServiceAndKeyedServiceTypes
-                 let allExposingServiceTypes = exposedServiceType.ServiceKey is null
-                     ? exposedServiceAndKeyedServiceTypes.Where(x => x.ServiceKey is null).ToList()
-                     : exposedServiceAndKeyedServiceTypes
-                         .Where(x => x.ServiceKey?.ToString() == exposedServiceType.ServiceKey?.ToString()).ToList()
-                 select CreateServiceDescriptor(type, exposedServiceType.ServiceKey, exposedServiceType.ServiceType,
-                     allExposingServiceTypes, lifeTime.Value))
+                                          let allExposingServiceTypes = exposedServiceType.ServiceKey is null
+                                              ? exposedServiceAndKeyedServiceTypes.Where(x => x.ServiceKey is null).ToList()
+                                              : exposedServiceAndKeyedServiceTypes
+                                                  .Where(x => x.ServiceKey?.ToString() == exposedServiceType.ServiceKey?.ToString()).ToList()
+                                          select CreateServiceDescriptor(type, exposedServiceType.ServiceKey, exposedServiceType.ServiceType,
+                                              allExposingServiceTypes, lifeTime.Value))
         {
             if (dependencyAttribute?.ReplaceServices == true)
             {

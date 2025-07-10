@@ -12,7 +12,7 @@ namespace Web;
     typeof(ApplicationModule),
     typeof(InfrastructureModule)
     )]
-public class WebModule : BaseModule
+public class WebModule : DddModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

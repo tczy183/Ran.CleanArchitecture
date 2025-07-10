@@ -14,9 +14,9 @@ using Ran.EventBus.Local;
 namespace Ran.EventBus;
 
 [DependsOn(typeof(EventBusAbstractionsModule))]
-public class EventBusModule : BaseModule
+public class EventBusModule : DddModule
 {
-  
+
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         AddEventHandlers(context.Services);

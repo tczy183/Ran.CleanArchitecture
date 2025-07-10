@@ -4,5 +4,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\framework\Ran.Core\Ran.Core.csproj" />
+    <ProjectReference Include="..\DomainAbstraction\DomainAbstraction.csproj" />
   </ItemGroup>
 </Project>

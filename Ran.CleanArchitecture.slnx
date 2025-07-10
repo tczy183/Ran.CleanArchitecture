@@ -1,45 +1,9 @@
 ﻿<Solution>
-  <Folder Name=".github/workflows/">
-    <File Path=".github\workflows\doc.yml" />
+  <Folder Name="/.github/" />
+  <Folder Name="/.github/workflows/">
+    <File Path=".github/workflows/doc.yml" />
   </Folder>
-  <Folder Name="/docs/">
-    <File Path="docs\mkdocs.yml" />
-  </Folder>
-  <Folder Name="/docs/content/">
-    <File Path="docs\content\index.md" />
-    <File Path="docs\content\about.md" />
-  </Folder>
-  <Folder Name="/docs/content/en/" />
-  <Folder Name="/docs/content/en/quick-start/" >
-    <File Path="docs\content\en\quick-start\quick-start.md" />
-  </Folder>
-  <Folder Name="/docs/content/zh/" />
-  <Folder Name="/docs/content/zh/quick-start/" >
-    <File Path="docs\content\zh\quick-start\quick-start.md" />
-  </Folder>
-  <Folder Name="/framework/">
-    <Project Path="framework\Quartz.EntityFrameworkCore.MySql\Quartz.EntityFrameworkCore.MySql.csproj" Type="Classic C#" />
-    <Project Path="framework\Quartz.EntityFrameworkCore\Quartz.EntityFrameworkCore.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.Core\Ran.Core.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.Ddd.Application.Abstractions\Ran.Ddd.Application.Abstractions.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.Ddd.Application\Ran.Ddd.Application.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.Ddd.Domain.Abstractions\Ran.Ddd.Domain.Abstractions.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.Ddd.Domain\Ran.Ddd.Domain.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.Ddd.EntityFramework\Ran.Ddd.EntityFramework.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.EventBus.Abstractions\Ran.EventBus.Abstractions.csproj" Type="Classic C#" />
-    <Project Path="framework\Ran.EventBus\Ran.EventBus.csproj" Type="Classic C#" />
-    <Project Path="framework\src\Ran.Core.AspNetCore\Ran.Core.AspNetCore.csproj" Type="Classic C#" />
-  </Folder>
-  <Folder Name="/modules/" />
-  <Folder Name="/services/" />
-  <Folder Name="/services/src/">
-    <Project Path="services\src\Application\Application.csproj" Type="Classic C#" />
-    <Project Path="services\src\Domain\Domain.csproj" Type="Classic C#" />
-    <Project Path="services\src\Infrastructure\Infrastructure.csproj" Type="Classic C#" />
-    <Project Path="services\src\Web\Web.csproj" Type="Classic C#" />
-  </Folder>
-  <Folder Name="/services/test/" />
-  <Folder Name="/solution Items/">
+  <Folder Name="/.solution Items/">
     <File Path=".gitignore" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
@@ -49,4 +13,43 @@
     <File Path=".editorconfig" />
     <File Path="nuget.config" />
   </Folder>
+  <Folder Name="/docs/">
+    <File Path="docs/mkdocs.yml" />
+  </Folder>
+  <Folder Name="/docs/content/">
+    <File Path="docs/content/index.md" />
+    <File Path="docs/content/about.md" />
+  </Folder>
+  <Folder Name="/docs/content/en/" />
+  <Folder Name="/docs/content/en/quick-start/">
+    <File Path="docs/content/en/quick-start/quick-start.md" />
+  </Folder>
+  <Folder Name="/docs/content/zh/" />
+  <Folder Name="/docs/content/zh/quick-start/">
+    <File Path="docs/content/zh/quick-start/quick-start.md" />
+  </Folder>
+  <Folder Name="/framework/">
+    <Project Path="framework/Quartz.EntityFrameworkCore.MySql/Quartz.EntityFrameworkCore.MySql.csproj" />
+    <Project Path="framework/Quartz.EntityFrameworkCore/Quartz.EntityFrameworkCore.csproj" />
+    <Project Path="framework/Ran.Core/Ran.Core.csproj" />
+    <Project Path="framework/Ran.Ddd.Application/Ran.Ddd.Application.csproj" />
+    <Project Path="framework/Ran.Ddd.Domain/Ran.Ddd.Domain.csproj" />
+    <Project Path="framework/Ran.Ddd.EntityFramework/Ran.Ddd.EntityFramework.csproj" />
+    <Project Path="framework/Ran.EventBus.Abstractions/Ran.EventBus.Abstractions.csproj" />
+    <Project Path="framework/Ran.EventBus/Ran.EventBus.csproj" />
+    <Project Path="framework/src/Ran.Core.AspNetCore/Ran.Core.AspNetCore.csproj" />
+    <Project Path="framework\Ran.Ddd.Application.Abstraction\Ran.Ddd.Application.Abstraction.csproj" />
+    <Project Path="framework\Ran.Ddd.Domain.Abstraction\Ran.Ddd.Domain.Abstraction.csproj" />
+  </Folder>
+  <Folder Name="/modules/" />
+  <Folder Name="/services/" />
+  <Folder Name="/services/src/">
+    <Project Path="services/src/Application/Application.csproj" />
+    <Project Path="services/src/Domain/Domain.csproj" />
+    <Project Path="services/src/Infrastructure/Infrastructure.csproj" />
+    <Project Path="services/src/Web/Web.csproj" />
+    <Project Path="services\src\ApplicationAbstraction\ApplicationAbstraction.csproj" Type="Classic C#" />
+    <Project Path="services\src\DomainAbstraction\DomainAbstraction.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/services/test/" />
 </Solution>

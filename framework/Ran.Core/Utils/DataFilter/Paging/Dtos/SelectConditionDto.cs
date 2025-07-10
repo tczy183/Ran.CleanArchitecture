@@ -78,8 +78,8 @@ public class SelectConditionDto
 public class SelectConditionDto<T> : SelectConditionDto
 #pragma warning restore S2326
 {
-    
-    
+
+
     /// <summary>
     /// 使用选择字段名称和选择值，初始化一个<see cref="SelectConditionDto"/>类型的新实例
     /// </summary>
