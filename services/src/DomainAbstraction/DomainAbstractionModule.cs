@@ -2,5 +2,7 @@
 
 [DependsOn(
     typeof(DddDomainAbstractionModule)
-    )]
-public class DomainAbstractionModule : DddModule { }
+)]
+public class DomainAbstractionModule : DddModule
+{
+}

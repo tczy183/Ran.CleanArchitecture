@@ -4,7 +4,7 @@
         <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\Ran.Core\Ran.Core.csproj"/>
+        <ProjectReference Include="..\Ran.Core\Ran.Core.csproj"/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions"/>

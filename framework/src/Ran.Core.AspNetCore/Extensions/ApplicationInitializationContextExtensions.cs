@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Ran.Core.Application;
+﻿using Ran.Core.Application;
 using Ran.Core.Utils.System;
 
 namespace Ran.Core.AspNetCore.Extensions;
@@ -35,6 +31,31 @@ public static class ApplicationInitializationContextExtensions
     }
 
     /// <summary>
+    /// 获取
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
+    public static IEndpointRouteBuilder GetEndpointRouteBuilder(this ApplicationInitializationContext context)
+    {
+        var endpointRouteBuilder =
+            context.ServiceProvider.GetRequiredService<IObjectAccessor<IEndpointRouteBuilder>>().Value;
+
+        _ = CheckHelper.NotNull(endpointRouteBuilder, nameof(endpointRouteBuilder));
+
+        return endpointRouteBuilder!;
+    }
+
+    /// <summary>
+    /// 获取
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
+    public static IEndpointRouteBuilder GetEndpointRouteBuilderOrNull(this ApplicationInitializationContext context)
+    {
+        return context.ServiceProvider.GetRequiredService<IObjectAccessor<IEndpointRouteBuilder>>().Value;
+    }
+
+    /// <summary>
     /// 获取环境
     /// </summary>
     /// <param name="context"></param>
@@ -43,6 +64,7 @@ public static class ApplicationInitializationContextExtensions
     {
         return context.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
     }
+
 
     /// <summary>
     /// 获取环境

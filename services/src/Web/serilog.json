@@ -25,7 +25,7 @@
             {
               "Name": "Console",
               "Args": {
-                "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] [{ProcessId}] [{SourceContext}] [{ThreadId}] - {Message:lj}{NewLine}{Exception}",
+                "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] [{ProcessId}] [{SourceContext}] [{ThreadId}] - {Message:lj}{NewLine}{Exception}"
               }
             },
             {

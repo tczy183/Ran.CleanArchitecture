@@ -3,19 +3,24 @@
 [English](./README.md) | 简体中文
 
 ## 项目介绍
+
 DDD-CleanArchitecture 是一个基于领域驱动设计和干净架构的项目模板，用于快速构建项目。
 
 ***开发中，文档待补充***
 
 ## 如何贡献
+
 非常欢迎你的加入！提一个 Issue 或者提交一个 Pull Request。
 Pull Request:
+
 1. Fork 代码
 2. 创建自己的分支: `git checkout -b feat/xxxx`
 3. 提交你的修改: `git commit -am 'feat: add xxxxx'`
 4. 推送您的分支: `git push origin feat/xxxx`
 5. 提交`pull request`
+
 ### Git 贡献提交规范
+
 + 参考
     + `feat` 增加新功能
     + `fix` 修复问题/BUG

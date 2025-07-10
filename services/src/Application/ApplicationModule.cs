@@ -1,5 +1,6 @@
 ﻿namespace Application;
 
-[DependsOn(typeof(DomainModule),typeof(DddApplicationModule), typeof(ApplicationAbstractionModule))]
-public class ApplicationModule : DddModule { }
-
+[DependsOn(typeof(DomainModule), typeof(DddApplicationModule), typeof(ApplicationAbstractionModule))]
+public class ApplicationModule : DddModule
+{
+}
