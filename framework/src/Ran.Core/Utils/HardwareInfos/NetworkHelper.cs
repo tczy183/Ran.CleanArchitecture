@@ -17,7 +17,7 @@ public static class NetworkHelper
     /// 获取网卡信息
     /// </summary>
     /// <returns></returns>
-    public static List<NetworkInfo> GetNetworkInfos()
+    private static List<NetworkInfo> GetNetworkInfos()
     {
         List<NetworkInfo> networkInfos = [];
 
