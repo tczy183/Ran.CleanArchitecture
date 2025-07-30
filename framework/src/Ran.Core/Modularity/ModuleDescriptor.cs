@@ -53,7 +53,7 @@ public class ModuleDescriptor : IModuleDescriptor
     {
         _ = CheckHelper.NotNull(type, nameof(type));
         _ = CheckHelper.NotNull(instance, nameof(instance));
-        ModuleHelper.CheckXiHanModuleType(type);
+        ModuleHelper.CheckDddModuleType(type);
 
         if (!type.GetTypeInfo().IsInstanceOfType(instance))
         {

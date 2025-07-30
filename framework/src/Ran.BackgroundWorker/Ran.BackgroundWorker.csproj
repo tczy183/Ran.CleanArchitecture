@@ -1,12 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <RootNamespace>Ran.BackgroudWork</RootNamespace>
-    </PropertyGroup>
-
     <ItemGroup>
       <ProjectReference Include="..\Ran.Core\Ran.Core.csproj" />
     </ItemGroup>

@@ -54,7 +54,7 @@ public class FolderPlugInSource : IPlugInSource
             {
                 foreach (var type in assembly.GetTypes())
                 {
-                    if (ModuleHelper.IsXiHanModule(type))
+                    if (ModuleHelper.IsDddModule(type))
                     {
                         _ = modules.AddIfNotContains(type);
                     }
