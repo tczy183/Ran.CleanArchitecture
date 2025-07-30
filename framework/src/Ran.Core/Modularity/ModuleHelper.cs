@@ -30,7 +30,7 @@ public static class ModuleHelper
     /// <returns></returns>
     public static List<Type> FindDependedModuleTypes(Type moduleType)
     {
-        CheckXiHanModuleType(moduleType);
+        CheckDddModuleType(moduleType);
 
         List<Type> dependencies = [];
 
@@ -84,8 +84,8 @@ public static class ModuleHelper
     private static void AddModuleAndDependenciesRecursively(List<Type> moduleTypes, Type moduleType, ILogger? logger,
         string prefix = "", bool isLast = true)
     {
-        // 检查是否是合法的 XiHan 模块类型
-        CheckXiHanModuleType(moduleType);
+        // 检查是否是合法的模块类型
+        CheckDddModuleType(moduleType);
 
         if (moduleTypes.Contains(moduleType))
         {
@@ -127,7 +127,7 @@ public static class ModuleHelper
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public static bool IsXiHanModule(Type type)
+    public static bool IsDddModule(Type type)
     {
         var typeInfo = type.GetTypeInfo();
 
@@ -140,9 +140,9 @@ public static class ModuleHelper
     /// </summary>
     /// <param name="moduleType"></param>
     /// <exception cref="ArgumentException"></exception>
-    internal static void CheckXiHanModuleType(Type moduleType)
+    internal static void CheckDddModuleType(Type moduleType)
     {
-        if (!IsXiHanModule(moduleType))
+        if (!IsDddModule(moduleType))
         {
             throw new ArgumentException("给定的类型不是模块:" + moduleType.AssemblyQualifiedName);
         }
