@@ -22,7 +22,10 @@ public class BackgroundWorkerManager : IBackgroundWorkerManager, ISingletonDepen
         _backgroundWorkers = [];
     }
 
-    public virtual async Task AddAsync(IBackgroundWorker worker, CancellationToken cancellationToken = default)
+    public virtual async Task AddAsync(
+        IBackgroundWorker worker,
+        CancellationToken cancellationToken = default
+    )
     {
         _backgroundWorkers.Add(worker);
 

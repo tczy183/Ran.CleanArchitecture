@@ -17,7 +17,9 @@ public static class ServiceDescriptorExtensions
     /// </returns>
     public static object? NormalizedImplementationInstance(this ServiceDescriptor descriptor)
     {
-        return descriptor.IsKeyedService ? descriptor.KeyedImplementationInstance : descriptor.ImplementationInstance;
+        return descriptor.IsKeyedService
+            ? descriptor.KeyedImplementationInstance
+            : descriptor.ImplementationInstance;
     }
 
     /// <summary>
@@ -31,6 +33,8 @@ public static class ServiceDescriptorExtensions
     /// </returns>
     public static Type? NormalizedImplementationType(this ServiceDescriptor descriptor)
     {
-        return descriptor.IsKeyedService ? descriptor.KeyedImplementationType : descriptor.ImplementationType;
+        return descriptor.IsKeyedService
+            ? descriptor.KeyedImplementationType
+            : descriptor.ImplementationType;
     }
 }

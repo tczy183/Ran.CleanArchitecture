@@ -42,7 +42,10 @@ public static class ExceptionExtensions
     /// <param name="exception">异常</param>
     /// <param name="defaultLevel">默认日志级别</param>
     /// <returns></returns>
-    public static LogLevel GetLogLevel(this Exception exception, LogLevel defaultLevel = LogLevel.Error)
+    public static LogLevel GetLogLevel(
+        this Exception exception,
+        LogLevel defaultLevel = LogLevel.Error
+    )
     {
         return (exception as IHasLogLevel)?.LogLevel ?? defaultLevel;
     }

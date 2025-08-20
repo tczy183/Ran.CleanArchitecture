@@ -18,7 +18,8 @@ public static class ServiceCollectionApplicationExtensions
     /// <returns></returns>
     public static IApplicationWithExternalServiceProvider AddApplication<TStartupModule>(
         this IServiceCollection services,
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
         where TStartupModule : IModule
     {
         return ApplicationFactory.Create<TStartupModule>(services, optionsAction);
@@ -34,7 +35,8 @@ public static class ServiceCollectionApplicationExtensions
     public static IApplicationWithExternalServiceProvider AddApplication(
         this IServiceCollection services,
         Type startupModuleType,
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
     {
         return ApplicationFactory.Create(startupModuleType, services, optionsAction);
     }
@@ -48,7 +50,8 @@ public static class ServiceCollectionApplicationExtensions
     /// <returns></returns>
     public static async Task<IApplicationWithExternalServiceProvider> AddApplicationAsync<TStartupModule>(
         this IServiceCollection services,
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
         where TStartupModule : IModule
     {
         return await ApplicationFactory.CreateAsync<TStartupModule>(services, optionsAction);
@@ -64,7 +67,8 @@ public static class ServiceCollectionApplicationExtensions
     public static async Task<IApplicationWithExternalServiceProvider> AddApplicationAsync(
         this IServiceCollection services,
         Type startupModuleType,
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
     {
         return await ApplicationFactory.CreateAsync(startupModuleType, services, optionsAction);
     }

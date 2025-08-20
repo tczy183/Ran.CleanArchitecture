@@ -1,6 +1,7 @@
 namespace Quartz.EntityFrameworkCore.MySql.EntityTypeConfigurations;
 
-public class QuartzLockEntityTypeConfiguration(string? prefix) : IEntityTypeConfiguration<QuartzLock>
+public class QuartzLockEntityTypeConfiguration(string? prefix)
+    : IEntityTypeConfiguration<QuartzLock>
 {
     public void Configure(EntityTypeBuilder<QuartzLock> builder)
     {
@@ -8,12 +9,14 @@ public class QuartzLockEntityTypeConfiguration(string? prefix) : IEntityTypeConf
 
         builder.HasKey(x => new { x.SchedulerName, x.LockName });
 
-        builder.Property(x => x.SchedulerName)
+        builder
+            .Property(x => x.SchedulerName)
             .HasColumnName("SCHED_NAME")
             .HasColumnType("varchar(120)")
             .IsRequired();
 
-        builder.Property(x => x.LockName)
+        builder
+            .Property(x => x.LockName)
             .HasColumnName("LOCK_NAME")
             .HasColumnType("varchar(40)")
             .IsRequired();

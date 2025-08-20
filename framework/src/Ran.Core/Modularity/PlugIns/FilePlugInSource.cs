@@ -48,7 +48,10 @@ public class FilePlugInSource : IPlugInSource
             }
             catch (Exception ex)
             {
-                throw new UserFriendlyException($"无法从程序集获取模块类型：{assembly.FullName}", innerException: ex);
+                throw new UserFriendlyException(
+                    $"无法从程序集获取模块类型：{assembly.FullName}",
+                    innerException: ex
+                );
             }
         }
 

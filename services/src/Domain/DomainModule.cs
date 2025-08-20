@@ -1,6 +1,6 @@
-﻿namespace Domain;
+﻿using DomainAbstraction;
+
+namespace Domain;
 
 [DependsOn(typeof(DddDomainAbstractionModule), typeof(DomainAbstractionModule))]
-public class DomainModule : DddModule
-{
-}
+public class DomainModule : DddModule { }

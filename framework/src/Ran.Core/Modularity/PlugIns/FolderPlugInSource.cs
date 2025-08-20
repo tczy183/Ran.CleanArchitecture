@@ -31,7 +31,10 @@ public class FolderPlugInSource : IPlugInSource
     /// </summary>
     /// <param name="folder"></param>
     /// <param name="searchOption"></param>
-    public FolderPlugInSource(string folder, SearchOption searchOption = SearchOption.TopDirectoryOnly)
+    public FolderPlugInSource(
+        string folder,
+        SearchOption searchOption = SearchOption.TopDirectoryOnly
+    )
     {
         _ = CheckHelper.NotNull(folder, nameof(folder));
 
@@ -62,7 +65,10 @@ public class FolderPlugInSource : IPlugInSource
             }
             catch (Exception ex)
             {
-                throw new UserFriendlyException($"无法从程序集获取模块类型：{assembly.FullName}", innerException: ex);
+                throw new UserFriendlyException(
+                    $"无法从程序集获取模块类型：{assembly.FullName}",
+                    innerException: ex
+                );
             }
         }
 

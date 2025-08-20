@@ -30,9 +30,7 @@ public static class MemberInfoExtensions
         }
 
         var display = member.GetSingleAttributeOrNull<DisplayAttribute>(inherit);
-        return display is not null
-            ? display.Name ?? string.Empty
-            : member.Name;
+        return display is not null ? display.Name ?? string.Empty : member.Name;
     }
 
     #endregion 描述信息
@@ -59,7 +57,10 @@ public static class MemberInfoExtensions
     /// <param name="memberInfo">要检查的成员</param>
     /// <param name="inherit">是否从继承中查找</param>
     /// <returns>Returns the attribute object if found. Returns null if not found.</returns>
-    public static TAttribute? GetSingleAttributeOrNull<TAttribute>(this MemberInfo memberInfo, bool inherit = true)
+    public static TAttribute? GetSingleAttributeOrNull<TAttribute>(
+        this MemberInfo memberInfo,
+        bool inherit = true
+    )
         where TAttribute : Attribute
     {
         ArgumentNullException.ThrowIfNull(memberInfo);

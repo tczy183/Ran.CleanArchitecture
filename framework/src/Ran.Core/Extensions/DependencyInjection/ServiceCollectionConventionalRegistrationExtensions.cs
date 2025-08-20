@@ -14,8 +14,10 @@ public static class ServiceCollectionConventionalRegistrationExtensions
     /// <param name="services"></param>
     /// <param name="registrar"></param>
     /// <returns></returns>
-    public static IServiceCollection AddConventionalRegistrar(this IServiceCollection services,
-        IConventionalRegistrar registrar)
+    public static IServiceCollection AddConventionalRegistrar(
+        this IServiceCollection services,
+        IConventionalRegistrar registrar
+    )
     {
         GetOrCreateRegistrarList(services).Add(registrar);
         return services;
@@ -26,7 +28,9 @@ public static class ServiceCollectionConventionalRegistrationExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static List<IConventionalRegistrar> GetConventionalRegistrars(this IServiceCollection services)
+    public static List<IConventionalRegistrar> GetConventionalRegistrars(
+        this IServiceCollection services
+    )
     {
         return GetOrCreateRegistrarList(services);
     }
@@ -38,8 +42,9 @@ public static class ServiceCollectionConventionalRegistrationExtensions
     /// <returns></returns>
     private static ConventionalRegistrarList GetOrCreateRegistrarList(IServiceCollection services)
     {
-        var conventionalRegistrars =
-            services.GetSingletonInstanceOrNull<IObjectAccessor<ConventionalRegistrarList>>()?.Value;
+        var conventionalRegistrars = services
+            .GetSingletonInstanceOrNull<IObjectAccessor<ConventionalRegistrarList>>()
+            ?.Value;
         if (conventionalRegistrars is not null)
         {
             return conventionalRegistrars;
@@ -68,7 +73,10 @@ public static class ServiceCollectionConventionalRegistrationExtensions
     /// <param name="services"></param>
     /// <param name="assembly"></param>
     /// <returns></returns>
-    public static IServiceCollection AddAssembly(this IServiceCollection services, Assembly assembly)
+    public static IServiceCollection AddAssembly(
+        this IServiceCollection services,
+        Assembly assembly
+    )
     {
         foreach (var registrar in services.GetConventionalRegistrars())
         {

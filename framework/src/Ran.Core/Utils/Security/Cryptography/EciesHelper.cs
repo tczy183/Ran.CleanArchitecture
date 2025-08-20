@@ -73,7 +73,13 @@ public static class EciesHelper
         var result = new byte[senderPublicKey.Length + aes.IV.Length + cipherBytes.Length];
         Buffer.BlockCopy(senderPublicKey, 0, result, 0, senderPublicKey.Length);
         Buffer.BlockCopy(aes.IV, 0, result, senderPublicKey.Length, aes.IV.Length);
-        Buffer.BlockCopy(cipherBytes, 0, result, senderPublicKey.Length + aes.IV.Length, cipherBytes.Length);
+        Buffer.BlockCopy(
+            cipherBytes,
+            0,
+            result,
+            senderPublicKey.Length + aes.IV.Length,
+            cipherBytes.Length
+        );
         return result;
     }
 

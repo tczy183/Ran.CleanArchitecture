@@ -2,5 +2,7 @@
 
 public interface IQuartzModelBuilder
 {
-    IQuartzModelBuilder UseEntityTypeConfigurations(Action<EntityTypeConfigurationContext> entityTypeConfigurations);
+    IQuartzModelBuilder UseEntityTypeConfigurations(
+        Action<EntityTypeConfigurationContext> entityTypeConfigurations
+    );
 }

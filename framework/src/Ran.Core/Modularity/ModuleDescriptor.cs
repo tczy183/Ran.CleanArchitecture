@@ -58,7 +58,8 @@ public class ModuleDescriptor : IModuleDescriptor
         if (!type.GetTypeInfo().IsInstanceOfType(instance))
         {
             throw new ArgumentException(
-                $"模块实例({instance.GetType().AssemblyQualifiedName})不是模块类型{type.AssemblyQualifiedName}的实例！");
+                $"模块实例({instance.GetType().AssemblyQualifiedName})不是模块类型{type.AssemblyQualifiedName}的实例！"
+            );
         }
 
         Type = type;

@@ -24,13 +24,18 @@ public static class NetworkHelper
         try
         {
             // 获取可用网卡
-            var interfaces = NetworkInterface.GetAllNetworkInterfaces()
+            var interfaces = NetworkInterface
+                .GetAllNetworkInterfaces()
                 .Where(ni => ni.OperationalStatus == OperationalStatus.Up)
                 .Where(ni =>
-                    ni.NetworkInterfaceType is NetworkInterfaceType.Ethernet or NetworkInterfaceType.Wireless80211)
+                    ni.NetworkInterfaceType
+                        is NetworkInterfaceType.Ethernet
+                            or NetworkInterfaceType.Wireless80211
+                )
                 .ToList();
 
-            networkInfos.AddRange(from ni in interfaces
+            networkInfos.AddRange(
+                from ni in interfaces
                 let properties = ni.GetIPProperties()
                 select new NetworkInfo
                 {
@@ -38,11 +43,15 @@ public static class NetworkHelper
                     Description = ni.Description,
                     Type = ni.NetworkInterfaceType.ToString(),
                     Speed = ni.Speed.ToString("#,##0") + " bps",
-                    PhysicalAddress = BitConverter.ToString(ni.GetPhysicalAddress().GetAddressBytes()),
+                    PhysicalAddress = BitConverter.ToString(
+                        ni.GetPhysicalAddress().GetAddressBytes()
+                    ),
                     DnsAddresses = properties.DnsAddresses.Select(ip => ip.ToString()).ToList(),
-                    IpAddresses = properties.UnicastAddresses.Select(ip => ip.Address + " / " + ip.IPv4Mask)
-                        .ToList()
-                });
+                    IpAddresses = properties
+                        .UnicastAddresses.Select(ip => ip.Address + " / " + ip.IPv4Mask)
+                        .ToList(),
+                }
+            );
         }
         catch (Exception ex)
         {

@@ -35,10 +35,16 @@ public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override DateTimeOffset Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
-        if (reader.TokenType == JsonTokenType.String &&
-            DateTimeOffset.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var time))
+        if (
+            reader.TokenType == JsonTokenType.String
+            && DateTimeOffset.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var time)
+        )
         {
             return _isUtc ? time.ToUniversalTime() : time;
         }
@@ -52,11 +58,17 @@ public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
     /// <param name="writer"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DateTimeOffset value,
+        JsonSerializerOptions options
+    )
     {
-        writer.WriteStringValue(_isUtc
-            ? value.ToUniversalTime().ToString(_dateFormatString)
-            : value.ToString(_dateFormatString));
+        writer.WriteStringValue(
+            _isUtc
+                ? value.ToUniversalTime().ToString(_dateFormatString)
+                : value.ToString(_dateFormatString)
+        );
     }
 }
 
@@ -95,10 +107,16 @@ public class DateTimeOffsetNullableConverter : JsonConverter<DateTimeOffset?>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override DateTimeOffset? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
-        if (reader.TokenType == JsonTokenType.String &&
-            DateTimeOffset.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var time))
+        if (
+            reader.TokenType == JsonTokenType.String
+            && DateTimeOffset.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var time)
+        )
         {
             return _isUtc ? time.ToUniversalTime() : time;
         }
@@ -112,13 +130,19 @@ public class DateTimeOffsetNullableConverter : JsonConverter<DateTimeOffset?>
     /// <param name="writer"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DateTimeOffset? value,
+        JsonSerializerOptions options
+    )
     {
         if (value.HasValue)
         {
-            writer.WriteStringValue(_isUtc
-                ? value.Value.ToUniversalTime().ToString(_dateFormatString)
-                : value.Value.ToString(_dateFormatString));
+            writer.WriteStringValue(
+                _isUtc
+                    ? value.Value.ToUniversalTime().ToString(_dateFormatString)
+                    : value.Value.ToString(_dateFormatString)
+            );
         }
         else
         {

@@ -15,7 +15,11 @@ public static partial class RegexHelper
     /// <param name="input">输入的字符串</param>
     /// <param name="pattern">模式字符串</param>
     /// <param name="options">筛选条件</param>
-    public static bool IsMatch(string input, string pattern, RegexOptions options = RegexOptions.IgnoreCase)
+    public static bool IsMatch(
+        string input,
+        string pattern,
+        RegexOptions options = RegexOptions.IgnoreCase
+    )
     {
         return Regex.IsMatch(input, pattern, options);
     }
@@ -62,15 +66,15 @@ public static partial class RegexHelper
         switch (checkValue.Length)
         {
             case 18:
-                {
-                    var check = IsNumberPeople18(checkValue);
-                    return check;
-                }
+            {
+                var check = IsNumberPeople18(checkValue);
+                return check;
+            }
             case 15:
-                {
-                    var check = IsNumberPeople15(checkValue);
-                    return check;
-                }
+            {
+                var check = IsNumberPeople15(checkValue);
+                return check;
+            }
             default:
                 return false;
         }
@@ -84,8 +88,11 @@ public static partial class RegexHelper
     public static bool IsNumberPeople18(string checkValue)
     {
         // 数字验证
-        if (long.TryParse(checkValue[..17], out var n) || n < Math.Pow(10, 16) ||
-            long.TryParse(checkValue.Replace('x', '0').Replace('X', '0'), out _))
+        if (
+            long.TryParse(checkValue[..17], out var n)
+            || n < Math.Pow(10, 16)
+            || long.TryParse(checkValue.Replace('x', '0').Replace('X', '0'), out _)
+        )
         {
             return false;
         }
@@ -116,7 +123,8 @@ public static partial class RegexHelper
         }
 
         _ = Math.DivRem(sum, 11, out var y);
-        return arrVerifyCode[y].Equals(checkValue.Substring(17, 1), StringComparison.InvariantCultureIgnoreCase);
+        return arrVerifyCode[y]
+            .Equals(checkValue.Substring(17, 1), StringComparison.InvariantCultureIgnoreCase);
         // 符合 GB11643-1999标准
     }
 
@@ -181,7 +189,8 @@ public static partial class RegexHelper
     /// <returns></returns>
     public static bool IsInt(string source)
     {
-        return IntRegex().Match(source).Success && long.Parse(source) is <= 0x7fffffffL and >= -2147483648L;
+        return IntRegex().Match(source).Success
+            && long.Parse(source) is <= 0x7fffffffL and >= -2147483648L;
     }
 
     /// <summary>
@@ -428,7 +437,12 @@ public static partial class RegexHelper
     {
         try
         {
-            return DateTime.TryParse(checkValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
+            return DateTime.TryParse(
+                checkValue,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out _
+            );
         }
         catch
         {
@@ -481,7 +495,11 @@ public static partial class RegexHelper
         try
         {
             var checkValueArg = checkValue.Split('.');
-            if (checkValue.IsNullOrWhiteSpace() && checkValue.Length < 16 && checkValueArg.Length == 4)
+            if (
+                checkValue.IsNullOrWhiteSpace()
+                && checkValue.Length < 16
+                && checkValueArg.Length == 4
+            )
             {
                 for (var i = 0; i < 4; i++)
                 {
@@ -525,7 +543,11 @@ public static partial class RegexHelper
     /// <summary>
     /// 验证输入字符串是否与模式字符串匹配，匹配返回 true
     /// </summary>
-    [GeneratedRegex(@"^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$", RegexOptions.IgnoreCase, "zh-CN")]
+    [GeneratedRegex(
+        @"^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
+        RegexOptions.IgnoreCase,
+        "zh-CN"
+    )]
     public static partial Regex GuidRegex();
 
     /// <summary>
@@ -537,8 +559,11 @@ public static partial class RegexHelper
     /// <summary>
     /// 验证邮箱地址是否符合格式
     /// </summary>
-    [GeneratedRegex(@"^[A-Za-z0-9](([\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$",
-        RegexOptions.IgnoreCase, "zh-CN")]
+    [GeneratedRegex(
+        @"^[A-Za-z0-9](([\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$",
+        RegexOptions.IgnoreCase,
+        "zh-CN"
+    )]
     public static partial Regex EmailRegex();
 
     /// <summary>
@@ -672,13 +697,19 @@ public static partial class RegexHelper
     /// </summary>
     [GeneratedRegex(
         @"^(((file|gopher|news|nntp|telnet|http|ftp|https|ftps|sftp)://)|(www\.))+(([a-zA-Z0-9\.-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(/[a-zA-Z0-9\&amp;%\./-~-]*)?$",
-        RegexOptions.IgnoreCase, "zh-CN")]
+        RegexOptions.IgnoreCase,
+        "zh-CN"
+    )]
     public static partial Regex UrlRegex();
 
     /// <summary>
     /// 验证是否为请求安全参数字符串
     /// </summary>
-    [GeneratedRegex(@"(?<=password=|passwd=|pwd=|secret=|token=)[^&]+", RegexOptions.IgnoreCase, "zh-CN")]
+    [GeneratedRegex(
+        @"(?<=password=|passwd=|pwd=|secret=|token=)[^&]+",
+        RegexOptions.IgnoreCase,
+        "zh-CN"
+    )]
     public static partial Regex RequestSecurityParamsRegex();
 
     /// <summary>
@@ -698,7 +729,9 @@ public static partial class RegexHelper
     /// </summary>
     [GeneratedRegex(
         @"^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$",
-        RegexOptions.IgnoreCase, "zh-CN")]
+        RegexOptions.IgnoreCase,
+        "zh-CN"
+    )]
     public static partial Regex IpRegex();
 
     /// <summary>
@@ -706,15 +739,20 @@ public static partial class RegexHelper
     /// </summary>
     [GeneratedRegex(
         @"^\\s*($|#|\\w+\\s*=|(\\?|\\*|(?:[0-5]?\\d)(?:(?:-|\\/|\\,)(?:[0-5]?\\d))?(?:,(?:[0-5]?\\d)(?:(?:-|\\/|\\,)(?:[0-5]?\\d))?)*)\\s+(\\?|\\*|(?:[0-5]?\\d)(?:(?:-|\\/|\\,)(?:[0-5]?\\d))?(?:,(?:[0-5]?\\d)(?:(?:-|\\/|\\,)(?:[0-5]?\\d))?)*)\\s+(\\?|\\*|(?:[01]?\\d|2[0-3])(?:(?:-|\\/|\\,)(?:[01]?\\d|2[0-3]))?(?:,(?:[01]?\\d|2[0-3])(?:(?:-|\\/|\\,)(?:[01]?\\d|2[0-3]))?)*)\\s+(\\?|\\*|(?:0?[1-9]|[12]\\d|3[01])(?:(?:-|\\/|\\,)(?:0?[1-9]|[12]\\d|3[01]))?(?:,(?:0?[1-9]|[12]\\d|3[01])(?:(?:-|\\/|\\,)(?:0?[1-9]|[12]\\d|3[01]))?)*)\\s+(\\?|\\*|(?:[1-9]|1[012])(?:(?:-|\\/|\\,)(?:[1-9]|1[012]))?(?:L|W)?(?:,(?:[1-9]|1[012])(?:(?:-|\\/|\\,)(?:[1-9]|1[012]))?(?:L|W)?)*|\\?|\\*|(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)(?:(?:-)(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC))?(?:,(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)(?:(?:-)(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC))?)*)\\s+(\\?|\\*|(?:[0-6])(?:(?:-|\\/|\\,|#)(?:[0-6]))?(?:L)?(?:,(?:[0-6])(?:(?:-|\\/|\\,|#)(?:[0-6]))?(?:L)?)*|\\?|\\*|(?:MON|TUE|WED|THU|FRI|SAT|SUN)(?:(?:-)(?:MON|TUE|WED|THU|FRI|SAT|SUN))?(?:,(?:MON|TUE|WED|THU|FRI|SAT|SUN)(?:(?:-)(?:MON|TUE|WED|THU|FRI|SAT|SUN))?)*)(|\\s)+(\\?|\\*|(?:|\\d{4})(?:(?:-|\\/|\\,)(?:|\\d{4}))?(?:,(?:|\\d{4})(?:(?:-|\\/|\\,)(?:|\\d{4}))?)*))$",
-        RegexOptions.IgnoreCase, "zh-CN")]
+        RegexOptions.IgnoreCase,
+        "zh-CN"
+    )]
     public static partial Regex IsCron();
 
     /// <summary>
     /// 验证是否为 Windows 普通文件路径
     /// </summary>
     /// <returns></returns>
-    [GeneratedRegex(@"^(?:[a-zA-Z]:\\|\\\\)?(?:[^\\\/:*?""<>|\r\n]+\\)*[^\\\/:*?""<>|\r\n]+\\?$",
-        RegexOptions.IgnoreCase, "zh-CN")]
+    [GeneratedRegex(
+        @"^(?:[a-zA-Z]:\\|\\\\)?(?:[^\\\/:*?""<>|\r\n]+\\)*[^\\\/:*?""<>|\r\n]+\\?$",
+        RegexOptions.IgnoreCase,
+        "zh-CN"
+    )]
     public static partial Regex WindowsPathRegex();
 
     /// <summary>
@@ -728,13 +766,21 @@ public static partial class RegexHelper
     /// 验证是否为虚拟文件路径
     /// </summary>
     /// <returns></returns>
-    [GeneratedRegex(@"^(~\/|\/)([a-zA-Z0-9_\-\.]+(\/[a-zA-Z0-9_\-\.]+)*)\/?$", RegexOptions.IgnoreCase, "zh-CN")]
+    [GeneratedRegex(
+        @"^(~\/|\/)([a-zA-Z0-9_\-\.]+(\/[a-zA-Z0-9_\-\.]+)*)\/?$",
+        RegexOptions.IgnoreCase,
+        "zh-CN"
+    )]
     public static partial Regex VirtualPathRegex();
 
     /// <summary>
     /// 验证是否为嵌入文件路径
     /// </summary>
-    [GeneratedRegex(@"^embedded://(?<assembly>[^/]+)/(?<path>.*)$", RegexOptions.IgnoreCase, "zh-CN")]
+    [GeneratedRegex(
+        @"^embedded://(?<assembly>[^/]+)/(?<path>.*)$",
+        RegexOptions.IgnoreCase,
+        "zh-CN"
+    )]
     public static partial Regex EmbeddedPathRegex();
 
     /// <summary>

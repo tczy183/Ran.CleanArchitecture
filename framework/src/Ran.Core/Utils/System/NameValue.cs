@@ -9,9 +9,7 @@ public class NameValue : NameValue<string>
     /// <summary>
     /// 构造函数
     /// </summary>
-    public NameValue()
-    {
-    }
+    public NameValue() { }
 
     /// <summary>
     /// 构造函数
@@ -44,9 +42,7 @@ public class NameValue<T>
     /// <summary>
     /// 构造函数
     /// </summary>
-    public NameValue()
-    {
-    }
+    public NameValue() { }
 
     /// <summary>
     /// 构造函数

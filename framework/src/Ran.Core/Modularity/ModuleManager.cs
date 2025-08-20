@@ -20,14 +20,18 @@ public class ModuleManager : IModuleManager, ISingletonDependency
     /// <param name="logger"></param>
     /// <param name="options"></param>
     /// <param name="serviceProvider"></param>
-    public ModuleManager(IModuleContainer moduleContainer, ILogger<ModuleManager> logger,
-        IOptions<ModuleLifecycleOptions> options, IServiceProvider serviceProvider)
+    public ModuleManager(
+        IModuleContainer moduleContainer,
+        ILogger<ModuleManager> logger,
+        IOptions<ModuleLifecycleOptions> options,
+        IServiceProvider serviceProvider
+    )
     {
         _moduleContainer = moduleContainer;
         _logger = logger;
 
-        _lifecycleContributors = options.Value.Contributors
-            .Select(serviceProvider.GetRequiredService)
+        _lifecycleContributors = options
+            .Value.Contributors.Select(serviceProvider.GetRequiredService)
             .Cast<IModuleLifecycleContributor>()
             .ToArray();
     }
@@ -52,7 +56,8 @@ public class ModuleManager : IModuleManager, ISingletonDependency
                 {
                     throw new InitializationException(
                         $"在模块 {module.Type.AssemblyQualifiedName} 的初始化 {contributor.GetType().FullName} 阶段发生错误：{ex.Message}。查看集成异常以获取详细信息。",
-                        ex);
+                        ex
+                    );
                 }
             }
         }
@@ -80,7 +85,8 @@ public class ModuleManager : IModuleManager, ISingletonDependency
                 {
                     throw new InitializationException(
                         $"在模块 {module.Type.AssemblyQualifiedName} 的初始化 {contributor.GetType().FullName} 阶段发生错误：{ex.Message}。查看集成异常以获取详细信息。",
-                        ex);
+                        ex
+                    );
                 }
             }
         }
@@ -110,7 +116,8 @@ public class ModuleManager : IModuleManager, ISingletonDependency
                 {
                     throw new ShutdownException(
                         $"在模块 {module.Type.AssemblyQualifiedName} 的关闭 {contributor.GetType().FullName} 阶段发生错误：{ex.Message}。查看集成异常以获取详细信息。",
-                        ex);
+                        ex
+                    );
                 }
             }
         }
@@ -140,7 +147,8 @@ public class ModuleManager : IModuleManager, ISingletonDependency
                 {
                     throw new ShutdownException(
                         $"在模块 {module.Type.AssemblyQualifiedName} 的关闭 {contributor.GetType().FullName} 阶段发生错误：{ex.Message}。查看集成异常以获取详细信息。",
-                        ex);
+                        ex
+                    );
                 }
             }
         }

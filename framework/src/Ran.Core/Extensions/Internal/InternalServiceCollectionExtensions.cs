@@ -31,8 +31,11 @@ internal static class InternalServiceCollectionExtensions
     /// <param name="services"></param>
     /// <param name="application"></param>
     /// <param name="applicationCreationOptions"></param>
-    internal static void AddCoreServices(this IServiceCollection services, IApplication application,
-        ApplicationCreationOptions applicationCreationOptions)
+    internal static void AddCoreServices(
+        this IServiceCollection services,
+        IApplication application,
+        ApplicationCreationOptions applicationCreationOptions
+    )
     {
         var moduleLoader = new ModuleLoader();
         var assemblyFinder = new AssemblyFinder(application);
@@ -41,7 +44,8 @@ internal static class InternalServiceCollectionExtensions
         if (!services.IsAdded<IConfiguration>())
         {
             _ = services.ReplaceConfiguration(
-                ConfigurationHelper.BuildConfiguration(applicationCreationOptions.Configuration));
+                ConfigurationHelper.BuildConfiguration(applicationCreationOptions.Configuration)
+            );
         }
 
         services.TryAddSingleton<IAssemblyFinder>(assemblyFinder);
@@ -54,7 +58,10 @@ internal static class InternalServiceCollectionExtensions
 
         _ = services.AddAssemblyOf<IApplication>();
 
-        _ = services.AddTransient(typeof(ISimpleStateCheckerManager<>), typeof(SimpleStateCheckerManager<>));
+        _ = services.AddTransient(
+            typeof(ISimpleStateCheckerManager<>),
+            typeof(SimpleStateCheckerManager<>)
+        );
 
         _ = services.Configure<ModuleLifecycleOptions>(options =>
         {

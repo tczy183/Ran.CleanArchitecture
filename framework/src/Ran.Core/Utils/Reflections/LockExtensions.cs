@@ -189,7 +189,11 @@ public static class LockExtensions
     /// <param name="timeout"></param>
     /// <param name="func"></param>
     /// <returns></returns>
-    public static (bool Success, T? Result) TryLock<T>(this object lockObj, TimeSpan timeout, Func<T> func)
+    public static (bool Success, T? Result) TryLock<T>(
+        this object lockObj,
+        TimeSpan timeout,
+        Func<T> func
+    )
     {
         ArgumentNullException.ThrowIfNull(lockObj);
 

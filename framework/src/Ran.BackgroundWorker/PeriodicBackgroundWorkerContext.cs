@@ -12,7 +12,10 @@ public class PeriodicBackgroundWorkerContext
         CancellationToken = default;
     }
 
-    public PeriodicBackgroundWorkerContext(IServiceProvider serviceProvider, CancellationToken cancellationToken)
+    public PeriodicBackgroundWorkerContext(
+        IServiceProvider serviceProvider,
+        CancellationToken cancellationToken
+    )
     {
         ServiceProvider = serviceProvider;
         CancellationToken = cancellationToken;

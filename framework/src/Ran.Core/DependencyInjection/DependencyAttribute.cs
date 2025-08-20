@@ -24,9 +24,7 @@ public sealed class DependencyAttribute : Attribute
     /// <summary>
     /// 构造函数
     /// </summary>
-    public DependencyAttribute()
-    {
-    }
+    public DependencyAttribute() { }
 
     /// <summary>
     /// 构造函数

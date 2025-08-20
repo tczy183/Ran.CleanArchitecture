@@ -49,7 +49,13 @@ public static class OtpHelper
     /// <param name="step"> </param>
     /// <param name="allowedSkew">允许的时间偏移量</param>
     /// <returns></returns>
-    public static bool VerifyTotp(string secretKey, string otp, int digits = 6, int step = 30, int allowedSkew = 1)
+    public static bool VerifyTotp(
+        string secretKey,
+        string otp,
+        int digits = 6,
+        int step = 30,
+        int allowedSkew = 1
+    )
     {
         if (string.IsNullOrWhiteSpace(secretKey) || string.IsNullOrWhiteSpace(otp))
         {
@@ -96,8 +102,9 @@ public static class OtpHelper
     /// <returns></returns>
     public static bool VerifyHotp(string secretKey, string otp, long counter, int digits = 6)
     {
-        return !string.IsNullOrWhiteSpace(secretKey) && !string.IsNullOrWhiteSpace(otp) &&
-               GenerateOtp(secretKey, counter, digits) == otp;
+        return !string.IsNullOrWhiteSpace(secretKey)
+            && !string.IsNullOrWhiteSpace(otp)
+            && GenerateOtp(secretKey, counter, digits) == otp;
     }
 
     /// <summary>
@@ -131,10 +138,11 @@ public static class OtpHelper
 
         // 动态截取
         var offset = hash[^1] & 0x0F;
-        var binaryCode = ((hash[offset] & 0x7F) << 24) |
-                         (hash[offset + 1] << 16) |
-                         (hash[offset + 2] << 8) |
-                         hash[offset + 3];
+        var binaryCode =
+            ((hash[offset] & 0x7F) << 24)
+            | (hash[offset + 1] << 16)
+            | (hash[offset + 2] << 8)
+            | hash[offset + 3];
 
         // 取模以生成固定位数的 OTP
         var otp = binaryCode % (int)Math.Pow(10, digits);

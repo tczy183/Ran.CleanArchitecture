@@ -1,50 +1,46 @@
 <Project>
-    <PropertyGroup Label="Build">
-        <TargetFramework>net9.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <LangVersion>preview</LangVersion>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    </PropertyGroup>
-
-    <PropertyGroup Label="CodeAnalysis">
-        <AnalysisLevel>latest</AnalysisLevel>
-        <AnalysisMode>All</AnalysisMode>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
-        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    </PropertyGroup>
-
-    <PropertyGroup Label="Version">
-        <!-- 手动或 CI 注入 -->
-        <MajorVersion>1</MajorVersion>
-        <MinorVersion>0</MinorVersion>
-        <PatchVersion>1</PatchVersion>
-        <Revision>1</Revision>
-        <!-- 拼接主版本号 -->
-        <VersionPrefix>$(MajorVersion).$(MinorVersion).$(PatchVersion)</VersionPrefix>
-        <AssemblyVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion).$(Revision)</AssemblyVersion>
-        <FileVersion>$(AssemblyVersion)</FileVersion>
-        <Version>$(AssemblyVersion)</Version>
-        <PackageVersion>$(Version)</PackageVersion>
-        <Authors>张阳</Authors>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Description>基于DDD领域驱动</Description>
-        <PackageProjectUrl>https://github.com/tczy183/Ran.CleanArchitecture.git</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/tczy183/Ran.CleanArchitecture.git</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-    </PropertyGroup>
-
-    <ItemGroup Condition="'$(Configuration)' == 'Release'">
-        <PackageReference Include="ConfigureAwait.Fody" PrivateAssets="All"/>
-        <PackageReference Include="Fody" PrivateAssets="All"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="SonarAnalyzer.CSharp">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+  <PropertyGroup Label="Build">
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>preview</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Label="CodeAnalysis">
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>All</AnalysisMode>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+  <PropertyGroup Label="Version">
+    <!-- 手动或 CI 注入 -->
+    <MajorVersion>1</MajorVersion>
+    <MinorVersion>0</MinorVersion>
+    <PatchVersion>1</PatchVersion>
+    <Revision>1</Revision>
+    <!-- 拼接主版本号 -->
+    <VersionPrefix>$(MajorVersion).$(MinorVersion).$(PatchVersion)</VersionPrefix>
+    <AssemblyVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion).$(Revision)</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <Version>$(AssemblyVersion)</Version>
+    <PackageVersion>$(Version)</PackageVersion>
+    <Authors>张阳</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>基于DDD领域驱动</Description>
+    <PackageProjectUrl>https://github.com/tczy183/Ran.CleanArchitecture.git</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tczy183/Ran.CleanArchitecture.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <PackageReference Include="ConfigureAwait.Fody" PrivateAssets="All" />
+    <PackageReference Include="Fody" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

@@ -8,11 +8,7 @@ using Ran.Core.Modularity;
 
 namespace Web;
 
-[DependsOn(
-    typeof(ApplicationModule),
-    typeof(InfrastructureModule),
-    typeof(AspNetCoreModule)
-)]
+[DependsOn(typeof(ApplicationModule), typeof(InfrastructureModule), typeof(AspNetCoreModule))]
 public class WebModule : DddModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

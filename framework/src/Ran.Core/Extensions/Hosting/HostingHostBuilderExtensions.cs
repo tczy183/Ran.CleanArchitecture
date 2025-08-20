@@ -22,11 +22,14 @@ public static class HostingHostBuilderExtensions
         this IHostBuilder hostBuilder,
         bool optional = true,
         bool reloadOnChange = true,
-        string path = AppSettingsSecretJsonPath)
+        string path = AppSettingsSecretJsonPath
+    )
     {
-        return hostBuilder.ConfigureAppConfiguration((_, builder) =>
-        {
-            builder.AddJsonFile(path, optional, reloadOnChange);
-        });
+        return hostBuilder.ConfigureAppConfiguration(
+            (_, builder) =>
+            {
+                builder.AddJsonFile(path, optional, reloadOnChange);
+            }
+        );
     }
 }

@@ -13,8 +13,11 @@ public static class PlugInSourceListExtensions
     /// <param name="list"></param>
     /// <param name="folder"></param>
     /// <param name="searchOption"></param>
-    public static void AddFolder(this PlugInSourceList list, string folder,
-        SearchOption searchOption = SearchOption.TopDirectoryOnly)
+    public static void AddFolder(
+        this PlugInSourceList list,
+        string folder,
+        SearchOption searchOption = SearchOption.TopDirectoryOnly
+    )
     {
         _ = CheckHelper.NotNull(list, nameof(list));
 

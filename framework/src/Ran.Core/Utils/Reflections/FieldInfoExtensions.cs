@@ -16,9 +16,14 @@ public static class FieldInfoExtensions
     public static string GetDescriptionValue(this FieldInfo field)
     {
         var descValue = field.Name;
-        if (field.GetCustomAttribute(typeof(DescriptionAttribute), false) is DescriptionAttribute description)
+        if (
+            field.GetCustomAttribute(typeof(DescriptionAttribute), false)
+            is DescriptionAttribute description
+        )
         {
-            descValue = !string.IsNullOrEmpty(description.Description) ? description.Description : descValue;
+            descValue = !string.IsNullOrEmpty(description.Description)
+                ? description.Description
+                : descValue;
         }
 
         return descValue;
@@ -34,7 +39,9 @@ public static class FieldInfoExtensions
         var displayValue = field.Name;
         if (field.GetCustomAttribute(typeof(DisplayAttribute), false) is DisplayAttribute display)
         {
-            displayValue = !string.IsNullOrEmpty(display.Description) ? display.Description : displayValue;
+            displayValue = !string.IsNullOrEmpty(display.Description)
+                ? display.Description
+                : displayValue;
         }
 
         return displayValue;

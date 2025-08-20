@@ -14,7 +14,11 @@ public class BooleanJsonConverter : JsonConverter<bool>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override bool Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         return reader.TokenType is JsonTokenType.True or JsonTokenType.False
             ? reader.GetBoolean()

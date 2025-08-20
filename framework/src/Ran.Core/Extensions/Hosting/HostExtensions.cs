@@ -15,11 +15,13 @@ public static class HostExtensions
     /// <returns></returns>
     public static async Task InitializeAsync(this IHost host)
     {
-        var application = host.Services.GetRequiredService<IApplicationWithExternalServiceProvider>();
+        var application =
+            host.Services.GetRequiredService<IApplicationWithExternalServiceProvider>();
         var applicationLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
         _ = applicationLifetime.ApplicationStopping.Register(() =>
-            AsyncHelper.RunSync(() => application.ShutdownAsync()));
+            AsyncHelper.RunSync(() => application.ShutdownAsync())
+        );
         _ = applicationLifetime.ApplicationStopped.Register(application.Dispose);
 
         await application.InitializeAsync(host.Services);

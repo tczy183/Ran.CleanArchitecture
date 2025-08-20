@@ -4,12 +4,12 @@ namespace Ran.Core.DependencyInjection;
 
 /// <summary>
 /// This class is equivalent of the <see cref="TransientCachedServiceProvider"/>.
-/// Use <see cref="TransientCachedServiceProvider"/> instead of this class, for new projects. 
+/// Use <see cref="TransientCachedServiceProvider"/> instead of this class, for new projects.
 /// </summary>
-public class LazyServiceProvider(IServiceProvider serviceProvider) :
-    CachedServiceProviderBase(serviceProvider),
-    ILazyServiceProvider,
-    ITransientDependency
+public class LazyServiceProvider(IServiceProvider serviceProvider)
+    : CachedServiceProviderBase(serviceProvider),
+        ILazyServiceProvider,
+        ITransientDependency
 {
     public virtual T LazyGetRequiredService<T>()
     {

@@ -44,15 +44,26 @@ public static class CheckHelper
     /// <param name="minLength"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static string NotNull(string? value, string parameterName, int maxLength = int.MaxValue, int minLength = 0)
+    public static string NotNull(
+        string? value,
+        string parameterName,
+        int maxLength = int.MaxValue,
+        int minLength = 0
+    )
     {
         return value is null
-            ? throw new ArgumentException($"{parameterName}不能为空!", parameterName)
+                ? throw new ArgumentException($"{parameterName}不能为空!", parameterName)
             : value.Length > maxLength
-                ? throw new ArgumentException($"{parameterName}长度必须等于或小于{maxLength}!", parameterName)
-                : minLength > 0 && value.Length < minLength
-                    ? throw new ArgumentException($"{parameterName}长度必须等于或大于{minLength}!", parameterName)
-                    : value;
+                ? throw new ArgumentException(
+                    $"{parameterName}长度必须等于或小于{maxLength}!",
+                    parameterName
+                )
+            : minLength > 0 && value.Length < minLength
+                ? throw new ArgumentException(
+                    $"{parameterName}长度必须等于或大于{minLength}!",
+                    parameterName
+                )
+            : value;
     }
 
     /// <summary>
@@ -64,16 +75,29 @@ public static class CheckHelper
     /// <param name="minLength"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static string NotNullOrWhiteSpace(string? value, string parameterName, int maxLength = int.MaxValue,
-        int minLength = 0)
+    public static string NotNullOrWhiteSpace(
+        string? value,
+        string parameterName,
+        int maxLength = int.MaxValue,
+        int minLength = 0
+    )
     {
         return string.IsNullOrWhiteSpace(value)
-            ? throw new ArgumentException($"{parameterName}不能为无效、空值或空白!", parameterName)
+                ? throw new ArgumentException(
+                    $"{parameterName}不能为无效、空值或空白!",
+                    parameterName
+                )
             : value.Length > maxLength
-                ? throw new ArgumentException($"{parameterName}长度必须等于或小于{maxLength}!", parameterName)
-                : minLength > 0 && value.Length < minLength
-                    ? throw new ArgumentException($"{parameterName}长度必须等于或大于{minLength}!", parameterName)
-                    : value;
+                ? throw new ArgumentException(
+                    $"{parameterName}长度必须等于或小于{maxLength}!",
+                    parameterName
+                )
+            : minLength > 0 && value.Length < minLength
+                ? throw new ArgumentException(
+                    $"{parameterName}长度必须等于或大于{minLength}!",
+                    parameterName
+                )
+            : value;
     }
 
     /// <summary>
@@ -85,16 +109,26 @@ public static class CheckHelper
     /// <param name="minLength"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static string NotNullOrEmpty(string? value, string parameterName, int maxLength = int.MaxValue,
-        int minLength = 0)
+    public static string NotNullOrEmpty(
+        string? value,
+        string parameterName,
+        int maxLength = int.MaxValue,
+        int minLength = 0
+    )
     {
         return string.IsNullOrEmpty(value)
-            ? throw new ArgumentException($"{parameterName}不能为无效、空值!", parameterName)
+                ? throw new ArgumentException($"{parameterName}不能为无效、空值!", parameterName)
             : value.Length > maxLength
-                ? throw new ArgumentException($"{parameterName}长度必须等于或小于{maxLength}!", parameterName)
-                : minLength > 0 && value.Length < minLength
-                    ? throw new ArgumentException($"{parameterName}长度必须等于或大于{minLength}!", parameterName)
-                    : value;
+                ? throw new ArgumentException(
+                    $"{parameterName}长度必须等于或小于{maxLength}!",
+                    parameterName
+                )
+            : minLength > 0 && value.Length < minLength
+                ? throw new ArgumentException(
+                    $"{parameterName}长度必须等于或大于{minLength}!",
+                    parameterName
+                )
+            : value;
     }
 
     /// <summary>
@@ -106,18 +140,32 @@ public static class CheckHelper
     /// <param name="minLength"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static string? Length(string? value, string parameterName, int maxLength, int minLength = 0)
+    public static string? Length(
+        string? value,
+        string parameterName,
+        int maxLength,
+        int minLength = 0
+    )
     {
         return minLength <= 0
             ? value is not null && value.Length > maxLength
-                ? throw new ArgumentException($"{parameterName}长度必须等于或小于{maxLength}!", parameterName)
+                ? throw new ArgumentException(
+                    $"{parameterName}长度必须等于或小于{maxLength}!",
+                    parameterName
+                )
                 : value
             : string.IsNullOrEmpty(value)
                 ? throw new ArgumentException($"{parameterName}不能为无效、空值!", parameterName)
                 : value.Length < minLength
-                    ? throw new ArgumentException($"{parameterName}长度必须等于或大于{minLength}!", parameterName)
+                    ? throw new ArgumentException(
+                        $"{parameterName}长度必须等于或大于{minLength}!",
+                        parameterName
+                    )
                     : value.Length > maxLength
-                        ? throw new ArgumentException($"{parameterName}长度必须等于或小于{maxLength}!", parameterName)
+                        ? throw new ArgumentException(
+                            $"{parameterName}长度必须等于或小于{maxLength}!",
+                            parameterName
+                        )
                         : value;
     }
 

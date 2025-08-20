@@ -6,15 +6,15 @@ namespace Ran.Core.DependencyInjection;
 /// 瞬时缓存服务提供器
 /// </summary>
 [ExposeServices(typeof(ITransientCachedServiceProvider))]
-public class TransientCachedServiceProvider : CachedServiceProviderBase, ITransientCachedServiceProvider,
-    ITransientDependency
+public class TransientCachedServiceProvider
+    : CachedServiceProviderBase,
+        ITransientCachedServiceProvider,
+        ITransientDependency
 {
     /// <summary>
     /// 构造函数
     /// </summary>
     /// <param name="serviceProvider"></param>
     public TransientCachedServiceProvider(IServiceProvider serviceProvider)
-        : base(serviceProvider)
-    {
-    }
+        : base(serviceProvider) { }
 }

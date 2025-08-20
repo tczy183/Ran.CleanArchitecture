@@ -7,9 +7,14 @@ namespace Ran.Core.Modularity;
 /// <summary>
 /// 模块化服务配置基类
 /// </summary>
-public abstract class DddModule : IPreConfigureServices, IModule, IPostConfigureServices,
-    IOnPreApplicationInitialization, IOnApplicationInitialization, IOnPostApplicationInitialization,
-    IOnApplicationShutdown
+public abstract class DddModule
+    : IPreConfigureServices,
+        IModule,
+        IPostConfigureServices,
+        IOnPreApplicationInitialization,
+        IOnApplicationInitialization,
+        IOnPostApplicationInitialization,
+        IOnApplicationShutdown
 {
     /// <summary>
     /// 服务配置上下文
@@ -38,9 +43,7 @@ public abstract class DddModule : IPreConfigureServices, IModule, IPostConfigure
     /// 服务配置前
     /// </summary>
     /// <param name="context"></param>
-    public virtual void PreConfigureServices(ServiceConfigurationContext context)
-    {
-    }
+    public virtual void PreConfigureServices(ServiceConfigurationContext context) { }
 
     /// <summary>
     /// 服务配置，异步
@@ -57,9 +60,7 @@ public abstract class DddModule : IPreConfigureServices, IModule, IPostConfigure
     /// 服务配置
     /// </summary>
     /// <param name="context"></param>
-    public virtual void ConfigureServices(ServiceConfigurationContext context)
-    {
-    }
+    public virtual void ConfigureServices(ServiceConfigurationContext context) { }
 
     /// <summary>
     /// 服务配置后，异步
@@ -76,9 +77,7 @@ public abstract class DddModule : IPreConfigureServices, IModule, IPostConfigure
     /// 服务配置后
     /// </summary>
     /// <param name="context"></param>
-    public virtual void PostConfigureServices(ServiceConfigurationContext context)
-    {
-    }
+    public virtual void PostConfigureServices(ServiceConfigurationContext context) { }
 
     #endregion 服务配置
 
@@ -89,7 +88,9 @@ public abstract class DddModule : IPreConfigureServices, IModule, IPostConfigure
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public virtual Task OnPreApplicationInitializationAsync(ApplicationInitializationContext context)
+    public virtual Task OnPreApplicationInitializationAsync(
+        ApplicationInitializationContext context
+    )
     {
         OnPreApplicationInitialization(context);
         return Task.CompletedTask;
@@ -100,9 +101,7 @@ public abstract class DddModule : IPreConfigureServices, IModule, IPostConfigure
     /// </summary>
     /// <param name="context"></param>
     /// <exception cref="NotImplementedException"></exception>
-    public virtual void OnPreApplicationInitialization(ApplicationInitializationContext context)
-    {
-    }
+    public virtual void OnPreApplicationInitialization(ApplicationInitializationContext context) { }
 
     /// <summary>
     /// 程序初始化，异步
@@ -123,16 +122,16 @@ public abstract class DddModule : IPreConfigureServices, IModule, IPostConfigure
     /// </summary>
     /// <param name="context"></param>
     /// <exception cref="NotImplementedException"></exception>
-    public virtual void OnApplicationInitialization(ApplicationInitializationContext context)
-    {
-    }
+    public virtual void OnApplicationInitialization(ApplicationInitializationContext context) { }
 
     /// <summary>
     /// 程序初始化后，异步
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public virtual Task OnPostApplicationInitializationAsync(ApplicationInitializationContext context)
+    public virtual Task OnPostApplicationInitializationAsync(
+        ApplicationInitializationContext context
+    )
     {
         OnPostApplicationInitialization(context);
         return Task.CompletedTask;
@@ -142,9 +141,9 @@ public abstract class DddModule : IPreConfigureServices, IModule, IPostConfigure
     /// 程序初始化后
     /// </summary>
     /// <param name="context"></param>
-    public virtual void OnPostApplicationInitialization(ApplicationInitializationContext context)
-    {
-    }
+    public virtual void OnPostApplicationInitialization(
+        ApplicationInitializationContext context
+    ) { }
 
     /// <summary>
     /// 程序关闭时，异步
@@ -161,9 +160,7 @@ public abstract class DddModule : IPreConfigureServices, IModule, IPostConfigure
     /// 程序关闭时
     /// </summary>
     /// <param name="context"></param>
-    public virtual void OnApplicationShutdown(ApplicationShutdownContext context)
-    {
-    }
+    public virtual void OnApplicationShutdown(ApplicationShutdownContext context) { }
 
     #endregion 程序相关
 
@@ -209,10 +206,16 @@ public abstract class DddModule : IPreConfigureServices, IModule, IPostConfigure
     /// <typeparam name="TOptions"></typeparam>
     /// <param name="configuration"></param>
     /// <param name="configureBinder"></param>
-    protected void Configure<TOptions>(IConfiguration configuration, Action<BinderOptions> configureBinder)
+    protected void Configure<TOptions>(
+        IConfiguration configuration,
+        Action<BinderOptions> configureBinder
+    )
         where TOptions : class
     {
-        _ = ServiceConfigurationContext.Services.Configure<TOptions>(configuration, configureBinder);
+        _ = ServiceConfigurationContext.Services.Configure<TOptions>(
+            configuration,
+            configureBinder
+        );
     }
 
     /// <summary>

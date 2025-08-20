@@ -17,7 +17,10 @@ public class TypeFinder : ITypeFinder
     public TypeFinder(IAssemblyFinder assemblyFinder)
     {
         _assemblyFinder = assemblyFinder;
-        _types = new Lazy<IReadOnlyList<Type>>(FindAll, LazyThreadSafetyMode.ExecutionAndPublication);
+        _types = new Lazy<IReadOnlyList<Type>>(
+            FindAll,
+            LazyThreadSafetyMode.ExecutionAndPublication
+        );
     }
 
     /// <summary>

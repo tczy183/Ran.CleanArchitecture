@@ -11,5 +11,7 @@ public interface ISimpleBatchStateChecker<TState> : ISimpleStateChecker<TState>
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    Task<SimpleStateCheckerResult<TState>> IsEnabledAsync(SimpleBatchStateCheckerContext<TState> context);
+    Task<SimpleStateCheckerResult<TState>> IsEnabledAsync(
+        SimpleBatchStateCheckerContext<TState> context
+    );
 }

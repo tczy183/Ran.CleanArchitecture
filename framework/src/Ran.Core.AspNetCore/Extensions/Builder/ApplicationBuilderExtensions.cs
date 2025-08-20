@@ -15,9 +15,12 @@ public static class ApplicationBuilderExtensions
     {
         _ = CheckHelper.NotNull(app, nameof(app));
 
-        app.ApplicationServices.GetRequiredService<ObjectAccessor<IApplicationBuilder>>().Value = app;
-        var application = app.ApplicationServices.GetRequiredService<IApplicationWithExternalServiceProvider>();
-        var applicationLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+        app.ApplicationServices.GetRequiredService<ObjectAccessor<IApplicationBuilder>>().Value =
+            app;
+        var application =
+            app.ApplicationServices.GetRequiredService<IApplicationWithExternalServiceProvider>();
+        var applicationLifetime =
+            app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
 
         _ = applicationLifetime.ApplicationStopping.Register(() =>
         {
@@ -36,9 +39,12 @@ public static class ApplicationBuilderExtensions
     {
         _ = CheckHelper.NotNull(app, nameof(app));
 
-        app.ApplicationServices.GetRequiredService<ObjectAccessor<IApplicationBuilder>>().Value = app;
-        var application = app.ApplicationServices.GetRequiredService<IApplicationWithExternalServiceProvider>();
-        var applicationLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+        app.ApplicationServices.GetRequiredService<ObjectAccessor<IApplicationBuilder>>().Value =
+            app;
+        var application =
+            app.ApplicationServices.GetRequiredService<IApplicationWithExternalServiceProvider>();
+        var applicationLifetime =
+            app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
 
         _ = applicationLifetime.ApplicationStopping.Register(application.Shutdown);
         _ = applicationLifetime.ApplicationStopped.Register(application.Dispose);

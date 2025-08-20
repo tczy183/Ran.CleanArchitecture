@@ -7,8 +7,8 @@ namespace Ran.EventBus.Distributed;
 
 public class OutboxSenderManager(
     IOptions<DistributedEventBusOptions> options,
-    IServiceProvider serviceProvider)
-    : IBackgroundWorker
+    IServiceProvider serviceProvider
+) : IBackgroundWorker
 {
     protected DistributedEventBusOptions Options { get; } = options.Value;
     protected IServiceProvider ServiceProvider { get; } = serviceProvider;

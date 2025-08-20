@@ -3,7 +3,9 @@
 namespace Ran.Ddd.Domain.Abstraction.Auditing;
 
 public class AuditedEntity<TKey>(TKey createdBy, bool isDeleted = false)
-    : Entity<TKey>, IAuditedEntity<TKey>, ISoftDelete<TKey>
+    : Entity<TKey>,
+        IAuditedEntity<TKey>,
+        ISoftDelete<TKey>
 {
     public TKey CreatedBy { get; set; } = createdBy;
     public DateTime CreatedAt { get; set; }

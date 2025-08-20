@@ -6,7 +6,9 @@ namespace Ran.Core.DependencyInjection;
 /// 暴露键值服务特性
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-public sealed class ExposeKeyedServiceAttribute<TServiceType> : Attribute, IExposedKeyedServiceTypesProvider
+public sealed class ExposeKeyedServiceAttribute<TServiceType>
+    : Attribute,
+        IExposedKeyedServiceTypesProvider
     where TServiceType : class
 {
     /// <summary>
@@ -24,7 +26,8 @@ public sealed class ExposeKeyedServiceAttribute<TServiceType> : Attribute, IExpo
         if (serviceKey is null)
         {
             throw new UserFriendlyException(
-                $"{nameof(serviceKey)} can not be null! Use {nameof(ExposeServicesAttribute)} instead.");
+                $"{nameof(serviceKey)} can not be null! Use {nameof(ExposeServicesAttribute)} instead."
+            );
         }
 
         ServiceIdentifier = new ServiceIdentifier(serviceKey, typeof(TServiceType));

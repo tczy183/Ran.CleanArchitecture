@@ -9,9 +9,7 @@ public class PageDataDto
     /// <summary>
     /// 构造函数
     /// </summary>
-    public PageDataDto()
-    {
-    }
+    public PageDataDto() { }
 
     /// <summary>
     /// 构造函数

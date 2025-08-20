@@ -9,9 +9,7 @@ public class SimpleStateCheckerResult<TState> : Dictionary<TState, bool>
     /// <summary>
     /// 构造函数
     /// </summary>
-    public SimpleStateCheckerResult()
-    {
-    }
+    public SimpleStateCheckerResult() { }
 
     /// <summary>
     /// 构造函数

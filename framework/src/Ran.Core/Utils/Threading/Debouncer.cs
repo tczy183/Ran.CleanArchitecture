@@ -30,13 +30,18 @@ public class Debouncer : IDisposable
             _cts?.Cancel();
             _cts = new CancellationTokenSource();
             _ = Task.Delay(_interval, _cts.Token)
-                .ContinueWith(t =>
-                {
-                    if (!t.IsCanceled)
+                .ContinueWith(
+                    t =>
                     {
-                        action();
-                    }
-                }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+                        if (!t.IsCanceled)
+                        {
+                            action();
+                        }
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                );
         }
     }
 

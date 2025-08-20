@@ -165,7 +165,11 @@ public static class ListExtensions
     /// <param name="source">要操作的列表</param>
     /// <param name="selector">用于测试列表中每个项的条件</param>
     /// <param name="itemFactory">一个工厂方法，用于生成要替换的新项</param>
-    public static void ReplaceWhile<T>(this IList<T> source, Predicate<T> selector, Func<T, T> itemFactory)
+    public static void ReplaceWhile<T>(
+        this IList<T> source,
+        Predicate<T> selector,
+        Func<T, T> itemFactory
+    )
     {
         for (var i = 0; i < source.Count; i++)
         {
@@ -205,7 +209,11 @@ public static class ListExtensions
     /// <param name="source">要操作的列表</param>
     /// <param name="selector">用于测试列表中每个项的条件</param>
     /// <param name="itemFactory">一个工厂方法，用于生成要替换的新项</param>
-    public static void ReplaceOne<T>(this IList<T> source, Predicate<T> selector, Func<T, T> itemFactory)
+    public static void ReplaceOne<T>(
+        this IList<T> source,
+        Predicate<T> selector,
+        Func<T, T> itemFactory
+    )
     {
         for (var i = 0; i < source.Count; i++)
         {
@@ -302,8 +310,11 @@ public static class ListExtensions
     /// <param name="getDependencies">用于解析项依赖关系的函数</param>
     /// <param name="comparer">依赖关系的相等比较器</param>
     /// <returns>返回按依赖关系排序的新列表</returns>
-    public static List<T> SortByDependencies<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies,
-        IEqualityComparer<T>? comparer = null)
+    public static List<T> SortByDependencies<T>(
+        this IEnumerable<T> source,
+        Func<T, IEnumerable<T>> getDependencies,
+        IEqualityComparer<T>? comparer = null
+    )
         where T : notnull
     {
         // 初始化排序列表、访问标记字典
@@ -327,8 +338,12 @@ public static class ListExtensions
     /// <param name="getDependencies">用于解析项依赖关系的函数</param>
     /// <param name="sorted">包含排序后项的列表</param>
     /// <param name="visited">包含已访问项的字典</param>
-    private static void SortByDependenciesVisit<T>(T item, Func<T, IEnumerable<T>> getDependencies, List<T> sorted,
-        Dictionary<T, bool> visited)
+    private static void SortByDependenciesVisit<T>(
+        T item,
+        Func<T, IEnumerable<T>> getDependencies,
+        List<T> sorted,
+        Dictionary<T, bool> visited
+    )
         where T : notnull
     {
         // 检查项是否已经在处理中或已访问过

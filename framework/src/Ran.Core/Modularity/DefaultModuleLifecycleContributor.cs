@@ -13,7 +13,10 @@ public class OnApplicationInitializationModuleLifecycleContributor : ModuleLifec
     /// <param name="context"></param>
     /// <param name="module"></param>
     /// <returns></returns>
-    public override async Task InitializeAsync(ApplicationInitializationContext context, IModule module)
+    public override async Task InitializeAsync(
+        ApplicationInitializationContext context,
+        IModule module
+    )
     {
         if (module is IOnApplicationInitialization onApplicationInitialization)
         {
@@ -65,7 +68,8 @@ public class OnApplicationShutdownModuleLifecycleContributor : ModuleLifecycleCo
 /// <summary>
 /// 在应用程序初始化后的模块生命周期贡献者
 /// </summary>
-public class OnPostApplicationInitializationModuleLifecycleContributor : ModuleLifecycleContributorBase
+public class OnPostApplicationInitializationModuleLifecycleContributor
+    : ModuleLifecycleContributorBase
 {
     /// <summary>
     /// 初始化
@@ -73,7 +77,10 @@ public class OnPostApplicationInitializationModuleLifecycleContributor : ModuleL
     /// <param name="context"></param>
     /// <param name="module"></param>
     /// <returns></returns>
-    public override async Task InitializeAsync(ApplicationInitializationContext context, IModule module)
+    public override async Task InitializeAsync(
+        ApplicationInitializationContext context,
+        IModule module
+    )
     {
         if (module is IOnPostApplicationInitialization onPostApplicationInitialization)
         {
@@ -95,7 +102,8 @@ public class OnPostApplicationInitializationModuleLifecycleContributor : ModuleL
 /// <summary>
 /// 在应用程序初始化之前的模块生命周期贡献者
 /// </summary>
-public class OnPreApplicationInitializationModuleLifecycleContributor : ModuleLifecycleContributorBase
+public class OnPreApplicationInitializationModuleLifecycleContributor
+    : ModuleLifecycleContributorBase
 {
     /// <summary>
     /// 初始化
@@ -103,7 +111,10 @@ public class OnPreApplicationInitializationModuleLifecycleContributor : ModuleLi
     /// <param name="context"></param>
     /// <param name="module"></param>
     /// <returns></returns>
-    public override async Task InitializeAsync(ApplicationInitializationContext context, IModule module)
+    public override async Task InitializeAsync(
+        ApplicationInitializationContext context,
+        IModule module
+    )
     {
         if (module is IOnPreApplicationInitialization onPreApplicationInitialization)
         {

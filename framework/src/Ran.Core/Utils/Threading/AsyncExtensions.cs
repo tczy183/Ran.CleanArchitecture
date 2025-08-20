@@ -25,8 +25,9 @@ public static class AsyncExtensions
     /// <returns></returns>
     public static bool IsTaskOrTaskOfT(this Type type)
     {
-        return type == typeof(Task) ||
-               type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>);
+        return type == typeof(Task)
+            || type.GetTypeInfo().IsGenericType
+                && type.GetGenericTypeDefinition() == typeof(Task<>);
     }
 
     /// <summary>
@@ -36,6 +37,7 @@ public static class AsyncExtensions
     /// <returns></returns>
     public static bool IsTaskOfT(this Type type)
     {
-        return type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>);
+        return type.GetTypeInfo().IsGenericType
+            && type.GetGenericTypeDefinition() == typeof(Task<>);
     }
 }

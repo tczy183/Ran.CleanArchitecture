@@ -28,42 +28,58 @@ public static class DiskHelper
         {
             if (OsPlatformHelper.OsIsUnix)
             {
-                var output = ShellHelper.Bash("df -k | awk '{print $1,$2,$3,$4,$6}' | tail -n +2").Trim();
-                var lines = output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).ToList();
+                var output = ShellHelper
+                    .Bash("df -k | awk '{print $1,$2,$3,$4,$6}' | tail -n +2")
+                    .Trim();
+                var lines = output
+                    .Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries)
+                    .ToList();
                 if (lines.Count != 0)
                 {
-                    diskInfos.AddRange(from line in lines
-                        select line.Split(' ', StringSplitOptions.RemoveEmptyEntries)
-                        into rootDisk
+                    diskInfos.AddRange(
+                        from line in lines
+                        select line.Split(' ', StringSplitOptions.RemoveEmptyEntries) into rootDisk
                         where rootDisk.Length >= 5
                         select new DiskInfo
                         {
                             DiskName = rootDisk[4].Trim(),
                             TypeName = rootDisk[0].Trim(),
-                            TotalSpace = (rootDisk[1].ParseToLong() * 1024).FormatFileSizeToString(),
+                            TotalSpace = (
+                                rootDisk[1].ParseToLong() * 1024
+                            ).FormatFileSizeToString(),
                             UsedSpace = (rootDisk[2].ParseToLong() * 1024).FormatFileSizeToString(),
-                            FreeSpace = ((rootDisk[1].ParseToLong() - rootDisk[2].ParseToLong()) * 1024)
-                                .FormatFileSizeToString(),
-                            AvailableRate = rootDisk[1].ParseToLong() == 0
-                                ? "0%"
-                                : Math.Round((decimal)rootDisk[3].ParseToLong() / rootDisk[1].ParseToLong() * 100, 3) +
-                                  "%"
-                        });
+                            FreeSpace = (
+                                (rootDisk[1].ParseToLong() - rootDisk[2].ParseToLong()) * 1024
+                            ).FormatFileSizeToString(),
+                            AvailableRate =
+                                rootDisk[1].ParseToLong() == 0
+                                    ? "0%"
+                                    : Math.Round(
+                                        (decimal)rootDisk[3].ParseToLong()
+                                            / rootDisk[1].ParseToLong()
+                                            * 100,
+                                        3
+                                    ) + "%",
+                        }
+                    );
                 }
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 var drives = DriveInfo.GetDrives().Where(d => d.IsReady).ToList();
-                diskInfos.AddRange(drives.Select(item => new DiskInfo
-                {
-                    DiskName = item.Name,
-                    TypeName = item.DriveType.ToString(),
-                    TotalSpace = GetHardDiskTotalSpace(item.Name).FormatFileSizeToString(),
-                    FreeSpace = GetHardDiskFreeSpace(item.Name).FormatFileSizeToString(),
-                    UsedSpace = (GetHardDiskTotalSpace(item.Name) - GetHardDiskFreeSpace(item.Name))
-                        .FormatFileSizeToString(),
-                    AvailableRate = ProportionOfHardDiskFreeSpace(item.Name)
-                }));
+                diskInfos.AddRange(
+                    drives.Select(item => new DiskInfo
+                    {
+                        DiskName = item.Name,
+                        TypeName = item.DriveType.ToString(),
+                        TotalSpace = GetHardDiskTotalSpace(item.Name).FormatFileSizeToString(),
+                        FreeSpace = GetHardDiskFreeSpace(item.Name).FormatFileSizeToString(),
+                        UsedSpace = (
+                            GetHardDiskTotalSpace(item.Name) - GetHardDiskFreeSpace(item.Name)
+                        ).FormatFileSizeToString(),
+                        AvailableRate = ProportionOfHardDiskFreeSpace(item.Name),
+                    })
+                );
             }
         }
         catch (Exception ex)
@@ -83,8 +99,12 @@ public static class DiskHelper
     {
         return GetHardDiskTotalSpace(hardDiskName) == 0
             ? "0%"
-            : Math.Round((decimal)GetHardDiskFreeSpace(hardDiskName) / GetHardDiskTotalSpace(hardDiskName) * 100, 3) +
-              "%";
+            : Math.Round(
+                (decimal)GetHardDiskFreeSpace(hardDiskName)
+                    / GetHardDiskTotalSpace(hardDiskName)
+                    * 100,
+                3
+            ) + "%";
     }
 
     /// <summary>

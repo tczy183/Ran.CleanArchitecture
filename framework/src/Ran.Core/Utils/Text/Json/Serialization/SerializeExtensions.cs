@@ -14,7 +14,10 @@ public static class SerializeExtensions
     /// <returns></returns>
     public static string SerializeTo(this object item)
     {
-        return JsonSerializer.Serialize(item, JsonSerializerOptionsHelper.DefaultJsonSerializerOptions);
+        return JsonSerializer.Serialize(
+            item,
+            JsonSerializerOptionsHelper.DefaultJsonSerializerOptions
+        );
     }
 
     /// <summary>
@@ -25,7 +28,10 @@ public static class SerializeExtensions
     /// <returns></returns>
     public static T? DeserializeTo<T>(this string jsonString)
     {
-        return JsonSerializer.Deserialize<T>(jsonString, JsonSerializerOptionsHelper.DefaultJsonSerializerOptions);
+        return JsonSerializer.Deserialize<T>(
+            jsonString,
+            JsonSerializerOptionsHelper.DefaultJsonSerializerOptions
+        );
     }
 
     /// <summary>
@@ -35,7 +41,11 @@ public static class SerializeExtensions
     /// <returns></returns>
     public static object? DeserializeTo(this string jsonString)
     {
-        return JsonSerializer.Deserialize(jsonString.ToStream(),
-            JsonTypeInfo.CreateJsonTypeInfo<object>(JsonSerializerOptionsHelper.DefaultJsonSerializerOptions));
+        return JsonSerializer.Deserialize(
+            jsonString.ToStream(),
+            JsonTypeInfo.CreateJsonTypeInfo<object>(
+                JsonSerializerOptionsHelper.DefaultJsonSerializerOptions
+            )
+        );
     }
 }

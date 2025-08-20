@@ -1,9 +1,6 @@
-﻿namespace ApplicationAbstraction;
+﻿using DomainAbstraction;
 
-[DependsOn(
-    typeof(DomainAbstractionModule),
-    typeof(DddApplicationAbstractionModule)
-)]
-public class ApplicationAbstractionModule : DddModule
-{
-}
+namespace ApplicationAbstraction;
+
+[DependsOn(typeof(DomainAbstractionModule), typeof(DddApplicationAbstractionModule))]
+public class ApplicationAbstractionModule : DddModule { }

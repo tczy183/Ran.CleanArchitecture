@@ -9,9 +9,7 @@ public class PageResponseDto
     /// <summary>
     /// 构造函数
     /// </summary>
-    public PageResponseDto()
-    {
-    }
+    public PageResponseDto() { }
 
     /// <summary>
     /// 构造函数
@@ -40,9 +38,7 @@ public class PageResponseDto<T> : PageResponseDto
     /// 构造函数
     /// </summary>
     public PageResponseDto()
-        : base()
-    {
-    }
+        : base() { }
 
     /// <summary>
     /// 构造函数

@@ -19,7 +19,11 @@ public class OutgoingEventInfo
     public OutgoingEventInfo(Guid id, string eventName, byte[] eventData, DateTime creationTime)
     {
         Id = id;
-        EventName = CheckHelper.NotNullOrWhiteSpace(eventName, nameof(eventName), MaxEventNameLength);
+        EventName = CheckHelper.NotNullOrWhiteSpace(
+            eventName,
+            nameof(eventName),
+            MaxEventNameLength
+        );
         EventData = eventData;
         CreationTime = creationTime;
     }

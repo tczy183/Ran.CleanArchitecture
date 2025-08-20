@@ -22,7 +22,9 @@ public static class EnumExtensions
     {
         var enumName = keyEnum.ToString();
         var field = keyEnum.GetType().GetField(enumName);
-        return field is null ? throw new ArgumentException(null, nameof(keyEnum)) : (int)field.GetRawConstantValue()!;
+        return field is null
+            ? throw new ArgumentException(null, nameof(keyEnum))
+            : (int)field.GetRawConstantValue()!;
     }
 
     /// <summary>
@@ -34,9 +36,7 @@ public static class EnumExtensions
     {
         var enumName = keyEnum.ToString();
         var field = keyEnum.GetType().GetField(enumName);
-        return field is null
-            ? string.Empty
-            : field.GetDescriptionValue();
+        return field is null ? string.Empty : field.GetDescriptionValue();
     }
 
     /// <summary>
@@ -48,9 +48,7 @@ public static class EnumExtensions
     {
         var enumName = keyEnum.ToString();
         var field = keyEnum.GetType().GetField(enumName);
-        return field is null
-            ? string.Empty
-            : field.GetThemeValue();
+        return field is null ? string.Empty : field.GetThemeValue();
     }
 
     /// <summary>
@@ -76,13 +74,15 @@ public static class EnumExtensions
         var fields = enumType.GetFields(BindingFlags.Public | BindingFlags.Static);
         foreach (var field in fields)
         {
-            enumInfos.Add(new EnumInfo
-            {
-                Key = field.Name,
-                Value = (int)field.GetRawConstantValue()!,
-                Label = field.GetDescriptionValue(),
-                Theme = field.GetThemeValue()
-            });
+            enumInfos.Add(
+                new EnumInfo
+                {
+                    Key = field.Name,
+                    Value = (int)field.GetRawConstantValue()!,
+                    Label = field.GetDescriptionValue(),
+                    Theme = field.GetThemeValue(),
+                }
+            );
         }
 
         // 加入缓存

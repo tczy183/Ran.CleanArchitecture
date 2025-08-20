@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\framework\src\Ran.Core\Ran.Core.csproj"/>
-        <ProjectReference Include="..\..\..\framework\src\Ran.Ddd.Application\Ran.Ddd.Application.csproj"/>
-        <ProjectReference Include="..\ApplicationAbstraction\ApplicationAbstraction.csproj"/>
-        <ProjectReference Include="..\Domain\Domain.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\framework\src\Ran.Core\Ran.Core.csproj" />
+    <ProjectReference Include="..\..\..\framework\src\Ran.Ddd.Application\Ran.Ddd.Application.csproj" />
+    <ProjectReference Include="..\ApplicationAbstraction\ApplicationAbstraction.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
 </Project>

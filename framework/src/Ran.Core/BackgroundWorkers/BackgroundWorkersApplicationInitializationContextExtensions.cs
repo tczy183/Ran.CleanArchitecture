@@ -14,10 +14,7 @@ public static class BackgroundWorkersApplicationInitializationContextExtensions
     {
         CheckHelper.NotNull(context, nameof(context));
 
-        await context.AddBackgroundWorkerAsync(
-            typeof(TWorker),
-            cancellationToken
-        );
+        await context.AddBackgroundWorkerAsync(typeof(TWorker), cancellationToken);
 
         return context;
     }

@@ -7,41 +7,58 @@ public class QuartzSimpleTriggerEntityTypeConfiguration(string? prefix)
     {
         builder.ToTable($"{prefix}SIMPLE_TRIGGERS");
 
-        builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
+        builder.HasKey(x => new
+        {
+            x.SchedulerName,
+            x.TriggerName,
+            x.TriggerGroup,
+        });
 
-        builder.Property(x => x.SchedulerName)
+        builder
+            .Property(x => x.SchedulerName)
             .HasColumnName("SCHED_NAME")
             .HasColumnType("varchar(120)")
             .IsRequired();
 
-        builder.Property(x => x.TriggerName)
+        builder
+            .Property(x => x.TriggerName)
             .HasColumnName("TRIGGER_NAME")
             .HasColumnType("varchar(200)")
             .IsRequired();
 
-        builder.Property(x => x.TriggerGroup)
+        builder
+            .Property(x => x.TriggerGroup)
             .HasColumnName("TRIGGER_GROUP")
             .HasColumnType("varchar(200)")
             .IsRequired();
 
-        builder.Property(x => x.RepeatCount)
+        builder
+            .Property(x => x.RepeatCount)
             .HasColumnName("REPEAT_COUNT")
             .HasColumnType("bigint(7)")
             .IsRequired();
 
-        builder.Property(x => x.RepeatInterval)
+        builder
+            .Property(x => x.RepeatInterval)
             .HasColumnName("REPEAT_INTERVAL")
             .HasColumnType("bigint(12)")
             .IsRequired();
 
-        builder.Property(x => x.TimesTriggered)
+        builder
+            .Property(x => x.TimesTriggered)
             .HasColumnName("TIMES_TRIGGERED")
             .HasColumnType("bigint(10)")
             .IsRequired();
 
-        builder.HasOne(x => x.Trigger)
+        builder
+            .HasOne(x => x.Trigger)
             .WithMany(x => x.SimpleTriggers)
-            .HasForeignKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup })
+            .HasForeignKey(x => new
+            {
+                x.SchedulerName,
+                x.TriggerName,
+                x.TriggerGroup,
+            })
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

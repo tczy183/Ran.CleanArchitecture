@@ -99,7 +99,7 @@ public static class HmacHelper
             "HMACSHA256" => new HMACSHA256(key),
             "HMACSHA384" => new HMACSHA384(key),
             "HMACSHA512" => new HMACSHA512(key),
-            _ => throw new NotSupportedException($"不支持的 HMAC 算法: {algorithm}")
+            _ => throw new NotSupportedException($"不支持的 HMAC 算法: {algorithm}"),
         };
     }
 }

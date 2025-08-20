@@ -12,13 +12,20 @@ public class DecimalJsonConverter : JsonConverter<decimal>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override decimal Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override decimal Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         if (reader.TokenType == JsonTokenType.Number)
         {
             return reader.GetDecimal();
         }
-        else if (reader.TokenType == JsonTokenType.String && decimal.TryParse(reader.GetString(), out var value))
+        else if (
+            reader.TokenType == JsonTokenType.String
+            && decimal.TryParse(reader.GetString(), out var value)
+        )
         {
             return value;
         }

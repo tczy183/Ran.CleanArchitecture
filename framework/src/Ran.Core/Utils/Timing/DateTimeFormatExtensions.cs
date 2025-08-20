@@ -33,7 +33,15 @@ public static class DateTimeFormatExtensions
     /// <returns></returns>
     public static DateTime GetDayMinDate(this DateTime dateTime)
     {
-        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Local);
+        return new DateTime(
+            dateTime.Year,
+            dateTime.Month,
+            dateTime.Day,
+            0,
+            0,
+            0,
+            DateTimeKind.Local
+        );
     }
 
     /// <summary>
@@ -43,7 +51,15 @@ public static class DateTimeFormatExtensions
     /// <returns></returns>
     public static DateTime GetDayMaxDate(this DateTime dateTime)
     {
-        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, DateTimeKind.Local);
+        return new DateTime(
+            dateTime.Year,
+            dateTime.Month,
+            dateTime.Day,
+            23,
+            59,
+            59,
+            DateTimeKind.Local
+        );
     }
 
     /// <summary>
@@ -53,11 +69,7 @@ public static class DateTimeFormatExtensions
     /// <returns></returns>
     public static List<DateTime> GetDayDateRange(this DateTime dateTime)
     {
-        return
-        [
-            dateTime.GetDayMinDate(),
-            dateTime.GetDayMaxDate()
-        ];
+        return [dateTime.GetDayMinDate(), dateTime.GetDayMaxDate()];
     }
 
     /// <summary>
@@ -68,7 +80,9 @@ public static class DateTimeFormatExtensions
     /// <returns></returns>
     public static DateTime GetBeginTime(this DateTime? dateTime, int days = 0)
     {
-        return dateTime == DateTime.MinValue || dateTime is null ? DateTime.Now.AddDays(days) : (DateTime)dateTime;
+        return dateTime == DateTime.MinValue || dateTime is null
+            ? DateTime.Now.AddDays(days)
+            : (DateTime)dateTime;
     }
 
     /// <summary>
@@ -100,7 +114,9 @@ public static class DateTimeFormatExtensions
         var diffDay = dayInMonth - firstWeekEndDay;
         diffDay = diffDay > 0 ? diffDay : 1;
         // 当前是第几周，若整除7就减一天
-        return (diffDay % 7 == 0 ? diffDay / 7 - 1 : diffDay / 7) + 1 + (dayInMonth > firstWeekEndDay ? 1 : 0);
+        return (diffDay % 7 == 0 ? diffDay / 7 - 1 : diffDay / 7)
+            + 1
+            + (dayInMonth > firstWeekEndDay ? 1 : 0);
     }
 
     /// <summary>
@@ -110,7 +126,9 @@ public static class DateTimeFormatExtensions
     /// <returns></returns>
     public static string FormatDateTimeToString(this DateTime dateTime)
     {
-        return dateTime.ToString(dateTime.Year == DateTime.Now.Year ? "MM-dd HH:mm" : "yyyy-MM-dd HH:mm");
+        return dateTime.ToString(
+            dateTime.Year == DateTime.Now.Year ? "MM-dd HH:mm" : "yyyy-MM-dd HH:mm"
+        );
     }
 
     /// <summary>
@@ -119,7 +137,10 @@ public static class DateTimeFormatExtensions
     /// <param name="dateTimeBefore"></param>
     /// <param name="dateTimeAfter"></param>
     /// <returns></returns>
-    public static string FormatDateTimeToString(this DateTime dateTimeBefore, DateTime dateTimeAfter)
+    public static string FormatDateTimeToString(
+        this DateTime dateTimeBefore,
+        DateTime dateTimeAfter
+    )
     {
         if (dateTimeBefore >= dateTimeAfter)
         {
@@ -230,21 +251,14 @@ public static class DateTimeFormatExtensions
 
         var dep = now - value;
 
-        return dep.TotalSeconds < 10
-            ? "刚刚"
-            : dep.TotalSeconds is >= 10 and < 60
-                ? (int)dep.TotalSeconds + "秒前"
-                : dep.TotalMinutes is >= 1 and < 60
-                    ? (int)dep.TotalMinutes + "分钟前"
-                    : dep.TotalHours < 24
-                        ? (int)dep.TotalHours + "小时前"
-                        : dep.TotalDays < 7
-                            ? (int)dep.TotalDays + "天前"
-                            : dep.TotalDays is >= 7 and < 30
-                                ? (int)dep.TotalDays / 7 + "周前"
-                                : dep.TotalDays is >= 30 and < 365
-                                    ? (int)dep.TotalDays / 30 + "个月前"
-                                    : now.Year - value.Year + "年前";
+        return dep.TotalSeconds < 10 ? "刚刚"
+            : dep.TotalSeconds is >= 10 and < 60 ? (int)dep.TotalSeconds + "秒前"
+            : dep.TotalMinutes is >= 1 and < 60 ? (int)dep.TotalMinutes + "分钟前"
+            : dep.TotalHours < 24 ? (int)dep.TotalHours + "小时前"
+            : dep.TotalDays < 7 ? (int)dep.TotalDays + "天前"
+            : dep.TotalDays is >= 7 and < 30 ? (int)dep.TotalDays / 7 + "周前"
+            : dep.TotalDays is >= 30 and < 365 ? (int)dep.TotalDays / 30 + "个月前"
+            : now.Year - value.Year + "年前";
     }
 
     /// <summary>
@@ -275,7 +289,7 @@ public static class DateTimeFormatExtensions
                 10 => DateTime.ParseExact(thisValue, "yyyyMMddHH", CultureInfo.CurrentCulture),
                 12 => DateTime.ParseExact(thisValue, "yyyyMMddHHmm", CultureInfo.CurrentCulture),
                 14 => DateTime.ParseExact(thisValue, "yyyyMMddHHmmss", CultureInfo.CurrentCulture),
-                _ => DateTime.ParseExact(thisValue, "yyyyMMddHHmmss", CultureInfo.CurrentCulture)
+                _ => DateTime.ParseExact(thisValue, "yyyyMMddHHmmss", CultureInfo.CurrentCulture),
             };
         }
         catch

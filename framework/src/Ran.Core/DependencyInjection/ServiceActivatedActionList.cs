@@ -3,7 +3,8 @@
 /// <summary>
 /// 服务激活时的动作列表
 /// </summary>
-public class ServiceActivatedActionList : List<KeyValuePair<ServiceDescriptor, Action<IOnServiceActivatedContext>>>
+public class ServiceActivatedActionList
+    : List<KeyValuePair<ServiceDescriptor, Action<IOnServiceActivatedContext>>>
 {
     /// <summary>
     /// 添加服务激活时的动作

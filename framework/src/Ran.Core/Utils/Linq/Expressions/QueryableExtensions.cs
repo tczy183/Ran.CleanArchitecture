@@ -12,8 +12,11 @@ public static class QueryableExtensions
     /// <param name="condition">第三方条件</param>
     /// <param name="predicate">用于选择查询对象的谓词</param>
     /// <returns>基于 <paramref name="condition"/> 的选择或未选择的查询对象</returns>
-    public static IQueryable<T> WhereIf<T>(this IQueryable<T> source, bool condition,
-        Expression<Func<T, bool>> predicate)
+    public static IQueryable<T> WhereIf<T>(
+        this IQueryable<T> source,
+        bool condition,
+        Expression<Func<T, bool>> predicate
+    )
     {
         return condition ? source.Where(predicate) : source;
     }

@@ -79,7 +79,11 @@ public static class EcdsaHelper
     /// <param name="signatureBytes">签名</param>
     /// <param name="publicKeyBytes">公钥</param>
     /// <returns>返回签名是否有效</returns>
-    public static bool VerifyDataBytes(byte[] dataBytes, byte[] signatureBytes, byte[] publicKeyBytes)
+    public static bool VerifyDataBytes(
+        byte[] dataBytes,
+        byte[] signatureBytes,
+        byte[] publicKeyBytes
+    )
     {
         using var ecdsa = ECDsa.Create();
         ecdsa.ImportSubjectPublicKeyInfo(publicKeyBytes, out _);

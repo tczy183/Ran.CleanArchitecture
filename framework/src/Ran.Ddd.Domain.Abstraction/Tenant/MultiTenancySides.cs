@@ -16,5 +16,5 @@ public enum MultiTenancySides
     /// <summary>
     /// Both sides
     /// </summary>
-    Both = Tenant | Host
+    Both = Tenant | Host,
 }

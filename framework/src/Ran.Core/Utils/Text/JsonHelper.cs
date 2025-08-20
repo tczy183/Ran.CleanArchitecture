@@ -31,7 +31,10 @@ public class JsonHelper
         }
 
         var jsonStr = File.ReadAllText(_jsonFilePath, Encoding.UTF8);
-        var result = JsonSerializer.Deserialize<T>(jsonStr, JsonSerializerOptionsHelper.DefaultJsonSerializerOptions);
+        var result = JsonSerializer.Deserialize<T>(
+            jsonStr,
+            JsonSerializerOptionsHelper.DefaultJsonSerializerOptions
+        );
         return result;
     }
 
@@ -50,7 +53,10 @@ public class JsonHelper
 
         using StreamReader streamReader = new(_jsonFilePath);
         var jsonStr = streamReader.ReadToEnd();
-        dynamic? obj = JsonSerializer.Deserialize<T>(jsonStr, JsonSerializerOptionsHelper.DefaultJsonSerializerOptions);
+        dynamic? obj = JsonSerializer.Deserialize<T>(
+            jsonStr,
+            JsonSerializerOptionsHelper.DefaultJsonSerializerOptions
+        );
         obj ??= JsonDocument.Parse(JsonSerializer.Serialize(new object()));
         var keys = keyLink.Split(':');
         var currentObject = obj;
@@ -63,8 +69,10 @@ public class JsonHelper
             }
         }
 
-        var result = JsonSerializer.Deserialize<T>(currentObject.ToString(),
-            JsonSerializerOptionsHelper.DefaultJsonSerializerOptions);
+        var result = JsonSerializer.Deserialize<T>(
+            currentObject.ToString(),
+            JsonSerializerOptionsHelper.DefaultJsonSerializerOptions
+        );
         return result;
     }
 
@@ -78,8 +86,10 @@ public class JsonHelper
     public void Set<T, TValue>(string keyLink, TValue value)
     {
         var jsonStr = File.ReadAllText(_jsonFilePath, Encoding.UTF8);
-        dynamic? jsoObj =
-            JsonSerializer.Deserialize<T>(jsonStr, JsonSerializerOptionsHelper.DefaultJsonSerializerOptions);
+        dynamic? jsoObj = JsonSerializer.Deserialize<T>(
+            jsonStr,
+            JsonSerializerOptionsHelper.DefaultJsonSerializerOptions
+        );
         jsoObj ??= JsonDocument.Parse(JsonSerializer.Serialize(new object()));
 
         var keys = keyLink.Split(':');
@@ -91,7 +101,10 @@ public class JsonHelper
             var isValueType = value!.GetType().IsValueType;
             if (i == keys.Length - 1)
             {
-                oldObject[keys[i]] = isValueType || value is string ? (dynamic)JsonSerializer.Serialize(value) : value;
+                oldObject[keys[i]] =
+                    isValueType || value is string
+                        ? (dynamic)JsonSerializer.Serialize(value)
+                        : value;
             }
             else
             {
@@ -117,7 +130,10 @@ public class JsonHelper
     /// <param name="jsoObj"></param>
     private void Save<T>(T jsoObj)
     {
-        var jsonStr = JsonSerializer.Serialize(jsoObj, JsonSerializerOptionsHelper.DefaultJsonSerializerOptions);
+        var jsonStr = JsonSerializer.Serialize(
+            jsoObj,
+            JsonSerializerOptionsHelper.DefaultJsonSerializerOptions
+        );
         File.WriteAllText(_jsonFilePath, jsonStr, Encoding.UTF8);
     }
 }

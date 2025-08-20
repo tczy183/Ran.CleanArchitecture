@@ -8,10 +8,12 @@ public enum SortDirection
     /// <summary>
     /// 升序
     /// </summary>
-    [Description("升序")] Asc,
+    [Description("升序")]
+    Asc,
 
     /// <summary>
     /// 降序
     /// </summary>
-    [Description("降序")] Desc
+    [Description("降序")]
+    Desc,
 }

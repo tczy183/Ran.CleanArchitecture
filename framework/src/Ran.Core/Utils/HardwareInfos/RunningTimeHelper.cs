@@ -68,7 +68,9 @@ public static class RunningTimeHelper
     private static TimeSpan ParseUptime(string uptime)
     {
         var parts = uptime.Split(',');
-        int days = 0, hours = 0, minutes = 0;
+        int days = 0,
+            hours = 0,
+            minutes = 0;
 
         foreach (var part in parts)
         {

@@ -31,10 +31,16 @@ public class TimeOnlyJsonConverter : JsonConverter<TimeOnly>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override TimeOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TimeOnly Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
-        if (reader.TokenType == JsonTokenType.String &&
-            TimeOnly.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var time))
+        if (
+            reader.TokenType == JsonTokenType.String
+            && TimeOnly.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var time)
+        )
         {
             return time;
         }
@@ -85,10 +91,16 @@ public class TimeOnlyNullableConverter : JsonConverter<TimeOnly?>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override TimeOnly? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TimeOnly? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
-        if (reader.TokenType == JsonTokenType.String &&
-            TimeOnly.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var time))
+        if (
+            reader.TokenType == JsonTokenType.String
+            && TimeOnly.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var time)
+        )
         {
             return time;
         }
@@ -102,7 +114,11 @@ public class TimeOnlyNullableConverter : JsonConverter<TimeOnly?>
     /// <param name="writer"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public override void Write(Utf8JsonWriter writer, TimeOnly? value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        TimeOnly? value,
+        JsonSerializerOptions options
+    )
     {
         writer.WriteStringValue(value?.ToString(_dateFormatString));
     }

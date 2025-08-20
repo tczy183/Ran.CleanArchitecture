@@ -52,11 +52,16 @@ public static class ServiceCollectionObjectAccessorExtensions
     /// <param name="accessor"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public static ObjectAccessor<T> AddObjectAccessor<T>(this IServiceCollection services, ObjectAccessor<T> accessor)
+    public static ObjectAccessor<T> AddObjectAccessor<T>(
+        this IServiceCollection services,
+        ObjectAccessor<T> accessor
+    )
     {
         if (services.Any(s => s.ServiceType == typeof(ObjectAccessor<T>)))
         {
-            throw new Exception($"对象访问器是在 type 之前注册的:{typeof(T).AssemblyQualifiedName}");
+            throw new Exception(
+                $"对象访问器是在 type 之前注册的:{typeof(T).AssemblyQualifiedName}"
+            );
         }
 
         // 添加到开头，以便快速检索
@@ -88,7 +93,9 @@ public static class ServiceCollectionObjectAccessorExtensions
     public static T GetObject<T>(this IServiceCollection services)
         where T : class
     {
-        return services.GetObjectOrNull<T>() ??
-               throw new Exception($"找不到{typeof(T).AssemblyQualifiedName}。确保已通过 AddObjectAccessor 添加!");
+        return services.GetObjectOrNull<T>()
+            ?? throw new Exception(
+                $"找不到{typeof(T).AssemblyQualifiedName}。确保已通过 AddObjectAccessor 添加!"
+            );
     }
 }

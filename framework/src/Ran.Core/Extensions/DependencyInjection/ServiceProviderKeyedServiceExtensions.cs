@@ -15,7 +15,11 @@ public static class ServiceProviderKeyedServiceExtensions
     /// <param name="serviceKey"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    public static object? GetKeyedService(this IServiceProvider provider, Type serviceType, object? serviceKey)
+    public static object? GetKeyedService(
+        this IServiceProvider provider,
+        Type serviceType,
+        object? serviceKey
+    )
     {
         _ = CheckHelper.NotNull(provider, nameof(provider));
 

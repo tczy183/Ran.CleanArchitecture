@@ -2,9 +2,9 @@
 
 /// <summary>
 /// This service is equivalent of the <see cref="ITransientCachedServiceProvider"/>.
-/// Use <see cref="ITransientCachedServiceProvider"/> instead of this interface, for new projects. 
+/// Use <see cref="ITransientCachedServiceProvider"/> instead of this interface, for new projects.
 /// </summary>
-public interface ILazyServiceProvider: ICachedServiceProviderBase
+public interface ILazyServiceProvider : ICachedServiceProviderBase
 {
     /// <summary>
     /// This method is equivalent of the GetRequiredService method.
@@ -35,7 +35,7 @@ public interface ILazyServiceProvider: ICachedServiceProviderBase
     /// It does exists for backward compatibility.
     /// </summary>
     T LazyGetService<T>(T defaultValue);
-    
+
     /// <summary>
     /// This method is equivalent of the <see cref="ICachedServiceProviderBase.GetService(Type, object)"/> method.
     /// It does exists for backward compatibility.

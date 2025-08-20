@@ -15,7 +15,11 @@ public static class DictionaryExtensions
     /// <param name="key">要查找的键</param>
     /// <param name="value">键对应的值，如果键不存在，则为默认值</param>
     /// <returns>如果字典中存在该键，则返回真(True)；否则返回假(False)</returns>
-    internal static bool TryGetValue<T>(this IDictionary<string, object> dictionary, string key, out T? value)
+    internal static bool TryGetValue<T>(
+        this IDictionary<string, object> dictionary,
+        string key,
+        out T? value
+    )
     {
         if (dictionary.TryGetValue(key, out var valueObj) && valueObj is T t)
         {
@@ -35,7 +39,10 @@ public static class DictionaryExtensions
     /// <param name="dictionary">要检查和获取的字典</param>
     /// <param name="key">要查找值的键</param>
     /// <returns>如果找到，返回值；如果找不到，返回默认值</returns>
-    public static TValue? GetOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
+    public static TValue? GetOrDefault<TKey, TValue>(
+        this Dictionary<TKey, TValue> dictionary,
+        TKey key
+    )
         where TKey : notnull
     {
         return dictionary.GetValueOrDefault(key);
@@ -49,7 +56,10 @@ public static class DictionaryExtensions
     /// <param name="dictionary">要检查和获取的字典</param>
     /// <param name="key">要查找值的键</param>
     /// <returns>如果找到，返回值；如果找不到，返回默认值</returns>
-    public static TValue? GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
+    public static TValue? GetOrDefault<TKey, TValue>(
+        this IDictionary<TKey, TValue> dictionary,
+        TKey key
+    )
     {
         return dictionary.TryGetValue(key, out var obj) ? obj : default;
     }
@@ -62,7 +72,10 @@ public static class DictionaryExtensions
     /// <param name="dictionary">要检查和获取的只读字典</param>
     /// <param name="key">要查找值的键</param>
     /// <returns>如果找到，返回值；如果找不到，返回默认值</returns>
-    public static TValue? GetOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key)
+    public static TValue? GetOrDefault<TKey, TValue>(
+        this IReadOnlyDictionary<TKey, TValue> dictionary,
+        TKey key
+    )
     {
         return dictionary.GetValueOrDefault(key);
     }
@@ -75,7 +88,10 @@ public static class DictionaryExtensions
     /// <param name="dictionary">要检查和获取的并发字典</param>
     /// <param name="key">要查找值的键</param>
     /// <returns>如果找到，返回值；如果找不到，返回默认值</returns>
-    public static TValue? GetOrDefault<TKey, TValue>(this ConcurrentDictionary<TKey, TValue> dictionary, TKey key)
+    public static TValue? GetOrDefault<TKey, TValue>(
+        this ConcurrentDictionary<TKey, TValue> dictionary,
+        TKey key
+    )
         where TKey : notnull
     {
         return dictionary.GetValueOrDefault(key);
@@ -90,14 +106,20 @@ public static class DictionaryExtensions
     /// <param name="key">要查找值的键</param>
     /// <param name="factory">如果字典中未找到，则用于创建值的工厂方法</param>
     /// <returns>如果找到，返回值；如果找不到，使用工厂方法创建并返回默认值</returns>
-    public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
-        Func<TKey, TValue> factory)
+    public static TValue GetOrAdd<TKey, TValue>(
+        this IDictionary<TKey, TValue> dictionary,
+        TKey key,
+        Func<TKey, TValue> factory
+    )
     {
         return dictionary.TryGetValue(key, out var obj) ? obj : AddValue(dictionary, key, factory);
     }
 
-    private static TValue AddValue<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey key,
-        Func<TKey, TValue> factory)
+    private static TValue AddValue<TKey, TValue>(
+        IDictionary<TKey, TValue> dictionary,
+        TKey key,
+        Func<TKey, TValue> factory
+    )
     {
         var value = factory(key);
         dictionary[key] = value;
@@ -113,8 +135,11 @@ public static class DictionaryExtensions
     /// <param name="key">要查找值的键</param>
     /// <param name="factory">如果字典中未找到，则用于创建值的工厂方法</param>
     /// <returns>如果找到，返回值；如果找不到，使用工厂方法创建并返回默认值</returns>
-    public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
-        Func<TValue> factory)
+    public static TValue GetOrAdd<TKey, TValue>(
+        this IDictionary<TKey, TValue> dictionary,
+        TKey key,
+        Func<TValue> factory
+    )
     {
         return dictionary.GetOrAdd(key, _ => factory());
     }
@@ -128,8 +153,12 @@ public static class DictionaryExtensions
     /// <param name="key">要查找值的键</param>
     /// <param name="factory">如果并发字典中未找到，则用于创建值的工厂方法</param>
     /// <returns>如果找到，返回值；如果找不到，使用工厂方法创建并返回默认值</returns>
-    public static TValue GetOrAdd<TKey, TValue>(this ConcurrentDictionary<TKey, TValue> dictionary, TKey key,
-        Func<TValue> factory) where TKey : notnull
+    public static TValue GetOrAdd<TKey, TValue>(
+        this ConcurrentDictionary<TKey, TValue> dictionary,
+        TKey key,
+        Func<TValue> factory
+    )
+        where TKey : notnull
     {
         return dictionary.GetOrAdd(key, _ => factory());
     }

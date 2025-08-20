@@ -69,7 +69,11 @@ public static class DsaHelper
     /// <param name="signatureBytes">签名字节数据</param>
     /// <param name="publicKeyBytes">公钥字节数据</param>
     /// <returns>返回签名是否有效</returns>
-    public static bool VerifyDataBytes(byte[] dataBytes, byte[] signatureBytes, byte[] publicKeyBytes)
+    public static bool VerifyDataBytes(
+        byte[] dataBytes,
+        byte[] signatureBytes,
+        byte[] publicKeyBytes
+    )
     {
         using var dsa = DSA.Create();
         dsa.ImportSubjectPublicKeyInfo(publicKeyBytes, out _);

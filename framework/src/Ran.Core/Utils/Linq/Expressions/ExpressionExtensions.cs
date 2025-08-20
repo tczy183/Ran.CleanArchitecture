@@ -13,8 +13,11 @@ public static class ExpressionExtensions
     /// <param name="second"></param>
     /// <param name="merge"></param>
     /// <returns></returns>
-    public static Expression<Func<T, bool>> Combine<T>(this Expression<Func<T, bool>> first,
-        Expression<Func<T, bool>> second, Func<Expression, Expression, BinaryExpression> merge)
+    public static Expression<Func<T, bool>> Combine<T>(
+        this Expression<Func<T, bool>> first,
+        Expression<Func<T, bool>> second,
+        Func<Expression, Expression, BinaryExpression> merge
+    )
     {
         if (first is null)
         {
@@ -27,10 +30,7 @@ public static class ExpressionExtensions
         }
 
         var parameter = Expression.Parameter(typeof(T), "x");
-        var body = merge(
-            Expression.Invoke(first, parameter),
-            Expression.Invoke(second, parameter)
-        );
+        var body = merge(Expression.Invoke(first, parameter), Expression.Invoke(second, parameter));
 
         return Expression.Lambda<Func<T, bool>>(body, parameter);
     }
@@ -42,8 +42,10 @@ public static class ExpressionExtensions
     /// <param name="first"></param>
     /// <param name="second"></param>
     /// <returns></returns>
-    public static Expression<Func<T, bool>> AndAlso<T>(this Expression<Func<T, bool>> first,
-        Expression<Func<T, bool>> second)
+    public static Expression<Func<T, bool>> AndAlso<T>(
+        this Expression<Func<T, bool>> first,
+        Expression<Func<T, bool>> second
+    )
     {
         return first.Combine(second, Expression.AndAlso);
     }
@@ -55,8 +57,10 @@ public static class ExpressionExtensions
     /// <param name="first"></param>
     /// <param name="second"></param>
     /// <returns></returns>
-    public static Expression<Func<T, bool>> OrElse<T>(this Expression<Func<T, bool>> first,
-        Expression<Func<T, bool>> second)
+    public static Expression<Func<T, bool>> OrElse<T>(
+        this Expression<Func<T, bool>> first,
+        Expression<Func<T, bool>> second
+    )
     {
         return first.Combine(second, Expression.OrElse);
     }
@@ -69,8 +73,11 @@ public static class ExpressionExtensions
     /// <param name="value"></param>
     /// <param name="comparison"></param>
     /// <returns></returns>
-    public static Expression<Func<T, bool>> CreateFilter<T>(string propertyName, object value,
-        Func<Expression, Expression, BinaryExpression> comparison)
+    public static Expression<Func<T, bool>> CreateFilter<T>(
+        string propertyName,
+        object value,
+        Func<Expression, Expression, BinaryExpression> comparison
+    )
     {
         var parameter = Expression.Parameter(typeof(T), "x");
         var property = Expression.PropertyOrField(parameter, propertyName);
@@ -124,14 +131,19 @@ public static class ExpressionExtensions
     /// <param name="propertyName"></param>
     /// <param name="ascending"></param>
     /// <returns></returns>
-    public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string propertyName, bool ascending = true)
+    public static IOrderedQueryable<T> OrderBy<T>(
+        this IQueryable<T> source,
+        string propertyName,
+        bool ascending = true
+    )
     {
         var parameter = Expression.Parameter(typeof(T), "x");
         var property = Expression.PropertyOrField(parameter, propertyName);
         var keySelector = Expression.Lambda(property, parameter);
 
         var methodName = ascending ? "OrderBy" : "OrderByDescending";
-        var method = typeof(Queryable).GetMethods()
+        var method = typeof(Queryable)
+            .GetMethods()
             .First(m => m.Name == methodName && m.GetParameters().Length == 2)
             .MakeGenericMethod(typeof(T), property.Type);
 
@@ -149,15 +161,19 @@ public static class ExpressionExtensions
     /// <param name="propertyName"></param>
     /// <param name="ascending"></param>
     /// <returns></returns>
-    public static IOrderedQueryable<T> ThenBy<T>(this IOrderedQueryable<T> source, string propertyName,
-        bool ascending = true)
+    public static IOrderedQueryable<T> ThenBy<T>(
+        this IOrderedQueryable<T> source,
+        string propertyName,
+        bool ascending = true
+    )
     {
         var parameter = Expression.Parameter(typeof(T), "x");
         var property = Expression.PropertyOrField(parameter, propertyName);
         var keySelector = Expression.Lambda(property, parameter);
 
         var methodName = ascending ? "ThenBy" : "ThenByDescending";
-        var method = typeof(Queryable).GetMethods()
+        var method = typeof(Queryable)
+            .GetMethods()
             .First(m => m.Name == methodName && m.GetParameters().Length == 2)
             .MakeGenericMethod(typeof(T), property.Type);
 
@@ -174,7 +190,10 @@ public static class ExpressionExtensions
     /// <param name="source"></param>
     /// <param name="propertyNames"></param>
     /// <returns></returns>
-    public static IQueryable<dynamic> SelectProperties<T>(this IQueryable<T> source, params string[] propertyNames)
+    public static IQueryable<dynamic> SelectProperties<T>(
+        this IQueryable<T> source,
+        params string[] propertyNames
+    )
     {
         var parameter = Expression.Parameter(typeof(T), "x");
 
