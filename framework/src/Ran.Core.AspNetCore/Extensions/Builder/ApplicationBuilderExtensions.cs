@@ -11,16 +11,18 @@ public static class ApplicationBuilderExtensions
     /// </summary>
     /// <param name="app"></param>
     /// <returns></returns>
-    public static async Task InitializeApplicationAsync(this IApplicationBuilder app)
+    public static async Task InitializeApplicationAsync(this WebApplication app)
     {
         _ = CheckHelper.NotNull(app, nameof(app));
 
-        app.ApplicationServices.GetRequiredService<ObjectAccessor<IApplicationBuilder>>().Value =
+        app.Services.GetRequiredService<ObjectAccessor<IApplicationBuilder>>().Value =
+            app;
+        app.Services.GetRequiredService<ObjectAccessor<IEndpointRouteBuilder>>().Value =
             app;
         var application =
-            app.ApplicationServices.GetRequiredService<IApplicationWithExternalServiceProvider>();
+            app.Services.GetRequiredService<IApplicationWithExternalServiceProvider>();
         var applicationLifetime =
-            app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+            app.Services.GetRequiredService<IHostApplicationLifetime>();
 
         _ = applicationLifetime.ApplicationStopping.Register(() =>
         {
@@ -28,27 +30,29 @@ public static class ApplicationBuilderExtensions
         });
         _ = applicationLifetime.ApplicationStopped.Register(application.Dispose);
 
-        await application.InitializeAsync(app.ApplicationServices);
+        await application.InitializeAsync(app.Services);
     }
 
     /// <summary>
     /// 初始化应用程序
     /// </summary>
     /// <param name="app"></param>
-    public static void InitializeApplication(this IApplicationBuilder app)
+    public static void InitializeApplication(this WebApplication app)
     {
         _ = CheckHelper.NotNull(app, nameof(app));
 
-        app.ApplicationServices.GetRequiredService<ObjectAccessor<IApplicationBuilder>>().Value =
+        app.Services.GetRequiredService<ObjectAccessor<IApplicationBuilder>>().Value =
+            app;
+        app.Services.GetRequiredService<ObjectAccessor<IEndpointRouteBuilder>>().Value =
             app;
         var application =
-            app.ApplicationServices.GetRequiredService<IApplicationWithExternalServiceProvider>();
+            app.Services.GetRequiredService<IApplicationWithExternalServiceProvider>();
         var applicationLifetime =
-            app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+            app.Services.GetRequiredService<IHostApplicationLifetime>();
 
         _ = applicationLifetime.ApplicationStopping.Register(application.Shutdown);
         _ = applicationLifetime.ApplicationStopped.Register(application.Dispose);
 
-        application.Initialize(app.ApplicationServices);
+        application.Initialize(app.Services);
     }
 }

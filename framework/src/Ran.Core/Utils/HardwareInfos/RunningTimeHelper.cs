@@ -35,7 +35,7 @@ public static class RunningTimeHelper
                 var output = ShellHelper.Bash("uptime | tail -n -1").Trim();
                 // 提取运行时间部分
                 var startIndex = output.IndexOf("up ", StringComparison.Ordinal) + 3;
-                var endIndex = output.IndexOf(" user", StringComparison.Ordinal);
+                var endIndex = output.IndexOf(" Users", StringComparison.Ordinal);
                 var uptime = output[startIndex..endIndex].Trim();
                 // 解析运行时间并转换为标准格式
                 var uptimeSpan = ParseUptime(uptime);
