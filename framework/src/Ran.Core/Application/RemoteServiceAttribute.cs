@@ -43,7 +43,8 @@ public sealed class RemoteServiceAttribute : Attribute
     /// <returns></returns>
     public static bool IsExplicitlyEnabledFor(Type type)
     {
-        var remoteServiceAttr = type.GetTypeInfo().GetSingleAttributeOrNull<RemoteServiceAttribute>();
+        var remoteServiceAttr = type.GetTypeInfo()
+            .GetSingleAttributeOrNull<RemoteServiceAttribute>();
         return remoteServiceAttr is not null && remoteServiceAttr.IsEnabled;
     }
 
@@ -54,7 +55,8 @@ public sealed class RemoteServiceAttribute : Attribute
     /// <returns></returns>
     public static bool IsExplicitlyDisabledFor(Type type)
     {
-        var remoteServiceAttr = type.GetTypeInfo().GetSingleAttributeOrNull<RemoteServiceAttribute>();
+        var remoteServiceAttr = type.GetTypeInfo()
+            .GetSingleAttributeOrNull<RemoteServiceAttribute>();
         return remoteServiceAttr is not null && !remoteServiceAttr.IsEnabled;
     }
 
@@ -65,7 +67,8 @@ public sealed class RemoteServiceAttribute : Attribute
     /// <returns></returns>
     public static bool IsMetadataExplicitlyEnabledFor(Type type)
     {
-        var remoteServiceAttr = type.GetTypeInfo().GetSingleAttributeOrNull<RemoteServiceAttribute>();
+        var remoteServiceAttr = type.GetTypeInfo()
+            .GetSingleAttributeOrNull<RemoteServiceAttribute>();
         return remoteServiceAttr is not null && remoteServiceAttr.IsMetadataEnabled;
     }
 
@@ -76,7 +79,8 @@ public sealed class RemoteServiceAttribute : Attribute
     /// <returns></returns>
     public static bool IsMetadataExplicitlyDisabledFor(Type type)
     {
-        var remoteServiceAttr = type.GetTypeInfo().GetSingleAttributeOrNull<RemoteServiceAttribute>();
+        var remoteServiceAttr = type.GetTypeInfo()
+            .GetSingleAttributeOrNull<RemoteServiceAttribute>();
         return remoteServiceAttr is not null && !remoteServiceAttr.IsMetadataEnabled;
     }
 

@@ -124,8 +124,11 @@ public static class AssemblyHelper
             }
         }
 
-        var asmsInBaseDir = Directory.EnumerateFiles(AppContext.BaseDirectory, "*.dll",
-            new EnumerationOptions { RecurseSubdirectories = true });
+        var asmsInBaseDir = Directory.EnumerateFiles(
+            AppContext.BaseDirectory,
+            "*.dll",
+            new EnumerationOptions { RecurseSubdirectories = true }
+        );
         foreach (var assemblyPath in asmsInBaseDir)
         {
             if (!IsManagedAssembly(assemblyPath))
@@ -136,7 +139,11 @@ public static class AssemblyHelper
             var asmName = AssemblyName.GetAssemblyName(assemblyPath);
 
             // 如果程序集已经加载过了就不再加载
-            if (returnAssemblies.Any(x => AssemblyName.ReferenceMatchesDefinition(x.GetName(), asmName)))
+            if (
+                returnAssemblies.Any(x =>
+                    AssemblyName.ReferenceMatchesDefinition(x.GetName(), asmName)
+                )
+            )
             {
                 continue;
             }
@@ -175,7 +182,11 @@ public static class AssemblyHelper
     /// <param name="suffix">后缀名</param>
     /// <param name="contain">包含名</param>
     /// <returns></returns>
-    public static IEnumerable<Assembly> GetEffectiveAssemblies(string prefix, string suffix, string contain)
+    public static IEnumerable<Assembly> GetEffectiveAssemblies(
+        string prefix,
+        string suffix,
+        string contain
+    )
     {
         _ = CheckHelper.NotNullOrEmpty(prefix, nameof(prefix));
         _ = CheckHelper.NotNullOrEmpty(suffix, nameof(suffix));
@@ -183,11 +194,23 @@ public static class AssemblyHelper
 
         return GetAllAssemblies()
             .Where(assembly =>
-                assembly.ManifestModule.Name.EndsWith(suffix, StringComparison.InvariantCultureIgnoreCase))
+                assembly.ManifestModule.Name.EndsWith(
+                    suffix,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
             .Where(assembly =>
-                assembly.ManifestModule.Name.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase))
+                assembly.ManifestModule.Name.StartsWith(
+                    prefix,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
             .Where(assembly =>
-                assembly.ManifestModule.Name.Contains(contain, StringComparison.InvariantCultureIgnoreCase))
+                assembly.ManifestModule.Name.Contains(
+                    contain,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
             .Distinct();
     }
 
@@ -204,9 +227,17 @@ public static class AssemblyHelper
 
         return GetAllAssemblies()
             .Where(assembly =>
-                assembly.ManifestModule.Name.EndsWith(suffix, StringComparison.InvariantCultureIgnoreCase))
+                assembly.ManifestModule.Name.EndsWith(
+                    suffix,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
             .Where(assembly =>
-                assembly.ManifestModule.Name.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase))
+                assembly.ManifestModule.Name.StartsWith(
+                    prefix,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
             .Distinct();
     }
 
@@ -221,7 +252,11 @@ public static class AssemblyHelper
 
         return GetAllAssemblies()
             .Where(assembly =>
-                assembly.ManifestModule.Name.Contains(contain, StringComparison.InvariantCultureIgnoreCase))
+                assembly.ManifestModule.Name.Contains(
+                    contain,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
             .Distinct();
     }
 
@@ -262,9 +297,7 @@ public static class AssemblyHelper
     /// <returns></returns>
     public static IEnumerable<Type> GetAllTypes()
     {
-        return GetAllAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
-            .Distinct();
+        return GetAllAssemblies().SelectMany(assembly => assembly.GetTypes()).Distinct();
     }
 
     /// <summary>
@@ -290,9 +323,7 @@ public static class AssemblyHelper
     /// <returns></returns>
     public static IEnumerable<Type> GetXiHanTypes()
     {
-        return GetXiHanAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
-            .Distinct();
+        return GetXiHanAssemblies().SelectMany(assembly => assembly.GetTypes()).Distinct();
     }
 
     /// <summary>
@@ -301,9 +332,7 @@ public static class AssemblyHelper
     /// <returns></returns>
     public static IEnumerable<Type> GetApplicationTypes()
     {
-        return GetApplicationAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
-            .Distinct();
+        return GetApplicationAssemblies().SelectMany(assembly => assembly.GetTypes()).Distinct();
     }
 
     /// <summary>
@@ -414,9 +443,11 @@ public static class AssemblyHelper
     public static IEnumerable<Type> GetSubClassesByGenericInterface(Type interfaceType)
     {
         return GetAllTypes()
-            .Where(type => type is { IsInterface: false, IsClass: true, IsAbstract: false }
-                           && type.GetInterfaces().Any(i => i.IsGenericType
-                                                            && i.GetGenericTypeDefinition() == interfaceType))
+            .Where(type =>
+                type is { IsInterface: false, IsClass: true, IsAbstract: false }
+                && type.GetInterfaces()
+                    .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == interfaceType)
+            )
             .ToList();
     }
 
@@ -500,7 +531,8 @@ public static class AssemblyHelper
         // 查找被引用程序集中的 NuGet 库依赖项
         foreach (var assembly in assemblies)
         {
-            var referencedAssemblies = assembly.GetReferencedAssemblies()
+            var referencedAssemblies = assembly
+                .GetReferencedAssemblies()
                 .Where(s => !s.FullName.StartsWith("Microsoft") && !s.FullName.StartsWith("System"))
                 .Where(s => !s.FullName.StartsWith("XiHan"));
             foreach (var referencedAssembly in referencedAssemblies)
@@ -515,7 +547,9 @@ public static class AssemblyHelper
                 {
                     // 获取 NuGet 包的名称和版本号
                     PackageName = referencedAssembly.Name!,
-                    PackageVersion = new AssemblyName(referencedAssembly.FullName).Version!.ToString()
+                    PackageVersion = new AssemblyName(
+                        referencedAssembly.FullName
+                    ).Version!.ToString(),
                 };
 
                 // 避免重复添加相同的 NuGet 包标识
@@ -645,8 +679,10 @@ internal sealed class AssemblyEquality : EqualityComparer<Assembly>
 {
     public override bool Equals(Assembly? x, Assembly? y)
     {
-        return x is null && y is null || x is not null && y is not null &&
-            AssemblyName.ReferenceMatchesDefinition(x.GetName(), y.GetName());
+        return x is null && y is null
+            || x is not null
+                && y is not null
+                && AssemblyName.ReferenceMatchesDefinition(x.GetName(), y.GetName());
     }
 
     public override int GetHashCode(Assembly obj)

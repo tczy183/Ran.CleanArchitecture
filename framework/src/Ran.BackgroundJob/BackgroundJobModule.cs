@@ -1,6 +1,3 @@
 ﻿namespace Ran.BackgroundJob;
 
-public class BackgroundJobModule
-{
-
-}
+public class BackgroundJobModule { }

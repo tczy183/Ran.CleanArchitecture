@@ -15,24 +15,28 @@ public interface ITypeList<in TBaseType> : IList<Type>
     /// 添加
     /// </summary>
     /// <typeparam name="T">Type</typeparam>
-    void Add<T>() where T : TBaseType;
+    void Add<T>()
+        where T : TBaseType;
 
     /// <summary>
     /// 尝试添加
     /// </summary>
     /// <typeparam name="T">Type</typeparam>
-    bool TryAdd<T>() where T : TBaseType;
+    bool TryAdd<T>()
+        where T : TBaseType;
 
     /// <summary>
     /// 包含
     /// </summary>
     /// <typeparam name="T">Type</typeparam>
     /// <returns></returns>
-    bool Contains<T>() where T : TBaseType;
+    bool Contains<T>()
+        where T : TBaseType;
 
     /// <summary>
     /// 移除
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    void Remove<T>() where T : TBaseType;
+    void Remove<T>()
+        where T : TBaseType;
 }

@@ -58,7 +58,7 @@ public static class PropertyInfoExtensions
             // 蛇形命名
             name => name.ToSnakeCase(),
             // 短横线命名
-            name => name.ToKebabCase()
+            name => name.ToKebabCase(),
         };
 
         foreach (var strategy in strategies)

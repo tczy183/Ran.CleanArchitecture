@@ -21,10 +21,19 @@ public static class PageExtensions
     /// <param name="criteriaValue">查询值</param>
     /// <param name="selectCompare">查询比较</param>
     /// <returns>选择后的数据</returns>
-    public static IEnumerable<T> Where<T>(this IEnumerable<T> source, string selectField, object? criteriaValue,
-        SelectCompare selectCompare = SelectCompare.Equal)
+    public static IEnumerable<T> Where<T>(
+        this IEnumerable<T> source,
+        string selectField,
+        object? criteriaValue,
+        SelectCompare selectCompare = SelectCompare.Equal
+    )
     {
-        return CollectionPropertySelector<T>.Where(source, selectField, criteriaValue, selectCompare);
+        return CollectionPropertySelector<T>.Where(
+            source,
+            selectField,
+            criteriaValue,
+            selectCompare
+        );
     }
 
     /// <summary>
@@ -33,7 +42,10 @@ public static class PageExtensions
     /// <param name="source">要应用选择的查询对象</param>
     /// <param name="selectCondition">查询条件</param>
     /// <returns>选择后的数据</returns>
-    public static IEnumerable<T> Where<T>(this IEnumerable<T> source, SelectConditionDto selectCondition)
+    public static IEnumerable<T> Where<T>(
+        this IEnumerable<T> source,
+        SelectConditionDto selectCondition
+    )
     {
         return CollectionPropertySelector<T>.Where(source, selectCondition);
     }
@@ -44,7 +56,10 @@ public static class PageExtensions
     /// <param name="source">要应用选择的查询对象</param>
     /// <param name="selectCondition">查询条件</param>
     /// <returns>选择后的数据</returns>
-    public static IEnumerable<T> Where<T>(this IEnumerable<T> source, SelectConditionDto<T> selectCondition)
+    public static IEnumerable<T> Where<T>(
+        this IEnumerable<T> source,
+        SelectConditionDto<T> selectCondition
+    )
         where T : class
     {
         return CollectionPropertySelector<T>.Where(source, selectCondition);
@@ -56,8 +71,10 @@ public static class PageExtensions
     /// <param name="source">要应用选择的查询对象</param>
     /// <param name="selectConditions">查询条件</param>
     /// <returns>基于 <paramref name="selectConditions"/> 的选择或未选择的查询对象</returns>
-    public static IEnumerable<T> WhereMultiple<T>(this IEnumerable<T> source,
-        IEnumerable<SelectConditionDto> selectConditions)
+    public static IEnumerable<T> WhereMultiple<T>(
+        this IEnumerable<T> source,
+        IEnumerable<SelectConditionDto> selectConditions
+    )
     {
         return CollectionPropertySelector<T>.Where(source, selectConditions);
     }
@@ -68,8 +85,10 @@ public static class PageExtensions
     /// <param name="source">要应用选择的查询对象</param>
     /// <param name="selectConditions">查询条件</param>
     /// <returns>基于 <paramref name="selectConditions"/> 的选择或未选择的查询对象</returns>
-    public static IEnumerable<T> WhereMultiple<T>(this IEnumerable<T> source,
-        IEnumerable<SelectConditionDto<T>> selectConditions)
+    public static IEnumerable<T> WhereMultiple<T>(
+        this IEnumerable<T> source,
+        IEnumerable<SelectConditionDto<T>> selectConditions
+    )
         where T : class
     {
         return CollectionPropertySelector<T>.Where(source, selectConditions);
@@ -87,8 +106,11 @@ public static class PageExtensions
     /// <param name="sortField">排序字段</param>
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedEnumerable<T> OrderBy<T>(this IEnumerable<T> source, string sortField,
-        SortDirection sortDirection)
+    public static IOrderedEnumerable<T> OrderBy<T>(
+        this IEnumerable<T> source,
+        string sortField,
+        SortDirection sortDirection
+    )
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortField, sortDirection);
     }
@@ -100,7 +122,10 @@ public static class PageExtensions
     /// <param name="source">原始数据源</param>
     /// <param name="sortCondition">排序条件</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedEnumerable<T> OrderBy<T>(this IEnumerable<T> source, SortConditionDto sortCondition)
+    public static IOrderedEnumerable<T> OrderBy<T>(
+        this IEnumerable<T> source,
+        SortConditionDto sortCondition
+    )
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortCondition);
     }
@@ -112,7 +137,10 @@ public static class PageExtensions
     /// <param name="source">原始数据源</param>
     /// <param name="sortCondition">排序条件</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedEnumerable<T> OrderBy<T>(this IEnumerable<T> source, SortConditionDto<T> sortCondition)
+    public static IOrderedEnumerable<T> OrderBy<T>(
+        this IEnumerable<T> source,
+        SortConditionDto<T> sortCondition
+    )
         where T : class
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortCondition);
@@ -126,8 +154,11 @@ public static class PageExtensions
     /// <param name="sortField">排序字段</param>
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedEnumerable<T> ThenBy<T>(this IOrderedEnumerable<T> source, string sortField,
-        SortDirection sortDirection)
+    public static IOrderedEnumerable<T> ThenBy<T>(
+        this IOrderedEnumerable<T> source,
+        string sortField,
+        SortDirection sortDirection
+    )
     {
         return CollectionPropertySortor<T>.ThenBy(source, sortField, sortDirection);
     }
@@ -139,7 +170,10 @@ public static class PageExtensions
     /// <param name="source">原始数据源</param>
     /// <param name="sortCondition">排序条件</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedEnumerable<T> ThenBy<T>(this IOrderedEnumerable<T> source, SortConditionDto sortCondition)
+    public static IOrderedEnumerable<T> ThenBy<T>(
+        this IOrderedEnumerable<T> source,
+        SortConditionDto sortCondition
+    )
     {
         return CollectionPropertySortor<T>.ThenBy(source, sortCondition);
     }
@@ -151,7 +185,10 @@ public static class PageExtensions
     /// <param name="source">原始数据源</param>
     /// <param name="sortCondition">排序条件</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedEnumerable<T> ThenBy<T>(this IOrderedEnumerable<T> source, SortConditionDto<T> sortCondition)
+    public static IOrderedEnumerable<T> ThenBy<T>(
+        this IOrderedEnumerable<T> source,
+        SortConditionDto<T> sortCondition
+    )
         where T : class
     {
         return CollectionPropertySortor<T>.ThenBy(source, sortCondition);
@@ -164,8 +201,10 @@ public static class PageExtensions
     /// <param name="source">要排序的集合</param>
     /// <param name="sortConditions">排序条件集合</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedEnumerable<T> OrderByMultiple<T>(this IEnumerable<T> source,
-        IEnumerable<SortConditionDto> sortConditions)
+    public static IOrderedEnumerable<T> OrderByMultiple<T>(
+        this IEnumerable<T> source,
+        IEnumerable<SortConditionDto> sortConditions
+    )
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortConditions);
     }
@@ -177,8 +216,10 @@ public static class PageExtensions
     /// <param name="source">要排序的集合</param>
     /// <param name="sortConditions">排序条件集合</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedEnumerable<T> OrderByMultiple<T>(this IEnumerable<T> source,
-        IEnumerable<SortConditionDto<T>> sortConditions)
+    public static IOrderedEnumerable<T> OrderByMultiple<T>(
+        this IEnumerable<T> source,
+        IEnumerable<SortConditionDto<T>> sortConditions
+    )
         where T : class
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortConditions);
@@ -197,13 +238,15 @@ public static class PageExtensions
     /// <param name="pageSize">每页大小</param>
     /// <param name="defaultFirstIndex">默认起始下标</param>
     /// <returns>分页后的 List 数据</returns>
-    public static List<T> ToPageList<T>(this IEnumerable<T> entities, int currentIndex, int pageSize,
-        int defaultFirstIndex = 1)
+    public static List<T> ToPageList<T>(
+        this IEnumerable<T> entities,
+        int currentIndex,
+        int pageSize,
+        int defaultFirstIndex = 1
+    )
         where T : class, new()
     {
-        return entities.Skip((currentIndex - defaultFirstIndex) * pageSize)
-            .Take(pageSize)
-            .ToList();
+        return entities.Skip((currentIndex - defaultFirstIndex) * pageSize).Take(pageSize).ToList();
     }
 
     /// <summary>
@@ -214,10 +257,15 @@ public static class PageExtensions
     /// <param name="pageInfo">分页信息</param>
     /// <param name="defaultFirstIndex">默认起始下标</param>
     /// <returns>分页后的 List 数据</returns>
-    public static List<T> ToPageList<T>(this IEnumerable<T> entities, PageInfoDto pageInfo, int defaultFirstIndex = 1)
+    public static List<T> ToPageList<T>(
+        this IEnumerable<T> entities,
+        PageInfoDto pageInfo,
+        int defaultFirstIndex = 1
+    )
         where T : class, new()
     {
-        return entities.Skip((pageInfo.CurrentIndex - defaultFirstIndex) * pageInfo.PageSize)
+        return entities
+            .Skip((pageInfo.CurrentIndex - defaultFirstIndex) * pageInfo.PageSize)
             .Take(pageInfo.PageSize)
             .ToList();
     }
@@ -231,7 +279,11 @@ public static class PageExtensions
     /// <param name="currentIndex">当前页标</param>
     /// <param name="pageSize">每页大小</param>
     /// <returns>分页数据</returns>
-    public static PageDataDto ToPageData<T>(this IEnumerable<T> entities, int currentIndex, int pageSize)
+    public static PageDataDto ToPageData<T>(
+        this IEnumerable<T> entities,
+        int currentIndex,
+        int pageSize
+    )
         where T : class, new()
     {
         var pageData = new PageDataDto(new PageInfoDto(currentIndex, pageSize), entities.Count());
@@ -263,8 +315,12 @@ public static class PageExtensions
     /// <param name="pageSize">每页大小</param>
     /// <param name="isOnlyPage">是否只返回分页信息</param>
     /// <returns>分页后的分页信息和数据</returns>
-    public static PageResponseDto<T> ToPageResponse<T>(this IEnumerable<T> entities, int currentIndex, int pageSize,
-        bool isOnlyPage = false)
+    public static PageResponseDto<T> ToPageResponse<T>(
+        this IEnumerable<T> entities,
+        int currentIndex,
+        int pageSize,
+        bool isOnlyPage = false
+    )
         where T : class, new()
     {
         var enumerable = entities as T[] ?? entities.ToArray();
@@ -289,8 +345,11 @@ public static class PageExtensions
     /// <param name="pageInfo">分页信息</param>
     /// <param name="isOnlyPage">是否只返回分页信息</param>
     /// <returns>分页后的分页信息和数据</returns>
-    public static PageResponseDto<T> ToPageResponse<T>(this IEnumerable<T> entities, PageInfoDto pageInfo,
-        bool isOnlyPage = false)
+    public static PageResponseDto<T> ToPageResponse<T>(
+        this IEnumerable<T> entities,
+        PageInfoDto pageInfo,
+        bool isOnlyPage = false
+    )
         where T : class, new()
     {
         var enumerable = entities as T[] ?? entities.ToArray();
@@ -313,7 +372,10 @@ public static class PageExtensions
     /// <param name="source">数据源</param>
     /// <param name="queryDto">分页查询</param>
     /// <returns>分页后的分页信息和数据</returns>
-    public static PageResponseDto<T> ToPageResponse<T>(this IEnumerable<T> source, PageQueryDto queryDto)
+    public static PageResponseDto<T> ToPageResponse<T>(
+        this IEnumerable<T> source,
+        PageQueryDto queryDto
+    )
         where T : class, new()
     {
         var isQueryAll = queryDto.IsQueryAll ?? false;
@@ -357,10 +419,19 @@ public static class PageExtensions
     /// <param name="criteriaValue">查询值</param>
     /// <param name="selectCompare">查询比较</param>
     /// <returns>选择后的数据</returns>
-    public static IQueryable<T> Where<T>(this IQueryable<T> source, string selectField, object? criteriaValue,
-        SelectCompare selectCompare = SelectCompare.Equal)
+    public static IQueryable<T> Where<T>(
+        this IQueryable<T> source,
+        string selectField,
+        object? criteriaValue,
+        SelectCompare selectCompare = SelectCompare.Equal
+    )
     {
-        return CollectionPropertySelector<T>.Where(source, selectField, criteriaValue, selectCompare);
+        return CollectionPropertySelector<T>.Where(
+            source,
+            selectField,
+            criteriaValue,
+            selectCompare
+        );
     }
 
     /// <summary>
@@ -369,7 +440,10 @@ public static class PageExtensions
     /// <param name="source">要应用选择的查询对象</param>
     /// <param name="selectCondition">查询条件</param>
     /// <returns>选择后的数据</returns>
-    public static IQueryable<T> Where<T>(this IQueryable<T> source, SelectConditionDto selectCondition)
+    public static IQueryable<T> Where<T>(
+        this IQueryable<T> source,
+        SelectConditionDto selectCondition
+    )
     {
         return CollectionPropertySelector<T>.Where(source, selectCondition);
     }
@@ -380,7 +454,10 @@ public static class PageExtensions
     /// <param name="source">要应用选择的查询对象</param>
     /// <param name="selectCondition">查询条件</param>
     /// <returns>选择后的数据</returns>
-    public static IQueryable<T> Where<T>(this IQueryable<T> source, SelectConditionDto<T> selectCondition)
+    public static IQueryable<T> Where<T>(
+        this IQueryable<T> source,
+        SelectConditionDto<T> selectCondition
+    )
         where T : class
     {
         return CollectionPropertySelector<T>.Where(source, selectCondition);
@@ -392,8 +469,10 @@ public static class PageExtensions
     /// <param name="source">要应用选择的查询对象</param>
     /// <param name="selectConditions">查询条件</param>
     /// <returns>基于 <paramref name="selectConditions"/> 的选择或未选择的查询对象</returns>
-    public static IQueryable<T> WhereMultiple<T>(this IQueryable<T> source,
-        IEnumerable<SelectConditionDto> selectConditions)
+    public static IQueryable<T> WhereMultiple<T>(
+        this IQueryable<T> source,
+        IEnumerable<SelectConditionDto> selectConditions
+    )
     {
         return CollectionPropertySelector<T>.Where(source, selectConditions);
     }
@@ -404,8 +483,10 @@ public static class PageExtensions
     /// <param name="source">要应用选择的查询对象</param>
     /// <param name="selectConditions">查询条件</param>
     /// <returns>基于 <paramref name="selectConditions"/> 的选择或未选择的查询对象</returns>
-    public static IQueryable<T> WhereMultiple<T>(this IQueryable<T> source,
-        IEnumerable<SelectConditionDto<T>> selectConditions)
+    public static IQueryable<T> WhereMultiple<T>(
+        this IQueryable<T> source,
+        IEnumerable<SelectConditionDto<T>> selectConditions
+    )
         where T : class
     {
         return CollectionPropertySelector<T>.Where(source, selectConditions);
@@ -423,8 +504,11 @@ public static class PageExtensions
     /// <param name="sortField">排序字段</param>
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string sortField,
-        SortDirection sortDirection)
+    public static IOrderedQueryable<T> OrderBy<T>(
+        this IQueryable<T> source,
+        string sortField,
+        SortDirection sortDirection
+    )
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortField, sortDirection);
     }
@@ -436,7 +520,10 @@ public static class PageExtensions
     /// <param name="source">原始数据源</param>
     /// <param name="sortCondition">排序条件</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, SortConditionDto sortCondition)
+    public static IOrderedQueryable<T> OrderBy<T>(
+        this IQueryable<T> source,
+        SortConditionDto sortCondition
+    )
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortCondition);
     }
@@ -448,7 +535,10 @@ public static class PageExtensions
     /// <param name="source">原始数据源</param>
     /// <param name="sortCondition">排序条件</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, SortConditionDto<T> sortCondition)
+    public static IOrderedQueryable<T> OrderBy<T>(
+        this IQueryable<T> source,
+        SortConditionDto<T> sortCondition
+    )
         where T : class
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortCondition);
@@ -462,8 +552,11 @@ public static class PageExtensions
     /// <param name="sortField">排序字段</param>
     /// <param name="sortDirection">排序方向</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedQueryable<T> ThenBy<T>(this IOrderedQueryable<T> source, string sortField,
-        SortDirection sortDirection)
+    public static IOrderedQueryable<T> ThenBy<T>(
+        this IOrderedQueryable<T> source,
+        string sortField,
+        SortDirection sortDirection
+    )
     {
         return CollectionPropertySortor<T>.ThenBy(source, sortField, sortDirection);
     }
@@ -475,7 +568,10 @@ public static class PageExtensions
     /// <param name="source">已排序的数据源</param>
     /// <param name="sortCondition">排序条件</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedQueryable<T> ThenBy<T>(this IOrderedQueryable<T> source, SortConditionDto sortCondition)
+    public static IOrderedQueryable<T> ThenBy<T>(
+        this IOrderedQueryable<T> source,
+        SortConditionDto sortCondition
+    )
     {
         return CollectionPropertySortor<T>.ThenBy(source, sortCondition);
     }
@@ -487,7 +583,10 @@ public static class PageExtensions
     /// <param name="source">已排序的数据源</param>
     /// <param name="sortCondition">排序条件</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedQueryable<T> ThenBy<T>(this IOrderedQueryable<T> source, SortConditionDto<T> sortCondition)
+    public static IOrderedQueryable<T> ThenBy<T>(
+        this IOrderedQueryable<T> source,
+        SortConditionDto<T> sortCondition
+    )
         where T : class
     {
         return CollectionPropertySortor<T>.ThenBy(source, sortCondition);
@@ -500,8 +599,10 @@ public static class PageExtensions
     /// <param name="source">要排序的集合</param>
     /// <param name="sortConditions">排序条件集合</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedQueryable<T> OrderByMultiple<T>(this IQueryable<T> source,
-        IEnumerable<SortConditionDto> sortConditions)
+    public static IOrderedQueryable<T> OrderByMultiple<T>(
+        this IQueryable<T> source,
+        IEnumerable<SortConditionDto> sortConditions
+    )
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortConditions);
     }
@@ -513,8 +614,10 @@ public static class PageExtensions
     /// <param name="source">要排序的集合</param>
     /// <param name="sortConditions">排序条件集合</param>
     /// <returns>排序后的数据</returns>
-    public static IOrderedQueryable<T> OrderByMultiple<T>(this IQueryable<T> source,
-        IEnumerable<SortConditionDto<T>> sortConditions)
+    public static IOrderedQueryable<T> OrderByMultiple<T>(
+        this IQueryable<T> source,
+        IEnumerable<SortConditionDto<T>> sortConditions
+    )
         where T : class
     {
         return CollectionPropertySortor<T>.OrderBy(source, sortConditions);
@@ -533,8 +636,12 @@ public static class PageExtensions
     /// <param name="pageSize">每页大小</param>
     /// <param name="defaultFirstIndex">默认起始下标</param>
     /// <returns>分页后的 List 数据</returns>
-    public static List<T> ToPageList<T>(this IQueryable<T> entities, int currentIndex, int pageSize,
-        int defaultFirstIndex = 1)
+    public static List<T> ToPageList<T>(
+        this IQueryable<T> entities,
+        int currentIndex,
+        int pageSize,
+        int defaultFirstIndex = 1
+    )
         where T : class, new()
     {
         return [.. entities.Skip((currentIndex - defaultFirstIndex) * pageSize).Take(pageSize)];
@@ -547,12 +654,18 @@ public static class PageExtensions
     /// <param name="entities">数据源</param>
     /// <param name="pageInfo">分页信息</param>
     /// <param name="defaultFirstIndex">默认起始下标</param>
-    public static List<T> ToPageList<T>(this IQueryable<T> entities, PageInfoDto pageInfo, int defaultFirstIndex = 1)
+    public static List<T> ToPageList<T>(
+        this IQueryable<T> entities,
+        PageInfoDto pageInfo,
+        int defaultFirstIndex = 1
+    )
         where T : class, new()
     {
         return
         [
-            .. entities.Skip((pageInfo.CurrentIndex - defaultFirstIndex) * pageInfo.PageSize).Take(pageInfo.PageSize)
+            .. entities
+                .Skip((pageInfo.CurrentIndex - defaultFirstIndex) * pageInfo.PageSize)
+                .Take(pageInfo.PageSize),
         ];
     }
 
@@ -565,7 +678,11 @@ public static class PageExtensions
     /// <param name="currentIndex">当前页标</param>
     /// <param name="pageSize">每页大小</param>
     /// <returns>分页数据</returns>
-    public static PageDataDto ToPageData<T>(this IQueryable<T> entities, int currentIndex, int pageSize)
+    public static PageDataDto ToPageData<T>(
+        this IQueryable<T> entities,
+        int currentIndex,
+        int pageSize
+    )
         where T : class, new()
     {
         var pageData = new PageDataDto(new PageInfoDto(currentIndex, pageSize), entities.Count());
@@ -597,8 +714,12 @@ public static class PageExtensions
     /// <param name="pageSize">每页大小</param>
     /// <param name="isOnlyPage">是否只返回分页信息</param>
     /// <returns>分页后的分页信息和数据</returns>
-    public static PageResponseDto<T> ToPageResponse<T>(this IQueryable<T> entities, int currentIndex, int pageSize,
-        bool isOnlyPage = false)
+    public static PageResponseDto<T> ToPageResponse<T>(
+        this IQueryable<T> entities,
+        int currentIndex,
+        int pageSize,
+        bool isOnlyPage = false
+    )
         where T : class, new()
     {
         var pageDta = entities.ToPageData(currentIndex, pageSize);
@@ -622,8 +743,11 @@ public static class PageExtensions
     /// <param name="pageInfo">分页信息</param>
     /// <param name="isOnlyPage">是否只返回分页信息</param>
     /// <returns>分页后的分页信息和数据</returns>
-    public static PageResponseDto<T> ToPageResponse<T>(this IQueryable<T> entities, PageInfoDto pageInfo,
-        bool isOnlyPage = false)
+    public static PageResponseDto<T> ToPageResponse<T>(
+        this IQueryable<T> entities,
+        PageInfoDto pageInfo,
+        bool isOnlyPage = false
+    )
         where T : class, new()
     {
         var pageDta = entities.ToPageData(pageInfo);
@@ -645,7 +769,10 @@ public static class PageExtensions
     /// <param name="source">数据源</param>
     /// <param name="queryDto">分页查询</param>
     /// <returns>分页后的分页信息和数据</returns>
-    public static PageResponseDto<T> ToPageResponse<T>(this IQueryable<T> source, PageQueryDto queryDto)
+    public static PageResponseDto<T> ToPageResponse<T>(
+        this IQueryable<T> source,
+        PageQueryDto queryDto
+    )
         where T : class, new()
     {
         var isQueryAll = queryDto.IsQueryAll ?? false;

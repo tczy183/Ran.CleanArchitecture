@@ -13,12 +13,17 @@ public static class PlugInSourceExtensions
     /// <param name="plugInSource"></param>
     /// <param name="logger"></param>
     /// <returns></returns>
-    public static Type[] GetModulesWithAllDependencies(this IPlugInSource plugInSource, ILogger logger)
+    public static Type[] GetModulesWithAllDependencies(
+        this IPlugInSource plugInSource,
+        ILogger logger
+    )
     {
         _ = CheckHelper.NotNull(plugInSource, nameof(plugInSource));
 
-        return plugInSource.GetModules()
+        return plugInSource
+            .GetModules()
             .SelectMany(type => ModuleHelper.FindAllModuleTypes(type, logger))
-            .Distinct().ToArray();
+            .Distinct()
+            .ToArray();
     }
 }

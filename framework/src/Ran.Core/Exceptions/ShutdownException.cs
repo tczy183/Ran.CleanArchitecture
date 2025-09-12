@@ -12,7 +12,8 @@ public class ShutdownException : Exception
     /// <summary>
     /// 构造函数
     /// </summary>
-    public ShutdownException() : base(DefaultMessage)
+    public ShutdownException()
+        : base(DefaultMessage)
     {
         LogHelper.Error(DefaultMessage);
     }
@@ -21,7 +22,8 @@ public class ShutdownException : Exception
     /// 构造函数
     /// </summary>
     /// <param name="message"></param>
-    public ShutdownException(string? message) : base(DefaultMessage + message)
+    public ShutdownException(string? message)
+        : base(DefaultMessage + message)
     {
         LogHelper.Error(DefaultMessage + message);
     }
@@ -31,8 +33,8 @@ public class ShutdownException : Exception
     /// </summary>
     /// <param name="message"></param>
     /// <param name="innerException"></param>
-    public ShutdownException(string? message, Exception? innerException) : base(DefaultMessage + message,
-        innerException)
+    public ShutdownException(string? message, Exception? innerException)
+        : base(DefaultMessage + message, innerException)
     {
         LogHelper.Error(DefaultMessage + message);
     }

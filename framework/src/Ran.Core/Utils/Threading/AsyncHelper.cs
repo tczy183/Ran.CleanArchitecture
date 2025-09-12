@@ -14,7 +14,9 @@ public static class AsyncHelper
     {
         _ = CheckHelper.NotNull(type, nameof(type));
 
-        return type == typeof(Task) ? typeof(void) : type.IsTaskOfT() ? type.GenericTypeArguments[0] : type;
+        return type == typeof(Task) ? typeof(void)
+            : type.IsTaskOfT() ? type.GenericTypeArguments[0]
+            : type;
     }
 
     /// <summary>

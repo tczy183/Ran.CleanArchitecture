@@ -28,7 +28,11 @@ public class IncomingEventInfo
     {
         Id = id;
         MessageId = messageId;
-        EventName = CheckHelper.NotNullOrWhiteSpace(eventName, nameof(eventName), MaxEventNameLength);
+        EventName = CheckHelper.NotNullOrWhiteSpace(
+            eventName,
+            nameof(eventName),
+            MaxEventNameLength
+        );
         EventData = eventData;
         CreationTime = creationTime;
     }

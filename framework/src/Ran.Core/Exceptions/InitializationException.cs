@@ -12,7 +12,8 @@ public class InitializationException : Exception
     /// <summary>
     /// 构造函数
     /// </summary>
-    public InitializationException() : base(DefaultMessage)
+    public InitializationException()
+        : base(DefaultMessage)
     {
         LogHelper.Error(DefaultMessage);
     }
@@ -21,7 +22,8 @@ public class InitializationException : Exception
     /// 构造函数
     /// </summary>
     /// <param name="message"></param>
-    public InitializationException(string? message) : base(DefaultMessage + message)
+    public InitializationException(string? message)
+        : base(DefaultMessage + message)
     {
         LogHelper.Error(DefaultMessage + Environment.NewLine + message);
     }
@@ -31,11 +33,16 @@ public class InitializationException : Exception
     /// </summary>
     /// <param name="message"></param>
     /// <param name="innerException"></param>
-    public InitializationException(string? message, Exception? innerException) : base(DefaultMessage + message,
-        innerException)
+    public InitializationException(string? message, Exception? innerException)
+        : base(DefaultMessage + message, innerException)
     {
-        LogHelper.Error(DefaultMessage + Environment.NewLine + message + Environment.NewLine +
-                        innerException?.StackTrace);
+        LogHelper.Error(
+            DefaultMessage
+                + Environment.NewLine
+                + message
+                + Environment.NewLine
+                + innerException?.StackTrace
+        );
     }
 
     /// <summary>

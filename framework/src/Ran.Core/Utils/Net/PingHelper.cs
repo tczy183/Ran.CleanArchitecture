@@ -19,7 +19,13 @@ public static class PingHelper
     /// <param name="ttl">TTL（生存时间），默认 128</param>
     /// <param name="pingCount">Ping 次数，默认 4 次</param>
     /// <returns>Ping 结果字符串</returns>
-    public static string Ping(string host, int timeout = 4000, int bufferSize = 32, int ttl = 128, int pingCount = 4)
+    public static string Ping(
+        string host,
+        int timeout = 4000,
+        int bufferSize = 32,
+        int ttl = 128,
+        int pingCount = 4
+    )
     {
         if (string.IsNullOrWhiteSpace(host))
         {
@@ -38,10 +44,12 @@ public static class PingHelper
             try
             {
                 var reply = ping.Send(host, timeout, buffer, options);
-                _ = reply.Status == IPStatus.Success
-                    ? result.AppendLine(
-                        $"第 {i} 次：成功，地址：{reply.Address}，往返时间：{reply.RoundtripTime}ms，TTL：{reply.Options?.Ttl}")
-                    : result.AppendLine($"第 {i} 次：失败，状态：{reply.Status}");
+                _ =
+                    reply.Status == IPStatus.Success
+                        ? result.AppendLine(
+                            $"第 {i} 次：成功，地址：{reply.Address}，往返时间：{reply.RoundtripTime}ms，TTL：{reply.Options?.Ttl}"
+                        )
+                        : result.AppendLine($"第 {i} 次：失败，状态：{reply.Status}");
             }
             catch (PingException ex)
             {

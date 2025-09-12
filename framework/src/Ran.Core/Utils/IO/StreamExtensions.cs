@@ -27,7 +27,10 @@ public static class StreamExtensions
     /// <param name="stream"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static async Task<byte[]> GetAllBytesAsync(this Stream stream, CancellationToken cancellationToken = default)
+    public static async Task<byte[]> GetAllBytesAsync(
+        this Stream stream,
+        CancellationToken cancellationToken = default
+    )
     {
         if (stream is MemoryStream memoryStream)
         {
@@ -45,7 +48,11 @@ public static class StreamExtensions
     /// <param name="destination"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static Task CopyToAsync(this Stream stream, Stream destination, CancellationToken cancellationToken)
+    public static Task CopyToAsync(
+        this Stream stream,
+        Stream destination,
+        CancellationToken cancellationToken
+    )
     {
         if (stream.CanSeek)
         {
@@ -86,8 +93,10 @@ public static class StreamExtensions
     /// <param name="stream"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static async Task<MemoryStream> CreateMemoryStreamAsync(this Stream stream,
-        CancellationToken cancellationToken = default)
+    public static async Task<MemoryStream> CreateMemoryStreamAsync(
+        this Stream stream,
+        CancellationToken cancellationToken = default
+    )
     {
         if (stream.CanSeek)
         {

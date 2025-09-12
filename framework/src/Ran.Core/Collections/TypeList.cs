@@ -51,7 +51,8 @@ public class TypeList<TBaseType> : ITypeList<TBaseType>
     /// 添加
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public void Add<T>() where T : TBaseType
+    public void Add<T>()
+        where T : TBaseType
     {
         _typeList.Add(typeof(T));
     }
@@ -61,7 +62,8 @@ public class TypeList<TBaseType> : ITypeList<TBaseType>
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public bool TryAdd<T>() where T : TBaseType
+    public bool TryAdd<T>()
+        where T : TBaseType
     {
         if (Contains<T>())
         {
@@ -108,7 +110,8 @@ public class TypeList<TBaseType> : ITypeList<TBaseType>
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public bool Contains<T>() where T : TBaseType
+    public bool Contains<T>()
+        where T : TBaseType
     {
         return Contains(typeof(T));
     }
@@ -127,7 +130,8 @@ public class TypeList<TBaseType> : ITypeList<TBaseType>
     /// 移除
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public void Remove<T>() where T : TBaseType
+    public void Remove<T>()
+        where T : TBaseType
     {
         _ = _typeList.Remove(typeof(T));
     }
@@ -197,7 +201,9 @@ public class TypeList<TBaseType> : ITypeList<TBaseType>
         if (!typeof(TBaseType).GetTypeInfo().IsAssignableFrom(item))
         {
             throw new ArgumentException(
-                $"给定类型 ({item.AssemblyQualifiedName}) 应为 {typeof(TBaseType).AssemblyQualifiedName} 的实例。", nameof(item));
+                $"给定类型 ({item.AssemblyQualifiedName}) 应为 {typeof(TBaseType).AssemblyQualifiedName} 的实例。",
+                nameof(item)
+            );
         }
     }
 }

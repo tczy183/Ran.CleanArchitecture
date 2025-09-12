@@ -25,8 +25,10 @@ public abstract class CachedServiceProviderBase : ICachedServiceProviderBase
     {
         ServiceProvider = serviceProvider;
         CachedServices = new ConcurrentDictionary<ServiceIdentifier, Lazy<object?>>();
-        _ = CachedServices.TryAdd(new ServiceIdentifier(typeof(IServiceProvider)),
-            new Lazy<object?>(() => ServiceProvider));
+        _ = CachedServices.TryAdd(
+            new ServiceIdentifier(typeof(IServiceProvider)),
+            new Lazy<object?>(() => ServiceProvider)
+        );
     }
 
     /// <summary>
@@ -36,10 +38,12 @@ public abstract class CachedServiceProviderBase : ICachedServiceProviderBase
     /// <returns></returns>
     public virtual object? GetService(Type serviceType)
     {
-        return CachedServices.GetOrAdd(
-            new ServiceIdentifier(serviceType),
-            _ => new Lazy<object?>(() => ServiceProvider.GetService(serviceType))
-        ).Value;
+        return CachedServices
+            .GetOrAdd(
+                new ServiceIdentifier(serviceType),
+                _ => new Lazy<object?>(() => ServiceProvider.GetService(serviceType))
+            )
+            .Value;
     }
 
     /// <summary>
@@ -83,10 +87,12 @@ public abstract class CachedServiceProviderBase : ICachedServiceProviderBase
     /// <returns></returns>
     public object GetService(Type serviceType, Func<IServiceProvider, object> factory)
     {
-        return CachedServices.GetOrAdd(
-            new ServiceIdentifier(serviceType),
-            _ => new Lazy<object?>(() => factory(ServiceProvider))
-        ).Value!;
+        return CachedServices
+            .GetOrAdd(
+                new ServiceIdentifier(serviceType),
+                _ => new Lazy<object?>(() => factory(ServiceProvider))
+            )
+            .Value!;
     }
 
     /// <summary>
@@ -97,10 +103,14 @@ public abstract class CachedServiceProviderBase : ICachedServiceProviderBase
     /// <returns></returns>
     public object? GetKeyedService(Type serviceType, object? serviceKey)
     {
-        return CachedServices.GetOrAdd(
-            new ServiceIdentifier(serviceKey, serviceType),
-            _ => new Lazy<object?>(() => ServiceProvider.GetKeyedService(serviceType, serviceKey))
-        ).Value;
+        return CachedServices
+            .GetOrAdd(
+                new ServiceIdentifier(serviceKey, serviceType),
+                _ => new Lazy<object?>(() =>
+                    ServiceProvider.GetKeyedService(serviceType, serviceKey)
+                )
+            )
+            .Value;
     }
 
     /// <summary>
@@ -111,9 +121,13 @@ public abstract class CachedServiceProviderBase : ICachedServiceProviderBase
     /// <returns></returns>
     public object GetRequiredKeyedService(Type serviceType, object? serviceKey)
     {
-        return CachedServices.GetOrAdd(
-            new ServiceIdentifier(serviceKey, serviceType),
-            _ => new Lazy<object?>(() => ServiceProvider.GetRequiredKeyedService(serviceType, serviceKey))
-        ).Value!;
+        return CachedServices
+            .GetOrAdd(
+                new ServiceIdentifier(serviceKey, serviceType),
+                _ => new Lazy<object?>(() =>
+                    ServiceProvider.GetRequiredKeyedService(serviceType, serviceKey)
+                )
+            )
+            .Value!;
     }
 }

@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-    <PropertyGroup>
-        <OutputType>Library</OutputType>
-        <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
-    </PropertyGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\Ran.Core\Ran.Core.csproj"/>
-    </ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions"/>
-    </ItemGroup>
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ran.Core\Ran.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" />
+  </ItemGroup>
 </Project>

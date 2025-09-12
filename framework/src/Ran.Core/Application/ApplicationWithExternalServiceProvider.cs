@@ -5,7 +5,9 @@ namespace Ran.Core.Application;
 /// <summary>
 /// 具有外部服务的应用提供器
 /// </summary>
-internal sealed class ApplicationWithExternalServiceProvider : ApplicationBase, IApplicationWithExternalServiceProvider
+internal sealed class ApplicationWithExternalServiceProvider
+    : ApplicationBase,
+        IApplicationWithExternalServiceProvider
 {
     /// <summary>
     /// 构造函数
@@ -16,7 +18,9 @@ internal sealed class ApplicationWithExternalServiceProvider : ApplicationBase, 
     public ApplicationWithExternalServiceProvider(
         Type startupModuleType,
         IServiceCollection services,
-        Action<ApplicationCreationOptions>? optionsAction) : base(startupModuleType, services, optionsAction)
+        Action<ApplicationCreationOptions>? optionsAction
+    )
+        : base(startupModuleType, services, optionsAction)
     {
         _ = services.AddSingleton<IApplicationWithExternalServiceProvider>(this);
     }
@@ -24,7 +28,9 @@ internal sealed class ApplicationWithExternalServiceProvider : ApplicationBase, 
     /// <summary>
     /// 设置服务提供器，但不初始化模块
     /// </summary>
-    void IApplicationWithExternalServiceProvider.SetServiceProvider(IServiceProvider serviceProvider)
+    void IApplicationWithExternalServiceProvider.SetServiceProvider(
+        IServiceProvider serviceProvider
+    )
     {
         _ = CheckHelper.NotNull(serviceProvider, nameof(serviceProvider));
 

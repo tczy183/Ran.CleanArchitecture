@@ -103,7 +103,9 @@ public static class MathHelper
     /// <exception cref="ArgumentException"></exception>
     public static double CircleArea(double radius)
     {
-        return radius < 0 ? throw new ArgumentException("半径不能为负。") : Math.PI * radius * radius;
+        return radius < 0
+            ? throw new ArgumentException("半径不能为负。")
+            : Math.PI * radius * radius;
     }
 
     /// <summary>
@@ -161,7 +163,9 @@ public static class MathHelper
     /// <exception cref="ArgumentException"></exception>
     public static double Average(double[]? numbers)
     {
-        return numbers is null || !numbers.Any() ? throw new ArgumentException("集合不能为空。") : numbers.Average();
+        return numbers is null || !numbers.Any()
+            ? throw new ArgumentException("集合不能为空。")
+            : numbers.Average();
     }
 
     /// <summary>

@@ -2,6 +2,4 @@
 
 namespace Ran.Ddd.Domain.Abstraction;
 
-public class DddDomainAbstractionModule : DddModule
-{
-}
+public class DddDomainAbstractionModule : DddModule { }

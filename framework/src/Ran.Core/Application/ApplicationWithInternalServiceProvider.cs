@@ -5,7 +5,9 @@ namespace Ran.Core.Application;
 /// <summary>
 /// 具有集成服务的应用提供器
 /// </summary>
-public class ApplicationWithInternalServiceProvider : ApplicationBase, IApplicationWithInternalServiceProvider
+public class ApplicationWithInternalServiceProvider
+    : ApplicationBase,
+        IApplicationWithInternalServiceProvider
 {
     /// <summary>
     /// 作用域服务
@@ -17,11 +19,11 @@ public class ApplicationWithInternalServiceProvider : ApplicationBase, IApplicat
     /// </summary>
     /// <param name="startupModuleType"></param>
     /// <param name="optionsAction"></param>
-    public ApplicationWithInternalServiceProvider(Type startupModuleType,
-        Action<ApplicationCreationOptions>? optionsAction)
-        : this(startupModuleType, new ServiceCollection(), optionsAction)
-    {
-    }
+    public ApplicationWithInternalServiceProvider(
+        Type startupModuleType,
+        Action<ApplicationCreationOptions>? optionsAction
+    )
+        : this(startupModuleType, new ServiceCollection(), optionsAction) { }
 
     /// <summary>
     /// 构造函数
@@ -32,7 +34,9 @@ public class ApplicationWithInternalServiceProvider : ApplicationBase, IApplicat
     private ApplicationWithInternalServiceProvider(
         Type startupModuleType,
         IServiceCollection services,
-        Action<ApplicationCreationOptions>? optionsAction) : base(startupModuleType, services, optionsAction)
+        Action<ApplicationCreationOptions>? optionsAction
+    )
+        : base(startupModuleType, services, optionsAction)
     {
         _ = Services.AddSingleton<IApplicationWithInternalServiceProvider>(this);
     }

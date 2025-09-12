@@ -23,9 +23,7 @@ public abstract class ModuleLifecycleContributorBase : IModuleLifecycleContribut
     /// </summary>
     /// <param name="context"></param>
     /// <param name="module"></param>
-    public virtual void Initialize(ApplicationInitializationContext context, IModule module)
-    {
-    }
+    public virtual void Initialize(ApplicationInitializationContext context, IModule module) { }
 
     /// <summary>
     /// 关闭
@@ -43,7 +41,5 @@ public abstract class ModuleLifecycleContributorBase : IModuleLifecycleContribut
     /// </summary>
     /// <param name="context"></param>
     /// <param name="module"></param>
-    public virtual void Shutdown(ApplicationShutdownContext context, IModule module)
-    {
-    }
+    public virtual void Shutdown(ApplicationShutdownContext context, IModule module) { }
 }

@@ -30,8 +30,11 @@ public static partial class MaskHelper
         }
 
         var maskLength = length - frontCount - endCount;
-        return string.Concat(input.AsSpan(0, frontCount), new string(maskChar, maskLength),
-            input.AsSpan(length - endCount, endCount));
+        return string.Concat(
+            input.AsSpan(0, frontCount),
+            new string(maskChar, maskLength),
+            input.AsSpan(length - endCount, endCount)
+        );
     }
 
     /// <summary>
@@ -57,7 +60,7 @@ public static partial class MaskHelper
             8 => Regex8().Replace(input, $"$1{masks}$2"),
             7 => Regex7().Replace(input, $"$1{masks}$2"),
             6 => Regex6().Replace(input, $"$1{masks}$2"),
-            _ => RegexDefault().Replace(input, $"$1{masks}")
+            _ => RegexDefault().Replace(input, $"$1{masks}"),
         };
     }
 
@@ -80,7 +83,9 @@ public static partial class MaskHelper
     /// <returns>脱敏后的身份证号</returns>
     public static string MaskIdCard(string idCard)
     {
-        return string.IsNullOrEmpty(idCard) || idCard.Length < 8 ? Mask(idCard) : Mask(idCard, 4, 4);
+        return string.IsNullOrEmpty(idCard) || idCard.Length < 8
+            ? Mask(idCard)
+            : Mask(idCard, 4, 4);
     }
 
     /// <summary>
@@ -91,7 +96,9 @@ public static partial class MaskHelper
     /// <returns>脱敏后的银行卡号</returns>
     public static string MaskBankCard(string bankCard)
     {
-        return string.IsNullOrEmpty(bankCard) || bankCard.Length < 8 ? Mask(bankCard) : Mask(bankCard, 4, 4);
+        return string.IsNullOrEmpty(bankCard) || bankCard.Length < 8
+            ? Mask(bankCard)
+            : Mask(bankCard, 4, 4);
     }
 
     /// <summary>
@@ -143,11 +150,13 @@ public static partial class MaskHelper
         }
 
         var length = name.Length;
-        return length == 1
-            ? name
-            : length == 2
-                ? string.Concat(name.AsSpan(0, 1), "*")
-                : string.Concat(name.AsSpan(0, 1), new string('*', length - 2), name.AsSpan(length - 1, 1));
+        return length == 1 ? name
+            : length == 2 ? string.Concat(name.AsSpan(0, 1), "*")
+            : string.Concat(
+                name.AsSpan(0, 1),
+                new string('*', length - 2),
+                name.AsSpan(length - 1, 1)
+            );
     }
 
     /// <summary>
@@ -186,7 +195,9 @@ public static partial class MaskHelper
     /// <returns></returns>
     public static string MaskLicensePlate(string plate)
     {
-        return string.IsNullOrEmpty(plate) ? plate : plate.Length < 2 ? plate : Mask(plate, 2, 1);
+        return string.IsNullOrEmpty(plate) ? plate
+            : plate.Length < 2 ? plate
+            : Mask(plate, 2, 1);
     }
 
     /// <summary>
@@ -226,8 +237,11 @@ public static partial class MaskHelper
             ("\"email\"\\s*:\\s*\"([^\"]+)\"", $"\"email\": \"{MaskEmail("$1")}\""),
             ("\"password\"\\s*:\\s*\"([^\"]+)\"", $"\"password\": \"{MaskPassword("$1")}\""),
             ("\"address\"\\s*:\\s*\"([^\"]+)\"", $"\"address\": \"{MaskAddress("$1")}\""),
-            ("\"licensePlate\"\\s*:\\s*\"([^\"]+)\"", $"\"licensePlate\": \"{MaskLicensePlate("$1")}\""),
-            ("\"url\"\\s*:\\s*\"([^\"]+)\"", $"\"url\": \"{MaskUrlParams("$1")}\"")
+            (
+                "\"licensePlate\"\\s*:\\s*\"([^\"]+)\"",
+                $"\"licensePlate\": \"{MaskLicensePlate("$1")}\""
+            ),
+            ("\"url\"\\s*:\\s*\"([^\"]+)\"", $"\"url\": \"{MaskUrlParams("$1")}\""),
         };
 
         foreach (var (pattern, replacement) in patterns)

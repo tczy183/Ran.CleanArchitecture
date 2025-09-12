@@ -107,9 +107,10 @@ public static class ObjectExtensions
     /// <param name="fullName"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static string GetObjectFullNameOf(this object instance,
-        [CallerArgumentExpression(nameof(instance))]
-        string fullName = "")
+    public static string GetObjectFullNameOf(
+        this object instance,
+        [CallerArgumentExpression(nameof(instance))] string fullName = ""
+    )
     {
         return instance is null
             ? throw new ArgumentNullException(nameof(instance))
@@ -133,9 +134,12 @@ public static class ObjectExtensions
             return false;
         }
 
-        var foundFieldInfo = instance.GetType()
-            .GetField(fieldName,
-                BindingFlags.Default | BindingFlags.Instance | BindingFlags.Public);
+        var foundFieldInfo = instance
+            .GetType()
+            .GetField(
+                fieldName,
+                BindingFlags.Default | BindingFlags.Instance | BindingFlags.Public
+            );
         return foundFieldInfo is not null;
     }
 
@@ -152,7 +156,8 @@ public static class ObjectExtensions
             throw new NotImplementedException(nameof(fieldName));
         }
 
-        var foundFieldInfo = instance.GetType()
+        var foundFieldInfo = instance
+            .GetType()
             .GetField(fieldName, BindingFlags.Public | BindingFlags.Instance);
         return foundFieldInfo ?? throw new NotImplementedException(nameof(fieldName));
     }
@@ -169,7 +174,8 @@ public static class ObjectExtensions
             throw new NotImplementedException(nameof(instance));
         }
 
-        var foundFieldInfos = instance.GetType()
+        var foundFieldInfos = instance
+            .GetType()
             .GetFields(BindingFlags.Public | BindingFlags.Instance);
         return foundFieldInfos ?? throw new NotImplementedException(nameof(foundFieldInfos));
     }
@@ -191,8 +197,9 @@ public static class ObjectExtensions
             return false;
         }
 
-        var foundPropertyInfo = instance.GetType().GetProperty(propertyName,
-            BindingFlags.Public | BindingFlags.Instance);
+        var foundPropertyInfo = instance
+            .GetType()
+            .GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
         return foundPropertyInfo is not null;
     }
 
@@ -209,8 +216,9 @@ public static class ObjectExtensions
             throw new NotImplementedException(nameof(propertyName));
         }
 
-        var foundPropertyInfo = instance.GetType().GetProperty(propertyName,
-            BindingFlags.Public | BindingFlags.Instance);
+        var foundPropertyInfo = instance
+            .GetType()
+            .GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
         return foundPropertyInfo ?? throw new NotImplementedException(nameof(foundPropertyInfo));
     }
 
@@ -226,7 +234,8 @@ public static class ObjectExtensions
             throw new NotImplementedException(nameof(instance));
         }
 
-        var foundPropertyInfos = instance.GetType()
+        var foundPropertyInfos = instance
+            .GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance);
         return foundPropertyInfos ?? throw new NotImplementedException(nameof(foundPropertyInfos));
     }

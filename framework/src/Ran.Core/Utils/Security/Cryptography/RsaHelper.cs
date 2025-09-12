@@ -24,7 +24,9 @@ public static class RsaHelper
     /// </summary>
     /// <param name="keySize">密钥长度，默认为 2048</param>
     /// <returns>返回公钥和私钥对</returns>
-    public static (byte[] publicKeyBytes, byte[] privateKeyBytes) GenerateKeysBytes(int keySize = 2048)
+    public static (byte[] publicKeyBytes, byte[] privateKeyBytes) GenerateKeysBytes(
+        int keySize = 2048
+    )
     {
         using var rsa = RSA.Create(keySize);
         var publicKeyBytes = rsa.ExportRSAPublicKey();
@@ -110,7 +112,11 @@ public static class RsaHelper
     {
         using var rsa = RSA.Create();
         rsa.ImportPkcs8PrivateKey(privateKeyBytes, out _);
-        var signedBytes = rsa.SignData(dataBytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+        var signedBytes = rsa.SignData(
+            dataBytes,
+            HashAlgorithmName.SHA256,
+            RSASignaturePadding.Pkcs1
+        );
         return signedBytes;
     }
 
@@ -136,11 +142,20 @@ public static class RsaHelper
     /// <param name="signatureBytes">签名</param>
     /// <param name="publicKeyBytes">公钥</param>
     /// <returns>返回签名是否有效</returns>
-    public static bool VerifyDataBytes(byte[] dataBytes, byte[] signatureBytes, byte[] publicKeyBytes)
+    public static bool VerifyDataBytes(
+        byte[] dataBytes,
+        byte[] signatureBytes,
+        byte[] publicKeyBytes
+    )
     {
         using var rsa = RSA.Create();
         rsa.ImportSubjectPublicKeyInfo(publicKeyBytes, out _);
-        return rsa.VerifyData(dataBytes, signatureBytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+        return rsa.VerifyData(
+            dataBytes,
+            signatureBytes,
+            HashAlgorithmName.SHA256,
+            RSASignaturePadding.Pkcs1
+        );
     }
 
     /// <summary>

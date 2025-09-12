@@ -14,7 +14,9 @@ public static class ServiceCollectionDynamicOptionsManagerExtensions
     /// <typeparam name="TManager"></typeparam>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddXiHanDynamicOptions<TOptions, TManager>(this IServiceCollection services)
+    public static IServiceCollection AddXiHanDynamicOptions<TOptions, TManager>(
+        this IServiceCollection services
+    )
         where TOptions : class
         where TManager : DynamicOptionsManager<TOptions>
     {

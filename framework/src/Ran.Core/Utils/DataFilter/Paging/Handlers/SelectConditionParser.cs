@@ -23,10 +23,15 @@ public static class SelectConditionParser<T>
     /// </summary>
     /// <param name="selectCondition"></param>
     /// <returns>生成的 Lambda 表达式</returns>
-    public static Expression<Func<T, bool>> GetSelectConditionParser(SelectConditionDto selectCondition)
+    public static Expression<Func<T, bool>> GetSelectConditionParser(
+        SelectConditionDto selectCondition
+    )
     {
-        return GetSelectConditionParser(selectCondition.SelectField, selectCondition.CriteriaValue,
-            selectCondition.SelectCompare);
+        return GetSelectConditionParser(
+            selectCondition.SelectField,
+            selectCondition.CriteriaValue,
+            selectCondition.SelectCompare
+        );
     }
 
     /// <summary>
@@ -34,10 +39,15 @@ public static class SelectConditionParser<T>
     /// </summary>
     /// <param name="selectCondition"></param>
     /// <returns>生成的 Lambda 表达式</returns>
-    public static Expression<Func<T, bool>> GetSelectConditionParser(SelectConditionDto<T> selectCondition)
+    public static Expression<Func<T, bool>> GetSelectConditionParser(
+        SelectConditionDto<T> selectCondition
+    )
     {
-        return GetSelectConditionParser(selectCondition.SelectField, selectCondition.CriteriaValue,
-            selectCondition.SelectCompare);
+        return GetSelectConditionParser(
+            selectCondition.SelectField,
+            selectCondition.CriteriaValue,
+            selectCondition.SelectCompare
+        );
     }
 
     /// <summary>
@@ -47,8 +57,11 @@ public static class SelectConditionParser<T>
     /// <param name="value">比较值</param>
     /// <param name="selectCompare">比较操作</param>
     /// <returns>生成的 Lambda 表达式</returns>
-    public static Expression<Func<T, bool>> GetSelectConditionParser(string propertyName, object? value,
-        SelectCompare selectCompare)
+    public static Expression<Func<T, bool>> GetSelectConditionParser(
+        string propertyName,
+        object? value,
+        SelectCompare selectCompare
+    )
     {
         var type = typeof(T);
         var key = $"{typeof(T).FullName}.{propertyName}.{selectCompare}";
@@ -80,8 +93,11 @@ public static class SelectConditionParser<T>
     /// <param name="selectCompare">比较操作 </param>
     /// <returns>生成的比较表达式 </returns>
     /// <exception cref="NotSupportedException"></exception>
-    private static Expression GenerateComparison(MemberExpression propertyAccess, object? value,
-        SelectCompare selectCompare)
+    private static Expression GenerateComparison(
+        MemberExpression propertyAccess,
+        object? value,
+        SelectCompare selectCompare
+    )
     {
         var constant = Expression.Constant(value);
 
@@ -103,7 +119,7 @@ public static class SelectConditionParser<T>
             // 区间比较
             SelectCompare.Between => GenerateBetweenExpression(propertyAccess, value),
 
-            _ => throw new NotSupportedException($"不支持的比较操作：{selectCompare}")
+            _ => throw new NotSupportedException($"不支持的比较操作：{selectCompare}"),
         };
     }
 
@@ -114,7 +130,10 @@ public static class SelectConditionParser<T>
     /// <param name="value">比较值</param>
     /// <returns>Contains 表达式</returns>
     /// <exception cref="ArgumentException"></exception>
-    private static MethodCallExpression GenerateContainsExpression(MemberExpression propertyAccess, object? value)
+    private static MethodCallExpression GenerateContainsExpression(
+        MemberExpression propertyAccess,
+        object? value
+    )
     {
         if (value is not string)
         {
@@ -134,7 +153,10 @@ public static class SelectConditionParser<T>
     /// <param name="value">比较值</param>
     /// <returns>InWithContains 表达式</returns>
     /// <exception cref="ArgumentException"></exception>
-    private static BinaryExpression GenerateInWithContainsExpression(MemberExpression propertyAccess, object? value)
+    private static BinaryExpression GenerateInWithContainsExpression(
+        MemberExpression propertyAccess,
+        object? value
+    )
     {
         if (value is not IEnumerable<string> stringList || !stringList.Any())
         {
@@ -160,7 +182,10 @@ public static class SelectConditionParser<T>
     /// <param name="value">比较值</param>
     /// <returns>InWithEqual 表达式</returns>
     /// <exception cref="ArgumentException"></exception>
-    private static BinaryExpression GenerateInWithEqualExpression(MemberExpression propertyAccess, object? value)
+    private static BinaryExpression GenerateInWithEqualExpression(
+        MemberExpression propertyAccess,
+        object? value
+    )
     {
         if (value is not IEnumerable<object> valueList)
         {
@@ -180,15 +205,24 @@ public static class SelectConditionParser<T>
     /// <param name="value">Between 操作的范围值</param>
     /// <returns>Between 表达式</returns>
     /// <exception cref="ArgumentException"></exception>
-    private static BinaryExpression GenerateBetweenExpression(MemberExpression propertyAccess, object? value)
+    private static BinaryExpression GenerateBetweenExpression(
+        MemberExpression propertyAccess,
+        object? value
+    )
     {
         if (value is not Tuple<object, object> range || range.Item1 is null || range.Item2 is null)
         {
             throw new ArgumentException("Between 操作需要一个范围值（Tuple<object, object>）。");
         }
 
-        var lowerBound = Expression.GreaterThanOrEqual(propertyAccess, Expression.Constant(range.Item1));
-        var upperBound = Expression.LessThanOrEqual(propertyAccess, Expression.Constant(range.Item2));
+        var lowerBound = Expression.GreaterThanOrEqual(
+            propertyAccess,
+            Expression.Constant(range.Item1)
+        );
+        var upperBound = Expression.LessThanOrEqual(
+            propertyAccess,
+            Expression.Constant(range.Item2)
+        );
         return Expression.AndAlso(lowerBound, upperBound);
     }
 

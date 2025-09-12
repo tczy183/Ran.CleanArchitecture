@@ -29,17 +29,24 @@ public class DefaultInitLogger<T> : IInitLogger<T>
     /// <param name="state"></param>
     /// <param name="exception"></param>
     /// <param name="formatter"></param>
-    public virtual void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception,
-        Func<TState, Exception?, string> formatter)
+    public virtual void Log<TState>(
+        LogLevel logLevel,
+        EventId eventId,
+        TState state,
+        Exception? exception,
+        Func<TState, Exception?, string> formatter
+    )
     {
-        Entries.Add(new InitLogEntry
-        {
-            LogLevel = logLevel,
-            EventId = eventId,
-            State = state!,
-            Exception = exception,
-            Formatter = (s, e) => formatter((TState)s, e)
-        });
+        Entries.Add(
+            new InitLogEntry
+            {
+                LogLevel = logLevel,
+                EventId = eventId,
+                State = state!,
+                Exception = exception,
+                Formatter = (s, e) => formatter((TState)s, e),
+            }
+        );
     }
 
     /// <summary>
@@ -58,7 +65,8 @@ public class DefaultInitLogger<T> : IInitLogger<T>
     /// <typeparam name="TState"></typeparam>
     /// <param name="state"></param>
     /// <returns></returns>
-    public virtual IDisposable BeginScope<TState>(TState state) where TState : notnull
+    public virtual IDisposable BeginScope<TState>(TState state)
+        where TState : notnull
     {
         return NullDisposable.Instance;
     }

@@ -4,6 +4,4 @@ using Ran.Ddd.Domain.Abstraction;
 namespace Ran.Ddd.Application.Abstraction;
 
 [DependsOn(typeof(DddDomainAbstractionModule))]
-public class DddApplicationAbstractionModule : DddModule
-{
-}
+public class DddApplicationAbstractionModule : DddModule { }

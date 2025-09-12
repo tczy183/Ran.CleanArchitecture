@@ -18,7 +18,10 @@ public class AssemblyFinder : IAssemblyFinder
     public AssemblyFinder(IModuleContainer moduleContainer)
     {
         _moduleContainer = moduleContainer;
-        _assemblies = new Lazy<IReadOnlyList<Assembly>>(FindAll, LazyThreadSafetyMode.ExecutionAndPublication);
+        _assemblies = new Lazy<IReadOnlyList<Assembly>>(
+            FindAll,
+            LazyThreadSafetyMode.ExecutionAndPublication
+        );
     }
 
     /// <summary>

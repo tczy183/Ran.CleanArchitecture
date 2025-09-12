@@ -103,7 +103,9 @@ public static class TypeExtensions
 
         if (!genericType.IsGenericType)
         {
-            throw new ArgumentException("该功能只支持泛型类型的调用，非泛型类型可使用 IsAssignableFrom 方法。");
+            throw new ArgumentException(
+                "该功能只支持泛型类型的调用，非泛型类型可使用 IsAssignableFrom 方法。"
+            );
         }
 
         List<Type> allOthers = [type];
@@ -298,7 +300,7 @@ public static class TypeExtensions
         { typeof(uint), "uint" },
         { typeof(ulong), "ulong" },
         { typeof(ushort), "ushort" },
-        { typeof(void), "void" }
+        { typeof(void), "void" },
     };
 
     /// <summary>
@@ -361,9 +363,13 @@ public static class TypeExtensions
     /// <param name="genericArguments"></param>
     /// <param name="length"></param>
     /// <param name="fullName"></param>
-    private static void ProcessGenericType(StringBuilder builder, Type type, IReadOnlyList<Type> genericArguments,
+    private static void ProcessGenericType(
+        StringBuilder builder,
+        Type type,
+        IReadOnlyList<Type> genericArguments,
         int length,
-        bool fullName)
+        bool fullName
+    )
     {
         var offset = type.IsNested ? type.DeclaringType!.GetGenericArguments().Length : 0;
 
@@ -371,7 +377,13 @@ public static class TypeExtensions
         {
             if (type.IsNested)
             {
-                ProcessGenericType(builder, type.DeclaringType!, genericArguments, offset, fullName);
+                ProcessGenericType(
+                    builder,
+                    type.DeclaringType!,
+                    genericArguments,
+                    offset,
+                    fullName
+                );
                 _ = builder.Append('+');
             }
             else

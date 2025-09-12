@@ -56,7 +56,12 @@ public static class LoggerExtensions
     /// <param name="logLevel"></param>
     /// <param name="message"></param>
     /// <param name="exception"></param>
-    public static void LogWithLevel(this ILogger logger, LogLevel logLevel, string message, Exception exception)
+    public static void LogWithLevel(
+        this ILogger logger,
+        LogLevel logLevel,
+        string message,
+        Exception exception
+    )
     {
         switch (logLevel)
         {

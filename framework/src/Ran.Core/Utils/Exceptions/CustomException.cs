@@ -12,7 +12,8 @@ public class CustomException : Exception
     /// <summary>
     /// 构造函数
     /// </summary>
-    public CustomException() : base(DefaultMessage)
+    public CustomException()
+        : base(DefaultMessage)
     {
         LogHelper.Error(DefaultMessage);
     }
@@ -21,7 +22,8 @@ public class CustomException : Exception
     /// 构造函数
     /// </summary>
     /// <param name="message"></param>
-    public CustomException(string? message) : base(DefaultMessage + message)
+    public CustomException(string? message)
+        : base(DefaultMessage + message)
     {
         LogHelper.Error(DefaultMessage + message);
     }
@@ -31,7 +33,8 @@ public class CustomException : Exception
     /// </summary>
     /// <param name="message"></param>
     /// <param name="exception"></param>
-    public CustomException(string? message, Exception? exception) : base(DefaultMessage + message, exception)
+    public CustomException(string? message, Exception? exception)
+        : base(DefaultMessage + message, exception)
     {
         LogHelper.Error(DefaultMessage + message);
     }

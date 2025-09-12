@@ -120,12 +120,12 @@ public static class ReflectionHelper
         where TAttribute : class
     {
         return memberInfo.GetCustomAttributes(true).OfType<TAttribute>().FirstOrDefault()
-               ?? memberInfo
-                   .DeclaringType?.GetTypeInfo()
-                   .GetCustomAttributes(inherit)
-                   .OfType<TAttribute>()
-                   .FirstOrDefault()
-               ?? defaultValue;
+            ?? memberInfo
+                .DeclaringType?.GetTypeInfo()
+                .GetCustomAttributes(inherit)
+                .OfType<TAttribute>()
+                .FirstOrDefault()
+            ?? defaultValue;
     }
 
     /// <summary>

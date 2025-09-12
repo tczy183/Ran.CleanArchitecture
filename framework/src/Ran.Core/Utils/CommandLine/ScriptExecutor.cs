@@ -26,7 +26,7 @@ public static class ScriptExecutor
             ".sh" => ExecuteShellScript(scriptFilePath, arguments),
             ".ps1" => ExecutePowerShellScript(scriptFilePath, arguments),
             ".bat" => ExecuteBatchScript(scriptFilePath, arguments),
-            _ => throw new NotSupportedException("不支持的脚本类型")
+            _ => throw new NotSupportedException("不支持的脚本类型"),
         };
     }
 
@@ -45,7 +45,7 @@ public static class ScriptExecutor
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
-            CreateNoWindow = true
+            CreateNoWindow = true,
         };
 
         return ExecuteProcess(processStartInfo);
@@ -66,7 +66,7 @@ public static class ScriptExecutor
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
-            CreateNoWindow = true
+            CreateNoWindow = true,
         };
 
         return ExecuteProcess(processStartInfo);
@@ -87,7 +87,7 @@ public static class ScriptExecutor
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
-            CreateNoWindow = true
+            CreateNoWindow = true,
         };
 
         return ExecuteProcess(processStartInfo);

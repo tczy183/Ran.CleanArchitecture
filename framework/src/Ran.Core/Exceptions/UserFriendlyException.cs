@@ -13,8 +13,13 @@ public class UserFriendlyException : BusinessException, IUserFriendlyException
     /// <param name="details"></param>
     /// <param name="innerException"></param>
     /// <param name="logLevel"></param>
-    public UserFriendlyException(string message, string? code = null, string? details = null,
-        Exception? innerException = null, LogLevel logLevel = LogLevel.Warning)
+    public UserFriendlyException(
+        string message,
+        string? code = null,
+        string? details = null,
+        Exception? innerException = null,
+        LogLevel logLevel = LogLevel.Warning
+    )
         : base(code, message, details, innerException, logLevel)
     {
         Details = details;

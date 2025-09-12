@@ -51,8 +51,11 @@ public class ApplicationBase : IApplication
     /// <param name="startupModuleType"></param>
     /// <param name="services"></param>
     /// <param name="optionsAction"></param>
-    internal ApplicationBase(Type startupModuleType, IServiceCollection services,
-        Action<ApplicationCreationOptions>? optionsAction)
+    internal ApplicationBase(
+        Type startupModuleType,
+        IServiceCollection services,
+        Action<ApplicationCreationOptions>? optionsAction
+    )
     {
         _ = CheckHelper.NotNull(startupModuleType, nameof(startupModuleType));
         _ = CheckHelper.NotNull(services, nameof(services));
@@ -74,7 +77,9 @@ public class ApplicationBase : IApplication
         _ = services.AddSingleton<IApplication>(this);
         _ = services.AddSingleton<IApplicationInfoAccessor>(this);
         _ = services.AddSingleton<IModuleContainer>(this);
-        _ = services.AddSingleton<IHostEnvironment>(new HostEnvironment { EnvironmentName = options.Environment });
+        _ = services.AddSingleton<IHostEnvironment>(
+            new HostEnvironment { EnvironmentName = options.Environment }
+        );
 
         // 添加日志等基础设施组件
         services.AddCoreServices();
@@ -104,11 +109,19 @@ public class ApplicationBase : IApplication
             return;
         }
 
-        var initLogger = serviceProvider.GetRequiredService<IInitLoggerFactory>().Create<ApplicationBase>();
+        var initLogger = serviceProvider
+            .GetRequiredService<IInitLoggerFactory>()
+            .Create<ApplicationBase>();
 
         foreach (var entry in initLogger.Entries)
         {
-            logger.Log(entry.LogLevel, entry.EventId, entry.State, entry.Exception, entry.Formatter);
+            logger.Log(
+                entry.LogLevel,
+                entry.EventId,
+                entry.State,
+                entry.Exception,
+                entry.Formatter
+            );
         }
 
         initLogger.Entries.Clear();
@@ -120,10 +133,13 @@ public class ApplicationBase : IApplication
     /// <param name="services"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    private IModuleDescriptor[] LoadModules(IServiceCollection services,
-        ApplicationCreationOptions options)
+    private IModuleDescriptor[] LoadModules(
+        IServiceCollection services,
+        ApplicationCreationOptions options
+    )
     {
-        return services.GetSingletonInstance<IModuleLoader>()
+        return services
+            .GetSingletonInstance<IModuleLoader>()
             .LoadModules(services, StartupModuleType, options.PlugInSources);
     }
 
@@ -173,7 +189,8 @@ public class ApplicationBase : IApplication
     protected void SetServiceProvider(IServiceProvider serviceProvider)
     {
         ServiceProvider = serviceProvider;
-        ServiceProvider.GetRequiredService<ObjectAccessor<IServiceProvider>>().Value = ServiceProvider;
+        ServiceProvider.GetRequiredService<ObjectAccessor<IServiceProvider>>().Value =
+            ServiceProvider;
     }
 
     /// <summary>
@@ -184,7 +201,8 @@ public class ApplicationBase : IApplication
     {
         using var scope = ServiceProvider.CreateScope();
         WriteInitLogs(scope.ServiceProvider);
-        await scope.ServiceProvider.GetRequiredService<IModuleManager>()
+        await scope
+            .ServiceProvider.GetRequiredService<IModuleManager>()
             .InitializeModulesAsync(new ApplicationInitializationContext(scope.ServiceProvider));
     }
 
@@ -195,7 +213,8 @@ public class ApplicationBase : IApplication
     {
         using var scope = ServiceProvider.CreateScope();
         WriteInitLogs(scope.ServiceProvider);
-        scope.ServiceProvider.GetRequiredService<IModuleManager>()
+        scope
+            .ServiceProvider.GetRequiredService<IModuleManager>()
             .InitializeModules(new ApplicationInitializationContext(scope.ServiceProvider));
     }
 
@@ -232,7 +251,8 @@ public class ApplicationBase : IApplication
             {
                 throw new InitializationException(
                     $"在模块 {module.Type.AssemblyQualifiedName} 的 {nameof(IPreConfigureServices.PreConfigureServicesAsync)} 阶段发生错误。查看集成异常以获取详细信息。",
-                    ex);
+                    ex
+                );
             }
         }
 
@@ -263,7 +283,8 @@ public class ApplicationBase : IApplication
             {
                 throw new InitializationException(
                     $"在模块 {module.Type.AssemblyQualifiedName} 的 {nameof(IModule.ConfigureServicesAsync)} 阶段发生了一个错误。查看集成异常以获取详细信息。",
-                    ex);
+                    ex
+                );
             }
         }
 
@@ -278,7 +299,8 @@ public class ApplicationBase : IApplication
             {
                 throw new InitializationException(
                     $"在模块 {module.Type.AssemblyQualifiedName} 的 {nameof(IPostConfigureServices.PostConfigureServicesAsync)} 阶段发生了一个错误。查看集成异常以了解详细信息。",
-                    ex);
+                    ex
+                );
             }
         }
 
@@ -325,7 +347,8 @@ public class ApplicationBase : IApplication
             {
                 throw new InitializationException(
                     $"在模块 {module.Type.AssemblyQualifiedName} 的 {nameof(IPreConfigureServices.PreConfigureServices)} 阶段发生了一个错误。查看集成异常以获取详细信息。",
-                    ex);
+                    ex
+                );
             }
         }
 
@@ -356,7 +379,8 @@ public class ApplicationBase : IApplication
             {
                 throw new InitializationException(
                     $"在模块 {module.Type.AssemblyQualifiedName} 的 {nameof(IModule.ConfigureServices)} 阶段发生了一个错误。查看集成异常以获取详细信息。",
-                    ex);
+                    ex
+                );
             }
         }
 
@@ -371,7 +395,8 @@ public class ApplicationBase : IApplication
             {
                 throw new InitializationException(
                     $"在模块 {module.Type.AssemblyQualifiedName} 的 {nameof(IPostConfigureServices.PostConfigureServices)} 阶段发生了一个错误。查看集成异常以获取详细信息。",
-                    ex);
+                    ex
+                );
             }
         }
 
@@ -397,7 +422,8 @@ public class ApplicationBase : IApplication
         if (_configuredServices)
         {
             throw new InitializationException(
-                "服务已被配置！如果调用 ConfigureServicesAsync 方法，必须在此之前将 ApplicationCreationOptions.SkipConfigureServices 设置为 true");
+                "服务已被配置！如果调用 ConfigureServicesAsync 方法，必须在此之前将 ApplicationCreationOptions.SkipConfigureServices 设置为 true"
+            );
         }
     }
 
@@ -411,7 +437,8 @@ public class ApplicationBase : IApplication
     public async Task ShutdownAsync()
     {
         using var scope = ServiceProvider.CreateScope();
-        await scope.ServiceProvider.GetRequiredService<IModuleManager>()
+        await scope
+            .ServiceProvider.GetRequiredService<IModuleManager>()
             .ShutdownModulesAsync(new ApplicationShutdownContext(scope.ServiceProvider));
     }
 
@@ -421,7 +448,8 @@ public class ApplicationBase : IApplication
     public void Shutdown()
     {
         using var scope = ServiceProvider.CreateScope();
-        scope.ServiceProvider.GetRequiredService<IModuleManager>()
+        scope
+            .ServiceProvider.GetRequiredService<IModuleManager>()
             .ShutdownModules(new ApplicationShutdownContext(scope.ServiceProvider));
     }
 

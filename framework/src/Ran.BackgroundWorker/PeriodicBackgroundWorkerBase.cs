@@ -15,6 +15,7 @@ public abstract class PeriodicBackgroundWorkerBase : BackgroundWorkerBase
     protected IServiceScopeFactory ServiceScopeFactory { get; }
     protected RanTimer RanTimer { get; }
     public int Period => RanTimer.Period;
+
     /// <summary>
     ///  CronExpression has high priority over Period.
     /// </summary>
@@ -22,7 +23,8 @@ public abstract class PeriodicBackgroundWorkerBase : BackgroundWorkerBase
 
     protected PeriodicBackgroundWorkerBase(
         RanTimer ranTimer,
-        IServiceScopeFactory serviceScopeFactory)
+        IServiceScopeFactory serviceScopeFactory
+    )
     {
         ServiceScopeFactory = serviceScopeFactory;
         RanTimer = ranTimer;
@@ -51,7 +53,9 @@ public abstract class PeriodicBackgroundWorkerBase : BackgroundWorkerBase
         catch (Exception ex)
         {
             var exceptionNotifier = scope.ServiceProvider.GetRequiredService<IExceptionNotifier>();
-            AsyncHelper.RunSync(() => exceptionNotifier.NotifyAsync(new ExceptionNotificationContext(ex)));
+            AsyncHelper.RunSync(() =>
+                exceptionNotifier.NotifyAsync(new ExceptionNotificationContext(ex))
+            );
 
             Logger.LogException(ex);
         }

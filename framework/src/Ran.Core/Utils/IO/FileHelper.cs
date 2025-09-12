@@ -38,7 +38,12 @@ public static class FileHelper
     /// <returns>包含文件所有字节的字节数组</returns>
     public static async Task<byte[]> ReadAllBytesAsync(string filePath)
     {
-        await using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+        await using var stream = File.Open(
+            filePath,
+            FileMode.Open,
+            FileAccess.Read,
+            FileShare.Read
+        );
         var result = new byte[stream.Length];
         _ = await stream.ReadAsync(result.AsMemory(0, (int)stream.Length));
         return result;
@@ -55,17 +60,21 @@ public static class FileHelper
     /// <param name="bufferSize">StreamReader 缓冲区的长度默认为 4096</param>
     /// <param name="fileOptions">指示 FileStream 选项默认为 Asynchronous（文件将用于异步读取）和 SequentialScan（文件将从开始到末尾顺序访问）</param>
     /// <returns>包含文件所有行的字符串数组</returns>
-    public static async Task<string[]> ReadAllLinesAsync(string path,
+    public static async Task<string[]> ReadAllLinesAsync(
+        string path,
         Encoding? encoding = null,
         FileMode fileMode = FileMode.Open,
         FileAccess fileAccess = FileAccess.Read,
         FileShare fileShare = FileShare.Read,
         int bufferSize = 4096,
-        FileOptions fileOptions = FileOptions.Asynchronous | FileOptions.SequentialScan)
+        FileOptions fileOptions = FileOptions.Asynchronous | FileOptions.SequentialScan
+    )
     {
         encoding ??= Encoding.UTF8;
         List<string> lines = [];
-        await using (FileStream stream = new(path, fileMode, fileAccess, fileShare, bufferSize, fileOptions))
+        await using (
+            FileStream stream = new(path, fileMode, fileAccess, fileShare, bufferSize, fileOptions)
+        )
         {
             using StreamReader reader = new(stream, encoding);
             while (await reader.ReadLineAsync() is { } line)
@@ -294,7 +303,12 @@ public static class FileHelper
     {
         try
         {
-            using var fileStream = File.Open(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            using var fileStream = File.Open(
+                filePath,
+                FileMode.Open,
+                FileAccess.ReadWrite,
+                FileShare.None
+            );
             // 如果没有异常，文件没有被锁定
             return true;
         }

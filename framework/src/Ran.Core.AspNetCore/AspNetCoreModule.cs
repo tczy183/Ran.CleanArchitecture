@@ -14,5 +14,6 @@ public class AspNetCoreModule : DddModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddObjectAccessor<IApplicationBuilder>();
+        context.Services.AddObjectAccessor<IEndpointRouteBuilder>();
     }
 }

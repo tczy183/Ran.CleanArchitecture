@@ -10,28 +10,38 @@ namespace Ran.BackgroundWorker;
 
 public class BackgroundWorkerModule : DddModule
 {
-    public override async Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
+    public override async Task OnApplicationInitializationAsync(
+        ApplicationInitializationContext context
+    )
     {
-        var options = context.ServiceProvider.GetRequiredService<IOptions<BackgroundWorkerOptions>>().Value;
+        var options = context
+            .ServiceProvider.GetRequiredService<IOptions<BackgroundWorkerOptions>>()
+            .Value;
         if (options.IsEnabled)
         {
-            var hostApplicationLifetime = context.ServiceProvider.GetService<IHostApplicationLifetime>();
-            var cancellationToken = hostApplicationLifetime?.ApplicationStopping ?? CancellationToken.None;
-            await context.ServiceProvider
-                .GetRequiredService<IBackgroundWorkerManager>()
+            var hostApplicationLifetime =
+                context.ServiceProvider.GetService<IHostApplicationLifetime>();
+            var cancellationToken =
+                hostApplicationLifetime?.ApplicationStopping ?? CancellationToken.None;
+            await context
+                .ServiceProvider.GetRequiredService<IBackgroundWorkerManager>()
                 .StartAsync(cancellationToken);
         }
     }
 
     public override async Task OnApplicationShutdownAsync(ApplicationShutdownContext context)
     {
-        var options = context.ServiceProvider.GetRequiredService<IOptions<BackgroundWorkerOptions>>().Value;
+        var options = context
+            .ServiceProvider.GetRequiredService<IOptions<BackgroundWorkerOptions>>()
+            .Value;
         if (options.IsEnabled)
         {
-            var hostApplicationLifetime = context.ServiceProvider.GetService<IHostApplicationLifetime>();
-            var cancellationToken = hostApplicationLifetime?.ApplicationStopping ?? CancellationToken.None;
-            await context.ServiceProvider
-                .GetRequiredService<IBackgroundWorkerManager>()
+            var hostApplicationLifetime =
+                context.ServiceProvider.GetService<IHostApplicationLifetime>();
+            var cancellationToken =
+                hostApplicationLifetime?.ApplicationStopping ?? CancellationToken.None;
+            await context
+                .ServiceProvider.GetRequiredService<IBackgroundWorkerManager>()
                 .StopAsync(cancellationToken);
         }
     }

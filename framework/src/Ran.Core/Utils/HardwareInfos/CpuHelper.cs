@@ -20,7 +20,11 @@ public static class CpuHelper
     /// <returns></returns>
     public static CpuInfo GetCpuInfos()
     {
-        CpuInfo cpuInfo = new() { CpuCount = Environment.ProcessorCount.ToString(), CpuRate = "0%" };
+        CpuInfo cpuInfo = new()
+        {
+            CpuCount = Environment.ProcessorCount.ToString(),
+            CpuRate = "0%",
+        };
 
         try
         {
@@ -36,7 +40,9 @@ public static class CpuHelper
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                var output = ShellHelper.Bash(@"top -l 1 -F | awk '/CPU usage/ {gsub(""%"", """"); print $7}'").Trim();
+                var output = ShellHelper
+                    .Bash(@"top -l 1 -F | awk '/CPU usage/ {gsub(""%"", """"); print $7}'")
+                    .Trim();
                 cpuInfo.CpuRate = output.ParseToLong() + "%";
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -45,7 +51,9 @@ public static class CpuHelper
                 var lines = output.Split(Environment.NewLine);
                 if (lines.Length != 0)
                 {
-                    var loadPercentage = lines.First(s => s.StartsWith("LoadPercentage")).Split('=')[1];
+                    var loadPercentage = lines
+                        .First(s => s.StartsWith("LoadPercentage"))
+                        .Split('=')[1];
                     cpuInfo.CpuRate = loadPercentage.ParseToLong() + "%";
                 }
             }

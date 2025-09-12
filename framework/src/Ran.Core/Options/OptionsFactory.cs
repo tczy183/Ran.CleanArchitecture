@@ -6,7 +6,8 @@ namespace Ran.Core.Options;
 /// 选项工厂
 /// </summary>
 /// <typeparam name="TOptions"></typeparam>
-public class OptionsFactory<TOptions> : IOptionsFactory<TOptions> where TOptions : class, new()
+public class OptionsFactory<TOptions> : IOptionsFactory<TOptions>
+    where TOptions : class, new()
 {
     private readonly IConfigureOptions<TOptions>[] _setups;
     private readonly IPostConfigureOptions<TOptions>[] _postConfigures;
@@ -19,10 +20,9 @@ public class OptionsFactory<TOptions> : IOptionsFactory<TOptions> where TOptions
     /// <param name="postConfigures"></param>
     public OptionsFactory(
         IEnumerable<IConfigureOptions<TOptions>> setups,
-        IEnumerable<IPostConfigureOptions<TOptions>> postConfigures)
-        : this(setups, postConfigures, Array.Empty<IValidateOptions<TOptions>>())
-    {
-    }
+        IEnumerable<IPostConfigureOptions<TOptions>> postConfigures
+    )
+        : this(setups, postConfigures, Array.Empty<IValidateOptions<TOptions>>()) { }
 
     /// <summary>
     /// 构造函数
@@ -33,13 +33,18 @@ public class OptionsFactory<TOptions> : IOptionsFactory<TOptions> where TOptions
     public OptionsFactory(
         IEnumerable<IConfigureOptions<TOptions>> setups,
         IEnumerable<IPostConfigureOptions<TOptions>> postConfigures,
-        IEnumerable<IValidateOptions<TOptions>> validations)
+        IEnumerable<IValidateOptions<TOptions>> validations
+    )
     {
-        _setups = setups as IConfigureOptions<TOptions>[] ?? new List<IConfigureOptions<TOptions>>(setups).ToArray();
-        _postConfigures = postConfigures as IPostConfigureOptions<TOptions>[] ??
-                          new List<IPostConfigureOptions<TOptions>>(postConfigures).ToArray();
-        _validations = validations as IValidateOptions<TOptions>[] ??
-                       new List<IValidateOptions<TOptions>>(validations).ToArray();
+        _setups =
+            setups as IConfigureOptions<TOptions>[]
+            ?? new List<IConfigureOptions<TOptions>>(setups).ToArray();
+        _postConfigures =
+            postConfigures as IPostConfigureOptions<TOptions>[]
+            ?? new List<IPostConfigureOptions<TOptions>>(postConfigures).ToArray();
+        _validations =
+            validations as IValidateOptions<TOptions>[]
+            ?? new List<IValidateOptions<TOptions>>(validations).ToArray();
     }
 
     /// <summary>

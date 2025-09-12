@@ -26,17 +26,28 @@ public class DefaultConventionalRegistrar : ConventionalRegistrarBase
         }
 
         var exposedServiceAndKeyedServiceTypes = GetExposedKeyedServiceTypes(type)
-            .Concat(GetExposedServiceTypes(type).Select(t => new ServiceIdentifier(t))).ToList();
+            .Concat(GetExposedServiceTypes(type).Select(t => new ServiceIdentifier(t)))
+            .ToList();
 
         TriggerServiceExposing(services, type, exposedServiceAndKeyedServiceTypes);
 
-        foreach (var serviceDescriptor in from exposedServiceType in exposedServiceAndKeyedServiceTypes
-                 let allExposingServiceTypes = exposedServiceType.ServiceKey is null
-                     ? exposedServiceAndKeyedServiceTypes.Where(x => x.ServiceKey is null).ToList()
-                     : exposedServiceAndKeyedServiceTypes
-                         .Where(x => x.ServiceKey?.ToString() == exposedServiceType.ServiceKey?.ToString()).ToList()
-                 select CreateServiceDescriptor(type, exposedServiceType.ServiceKey, exposedServiceType.ServiceType,
-                     allExposingServiceTypes, lifeTime.Value))
+        foreach (
+            var serviceDescriptor in from exposedServiceType in exposedServiceAndKeyedServiceTypes
+            let allExposingServiceTypes = exposedServiceType.ServiceKey is null
+                ? exposedServiceAndKeyedServiceTypes.Where(x => x.ServiceKey is null).ToList()
+                : exposedServiceAndKeyedServiceTypes
+                    .Where(x =>
+                        x.ServiceKey?.ToString() == exposedServiceType.ServiceKey?.ToString()
+                    )
+                    .ToList()
+            select CreateServiceDescriptor(
+                type,
+                exposedServiceType.ServiceKey,
+                exposedServiceType.ServiceType,
+                allExposingServiceTypes,
+                lifeTime.Value
+            )
+        )
         {
             if (dependencyAttribute?.ReplaceServices == true)
             {

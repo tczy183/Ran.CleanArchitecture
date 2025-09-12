@@ -14,6 +14,9 @@ public interface IModuleLoader
     /// <param name="startupModuleType"></param>
     /// <param name="plugInSources"></param>
     /// <returns></returns>
-    IModuleDescriptor[] LoadModules(IServiceCollection services, Type startupModuleType,
-        PlugInSourceList plugInSources);
+    IModuleDescriptor[] LoadModules(
+        IServiceCollection services,
+        Type startupModuleType,
+        PlugInSourceList plugInSources
+    );
 }

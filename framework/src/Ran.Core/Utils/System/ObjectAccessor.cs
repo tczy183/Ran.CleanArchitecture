@@ -14,9 +14,7 @@ public class ObjectAccessor<T> : IObjectAccessor<T>
     /// <summary>
     /// 构造函数
     /// </summary>
-    public ObjectAccessor()
-    {
-    }
+    public ObjectAccessor() { }
 
     /// <summary>
     /// 构造函数

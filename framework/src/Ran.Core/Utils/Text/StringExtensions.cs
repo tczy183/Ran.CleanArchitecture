@@ -15,8 +15,11 @@ public static partial class StringExtensions
     /// <param name="c"></param>
     /// <param name="comparisonType"></param>
     /// <returns></returns>
-    public static string EnsureEndsWith(this string str, char c,
-        StringComparison comparisonType = StringComparison.Ordinal)
+    public static string EnsureEndsWith(
+        this string str,
+        char c,
+        StringComparison comparisonType = StringComparison.Ordinal
+    )
     {
         _ = CheckHelper.NotNull(str, nameof(str));
 
@@ -30,8 +33,11 @@ public static partial class StringExtensions
     /// <param name="c"></param>
     /// <param name="comparisonType"></param>
     /// <returns></returns>
-    public static string EnsureStartsWith(this string str, char c,
-        StringComparison comparisonType = StringComparison.Ordinal)
+    public static string EnsureStartsWith(
+        this string str,
+        char c,
+        StringComparison comparisonType = StringComparison.Ordinal
+    )
     {
         _ = CheckHelper.NotNull(str, nameof(str));
 
@@ -67,7 +73,9 @@ public static partial class StringExtensions
     {
         _ = CheckHelper.NotNull(str, nameof(str));
 
-        return str.Length < len ? throw new ArgumentException("len 参数不能大于给定字符串的长度！") : str[..len];
+        return str.Length < len
+            ? throw new ArgumentException("len 参数不能大于给定字符串的长度！")
+            : str[..len];
     }
 
     /// <summary>
@@ -123,7 +131,11 @@ public static partial class StringExtensions
     /// <param name="comparisonType">字符串比较类型</param>
     /// <param name="postFixes">一个或多个后缀。</param>
     /// <returns>如果没有给定的任何后缀，则返回修改后的字符串或相同的字符串</returns>
-    public static string RemovePostFix(this string str, StringComparison comparisonType, params string[] postFixes)
+    public static string RemovePostFix(
+        this string str,
+        StringComparison comparisonType,
+        params string[] postFixes
+    )
     {
         if (str.IsNullOrEmpty())
         {
@@ -164,7 +176,11 @@ public static partial class StringExtensions
     /// <param name="comparisonType">字符串比较类型。</param>
     /// <param name="preFixes">一个或多个前缀。</param>
     /// <returns>如果没有任何给定的前缀，则返回修改后的字符串或相同的字符串</returns>
-    public static string RemovePreFix(this string str, StringComparison comparisonType, params string[] preFixes)
+    public static string RemovePreFix(
+        this string str,
+        StringComparison comparisonType,
+        params string[] preFixes
+    )
     {
         if (str.IsNullOrEmpty())
         {
@@ -195,8 +211,12 @@ public static partial class StringExtensions
     /// <param name="replace"></param>
     /// <param name="comparisonType"></param>
     /// <returns></returns>
-    public static string ReplaceFirst(this string str, string search, string replace,
-        StringComparison comparisonType = StringComparison.Ordinal)
+    public static string ReplaceFirst(
+        this string str,
+        string search,
+        string replace,
+        StringComparison comparisonType = StringComparison.Ordinal
+    )
     {
         _ = CheckHelper.NotNull(str, nameof(str));
 
@@ -234,7 +254,9 @@ public static partial class StringExtensions
         _ = CheckHelper.NotNull(str, nameof(str));
 
         return str.Length < len
-            ? throw new ArgumentException("len argument can not be bigger than given string's length!")
+            ? throw new ArgumentException(
+                "len argument can not be bigger than given string's length!"
+            )
             : str.Substring(str.Length - len, len);
     }
 
@@ -243,9 +265,7 @@ public static partial class StringExtensions
     /// </summary>
     public static string[] Split(this string str, string separator)
     {
-        return str.Split([
-            separator
-        ], StringSplitOptions.None);
+        return str.Split([separator], StringSplitOptions.None);
     }
 
     /// <summary>
@@ -253,9 +273,7 @@ public static partial class StringExtensions
     /// </summary>
     public static string[] Split(this string str, string separator, StringSplitOptions options)
     {
-        return str.Split([
-            separator
-        ], options);
+        return str.Split([separator], options);
     }
 
     /// <summary>
@@ -282,11 +300,10 @@ public static partial class StringExtensions
     /// <param name="useCurrentCulture">设置为 true 以使用当前文化。否则，将使用不变文化。</param>
     public static string ToSentenceCase(this string str, bool useCurrentCulture = false)
     {
-        return string.IsNullOrWhiteSpace(str)
-            ? str
+        return string.IsNullOrWhiteSpace(str) ? str
             : useCurrentCulture
                 ? RegexLetter().Replace(str, m => m.Value[0] + " " + char.ToLower(m.Value[1]))
-                : RegexLetter().Replace(str, m => m.Value[0] + " " + char.ToLowerInvariant(m.Value[1]));
+            : RegexLetter().Replace(str, m => m.Value[0] + " " + char.ToLowerInvariant(m.Value[1]));
     }
 
     /// <summary>
@@ -297,15 +314,20 @@ public static partial class StringExtensions
     /// <param name="useCurrentCulture">设置为 true 以使用当前文化。否则，将使用不变文化。</param>
     /// <param name="handleAbbreviations">如果您希望将 'XYZ' 转换为 'xyz'，则设置为 true。</param>
     /// <returns>该字符串的驼峰格式</returns>
-    public static string ToCamelCase(this string str, bool useCurrentCulture = false, bool handleAbbreviations = false)
+    public static string ToCamelCase(
+        this string str,
+        bool useCurrentCulture = false,
+        bool handleAbbreviations = false
+    )
     {
-        return string.IsNullOrWhiteSpace(str)
-            ? str
+        return string.IsNullOrWhiteSpace(str) ? str
             : str.Length == 1
-                ? useCurrentCulture ? str.ToLower() : str.ToLowerInvariant()
-                : handleAbbreviations && IsAllUpperCase(str)
-                    ? useCurrentCulture ? str.ToLower() : str.ToLowerInvariant()
-                    : (useCurrentCulture ? char.ToLower(str[0]) : char.ToLowerInvariant(str[0])) + str[1..];
+                ? useCurrentCulture ? str.ToLower()
+                    : str.ToLowerInvariant()
+            : handleAbbreviations && IsAllUpperCase(str)
+                ? useCurrentCulture ? str.ToLower()
+                    : str.ToLowerInvariant()
+            : (useCurrentCulture ? char.ToLower(str[0]) : char.ToLowerInvariant(str[0])) + str[1..];
     }
 
     /// <summary>
@@ -337,11 +359,11 @@ public static partial class StringExtensions
     /// <returns>该字符串的帕斯卡式</returns>
     public static string ToPascalCase(this string str, bool useCurrentCulture = false)
     {
-        return string.IsNullOrWhiteSpace(str)
-            ? str
+        return string.IsNullOrWhiteSpace(str) ? str
             : str.Length == 1
-                ? useCurrentCulture ? str.ToUpper() : str.ToUpperInvariant()
-                : (useCurrentCulture ? char.ToUpper(str[0]) : char.ToUpperInvariant(str[0])) + str[1..];
+                ? useCurrentCulture ? str.ToUpper()
+                    : str.ToUpperInvariant()
+            : (useCurrentCulture ? char.ToUpper(str[0]) : char.ToUpperInvariant(str[0])) + str[1..];
     }
 
     /// <summary>
@@ -397,7 +419,9 @@ public static partial class StringExtensions
     /// </summary>
     public static string? Truncate(this string? str, int maxLength)
     {
-        return str is null ? null : str.Length <= maxLength ? str : str.Left(maxLength);
+        return str is null ? null
+            : str.Length <= maxLength ? str
+            : str.Left(maxLength);
     }
 
     /// <summary>
@@ -405,7 +429,9 @@ public static partial class StringExtensions
     /// </summary>
     public static string? TruncateFromBeginning(this string? str, int maxLength)
     {
-        return str is null ? null : str.Length <= maxLength ? str : str.Right(maxLength);
+        return str is null ? null
+            : str.Length <= maxLength ? str
+            : str.Right(maxLength);
     }
 
     /// <summary>
@@ -413,17 +439,17 @@ public static partial class StringExtensions
     /// 返回的字符串不能长于最大长度。
     /// </summary>
     /// <exception cref="ArgumentNullException">如果 <paramref name="str"/> 为 null，则抛出</exception>
-    public static string? TruncateWithPostfix(this string? str, int maxLength, string postfix = "...")
+    public static string? TruncateWithPostfix(
+        this string? str,
+        int maxLength,
+        string postfix = "..."
+    )
     {
-        return str is null
-            ? null
-            : string.IsNullOrEmpty(str) || maxLength == 0
-                ? string.Empty
-                : str.Length <= maxLength
-                    ? str
-                    : maxLength <= postfix.Length
-                        ? postfix.Left(maxLength)
-                        : str.Left(maxLength - postfix.Length) + postfix;
+        return str is null ? null
+            : string.IsNullOrEmpty(str) || maxLength == 0 ? string.Empty
+            : str.Length <= maxLength ? str
+            : maxLength <= postfix.Length ? postfix.Left(maxLength)
+            : str.Left(maxLength - postfix.Length) + postfix;
     }
 
     /// <summary>

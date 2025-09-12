@@ -7,7 +7,12 @@ public static class PasswordStrengthChecker
 {
     private static readonly List<string> WeakPasswords =
     [
-        "123456", "password", "123456789", "12345678", "111111", "123123"
+        "123456",
+        "password",
+        "123456789",
+        "12345678",
+        "111111",
+        "123123",
     ];
 
     private const string SpecialCharacters = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/";
@@ -21,8 +26,10 @@ public static class PasswordStrengthChecker
     /// <param name="password"></param>
     /// <param name="customBlacklist"></param>
     /// <returns></returns>
-    public static PasswordStrengthResult CheckPasswordStrength(string password,
-        IEnumerable<string>? customBlacklist = null)
+    public static PasswordStrengthResult CheckPasswordStrength(
+        string password,
+        IEnumerable<string>? customBlacklist = null
+    )
     {
         if (string.IsNullOrEmpty(password))
         {
@@ -119,9 +126,12 @@ public static class PasswordStrengthChecker
             _ = characterPool.Append(SpecialCharacters);
         }
 
-        return new string(Enumerable.Range(0, length)
-            .Select(_ => characterPool[RandomNumberGenerator.GetInt32(characterPool.Length)])
-            .ToArray());
+        return new string(
+            Enumerable
+                .Range(0, length)
+                .Select(_ => characterPool[RandomNumberGenerator.GetInt32(characterPool.Length)])
+                .ToArray()
+        );
     }
 }
 

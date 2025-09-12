@@ -50,8 +50,10 @@ public static class ServiceCollectionCommonExtensions
     /// <returns></returns>
     public static T? GetSingletonInstanceOrNull<T>(this IServiceCollection services)
     {
-        return (T?)services.FirstOrDefault(d => d.ServiceType == typeof(T))
-            ?.NormalizedImplementationInstance();
+        return (T?)
+            services
+                .FirstOrDefault(d => d.ServiceType == typeof(T))
+                ?.NormalizedImplementationInstance();
     }
 
     /// <summary>
@@ -65,7 +67,9 @@ public static class ServiceCollectionCommonExtensions
     {
         var service = services.GetSingletonInstanceOrNull<T>();
         return service is null
-            ? throw new InvalidOperationException($"找不到单例服务: {typeof(T).AssemblyQualifiedName}")
+            ? throw new InvalidOperationException(
+                $"找不到单例服务: {typeof(T).AssemblyQualifiedName}"
+            )
             : service;
     }
 
@@ -80,10 +84,16 @@ public static class ServiceCollectionCommonExtensions
 
         foreach (var service in services)
         {
-            var factoryInterface = service.NormalizedImplementationInstance()?.GetType()
-                .GetTypeInfo().GetInterfaces().ToList()
+            var factoryInterface = service
+                .NormalizedImplementationInstance()
+                ?.GetType()
+                .GetTypeInfo()
+                .GetInterfaces()
+                .ToList()
                 .Find(i =>
-                    i.GetTypeInfo().IsGenericType && i.GetGenericTypeDefinition() == typeof(IServiceProviderFactory<>));
+                    i.GetTypeInfo().IsGenericType
+                    && i.GetGenericTypeDefinition() == typeof(IServiceProviderFactory<>)
+                );
 
             if (factoryInterface is null)
             {
@@ -91,10 +101,19 @@ public static class ServiceCollectionCommonExtensions
             }
 
             var containerBuilderType = factoryInterface.GenericTypeArguments[0];
-            return (IServiceProvider)typeof(ServiceCollectionCommonExtensions).GetTypeInfo().GetMethods()
-                .Single(m => m is { Name: nameof(BuildServiceProviderFromFactory), IsGenericMethod: true })
-                .MakeGenericMethod(containerBuilderType)
-                .Invoke(null, [services, null])!;
+            return (IServiceProvider)
+                typeof(ServiceCollectionCommonExtensions)
+                    .GetTypeInfo()
+                    .GetMethods()
+                    .Single(m =>
+                        m
+                            is {
+                                Name: nameof(BuildServiceProviderFromFactory),
+                                IsGenericMethod: true
+                            }
+                    )
+                    .MakeGenericMethod(containerBuilderType)
+                    .Invoke(null, [services, null])!;
         }
 
         return services.BuildServiceProvider();
@@ -108,15 +127,19 @@ public static class ServiceCollectionCommonExtensions
     /// <param name="builderAction"></param>
     /// <returns></returns>
     /// <exception cref="UserFriendlyException"></exception>
-    public static IServiceProvider BuildServiceProviderFromFactory<TContainerBuilder>(this IServiceCollection services,
-        Action<TContainerBuilder>? builderAction = null) where TContainerBuilder : notnull
+    public static IServiceProvider BuildServiceProviderFromFactory<TContainerBuilder>(
+        this IServiceCollection services,
+        Action<TContainerBuilder>? builderAction = null
+    )
+        where TContainerBuilder : notnull
     {
         _ = CheckHelper.NotNull(services, nameof(services));
 
         var serviceProviderFactory =
-            services.GetSingletonInstanceOrNull<IServiceProviderFactory<TContainerBuilder>>() ??
-            throw new UserFriendlyException(
-                $"在 {services} 中未发现服务提供器 {typeof(IServiceProviderFactory<TContainerBuilder>).FullName}");
+            services.GetSingletonInstanceOrNull<IServiceProviderFactory<TContainerBuilder>>()
+            ?? throw new UserFriendlyException(
+                $"在 {services} 中未发现服务提供器 {typeof(IServiceProviderFactory<TContainerBuilder>).FullName}"
+            );
         var builder = serviceProviderFactory.CreateBuilder(services);
         builderAction?.Invoke(builder);
         return serviceProviderFactory.CreateServiceProvider(builder);
@@ -153,9 +176,12 @@ public static class ServiceCollectionCommonExtensions
     /// <typeparam name="T"></typeparam>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static T GetRequiredService<T>(this IServiceCollection services) where T : notnull
+    public static T GetRequiredService<T>(this IServiceCollection services)
+        where T : notnull
     {
-        return services.GetSingletonInstance<IApplication>().ServiceProvider.GetRequiredService<T>();
+        return services
+            .GetSingletonInstance<IApplication>()
+            .ServiceProvider.GetRequiredService<T>();
     }
 
     /// <summary>
@@ -167,7 +193,9 @@ public static class ServiceCollectionCommonExtensions
     /// <returns></returns>
     public static object GetRequiredService(this IServiceCollection services, Type type)
     {
-        return services.GetSingletonInstance<IApplication>().ServiceProvider.GetRequiredService(type);
+        return services
+            .GetSingletonInstance<IApplication>()
+            .ServiceProvider.GetRequiredService(type);
     }
 
     /// <summary>
@@ -201,7 +229,8 @@ public static class ServiceCollectionCommonExtensions
     /// <typeparam name="T"></typeparam>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static Lazy<T> GetRequiredServiceLazy<T>(this IServiceCollection services) where T : notnull
+    public static Lazy<T> GetRequiredServiceLazy<T>(this IServiceCollection services)
+        where T : notnull
     {
         return new Lazy<T>(services.GetRequiredService<T>, true);
     }

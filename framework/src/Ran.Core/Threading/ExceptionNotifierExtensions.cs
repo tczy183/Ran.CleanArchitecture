@@ -10,16 +10,13 @@ public static class ExceptionNotifierExtensions
         [NotNull] this IExceptionNotifier exceptionNotifier,
         [NotNull] Exception exception,
         LogLevel? logLevel = null,
-        bool handled = true)
+        bool handled = true
+    )
     {
         CheckHelper.NotNull(exceptionNotifier, nameof(exceptionNotifier));
 
         return exceptionNotifier.NotifyAsync(
-            new ExceptionNotificationContext(
-                exception,
-                logLevel,
-                handled
-            )
+            new ExceptionNotificationContext(exception, logLevel, handled)
         );
     }
 }

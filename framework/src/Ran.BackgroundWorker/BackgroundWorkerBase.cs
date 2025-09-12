@@ -16,10 +16,13 @@ public abstract class BackgroundWorkerBase : IBackgroundWorker
 
     public IServiceProvider ServiceProvider { get; set; } = default!;
 
-    protected ILoggerFactory LoggerFactory => LazyServiceProvider.LazyGetRequiredService<ILoggerFactory>();
+    protected ILoggerFactory LoggerFactory =>
+        LazyServiceProvider.LazyGetRequiredService<ILoggerFactory>();
 
-    protected ILogger Logger => LazyServiceProvider.LazyGetService<ILogger>(provider =>
-        LoggerFactory?.CreateLogger(GetType().FullName!) ?? NullLogger.Instance);
+    protected ILogger Logger =>
+        LazyServiceProvider.LazyGetService<ILogger>(provider =>
+            LoggerFactory?.CreateLogger(GetType().FullName!) ?? NullLogger.Instance
+        );
 
     protected CancellationTokenSource StoppingTokenSource { get; set; }
 

@@ -29,8 +29,10 @@ public static class ServiceCollectionPreConfigureExtensions
     /// <param name="services"></param>
     /// <param name="optionsAction"></param>
     /// <returns></returns>
-    public static IServiceCollection PreConfigure<TOptions>(this IServiceCollection services,
-        Action<TOptions> optionsAction)
+    public static IServiceCollection PreConfigure<TOptions>(
+        this IServiceCollection services,
+        Action<TOptions> optionsAction
+    )
     {
         services.GetPreConfigureActions<TOptions>().Add(optionsAction);
         return services;
@@ -55,7 +57,10 @@ public static class ServiceCollectionPreConfigureExtensions
     /// <param name="services"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public static TOptions ExecutePreConfiguredActions<TOptions>(this IServiceCollection services, TOptions options)
+    public static TOptions ExecutePreConfiguredActions<TOptions>(
+        this IServiceCollection services,
+        TOptions options
+    )
     {
         services.GetPreConfigureActions<TOptions>().Configure(options);
         return options;
@@ -67,9 +72,12 @@ public static class ServiceCollectionPreConfigureExtensions
     /// <typeparam name="TOptions"></typeparam>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static PreConfigureActionList<TOptions> GetPreConfigureActions<TOptions>(this IServiceCollection services)
+    public static PreConfigureActionList<TOptions> GetPreConfigureActions<TOptions>(
+        this IServiceCollection services
+    )
     {
-        var actionList = services.GetSingletonInstanceOrNull<IObjectAccessor<PreConfigureActionList<TOptions>>>()
+        var actionList = services
+            .GetSingletonInstanceOrNull<IObjectAccessor<PreConfigureActionList<TOptions>>>()
             ?.Value;
         if (actionList is not null)
         {

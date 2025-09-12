@@ -22,7 +22,8 @@ public static class GuidHelper
     /// <returns>短 GUID 字符串。</returns>
     public static string GenerateShortGuid()
     {
-        return Convert.ToBase64String(Guid.NewGuid().ToByteArray())
+        return Convert
+            .ToBase64String(Guid.NewGuid().ToByteArray())
             .Replace("/", "_")
             .Replace("+", "-")
             .TrimEnd('=');
@@ -68,10 +69,7 @@ public static class GuidHelper
     {
         try
         {
-            var base64 = shortGuid
-                .Replace("_", "/")
-                .Replace("-", "+")
-                .PadRight(22, '=');
+            var base64 = shortGuid.Replace("_", "/").Replace("-", "+").PadRight(22, '=');
             var bytes = Convert.FromBase64String(base64);
             return new Guid(bytes);
         }

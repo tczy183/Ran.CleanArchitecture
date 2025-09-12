@@ -16,8 +16,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static bool ParseToBool(this object? thisValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               bool.TryParse(thisValue.ToString(), out var reveal) && reveal;
+        return thisValue is not null
+            && thisValue != DBNull.Value
+            && bool.TryParse(thisValue.ToString(), out var reveal)
+            && reveal;
     }
 
     #endregion Bool
@@ -31,8 +33,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static short ParseToShort(this object? thisValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               short.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && short.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : (short)0;
     }
@@ -45,8 +49,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static short ParseToShort(this object? thisValue, short errorValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               short.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && short.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : errorValue;
     }
@@ -62,8 +68,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static long ParseToLong(this object? thisValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               long.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && long.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : 0L;
     }
@@ -76,8 +84,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static long ParseToLong(this object? thisValue, long errorValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               long.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && long.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : errorValue;
     }
@@ -94,8 +104,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static float ParseToFloat(this object? thisValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               float.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && float.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : 0.0F;
     }
@@ -109,8 +121,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static float ParseToFloat(this object? thisValue, float errorValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               float.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && float.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : errorValue;
     }
@@ -127,8 +141,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static double ParseToDouble(this object? thisValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               double.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && double.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : 0.0D;
     }
@@ -142,8 +158,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static double ParseToDouble(this object? thisValue, double errorValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               double.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && double.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : errorValue;
     }
@@ -160,8 +178,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static decimal ParseToDecimal(this object? thisValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               decimal.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && decimal.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : 0M;
     }
@@ -175,8 +195,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static decimal ParseToDecimal(this object? thisValue, decimal errorValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               decimal.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && decimal.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : errorValue;
     }
@@ -192,8 +214,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static int ParseToInt(this object? thisValue)
     {
-        return thisValue is null ? 0 :
-            thisValue != DBNull.Value && int.TryParse(thisValue.ToString(), out var reveal) ? reveal : 0;
+        return thisValue is null ? 0
+            : thisValue != DBNull.Value && int.TryParse(thisValue.ToString(), out var reveal)
+                ? reveal
+            : 0;
     }
 
     /// <summary>
@@ -204,8 +228,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static int ParseToInt(this object? thisValue, int errorValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               int.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && int.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : errorValue;
     }
@@ -221,8 +247,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static double ParseToMoney(this object? thisValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               double.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && double.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : 0;
     }
@@ -235,8 +263,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static double ParseToMoney(this object? thisValue, double errorValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               double.TryParse(thisValue.ToString(), out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && double.TryParse(thisValue.ToString(), out var reveal)
             ? reveal
             : errorValue;
     }
@@ -283,9 +313,11 @@ public static class ParseExtensions
     /// <returns></returns>
     public static bool IsNotEmptyOrNull(this object? thisValue)
     {
-        return thisValue is not null && !string.IsNullOrEmpty(thisValue.ParseToString()) &&
-               !string.IsNullOrEmpty(thisValue.ParseToString()) &&
-               thisValue.ParseToString() != "undefined" && thisValue.ParseToString() != "null";
+        return thisValue is not null
+            && !string.IsNullOrEmpty(thisValue.ParseToString())
+            && !string.IsNullOrEmpty(thisValue.ParseToString())
+            && thisValue.ParseToString() != "undefined"
+            && thisValue.ParseToString() != "null";
     }
 
     /// <summary>
@@ -320,8 +352,11 @@ public static class ParseExtensions
     public static DateTime ParseToDateTime(this object? thisValue)
     {
         var reveal = DateTime.MinValue;
-        if (thisValue is not null && thisValue != DBNull.Value &&
-            DateTime.TryParse(thisValue.ToString(), CultureInfo.CurrentCulture, out reveal))
+        if (
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && DateTime.TryParse(thisValue.ToString(), CultureInfo.CurrentCulture, out reveal)
+        )
         {
             reveal = Convert.ToDateTime(thisValue);
         }
@@ -337,8 +372,10 @@ public static class ParseExtensions
     /// <returns></returns>
     public static DateTime ParseToDateTime(this object? thisValue, DateTime errorValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               DateTime.TryParse(thisValue.ToString(), CultureInfo.CurrentCulture, out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && DateTime.TryParse(thisValue.ToString(), CultureInfo.CurrentCulture, out var reveal)
             ? reveal
             : errorValue;
     }
@@ -354,8 +391,14 @@ public static class ParseExtensions
     /// <returns></returns>
     public static DateTimeOffset ParseToDateTimeOffset(this object? thisValue)
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               DateTimeOffset.TryParse(thisValue.ToString(), CultureInfo.CurrentCulture, out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && DateTimeOffset.TryParse(
+                thisValue.ToString(),
+                CultureInfo.CurrentCulture,
+                out var reveal
+            )
             ? reveal
             : DateTimeOffset.MinValue;
     }
@@ -366,10 +409,19 @@ public static class ParseExtensions
     /// <param name="thisValue"></param>
     /// <param name="errorValue"></param>
     /// <returns></returns>
-    public static DateTimeOffset ParseToDateTimeOffset(this object? thisValue, DateTimeOffset errorValue)
+    public static DateTimeOffset ParseToDateTimeOffset(
+        this object? thisValue,
+        DateTimeOffset errorValue
+    )
     {
-        return thisValue is not null && thisValue != DBNull.Value &&
-               DateTimeOffset.TryParse(thisValue.ToString(), CultureInfo.CurrentCulture, out var reveal)
+        return
+            thisValue is not null
+            && thisValue != DBNull.Value
+            && DateTimeOffset.TryParse(
+                thisValue.ToString(),
+                CultureInfo.CurrentCulture,
+                out var reveal
+            )
             ? reveal
             : errorValue;
     }
@@ -415,7 +467,9 @@ public static class ParseExtensions
         foreach (var objDynamic in objDynamics)
         {
             // 找到所有的没有此特性、或有此特性但忽略字段的属性
-            var item = (objDynamic as object).GetType().GetProperties()
+            var item = (objDynamic as object)
+                .GetType()
+                .GetProperties()
                 .ToDictionary(prop => prop.Name, prop => prop.GetValue(objDynamic, null));
 
             yield return item;
@@ -428,8 +482,9 @@ public static class ParseExtensions
     /// <typeparam name="TAttribute"></typeparam>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public static IEnumerable<Dictionary<string, dynamic>> ParseToDictionaryFilterAttribute<TAttribute>(
-        this object? obj)
+    public static IEnumerable<
+        Dictionary<string, dynamic>
+    > ParseToDictionaryFilterAttribute<TAttribute>(this object? obj)
         where TAttribute : Attribute
     {
         if (obj is not IEnumerable<dynamic> objDynamics)
@@ -440,12 +495,16 @@ public static class ParseExtensions
         foreach (var objDynamic in objDynamics)
         {
             // 找到所有的没有此特性、或有此特性但忽略字段的属性
-            var item = (objDynamic as object).GetType().GetProperties()
-                .Where(prop => !prop.HasAttribute<TAttribute>() || prop.HasAttribute<TAttribute>() &&
-                    !(Attribute.GetCustomAttribute(prop,
-                            typeof(TAttribute)) as TAttribute)!
-                        .GetPropertyValue<TAttribute, bool>(
-                            "IsIgnore"))
+            var item = (objDynamic as object)
+                .GetType()
+                .GetProperties()
+                .Where(prop =>
+                    !prop.HasAttribute<TAttribute>()
+                    || prop.HasAttribute<TAttribute>()
+                        && !(
+                            Attribute.GetCustomAttribute(prop, typeof(TAttribute)) as TAttribute
+                        )!.GetPropertyValue<TAttribute, bool>("IsIgnore")
+                )
                 .ToDictionary(prop => prop.Name, prop => prop.GetValue(objDynamic, null));
 
             yield return item;
@@ -523,7 +582,7 @@ public static class ParseExtensions
             { } t when t == typeof(string) => value.ParseToString(),
             { } t when t == typeof(DateTime) => value.ParseToDateTime(),
             { } t when t == typeof(Guid) => value.ParseToGuid(),
-            _ => Convert.ChangeType(value, conversionType) // 处理未知类型的情况
+            _ => Convert.ChangeType(value, conversionType), // 处理未知类型的情况
         };
     }
 

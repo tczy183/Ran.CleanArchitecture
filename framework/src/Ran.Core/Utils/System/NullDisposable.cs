@@ -13,14 +13,10 @@ public sealed class NullDisposable : IDisposable
     /// <summary>
     /// 构造函数
     /// </summary>
-    private NullDisposable()
-    {
-    }
+    private NullDisposable() { }
 
     /// <summary>
     /// 释放资源
     /// </summary>
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }

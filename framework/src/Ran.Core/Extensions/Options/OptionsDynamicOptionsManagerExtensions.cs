@@ -43,7 +43,9 @@ public static class OptionsDynamicOptionsManagerExtensions
     private static DynamicOptionsManager<T> ToDynamicOptions<T>(this IOptions<T> options)
         where T : class
     {
-        return options as DynamicOptionsManager<T> ??
-               throw new UserFriendlyException($"选项必须派生自 {typeof(DynamicOptionsManager<>).FullName}！");
+        return options as DynamicOptionsManager<T>
+            ?? throw new UserFriendlyException(
+                $"选项必须派生自 {typeof(DynamicOptionsManager<>).FullName}！"
+            );
     }
 }

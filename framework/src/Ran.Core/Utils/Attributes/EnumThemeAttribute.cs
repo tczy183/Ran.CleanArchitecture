@@ -29,35 +29,42 @@ public enum ThemeType
     /// <summary>
     /// 默认
     /// </summary>
-    [Description("default")] Default,
+    [Description("default")]
+    Default,
 
     /// <summary>
     /// 三级
     /// </summary>
-    [Description("tertiary")] Tertiary,
+    [Description("tertiary")]
+    Tertiary,
 
     /// <summary>
     /// 主要
     /// </summary>
-    [Description("primary")] Primary,
+    [Description("primary")]
+    Primary,
 
     /// <summary>
     /// 信息
     /// </summary>
-    [Description("info")] Info,
+    [Description("info")]
+    Info,
 
     /// <summary>
     /// 成功
     /// </summary>
-    [Description("success")] Success,
+    [Description("success")]
+    Success,
 
     /// <summary>
     /// 警告
     /// </summary>
-    [Description("warning")] Warning,
+    [Description("warning")]
+    Warning,
 
     /// <summary>
     /// 错误
     /// </summary>
-    [Description("error")] Error
+    [Description("error")]
+    Error,
 }

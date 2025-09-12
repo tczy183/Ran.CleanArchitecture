@@ -42,13 +42,7 @@ public class RanTimer : ITransientDependency, IDisposable
         ExceptionNotifier = NullExceptionNotifier.Instance;
         Logger = NullLogger<RanTimer>.Instance;
 
-
-        _taskTimer = new Timer(
-            TimerCallBack!,
-            null,
-            Timeout.Infinite,
-            Timeout.Infinite
-        );
+        _taskTimer = new Timer(TimerCallBack!, null, Timeout.Infinite, Timeout.Infinite);
     }
 
     public void Start()

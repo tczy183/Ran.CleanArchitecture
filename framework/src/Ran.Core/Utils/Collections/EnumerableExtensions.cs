@@ -37,7 +37,11 @@ public static class EnumerableExtensions
     /// <param name="condition">第三方条件</param>
     /// <param name="predicate">用于选择枚举对象的谓词</param>
     /// <returns>基于 <paramref name="condition"/> 的选择或未选择的枚举对象</returns>
-    public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> source, bool condition, Func<T, bool> predicate)
+    public static IEnumerable<T> WhereIf<T>(
+        this IEnumerable<T> source,
+        bool condition,
+        Func<T, bool> predicate
+    )
     {
         return condition ? source.Where(predicate) : source;
     }
@@ -49,7 +53,11 @@ public static class EnumerableExtensions
     /// <param name="condition">第三方条件</param>
     /// <param name="predicate">用于选择枚举对象的谓词，包含索引</param>
     /// <returns>基于 <paramref name="condition"/> 的选择或未选择的枚举对象</returns>
-    public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> source, bool condition, Func<T, int, bool> predicate)
+    public static IEnumerable<T> WhereIf<T>(
+        this IEnumerable<T> source,
+        bool condition,
+        Func<T, int, bool> predicate
+    )
     {
         return condition ? source.Where(predicate) : source;
     }

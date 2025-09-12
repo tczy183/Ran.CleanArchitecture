@@ -5,7 +5,12 @@ namespace Ran.Core.Exceptions;
 /// <summary>
 /// 业务异常
 /// </summary>
-public class BusinessException : Exception, IBusinessException, IHasErrorCode, IHasErrorDetails, IHasLogLevel
+public class BusinessException
+    : Exception,
+        IBusinessException,
+        IHasErrorCode,
+        IHasErrorDetails,
+        IHasLogLevel
 {
     /// <summary>
     /// 异常代码
@@ -30,8 +35,13 @@ public class BusinessException : Exception, IBusinessException, IHasErrorCode, I
     /// <param name="details"></param>
     /// <param name="innerException"></param>
     /// <param name="logLevel"></param>
-    public BusinessException(string? code = null, string? message = null, string? details = null,
-        Exception? innerException = null, LogLevel logLevel = LogLevel.Warning)
+    public BusinessException(
+        string? code = null,
+        string? message = null,
+        string? details = null,
+        Exception? innerException = null,
+        LogLevel logLevel = LogLevel.Warning
+    )
         : base(message, innerException)
     {
         Code = code;
@@ -54,8 +64,13 @@ public class BusinessException : Exception, IBusinessException, IHasErrorCode, I
     /// <summary>
     /// 抛出异常
     /// </summary>
-    public static void Throw(string? code = null, string? message = null, string? details = null,
-        Exception? innerException = null, LogLevel logLevel = LogLevel.Warning)
+    public static void Throw(
+        string? code = null,
+        string? message = null,
+        string? details = null,
+        Exception? innerException = null,
+        LogLevel logLevel = LogLevel.Warning
+    )
     {
         throw new BusinessException(code, message, details, innerException, logLevel);
     }

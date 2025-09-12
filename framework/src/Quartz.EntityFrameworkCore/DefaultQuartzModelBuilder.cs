@@ -3,7 +3,8 @@
 public class DefaultQuartzModelBuilder(QuartzModel model) : IQuartzModelBuilder
 {
     public IQuartzModelBuilder UseEntityTypeConfigurations(
-        Action<EntityTypeConfigurationContext> entityTypeConfigurations)
+        Action<EntityTypeConfigurationContext> entityTypeConfigurations
+    )
     {
         model.EntityTypeConfigurations = entityTypeConfigurations;
 

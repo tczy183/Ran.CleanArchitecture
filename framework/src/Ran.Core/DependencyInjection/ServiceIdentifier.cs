@@ -44,8 +44,10 @@ public readonly struct ServiceIdentifier : IEquatable<ServiceIdentifier>
     {
         return ServiceKey is null && other.ServiceKey is null
             ? ServiceType == other.ServiceType
-            : ServiceKey is not null && other.ServiceKey is not null && ServiceType == other.ServiceType &&
-              ServiceKey.Equals(other.ServiceKey);
+            : ServiceKey is not null
+                && other.ServiceKey is not null
+                && ServiceType == other.ServiceType
+                && ServiceKey.Equals(other.ServiceKey);
     }
 
     /// <summary>
@@ -68,7 +70,6 @@ public readonly struct ServiceIdentifier : IEquatable<ServiceIdentifier>
         {
             return ServiceType.GetHashCode();
         }
-
         unchecked
         {
             return (ServiceType.GetHashCode() * 397) ^ ServiceKey.GetHashCode();
@@ -81,7 +82,8 @@ public readonly struct ServiceIdentifier : IEquatable<ServiceIdentifier>
     /// <param name="left"></param>
     /// <param name="right"></param>
     /// <returns></returns>
-    public static bool operator ==(ServiceIdentifier left, ServiceIdentifier right) => left.Equals(right);
+    public static bool operator ==(ServiceIdentifier left, ServiceIdentifier right) =>
+        left.Equals(right);
 
     /// <summary>
     /// 不相等操作符
@@ -89,5 +91,6 @@ public readonly struct ServiceIdentifier : IEquatable<ServiceIdentifier>
     /// <param name="left"></param>
     /// <param name="right"></param>
     /// <returns></returns>
-    public static bool operator !=(ServiceIdentifier left, ServiceIdentifier right) => !(left == right);
+    public static bool operator !=(ServiceIdentifier left, ServiceIdentifier right) =>
+        !(left == right);
 }

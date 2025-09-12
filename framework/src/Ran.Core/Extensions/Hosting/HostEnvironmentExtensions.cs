@@ -55,6 +55,10 @@ public static class HostEnvironmentExtensions
     {
         _ = CheckHelper.NotNull(hostEnvironment, nameof(hostEnvironment));
 
-        return string.Equals(hostEnvironment.EnvironmentName, environmentName, StringComparison.OrdinalIgnoreCase);
+        return string.Equals(
+            hostEnvironment.EnvironmentName,
+            environmentName,
+            StringComparison.OrdinalIgnoreCase
+        );
     }
 }

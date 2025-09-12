@@ -25,7 +25,8 @@ public class OnServiceExposingContext : IOnServiceExposingContext
     public OnServiceExposingContext(Type implementationType, List<Type> exposedTypes)
     {
         ImplementationType = CheckHelper.NotNull(implementationType, nameof(implementationType));
-        ExposedTypes = CheckHelper.NotNull(exposedTypes, nameof(exposedTypes))
+        ExposedTypes = CheckHelper
+            .NotNull(exposedTypes, nameof(exposedTypes))
             .ConvertAll(t => new ServiceIdentifier(t));
     }
 

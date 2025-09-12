@@ -20,7 +20,10 @@ public static class GenericExtensions
 
         if (type.IsGenericType)
         {
-            var genericTypes = string.Join(",", type.GetGenericArguments().Select(t => t.Name).ToArray());
+            var genericTypes = string.Join(
+                ",",
+                type.GetGenericArguments().Select(t => t.Name).ToArray()
+            );
             typeName = $"{type.Name[..type.Name.IndexOf('`')]}<{genericTypes}>";
         }
         else
@@ -74,7 +77,9 @@ public static class GenericExtensions
         var propertyInfo = objectType.GetProperty(propertyName);
         if (propertyInfo is null || !propertyInfo.PropertyType.IsGenericType)
         {
-            throw new ArgumentException($"属性 '{propertyName}' 不存在，或者不是类型 '{objectType.Name}' 中的泛型类型。");
+            throw new ArgumentException(
+                $"属性 '{propertyName}' 不存在，或者不是类型 '{objectType.Name}' 中的泛型类型。"
+            );
         }
 
         var paramObj = Expression.Parameter(typeof(TEntity));
@@ -95,13 +100,19 @@ public static class GenericExtensions
     /// <param name="propertyName"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-    public static bool SetPropertyValue<TEntity, TValue>(this TEntity entity, string propertyName, TValue value)
+    public static bool SetPropertyValue<TEntity, TValue>(
+        this TEntity entity,
+        string propertyName,
+        TValue value
+    )
     {
         var objectType = typeof(TEntity);
         var propertyInfo = objectType.GetProperty(propertyName);
         if (propertyInfo is null || !propertyInfo.PropertyType.IsGenericType)
         {
-            throw new ArgumentException($"属性 '{propertyName}' 不存在，或者不是类型 '{objectType.Name}' 中的泛型类型。");
+            throw new ArgumentException(
+                $"属性 '{propertyName}' 不存在，或者不是类型 '{objectType.Name}' 中的泛型类型。"
+            );
         }
 
         var paramObj = Expression.Parameter(objectType);
@@ -118,7 +129,9 @@ public static class GenericExtensions
         }
 
         var body = Expression.Call(paramObj, setMethod, bodyVal);
-        var setValue = Expression.Lambda<Action<TEntity, TValue>>(body, paramObj, paramVal).Compile();
+        var setValue = Expression
+            .Lambda<Action<TEntity, TValue>>(body, paramObj, paramVal)
+            .Compile();
         setValue(entity, value);
 
         return true;
@@ -131,20 +144,24 @@ public static class GenericExtensions
     /// <param name="entity"></param>
     /// <param name="isContainsInherited">是否含继承属性</param>
     /// <returns></returns>
-    public static List<CustomPropertyInfo> GetProperties<TEntity>(this TEntity entity, bool isContainsInherited)
+    public static List<CustomPropertyInfo> GetProperties<TEntity>(
+        this TEntity entity,
+        bool isContainsInherited
+    )
         where TEntity : class
     {
         var type = typeof(TEntity);
-        var properties =
-            isContainsInherited
-                ? type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                : type.GetProperties();
-        return properties.Select(info => new CustomPropertyInfo
-        {
-            PropertyName = info.Name,
-            PropertyType = info.PropertyType.Name,
-            PropertyValue = info.GetValue(entity).ParseToString()
-        }).ToList();
+        var properties = isContainsInherited
+            ? type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            : type.GetProperties();
+        return properties
+            .Select(info => new CustomPropertyInfo
+            {
+                PropertyName = info.Name,
+                PropertyType = info.PropertyType.Name,
+                PropertyValue = info.GetValue(entity).ParseToString(),
+            })
+            .ToList();
     }
 
     /// <summary>
@@ -154,8 +171,10 @@ public static class GenericExtensions
     /// <param name="entity1">对象实例1</param>
     /// <param name="entity2">对象实例2</param>
     /// <returns></returns>
-    public static List<CustomPropertyVariance> GetPropertiesDetailedCompare<TEntity>(this TEntity entity1,
-        TEntity entity2)
+    public static List<CustomPropertyVariance> GetPropertiesDetailedCompare<TEntity>(
+        this TEntity entity1,
+        TEntity entity2
+    )
         where TEntity : class
     {
         var propertyInfo = typeof(TEntity).GetProperties();
@@ -172,23 +191,27 @@ public static class GenericExtensions
             {
                 if (!before.Equals(after))
                 {
-                    result.Add(new CustomPropertyVariance
-                    {
-                        PropertyName = variance.Name,
-                        Before = before.ToString() ?? string.Empty,
-                        After = after.ToString() ?? string.Empty
-                    });
+                    result.Add(
+                        new CustomPropertyVariance
+                        {
+                            PropertyName = variance.Name,
+                            Before = before.ToString() ?? string.Empty,
+                            After = after.ToString() ?? string.Empty,
+                        }
+                    );
                 }
             }
             // 处理 null 的情况
             else if (before != after)
             {
-                result.Add(new CustomPropertyVariance
-                {
-                    PropertyName = variance.Name,
-                    Before = before?.ToString() ?? string.Empty,
-                    After = after?.ToString() ?? string.Empty
-                });
+                result.Add(
+                    new CustomPropertyVariance
+                    {
+                        PropertyName = variance.Name,
+                        Before = before?.ToString() ?? string.Empty,
+                        After = after?.ToString() ?? string.Empty,
+                    }
+                );
             }
         }
 
@@ -203,12 +226,20 @@ public static class GenericExtensions
     /// <param name="newVal">对象实例2</param>
     /// <param name="specialList">要排除某些特殊属性</param>
     /// <returns></returns>
-    public static string GetPropertiesChangedNote<TEntity>(this TEntity oldVal, TEntity newVal,
-        List<string>? specialList)
+    public static string GetPropertiesChangedNote<TEntity>(
+        this TEntity oldVal,
+        TEntity newVal,
+        List<string>? specialList
+    )
         where TEntity : class
     {
         var list = oldVal.GetPropertiesDetailedCompare(newVal);
-        var newList = list.Select(s => new { s.PropertyName, s.Before, s.After });
+        var newList = list.Select(s => new
+        {
+            s.PropertyName,
+            s.Before,
+            s.After,
+        });
 
         // 要排除某些特殊属性
         if (specialList is not null && specialList.Count != 0)
@@ -266,8 +297,13 @@ public static class GenericExtensions
     /// <param name="leftEqual">是否可等于上限(默认等于)</param>
     /// <param name="rightEqual">是否可等于下限(默认等于)</param>
     /// <returns> 是否介于 </returns>
-    public static bool IsBetween<T>(this IComparable<T> value, T start, T end, bool leftEqual = true,
-        bool rightEqual = true)
+    public static bool IsBetween<T>(
+        this IComparable<T> value,
+        T start,
+        T end,
+        bool leftEqual = true,
+        bool rightEqual = true
+    )
         where T : IComparable
     {
         var flag = leftEqual ? value.CompareTo(start) >= 0 : value.CompareTo(start) > 0;
@@ -283,7 +319,13 @@ public static class GenericExtensions
     /// <param name="max">范围大值</param>
     /// <param name="minEqual">是否可等于小值(默认等于)</param>
     /// <param name="maxEqual">是否可等于大值(默认等于)</param>
-    public static bool IsInRange<T>(this IComparable<T> value, T min, T max, bool minEqual = true, bool maxEqual = true)
+    public static bool IsInRange<T>(
+        this IComparable<T> value,
+        T min,
+        T max,
+        bool minEqual = true,
+        bool maxEqual = true
+    )
         where T : IComparable
     {
         var flag = minEqual ? value.CompareTo(min) >= 0 : value.CompareTo(min) > 0;

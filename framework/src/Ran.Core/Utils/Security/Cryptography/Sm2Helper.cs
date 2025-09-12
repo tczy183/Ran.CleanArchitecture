@@ -22,8 +22,12 @@ public static class Sm2Helper
     private static readonly X9ECParameters CurveParameters = SecNamedCurves.GetByName("sm2p256v1");
 
     // SM2 椭圆曲线域参数
-    private static readonly ECDomainParameters DomainParameters =
-        new(CurveParameters.Curve, CurveParameters.G, CurveParameters.N, CurveParameters.H);
+    private static readonly ECDomainParameters DomainParameters = new(
+        CurveParameters.Curve,
+        CurveParameters.G,
+        CurveParameters.N,
+        CurveParameters.H
+    );
 
     /// <summary>
     /// 生成 SM2 密钥对
@@ -33,11 +37,15 @@ public static class Sm2Helper
     {
         var keyPair = GenerateKeyPair();
         // 导出私钥
-        var privateKeyBytes = PrivateKeyInfoFactory.CreatePrivateKeyInfo(keyPair.Private).GetEncoded();
+        var privateKeyBytes = PrivateKeyInfoFactory
+            .CreatePrivateKeyInfo(keyPair.Private)
+            .GetEncoded();
         var privateKey = Convert.ToBase64String(privateKeyBytes);
 
         // 导出公钥
-        var publicKeyBytes = SubjectPublicKeyInfoFactory.CreateSubjectPublicKeyInfo(keyPair.Public).GetEncoded();
+        var publicKeyBytes = SubjectPublicKeyInfoFactory
+            .CreateSubjectPublicKeyInfo(keyPair.Public)
+            .GetEncoded();
         var publicKey = Convert.ToBase64String(publicKeyBytes);
         return (publicKey, privateKey);
     }
@@ -53,7 +61,10 @@ public static class Sm2Helper
         var dataBytes = Encoding.UTF8.GetBytes(data);
         var privateKeyBytes = Convert.FromBase64String(privateKey);
 
-        var privateKeyParam = new ECPrivateKeyParameters(new BigInteger(1, privateKeyBytes), DomainParameters);
+        var privateKeyParam = new ECPrivateKeyParameters(
+            new BigInteger(1, privateKeyBytes),
+            DomainParameters
+        );
         var signer = SignerUtilities.GetSigner("SM3WITHSM2");
         signer.Init(true, privateKeyParam);
         signer.BlockUpdate(dataBytes, 0, dataBytes.Length);

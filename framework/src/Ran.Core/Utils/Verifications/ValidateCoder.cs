@@ -17,7 +17,8 @@ public static class ValidateCoder
     private const string DefaultLowerLetterSource = "abcdefghijklmnopqrstuvwxyz";
 
     // 默认字母或数字字符源
-    private const string DefaultNumberOrLetterSource = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private const string DefaultNumberOrLetterSource =
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     /// <summary>
     /// 随机数字
@@ -38,7 +39,10 @@ public static class ValidateCoder
     /// <returns></returns>
     public static string GetUpperLetter(int? length, string? source)
     {
-        return RandomHelper.GetRandom(length ?? 6, source?.ToUpperInvariant() ?? DefaultUpperLetterSource);
+        return RandomHelper.GetRandom(
+            length ?? 6,
+            source?.ToUpperInvariant() ?? DefaultUpperLetterSource
+        );
     }
 
     /// <summary>
@@ -49,7 +53,10 @@ public static class ValidateCoder
     /// <returns></returns>
     public static string GetLowerLetter(int? length, string? source)
     {
-        return RandomHelper.GetRandom(length ?? 6, source?.ToLowerInvariant() ?? DefaultLowerLetterSource);
+        return RandomHelper.GetRandom(
+            length ?? 6,
+            source?.ToLowerInvariant() ?? DefaultLowerLetterSource
+        );
     }
 
     /// <summary>
@@ -71,15 +78,19 @@ public static class ValidateCoder
     public static string RandChineseCharacter(int? length)
     {
         //汉字由区位和码位组成(都为0-94,其中区位16-55为一级汉字区,56-87为二级汉字区,1-9为特殊字符区)
-        int area, code;
+        int area,
+            code;
         var strtem = new StringBuilder();
         length ??= 6;
         for (var i = 0; i < length; i++)
         {
             area = RandomHelper.GetRandom(16, 88);
             code = area == 55 ? RandomHelper.GetRandom(1, 90) : RandomHelper.GetRandom(1, 94);
-            _ = strtem.Append(Encoding.GetEncoding("GB2312")
-                .GetString([Convert.ToByte(area + 160), Convert.ToByte(code + 160)]));
+            _ = strtem.Append(
+                Encoding
+                    .GetEncoding("GB2312")
+                    .GetString([Convert.ToByte(area + 160), Convert.ToByte(code + 160)])
+            );
         }
 
         return strtem.ToString();

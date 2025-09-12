@@ -21,7 +21,9 @@ public static class CrossCuttingConcerns
             throw new ArgumentNullException(nameof(concerns), $"未提供 {nameof(concerns)}!");
         }
 
-        (obj as IAvoidDuplicateCrossCuttingConcerns)?.AppliedCrossCuttingConcerns.AddRange(concerns);
+        (obj as IAvoidDuplicateCrossCuttingConcerns)?.AppliedCrossCuttingConcerns.AddRange(
+            concerns
+        );
     }
 
     /// <summary>
@@ -57,11 +59,11 @@ public static class CrossCuttingConcerns
     /// <exception cref="ArgumentNullException"></exception>
     public static bool IsApplied([NotNull] object obj, [NotNull] string concern)
     {
-        return obj is null
-            ? throw new ArgumentNullException(nameof(obj))
-            : concern is null
-                ? throw new ArgumentNullException(nameof(concern))
-                : (obj as IAvoidDuplicateCrossCuttingConcerns)?.AppliedCrossCuttingConcerns.Contains(concern) ?? false;
+        return obj is null ? throw new ArgumentNullException(nameof(obj))
+            : concern is null ? throw new ArgumentNullException(nameof(concern))
+            : (obj as IAvoidDuplicateCrossCuttingConcerns)?.AppliedCrossCuttingConcerns.Contains(
+                concern
+            ) ?? false;
     }
 
     /// <summary>
@@ -73,11 +75,14 @@ public static class CrossCuttingConcerns
     public static IDisposable Applying(object obj, params string[] concerns)
     {
         AddApplied(obj, concerns);
-        return new DisposeAction<ValueTuple<object, string[]>>(static (state) =>
-        {
-            var (obj, concerns) = state;
-            RemoveApplied(obj, concerns);
-        }, (obj, concerns));
+        return new DisposeAction<ValueTuple<object, string[]>>(
+            static (state) =>
+            {
+                var (obj, concerns) = state;
+                RemoveApplied(obj, concerns);
+            },
+            (obj, concerns)
+        );
     }
 
     /// <summary>

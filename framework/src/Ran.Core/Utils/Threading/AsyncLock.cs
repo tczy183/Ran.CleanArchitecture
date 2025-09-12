@@ -37,7 +37,9 @@ public class AsyncLock : IDisposable
     /// <exception cref="TimeoutException"></exception>
     public async Task<IDisposable> LockAsync(TimeSpan timeout)
     {
-        return await _semaphore.WaitAsync(timeout) ? await _releaser : throw new TimeoutException("未能在指定的超时时间内获取锁。");
+        return await _semaphore.WaitAsync(timeout)
+            ? await _releaser
+            : throw new TimeoutException("未能在指定的超时时间内获取锁。");
     }
 
     /// <summary>

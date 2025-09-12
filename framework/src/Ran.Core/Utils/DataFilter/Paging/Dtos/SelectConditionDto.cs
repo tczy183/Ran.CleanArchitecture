@@ -25,7 +25,11 @@ public class SelectConditionDto
     /// <param name="selectField">字段名称</param>
     /// <param name="criteriaValue">条件值</param>
     /// <param name="selectCompare">选择比较</param>
-    public SelectConditionDto(string selectField, object? criteriaValue, SelectCompare selectCompare)
+    public SelectConditionDto(
+        string selectField,
+        object? criteriaValue,
+        SelectCompare selectCompare
+    )
     {
         SelectField = selectField;
         CriteriaValue = criteriaValue;
@@ -39,8 +43,12 @@ public class SelectConditionDto
     /// <param name="selectField">字段名称</param>
     /// <param name="criteriaValue">条件值</param>
     /// <param name="selectCompare">选择比较</param>
-    public SelectConditionDto(bool isKeywords, string selectField, object? criteriaValue,
-        SelectCompare selectCompare)
+    public SelectConditionDto(
+        bool isKeywords,
+        string selectField,
+        object? criteriaValue,
+        SelectCompare selectCompare
+    )
     {
         IsKeywords = isKeywords;
         SelectField = selectField;
@@ -84,9 +92,7 @@ public class SelectConditionDto<T> : SelectConditionDto
     /// <param name="selectField">字段名称</param>
     /// <param name="criteriaValue">条件值</param>
     public SelectConditionDto(string selectField, object? criteriaValue)
-        : base(selectField, criteriaValue!)
-    {
-    }
+        : base(selectField, criteriaValue!) { }
 
     /// <summary>
     /// 使用选择字段名称和选择值，初始化一个<see cref="SelectConditionDto"/>类型的新实例
@@ -94,10 +100,12 @@ public class SelectConditionDto<T> : SelectConditionDto
     /// <param name="selectField">字段名称</param>
     /// <param name="criteriaValue">条件值</param>
     /// <param name="selectCompare">选择比较</param>
-    public SelectConditionDto(string selectField, object? criteriaValue, SelectCompare selectCompare)
-        : base(selectField, criteriaValue!, selectCompare)
-    {
-    }
+    public SelectConditionDto(
+        string selectField,
+        object? criteriaValue,
+        SelectCompare selectCompare
+    )
+        : base(selectField, criteriaValue!, selectCompare) { }
 
     /// <summary>
     /// 使用选择字段名称和选择值，初始化一个<see cref="SelectConditionDto"/>类型的新实例
@@ -106,9 +114,11 @@ public class SelectConditionDto<T> : SelectConditionDto
     /// <param name="selectField">字段名称</param>
     /// <param name="criteriaValue">条件值</param>
     /// <param name="selectCompare">选择比较</param>
-    public SelectConditionDto(bool isKeywords, string selectField, object? criteriaValue,
-        SelectCompare selectCompare)
-        : base(isKeywords, selectField, criteriaValue!, selectCompare)
-    {
-    }
+    public SelectConditionDto(
+        bool isKeywords,
+        string selectField,
+        object? criteriaValue,
+        SelectCompare selectCompare
+    )
+        : base(isKeywords, selectField, criteriaValue!, selectCompare) { }
 }

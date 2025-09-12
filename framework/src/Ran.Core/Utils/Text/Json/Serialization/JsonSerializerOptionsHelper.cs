@@ -12,7 +12,8 @@ public static class JsonSerializerOptionsHelper
     /// <summary>
     /// 公共参数
     /// </summary>
-    public static JsonSerializerOptions DefaultJsonSerializerOptions => GetDefaultJsonSerializerOptions();
+    public static JsonSerializerOptions DefaultJsonSerializerOptions =>
+        GetDefaultJsonSerializerOptions();
 
     /// <summary>
     /// 获取默认序列化参数
@@ -37,7 +38,7 @@ public static class JsonSerializerOptionsHelper
             // 数据格式首字母小写 JsonNamingPolicy.CamelCase 驼峰样式，null 则为不改变大小写
             PropertyNamingPolicy = null,
             // 获取或设置要在转义字符串时使用的编码器，不转义字符
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
         };
 
         // 布尔类型
@@ -71,8 +72,11 @@ public static class JsonSerializerOptionsHelper
     /// <param name="removeConverter"></param>
     /// <param name="addConverters"></param>
     /// <returns></returns>
-    public static JsonSerializerOptions Create(JsonSerializerOptions baseOptions, JsonConverter removeConverter,
-        params JsonConverter[] addConverters)
+    public static JsonSerializerOptions Create(
+        JsonSerializerOptions baseOptions,
+        JsonConverter removeConverter,
+        params JsonConverter[] addConverters
+    )
     {
         return Create(baseOptions, x => x == removeConverter, addConverters);
     }
@@ -84,8 +88,11 @@ public static class JsonSerializerOptionsHelper
     /// <param name="removeConverterPredicate"></param>
     /// <param name="addConverters"></param>
     /// <returns></returns>
-    public static JsonSerializerOptions Create(JsonSerializerOptions baseOptions,
-        Func<JsonConverter, bool> removeConverterPredicate, params JsonConverter[] addConverters)
+    public static JsonSerializerOptions Create(
+        JsonSerializerOptions baseOptions,
+        Func<JsonConverter, bool> removeConverterPredicate,
+        params JsonConverter[] addConverters
+    )
     {
         JsonSerializerOptions options = new(baseOptions);
         _ = options.Converters.RemoveAllWhere(removeConverterPredicate);

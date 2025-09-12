@@ -34,7 +34,8 @@ public static class ModuleHelper
 
         List<Type> dependencies = [];
 
-        var dependencyDescriptors = moduleType.GetCustomAttributes()
+        var dependencyDescriptors = moduleType
+            .GetCustomAttributes()
             .OfType<IDependedTypesProvider>();
 
         foreach (var descriptor in dependencyDescriptors)
@@ -57,7 +58,8 @@ public static class ModuleHelper
     {
         List<Assembly> assemblies = [];
 
-        var additionalAssemblyDescriptors = moduleType.GetCustomAttributes()
+        var additionalAssemblyDescriptors = moduleType
+            .GetCustomAttributes()
             .OfType<IAdditionalModuleAssemblyProvider>();
 
         foreach (var descriptor in additionalAssemblyDescriptors)
@@ -81,8 +83,13 @@ public static class ModuleHelper
     /// <param name="logger">日志记录器（可选）</param>
     /// <param name="prefix">前缀字符串，用于构造目录树分支</param>
     /// <param name="isLast">当前模块是否为同级中的最后一个</param>
-    private static void AddModuleAndDependenciesRecursively(List<Type> moduleTypes, Type moduleType, ILogger? logger,
-        string prefix = "", bool isLast = true)
+    private static void AddModuleAndDependenciesRecursively(
+        List<Type> moduleTypes,
+        Type moduleType,
+        ILogger? logger,
+        string prefix = "",
+        bool isLast = true
+    )
     {
         // 检查是否是合法的模块类型
         CheckDddModuleType(moduleType);
@@ -90,9 +97,10 @@ public static class ModuleHelper
         if (moduleTypes.Contains(moduleType))
         {
             // 构造当前节点的前缀和分支符号
-            var nodeContainsLine = (string.IsNullOrEmpty(prefix) ? "" : prefix + (isLast ? "└─ " : "├─ ")) +
-                                   moduleType.Namespace +
-                                   "(此模块之前已加载)";
+            var nodeContainsLine =
+                (string.IsNullOrEmpty(prefix) ? "" : prefix + (isLast ? "└─ " : "├─ "))
+                + moduleType.Namespace
+                + "(此模块之前已加载)";
             // LogHelper.Handle(nodeContainsLine);
 #pragma warning disable CA2254
             logger?.LogInformation(nodeContainsLine);
@@ -101,7 +109,9 @@ public static class ModuleHelper
         }
 
         // 构造当前节点的前缀和分支符号
-        var nodeLine = (string.IsNullOrEmpty(prefix) ? "" : prefix + (isLast ? "└─ " : "├─ ")) + moduleType.Namespace;
+        var nodeLine =
+            (string.IsNullOrEmpty(prefix) ? "" : prefix + (isLast ? "└─ " : "├─ "))
+            + moduleType.Namespace;
         // LogHelper.Handle(nodeLine);
 #pragma warning disable CA2254
         logger?.LogInformation(nodeLine);
@@ -118,7 +128,13 @@ public static class ModuleHelper
             var childIsLast = i == dependedModuleTypes.Count - 1;
             // 为子节点构造新的前缀：如果当前节点是最后一个，则用空格，否则用竖线保持上层分支的连贯
             var childPrefix = prefix + (isLast ? "    " : "│   ");
-            AddModuleAndDependenciesRecursively(moduleTypes, dependedModuleTypes[i], logger, childPrefix, childIsLast);
+            AddModuleAndDependenciesRecursively(
+                moduleTypes,
+                dependedModuleTypes[i],
+                logger,
+                childPrefix,
+                childIsLast
+            );
         }
     }
 
@@ -131,8 +147,8 @@ public static class ModuleHelper
     {
         var typeInfo = type.GetTypeInfo();
 
-        return typeInfo is { IsClass: true, IsAbstract: false, IsGenericType: false } &&
-               typeof(IModule).GetTypeInfo().IsAssignableFrom(type);
+        return typeInfo is { IsClass: true, IsAbstract: false, IsGenericType: false }
+            && typeof(IModule).GetTypeInfo().IsAssignableFrom(type);
     }
 
     /// <summary>

@@ -13,9 +13,7 @@ public sealed class NullAsyncDisposable : IAsyncDisposable
     /// <summary>
     /// 构造函数
     /// </summary>
-    private NullAsyncDisposable()
-    {
-    }
+    private NullAsyncDisposable() { }
 
     /// <summary>
     /// 释放资源

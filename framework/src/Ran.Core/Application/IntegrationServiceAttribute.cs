@@ -23,7 +23,8 @@ public sealed class IntegrationServiceAttribute : Attribute
     /// <returns></returns>
     public static bool IsDefinedOrInherited(Type type)
     {
-        return type.IsDefined(typeof(IntegrationServiceAttribute), true) || type.GetInterfaces()
-            .Any(@interface => @interface.IsDefined(typeof(IntegrationServiceAttribute), true));
+        return type.IsDefined(typeof(IntegrationServiceAttribute), true)
+            || type.GetInterfaces()
+                .Any(@interface => @interface.IsDefined(typeof(IntegrationServiceAttribute), true));
     }
 }

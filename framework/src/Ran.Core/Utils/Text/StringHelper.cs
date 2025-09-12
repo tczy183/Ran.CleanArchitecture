@@ -14,7 +14,11 @@ public static class StringHelper
     /// <param name="sepeater">分割器</param>
     /// <param name="isAllowsDuplicates">是否允许重复</param>
     /// <returns></returns>
-    public static List<string> GetStrList(string sourceStr, char sepeater = ',', bool isAllowsDuplicates = true)
+    public static List<string> GetStrList(
+        string sourceStr,
+        char sepeater = ',',
+        bool isAllowsDuplicates = true
+    )
     {
         return GetStrEnumerable(sourceStr, sepeater, isAllowsDuplicates).ToList();
     }
@@ -26,7 +30,11 @@ public static class StringHelper
     /// <param name="sepeater">分割器</param>
     /// <param name="isAllowsDuplicates">是否允许重复</param>
     /// <returns></returns>
-    public static string[] GetStrArray(string sourceStr, char sepeater = ',', bool isAllowsDuplicates = true)
+    public static string[] GetStrArray(
+        string sourceStr,
+        char sepeater = ',',
+        bool isAllowsDuplicates = true
+    )
     {
         return GetStrEnumerable(sourceStr, sepeater, isAllowsDuplicates).ToArray();
     }
@@ -38,8 +46,11 @@ public static class StringHelper
     /// <param name="sepeater">分割器</param>
     /// <param name="isAllowsDuplicates">是否允许重复</param>
     /// <returns></returns>
-    public static IEnumerable<string> GetStrEnumerable(string sourceStr, char sepeater = ',',
-        bool isAllowsDuplicates = true)
+    public static IEnumerable<string> GetStrEnumerable(
+        string sourceStr,
+        char sepeater = ',',
+        bool isAllowsDuplicates = true
+    )
     {
         // 如果为空，返回空列表
         if (string.IsNullOrWhiteSpace(sourceStr))
@@ -69,7 +80,11 @@ public static class StringHelper
     /// <param name="sepeater">分割器</param>
     /// <param name="isAllowsDuplicates">是否允许重复</param>
     /// <returns></returns>
-    public static string GetListStr(IEnumerable<string> sourceList, char sepeater = ',', bool isAllowsDuplicates = true)
+    public static string GetListStr(
+        IEnumerable<string> sourceList,
+        char sepeater = ',',
+        bool isAllowsDuplicates = true
+    )
     {
         return GetEnumerableStr(sourceList, sepeater, isAllowsDuplicates);
     }
@@ -81,8 +96,11 @@ public static class StringHelper
     /// <param name="sepeator">分割器</param>
     /// <param name="isAllowsDuplicates">是否允许重复</param>
     /// <returns></returns>
-    public static string GetArrayStr(IEnumerable<string> sourceArray, char sepeator = ',',
-        bool isAllowsDuplicates = true)
+    public static string GetArrayStr(
+        IEnumerable<string> sourceArray,
+        char sepeator = ',',
+        bool isAllowsDuplicates = true
+    )
     {
         return GetEnumerableStr(sourceArray, sepeator, isAllowsDuplicates);
     }
@@ -94,8 +112,11 @@ public static class StringHelper
     /// <param name="sepeater">分割器</param>
     /// <param name="isAllowsDuplicates">是否允许重复</param>
     /// <returns></returns>
-    public static string GetDictionaryValueStr(Dictionary<string, string> sourceDictionary, char sepeater = ',',
-        bool isAllowsDuplicates = true)
+    public static string GetDictionaryValueStr(
+        Dictionary<string, string> sourceDictionary,
+        char sepeater = ',',
+        bool isAllowsDuplicates = true
+    )
     {
         IEnumerable<string> sourceEnumerable = sourceDictionary.Values;
         return GetEnumerableStr(sourceEnumerable, sepeater, isAllowsDuplicates);
@@ -108,8 +129,11 @@ public static class StringHelper
     /// <param name="sepeater">分割器</param>
     /// <param name="isAllowsDuplicates">是否允许重复</param>
     /// <returns></returns>
-    public static string GetEnumerableStr(IEnumerable<string> sourceEnumerable, char sepeater = ',',
-        bool isAllowsDuplicates = true)
+    public static string GetEnumerableStr(
+        IEnumerable<string> sourceEnumerable,
+        char sepeater = ',',
+        bool isAllowsDuplicates = true
+    )
     {
         StringBuilder sb = new();
 
@@ -175,7 +199,12 @@ public static class StringHelper
     /// <param name="splitString"></param>
     /// <param name="error"></param>
     /// <returns></returns>
-    public static string GetNewStyle(string? sourceStr, string? newStyle, string splitString, out string error)
+    public static string GetNewStyle(
+        string? sourceStr,
+        string? newStyle,
+        string splitString,
+        out string error
+    )
     {
         string? returnValue;
         // 如果输入空值，返回空，并给出错误提示
@@ -213,7 +242,10 @@ public static class StringHelper
                 {
                     // 将分隔符放在新样式中的位置
                     var str = newStr.ToString().Split(',');
-                    sourceStr = str.Aggregate(sourceStr, (current, bb) => current.Insert(int.Parse(bb), splitString));
+                    sourceStr = str.Aggregate(
+                        sourceStr,
+                        (current, bb) => current.Insert(int.Parse(bb), splitString)
+                    );
                 }
 
                 // 给出最后的结果
@@ -395,12 +427,16 @@ public static class StringHelper
             @"&(copy|#169);",
             @"&#(\d+);",
             @"-->",
-            @"<!--.*\n"
+            @"<!--.*\n",
         ];
 
-        var strOutput = aryReg.Select(t => new Regex(t, RegexOptions.IgnoreCase))
+        var strOutput = aryReg
+            .Select(t => new Regex(t, RegexOptions.IgnoreCase))
             .Aggregate(strHtml, (current, regex) => regex.Replace(current, string.Empty));
-        strOutput = strOutput.Replace("<", string.Empty).Replace(">", string.Empty).Replace("\n", string.Empty);
+        strOutput = strOutput
+            .Replace("<", string.Empty)
+            .Replace(">", string.Empty)
+            .Replace("\n", string.Empty);
         return strOutput;
     }
 

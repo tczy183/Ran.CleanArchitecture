@@ -39,12 +39,7 @@ public class AsyncRanTimer : ITransientDependency, IAsyncDisposable
         Logger = NullLogger<AsyncRanTimer>.Instance;
         Elapsed = _ => Task.CompletedTask;
 
-        _taskTimer = new Timer(
-            TimerCallBack!,
-            null,
-            Timeout.Infinite,
-            Timeout.Infinite
-        );
+        _taskTimer = new Timer(TimerCallBack!, null, Timeout.Infinite, Timeout.Infinite);
     }
 
     public void Start()

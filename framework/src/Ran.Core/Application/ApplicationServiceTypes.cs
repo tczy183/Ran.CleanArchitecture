@@ -20,5 +20,5 @@ public enum ApplicationServiceTypes
     /// <summary>
     /// 所有服务
     /// </summary>
-    All = ApplicationServices | IntegrationServices
+    All = ApplicationServices | IntegrationServices,
 }

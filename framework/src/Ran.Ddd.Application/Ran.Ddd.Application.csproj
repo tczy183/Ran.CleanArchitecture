@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <ItemGroup>
-        <ProjectReference Include="..\Ran.Ddd.Application.Abstraction\Ran.Ddd.Application.Abstraction.csproj"/>
-        <ProjectReference Include="..\Ran.Ddd.Domain\Ran.Ddd.Domain.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ran.Ddd.Application.Abstraction\Ran.Ddd.Application.Abstraction.csproj" />
+    <ProjectReference Include="..\Ran.Ddd.Domain\Ran.Ddd.Domain.csproj" />
+    <ProjectReference Include="..\Ran.Mediator\Ran.Mediator.csproj" />
+  </ItemGroup>
 </Project>

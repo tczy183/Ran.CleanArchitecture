@@ -42,8 +42,11 @@ public static class HttpHelper
     /// <param name="data"></param>
     /// <param name="headers"></param>
     /// <returns></returns>
-    public static async Task<T?> PostAsync<T>(string url, object? data = null,
-        Dictionary<string, string>? headers = null)
+    public static async Task<T?> PostAsync<T>(
+        string url,
+        object? data = null,
+        Dictionary<string, string>? headers = null
+    )
     {
         using var request = new HttpRequestMessage(HttpMethod.Post, url);
         request.Content = SerializeJson(data);
@@ -61,8 +64,11 @@ public static class HttpHelper
     /// <param name="data"></param>
     /// <param name="headers"></param>
     /// <returns></returns>
-    public static async Task<T?> PutAsync<T>(string url, object? data = null,
-        Dictionary<string, string>? headers = null)
+    public static async Task<T?> PutAsync<T>(
+        string url,
+        object? data = null,
+        Dictionary<string, string>? headers = null
+    )
     {
         using var request = new HttpRequestMessage(HttpMethod.Put, url);
         request.Content = SerializeJson(data);
@@ -79,7 +85,10 @@ public static class HttpHelper
     /// <param name="url"></param>
     /// <param name="headers"></param>
     /// <returns></returns>
-    public static async Task<T?> DeleteAsync<T>(string url, Dictionary<string, string>? headers = null)
+    public static async Task<T?> DeleteAsync<T>(
+        string url,
+        Dictionary<string, string>? headers = null
+    )
     {
         using var request = new HttpRequestMessage(HttpMethod.Delete, url);
         AddHeaders(request, headers);
@@ -136,11 +145,15 @@ public static class HttpHelper
         if (!response.IsSuccessStatusCode)
         {
             var error = await response.Content.ReadAsStringAsync();
-            throw new HttpRequestException($"请求失败，状态码: {response.StatusCode}, 错误信息: {error}");
+            throw new HttpRequestException(
+                $"请求失败，状态码: {response.StatusCode}, 错误信息: {error}"
+            );
         }
 
         var responseData = await response.Content.ReadAsStringAsync();
-        return typeof(T) == typeof(string) ? (T)(object)responseData : JsonSerializer.Deserialize<T>(responseData);
+        return typeof(T) == typeof(string)
+            ? (T)(object)responseData
+            : JsonSerializer.Deserialize<T>(responseData);
     }
 
     public static Task<T?> GetAsync<T>(Uri url, Dictionary<string, string>? headers = null)
@@ -148,12 +161,20 @@ public static class HttpHelper
         throw new NotImplementedException();
     }
 
-    public static Task<T?> PostAsync<T>(Uri url, object? data = null, Dictionary<string, string>? headers = null)
+    public static Task<T?> PostAsync<T>(
+        Uri url,
+        object? data = null,
+        Dictionary<string, string>? headers = null
+    )
     {
         throw new NotImplementedException();
     }
 
-    public static Task<T?> PutAsync<T>(Uri url, object? data = null, Dictionary<string, string>? headers = null)
+    public static Task<T?> PutAsync<T>(
+        Uri url,
+        object? data = null,
+        Dictionary<string, string>? headers = null
+    )
     {
         throw new NotImplementedException();
     }

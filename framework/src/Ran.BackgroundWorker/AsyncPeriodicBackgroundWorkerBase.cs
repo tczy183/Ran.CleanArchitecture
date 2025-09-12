@@ -20,7 +20,8 @@ public abstract class AsyncPeriodicBackgroundWorkerBase : BackgroundWorkerBase
 
     protected AsyncPeriodicBackgroundWorkerBase(
         AsyncRanTimer ranTimer,
-        IServiceScopeFactory serviceScopeFactory)
+        IServiceScopeFactory serviceScopeFactory
+    )
     {
         ServiceScopeFactory = serviceScopeFactory;
         RanTimer = ranTimer;
@@ -51,12 +52,14 @@ public abstract class AsyncPeriodicBackgroundWorkerBase : BackgroundWorkerBase
         using var scope = ServiceScopeFactory.CreateScope();
         try
         {
-            await DoWorkAsync(new PeriodicBackgroundWorkerContext(scope.ServiceProvider, cancellationToken));
+            await DoWorkAsync(
+                new PeriodicBackgroundWorkerContext(scope.ServiceProvider, cancellationToken)
+            );
         }
         catch (Exception ex)
         {
-            await scope.ServiceProvider
-                .GetRequiredService<IExceptionNotifier>()
+            await scope
+                .ServiceProvider.GetRequiredService<IExceptionNotifier>()
                 .NotifyAsync(new ExceptionNotificationContext(ex));
 
             Logger.LogException(ex);

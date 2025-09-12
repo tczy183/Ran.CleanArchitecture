@@ -13,8 +13,10 @@ public static class ConfigurationHelper
     /// <param name="options"></param>
     /// <param name="builderAction"></param>
     /// <returns></returns>
-    public static IConfigurationRoot BuildConfiguration(ConfigurationBuilderOptions? options = null,
-        Action<IConfigurationBuilder>? builderAction = null)
+    public static IConfigurationRoot BuildConfiguration(
+        ConfigurationBuilderOptions? options = null,
+        Action<IConfigurationBuilder>? builderAction = null
+    )
     {
         options ??= new ConfigurationBuilderOptions();
 
@@ -33,8 +35,11 @@ public static class ConfigurationHelper
         // 加载特定环境下的配置文件
         if (!options.EnvironmentName.IsNullOrEmpty())
         {
-            builder = builder.AddJsonFile($"{options.FileName}.{options.EnvironmentName}.json", true,
-                options.ReloadOnChange);
+            builder = builder.AddJsonFile(
+                $"{options.FileName}.{options.EnvironmentName}.json",
+                true,
+                options.ReloadOnChange
+            );
         }
 
         // 开发环境，加载用户机密

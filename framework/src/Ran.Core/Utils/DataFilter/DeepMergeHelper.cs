@@ -16,7 +16,8 @@ public static class DeepMergeHelper
     /// <typeparam name="T">配置类型</typeparam>
     /// <param name="configs">按优先级排序的配置列表，第一个为最高优先级</param>
     /// <returns>合并后的配置</returns>
-    public static T DeepMerge<T>(params T[] configs) where T : class, new()
+    public static T DeepMerge<T>(params T[] configs)
+        where T : class, new()
     {
         // 快速路径：没有配置或只有一个配置
         if (configs is null || configs.Length == 0)
@@ -54,7 +55,8 @@ public static class DeepMergeHelper
     /// <summary>
     /// 处理单个属性的合并
     /// </summary>
-    private static void ProcessProperty<T>(PropertyInfo property, T result, T[] configs) where T : class
+    private static void ProcessProperty<T>(PropertyInfo property, T result, T[] configs)
+        where T : class
     {
         object? valueToSet = null;
         var valueFound = false;
@@ -108,10 +110,15 @@ public static class DeepMergeHelper
     /// </summary>
     private static bool CanMerge(object? target, object? source)
     {
-        return target is not null && source is not null &&
-               (IsMergeableCollection(target) && IsMergeableCollection(source) ||
-                IsDictionary(target) && IsDictionary(source) ||
-                IsComplexObject(target) && IsComplexObject(source) && target.GetType() == source.GetType());
+        return target is not null
+            && source is not null
+            && (
+                IsMergeableCollection(target) && IsMergeableCollection(source)
+                || IsDictionary(target) && IsDictionary(source)
+                || IsComplexObject(target)
+                    && IsComplexObject(source)
+                    && target.GetType() == source.GetType()
+            );
     }
 
     /// <summary>
@@ -129,7 +136,11 @@ public static class DeepMergeHelper
             return MergeDictionaries(target, source);
         }
 
-        if (IsComplexObject(target) && IsComplexObject(source) && target?.GetType() == source?.GetType())
+        if (
+            IsComplexObject(target)
+            && IsComplexObject(source)
+            && target?.GetType() == source?.GetType()
+        )
         {
             return MergeComplexObjects(target, source);
         }
@@ -142,7 +153,8 @@ public static class DeepMergeHelper
     /// </summary>
     private static bool NeedsCloning(object? value)
     {
-        return value is not null && (IsComplexObject(value) || IsCollection(value) || IsDictionary(value));
+        return value is not null
+            && (IsComplexObject(value) || IsCollection(value) || IsDictionary(value));
     }
 
     /// <summary>
@@ -200,11 +212,13 @@ public static class DeepMergeHelper
         var type = value.GetType();
 
         // 数组或实现了泛型集合接口的类型
-        return type.IsArray || type.IsGenericType && (
-            typeof(IList<>).IsAssignableFrom(type.GetGenericTypeDefinition()) ||
-            typeof(ICollection<>).IsAssignableFrom(type.GetGenericTypeDefinition()) ||
-            typeof(IEnumerable<>).IsAssignableFrom(type.GetGenericTypeDefinition())
-        );
+        return type.IsArray
+            || type.IsGenericType
+                && (
+                    typeof(IList<>).IsAssignableFrom(type.GetGenericTypeDefinition())
+                    || typeof(ICollection<>).IsAssignableFrom(type.GetGenericTypeDefinition())
+                    || typeof(IEnumerable<>).IsAssignableFrom(type.GetGenericTypeDefinition())
+                );
     }
 
     /// <summary>
@@ -236,16 +250,16 @@ public static class DeepMergeHelper
         var type = value.GetType();
 
         // 排除基本类型、枚举和常见值类型
-        return !type.IsPrimitive &&
-               !type.IsEnum &&
-               type != typeof(string) &&
-               type != typeof(DateTime) &&
-               type != typeof(DateTimeOffset) &&
-               type != typeof(TimeSpan) &&
-               type != typeof(decimal) &&
-               type != typeof(Guid) &&
-               !type.IsArray &&
-               value is not ICollection;
+        return !type.IsPrimitive
+            && !type.IsEnum
+            && type != typeof(string)
+            && type != typeof(DateTime)
+            && type != typeof(DateTimeOffset)
+            && type != typeof(TimeSpan)
+            && type != typeof(decimal)
+            && type != typeof(Guid)
+            && !type.IsArray
+            && value is not ICollection;
     }
 
     /// <summary>
@@ -484,14 +498,14 @@ public static class DeepMergeHelper
     /// </summary>
     private static bool IsSimpleType(Type type)
     {
-        return type.IsPrimitive ||
-               type.IsEnum ||
-               type == typeof(string) ||
-               type == typeof(DateTime) ||
-               type == typeof(DateTimeOffset) ||
-               type == typeof(TimeSpan) ||
-               type == typeof(decimal) ||
-               type == typeof(Guid);
+        return type.IsPrimitive
+            || type.IsEnum
+            || type == typeof(string)
+            || type == typeof(DateTime)
+            || type == typeof(DateTimeOffset)
+            || type == typeof(TimeSpan)
+            || type == typeof(decimal)
+            || type == typeof(Guid);
     }
 
     /// <summary>

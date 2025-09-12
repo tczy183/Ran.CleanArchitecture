@@ -124,8 +124,11 @@ public static class DirectoryHelper
     /// <returns>包含目录中所有文件路径的数组</returns>
     public static string[] GetFiles(string directoryPath, string searchPattern, bool isSearchChild)
     {
-        return Directory.GetFiles(directoryPath, searchPattern,
-            isSearchChild ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+        return Directory.GetFiles(
+            directoryPath,
+            searchPattern,
+            isSearchChild ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly
+        );
     }
 
     /// <summary>
@@ -145,10 +148,17 @@ public static class DirectoryHelper
     /// <param name="searchPattern">模式字符串，"*"代表0或 N 个字符，"?"代表1个字符 范例:"Log*.xml"表示搜索所有以 Log 开头的 Xml 目录</param>
     /// <param name="isSearchChild">是否搜索子目录</param>
     /// <returns>包含目录中所有文件路径的数组</returns>
-    public static string[] GetDirectories(string directoryPath, string searchPattern, bool isSearchChild)
+    public static string[] GetDirectories(
+        string directoryPath,
+        string searchPattern,
+        bool isSearchChild
+    )
     {
-        return Directory.GetDirectories(directoryPath, searchPattern,
-            isSearchChild ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+        return Directory.GetDirectories(
+            directoryPath,
+            searchPattern,
+            isSearchChild ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly
+        );
     }
 
     /// <summary>
@@ -215,7 +225,11 @@ public static class DirectoryHelper
     /// <param name="isSearchChild">是否搜索子目录</param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public static bool IsContainsFiles(string directoryPath, string searchPattern, bool isSearchChild)
+    public static bool IsContainsFiles(
+        string directoryPath,
+        string searchPattern,
+        bool isSearchChild
+    )
     {
         // 获取指定的文件列表
         var fileNames = GetFiles(directoryPath, searchPattern, isSearchChild);

@@ -81,9 +81,7 @@ public class SortConditionDto<T> : SortConditionDto
     /// </summary>
     /// <param name="keySelector">属性选择器</param>
     public SortConditionDto(Expression<Func<T, object>> keySelector)
-        : base(keySelector.GetPropertyName())
-    {
-    }
+        : base(keySelector.GetPropertyName()) { }
 
     /// <summary>
     /// 使用排序字段与排序方式，初始化一个<see cref="SortConditionDto"/>类型的新实例
@@ -91,9 +89,7 @@ public class SortConditionDto<T> : SortConditionDto
     /// <param name="keySelector">属性选择器</param>
     /// <param name="sortPriority">排序优先级</param>
     public SortConditionDto(Expression<Func<T, object>> keySelector, int sortPriority)
-        : base(keySelector.GetPropertyName(), sortPriority)
-    {
-    }
+        : base(keySelector.GetPropertyName(), sortPriority) { }
 
     /// <summary>
     /// 使用排序字段与排序方式，初始化一个<see cref="SortConditionDto"/>类型的新实例
@@ -101,9 +97,7 @@ public class SortConditionDto<T> : SortConditionDto
     /// <param name="keySelector">属性选择器</param>
     /// <param name="sortDirection">排序方式</param>
     public SortConditionDto(Expression<Func<T, object>> keySelector, SortDirection sortDirection)
-        : base(keySelector.GetPropertyName(), sortDirection)
-    {
-    }
+        : base(keySelector.GetPropertyName(), sortDirection) { }
 
     /// <summary>
     /// 使用排序字段与排序方式，初始化一个<see cref="SortConditionDto"/>类型的新实例
@@ -111,8 +105,10 @@ public class SortConditionDto<T> : SortConditionDto
     /// <param name="keySelector">属性选择器</param>
     /// <param name="sortPriority">排序优先级</param>
     /// <param name="sortDirection">排序方式</param>
-    public SortConditionDto(Expression<Func<T, object>> keySelector, int sortPriority, SortDirection sortDirection)
-        : base(keySelector.GetPropertyName(), sortPriority, sortDirection)
-    {
-    }
+    public SortConditionDto(
+        Expression<Func<T, object>> keySelector,
+        int sortPriority,
+        SortDirection sortDirection
+    )
+        : base(keySelector.GetPropertyName(), sortPriority, sortDirection) { }
 }

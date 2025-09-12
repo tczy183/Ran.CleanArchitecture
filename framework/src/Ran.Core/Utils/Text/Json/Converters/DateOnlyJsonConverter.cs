@@ -31,10 +31,16 @@ public class DateOnlyJsonConverter : JsonConverter<DateOnly>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override DateOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override DateOnly Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
-        if (reader.TokenType == JsonTokenType.String &&
-            DateOnly.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var date))
+        if (
+            reader.TokenType == JsonTokenType.String
+            && DateOnly.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var date)
+        )
         {
             return date;
         }
@@ -85,10 +91,16 @@ public class DateOnlyNullableConverter : JsonConverter<DateOnly?>
     /// <param name="typeToConvert"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override DateOnly? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override DateOnly? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
-        if (reader.TokenType == JsonTokenType.String &&
-            DateOnly.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var date))
+        if (
+            reader.TokenType == JsonTokenType.String
+            && DateOnly.TryParse(reader.GetString(), CultureInfo.CurrentCulture, out var date)
+        )
         {
             return date;
         }
@@ -102,7 +114,11 @@ public class DateOnlyNullableConverter : JsonConverter<DateOnly?>
     /// <param name="writer"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public override void Write(Utf8JsonWriter writer, DateOnly? value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DateOnly? value,
+        JsonSerializerOptions options
+    )
     {
         if (value.HasValue)
         {

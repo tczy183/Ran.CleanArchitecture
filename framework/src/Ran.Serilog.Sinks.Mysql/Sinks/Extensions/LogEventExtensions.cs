@@ -78,11 +78,7 @@ internal static class LogEventExtensions
                     dictionary.Add(key, Simplify(readOnlyDictionary[key]));
                 return dictionary;
             case SequenceValue sequenceValue:
-                return sequenceValue
-                    .Elements.Select(
-                        Simplify
-                    )
-                    .ToArray();
+                return sequenceValue.Elements.Select(Simplify).ToArray();
             case StructureValue structureValue:
                 try
                 {
@@ -118,4 +114,3 @@ internal static class LogEventExtensions
         }
     }
 }
-

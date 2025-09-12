@@ -10,10 +10,13 @@ public static class ApplicationInitializationContextExtensions
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public static IApplicationBuilder GetApplicationBuilder(this ApplicationInitializationContext context)
+    public static IApplicationBuilder GetApplicationBuilder(
+        this ApplicationInitializationContext context
+    )
     {
-        var applicationBuilder =
-            context.ServiceProvider.GetRequiredService<IObjectAccessor<IApplicationBuilder>>().Value;
+        var applicationBuilder = context
+            .ServiceProvider.GetRequiredService<IObjectAccessor<IApplicationBuilder>>()
+            .Value;
 
         _ = CheckHelper.NotNull(applicationBuilder, nameof(applicationBuilder));
 
@@ -25,9 +28,13 @@ public static class ApplicationInitializationContextExtensions
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public static IApplicationBuilder? GetApplicationBuilderOrNull(this ApplicationInitializationContext context)
+    public static IApplicationBuilder? GetApplicationBuilderOrNull(
+        this ApplicationInitializationContext context
+    )
     {
-        return context.ServiceProvider.GetRequiredService<IObjectAccessor<IApplicationBuilder>>().Value;
+        return context
+            .ServiceProvider.GetRequiredService<IObjectAccessor<IApplicationBuilder>>()
+            .Value;
     }
 
     /// <summary>
@@ -35,10 +42,13 @@ public static class ApplicationInitializationContextExtensions
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public static IEndpointRouteBuilder GetEndpointRouteBuilder(this ApplicationInitializationContext context)
+    public static IEndpointRouteBuilder GetEndpointRouteBuilder(
+        this ApplicationInitializationContext context
+    )
     {
-        var endpointRouteBuilder =
-            context.ServiceProvider.GetRequiredService<IObjectAccessor<IEndpointRouteBuilder>>().Value;
+        var endpointRouteBuilder = context
+            .ServiceProvider.GetRequiredService<IObjectAccessor<IEndpointRouteBuilder>>()
+            .Value;
 
         _ = CheckHelper.NotNull(endpointRouteBuilder, nameof(endpointRouteBuilder));
 
@@ -50,9 +60,13 @@ public static class ApplicationInitializationContextExtensions
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public static IEndpointRouteBuilder GetEndpointRouteBuilderOrNull(this ApplicationInitializationContext context)
+    public static IEndpointRouteBuilder GetEndpointRouteBuilderOrNull(
+        this ApplicationInitializationContext context
+    )
     {
-        return context.ServiceProvider.GetRequiredService<IObjectAccessor<IEndpointRouteBuilder>>().Value;
+        return context
+            .ServiceProvider.GetRequiredService<IObjectAccessor<IEndpointRouteBuilder>>()
+            .Value;
     }
 
     /// <summary>
@@ -65,13 +79,14 @@ public static class ApplicationInitializationContextExtensions
         return context.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
     }
 
-
     /// <summary>
     /// 获取环境
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public static IWebHostEnvironment? GetEnvironmentOrNull(this ApplicationInitializationContext context)
+    public static IWebHostEnvironment? GetEnvironmentOrNull(
+        this ApplicationInitializationContext context
+    )
     {
         return context.ServiceProvider.GetService<IWebHostEnvironment>();
     }

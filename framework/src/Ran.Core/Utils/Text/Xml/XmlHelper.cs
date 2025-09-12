@@ -25,7 +25,7 @@ public static class XmlHelper
         {
             OmitXmlDeclaration = omitXmlDeclaration,
             Indent = indent,
-            Encoding = Encoding.UTF8
+            Encoding = Encoding.UTF8,
         };
 
         using var stream = new StringWriter();
@@ -48,14 +48,13 @@ public static class XmlHelper
     {
         var settings = new XmlReaderSettings
         {
-            DtdProcessing = DtdProcessing.Prohibit // 禁用 DTD 处理
+            DtdProcessing = DtdProcessing.Prohibit, // 禁用 DTD 处理
         };
 
         using var stringReader = new StringReader(xml);
         using var xmlReader = XmlReader.Create(stringReader, settings);
         var serializer = new XmlSerializer(typeof(T));
         var objectValue = serializer.Deserialize(xmlReader);
-
 
         return objectValue is T result ? result : throw new Exception("反序列化失败");
     }

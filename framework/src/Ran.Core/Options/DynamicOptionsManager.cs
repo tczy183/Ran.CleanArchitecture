@@ -12,9 +12,7 @@ public abstract class DynamicOptionsManager<T> : OptionsManager<T>
     /// </summary>
     /// <param name="factory"></param>
     protected DynamicOptionsManager(IOptionsFactory<T> factory)
-        : base(factory)
-    {
-    }
+        : base(factory) { }
 
     /// <summary>
     /// 设置

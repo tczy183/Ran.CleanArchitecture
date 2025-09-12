@@ -6,11 +6,9 @@ public abstract class AggregateRoot<TKey> : Entity<TKey>, IAggregateRoot<TKey>
 {
     public string ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
 
-    private readonly ICollection<DomainEventRecord> _distributedEvents =
-        [];
+    private readonly ICollection<DomainEventRecord> _distributedEvents = [];
 
-    private readonly ICollection<DomainEventRecord> _localEvents =
-        [];
+    private readonly ICollection<DomainEventRecord> _localEvents = [];
 
     public IEnumerable<DomainEventRecord> GetLocalEvents()
     {

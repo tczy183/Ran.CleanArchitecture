@@ -15,8 +15,10 @@ public static class ServiceCollectionRegistrationActionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="registrationAction"></param>
-    public static void OnRegistered(this IServiceCollection services,
-        Action<IOnServiceRegistredContext> registrationAction)
+    public static void OnRegistered(
+        this IServiceCollection services,
+        Action<IOnServiceRegistredContext> registrationAction
+    )
     {
         GetOrCreateRegistrationActionList(services).Add(registrationAction);
     }
@@ -26,7 +28,9 @@ public static class ServiceCollectionRegistrationActionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static ServiceRegistrationActionList GetRegistrationActionList(this IServiceCollection services)
+    public static ServiceRegistrationActionList GetRegistrationActionList(
+        this IServiceCollection services
+    )
     {
         return GetOrCreateRegistrationActionList(services);
     }
@@ -36,9 +40,13 @@ public static class ServiceCollectionRegistrationActionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    private static ServiceRegistrationActionList GetOrCreateRegistrationActionList(IServiceCollection services)
+    private static ServiceRegistrationActionList GetOrCreateRegistrationActionList(
+        IServiceCollection services
+    )
     {
-        var actionList = services.GetSingletonInstanceOrNull<IObjectAccessor<ServiceRegistrationActionList>>()?.Value;
+        var actionList = services
+            .GetSingletonInstanceOrNull<IObjectAccessor<ServiceRegistrationActionList>>()
+            ?.Value;
         if (actionList is not null)
         {
             return actionList;
@@ -78,7 +86,10 @@ public static class ServiceCollectionRegistrationActionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="exposeAction"></param>
-    public static void OnExposing(this IServiceCollection services, Action<IOnServiceExposingContext> exposeAction)
+    public static void OnExposing(
+        this IServiceCollection services,
+        Action<IOnServiceExposingContext> exposeAction
+    )
     {
         GetOrCreateExposingList(services).Add(exposeAction);
     }
@@ -100,7 +111,9 @@ public static class ServiceCollectionRegistrationActionExtensions
     /// <returns></returns>
     private static ServiceExposingActionList GetOrCreateExposingList(IServiceCollection services)
     {
-        var actionList = services.GetSingletonInstanceOrNull<IObjectAccessor<ServiceExposingActionList>>()?.Value;
+        var actionList = services
+            .GetSingletonInstanceOrNull<IObjectAccessor<ServiceExposingActionList>>()
+            ?.Value;
         if (actionList is not null)
         {
             return actionList;

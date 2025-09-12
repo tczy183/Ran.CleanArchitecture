@@ -19,12 +19,7 @@ public static class CultureHelper
     {
         _ = CheckHelper.NotNull(culture, nameof(culture));
 
-        return Use(
-            new CultureInfo(culture),
-            uiCulture is null
-                ? null
-                : new CultureInfo(uiCulture)
-        );
+        return Use(new CultureInfo(culture), uiCulture is null ? null : new CultureInfo(uiCulture));
     }
 
     /// <summary>
@@ -43,12 +38,15 @@ public static class CultureHelper
         CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = uiCulture ?? culture;
 
-        return new DisposeAction<ValueTuple<CultureInfo, CultureInfo>>(static (state) =>
-        {
-            var (currentCulture, currentUiCulture) = state;
-            CultureInfo.CurrentCulture = currentCulture;
-            CultureInfo.CurrentUICulture = currentUiCulture;
-        }, (currentCulture, currentUiCulture));
+        return new DisposeAction<ValueTuple<CultureInfo, CultureInfo>>(
+            static (state) =>
+            {
+                var (currentCulture, currentUiCulture) = state;
+                CultureInfo.CurrentCulture = currentCulture;
+                CultureInfo.CurrentUICulture = currentUiCulture;
+            },
+            (currentCulture, currentUiCulture)
+        );
     }
 
     /// <summary>
@@ -116,7 +114,8 @@ public static class CultureHelper
             } while (!culture.Equals(CultureInfo.InvariantCulture));
         }
 
-        return !sourceCultureName.Contains('-') && targetCultureName.Contains('-') &&
-               sourceCultureName == GetBaseCultureName(targetCultureName);
+        return !sourceCultureName.Contains('-')
+            && targetCultureName.Contains('-')
+            && sourceCultureName == GetBaseCultureName(targetCultureName);
     }
 }

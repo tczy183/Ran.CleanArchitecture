@@ -1,62 +1,74 @@
 namespace Quartz.EntityFrameworkCore.MySql.EntityTypeConfigurations;
 
-public class QuartzJobDetailEntityTypeConfiguration(string? prefix) : IEntityTypeConfiguration<QuartzJobDetail>
+public class QuartzJobDetailEntityTypeConfiguration(string? prefix)
+    : IEntityTypeConfiguration<QuartzJobDetail>
 {
     public void Configure(EntityTypeBuilder<QuartzJobDetail> builder)
     {
         builder.ToTable($"{prefix}JOB_DETAILS");
 
-        builder.HasKey(x => new { x.SchedulerName, x.JobName, x.JobGroup });
+        builder.HasKey(x => new
+        {
+            x.SchedulerName,
+            x.JobName,
+            x.JobGroup,
+        });
 
-        builder.Property(x => x.SchedulerName)
+        builder
+            .Property(x => x.SchedulerName)
             .HasColumnName("SCHED_NAME")
             .HasColumnType("varchar(120)")
             .IsRequired();
 
-        builder.Property(x => x.JobName)
+        builder
+            .Property(x => x.JobName)
             .HasColumnName("JOB_NAME")
             .HasColumnType("varchar(200)")
             .IsRequired();
 
-        builder.Property(x => x.JobGroup)
+        builder
+            .Property(x => x.JobGroup)
             .HasColumnName("JOB_GROUP")
             .HasColumnType("varchar(200)")
             .IsRequired();
 
-        builder.Property(x => x.Description)
+        builder
+            .Property(x => x.Description)
             .HasColumnName("DESCRIPTION")
             .HasColumnType("varchar(250)");
 
-        builder.Property(x => x.JobClassName)
+        builder
+            .Property(x => x.JobClassName)
             .HasColumnName("JOB_CLASS_NAME")
             .HasColumnType("varchar(250)")
             .IsRequired();
 
-        builder.Property(x => x.IsDurable)
+        builder
+            .Property(x => x.IsDurable)
             .HasColumnName("IS_DURABLE")
             .HasColumnType("tinyint(1)")
             .IsRequired();
 
-        builder.Property(x => x.IsNonConcurrent)
+        builder
+            .Property(x => x.IsNonConcurrent)
             .HasColumnName("IS_NONCONCURRENT")
             .HasColumnType("tinyint(1)")
             .IsRequired();
 
-        builder.Property(x => x.IsUpdateData)
+        builder
+            .Property(x => x.IsUpdateData)
             .HasColumnName("IS_UPDATE_DATA")
             .HasColumnType("tinyint(1)")
             .IsRequired();
 
-        builder.Property(x => x.RequestsRecovery)
+        builder
+            .Property(x => x.RequestsRecovery)
             .HasColumnName("REQUESTS_RECOVERY")
             .HasColumnType("tinyint(1)")
             .IsRequired();
 
-        builder.Property(x => x.JobData)
-            .HasColumnName("JOB_DATA")
-            .HasColumnType("blob");
+        builder.Property(x => x.JobData).HasColumnName("JOB_DATA").HasColumnType("blob");
 
-        builder.HasIndex(x => x.RequestsRecovery)
-            .HasDatabaseName($"IDX_{prefix}J_REQ_RECOVERY");
+        builder.HasIndex(x => x.RequestsRecovery).HasDatabaseName($"IDX_{prefix}J_REQ_RECOVERY");
     }
 }

@@ -4,6 +4,4 @@ using Ran.Ddd.Domain;
 namespace Ran.Ddd.EntityFramework;
 
 [DependsOn(typeof(DddDomainModule))]
-public class EntityFrameworkModule : DddModule
-{
-}
+public class EntityFrameworkModule : DddModule { }

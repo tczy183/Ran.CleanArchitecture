@@ -15,7 +15,10 @@ public static class TreeExtensions
     /// <param name="source"></param>
     /// <param name="isChild"></param>
     /// <returns></returns>
-    public static IEnumerable<TreeNodeDto<T>> ToTree<T>(this IEnumerable<T> source, Func<T, T, bool> isChild)
+    public static IEnumerable<TreeNodeDto<T>> ToTree<T>(
+        this IEnumerable<T> source,
+        Func<T, T, bool> isChild
+    )
     {
         var nodes = source.Select(value => new TreeNodeDto<T>(value)).ToList();
         var visited = new HashSet<T>();
@@ -62,8 +65,11 @@ public static class TreeExtensions
     /// <param name="keySelector">主键选择器</param>
     /// <param name="parentKeySelector">父级主键选择器</param>
     /// <returns>树形结构</returns>
-    public static IEnumerable<TreeNodeDto<T>> ToTree<T>(this IEnumerable<T> source, Func<T, object> keySelector,
-        Func<T, object> parentKeySelector)
+    public static IEnumerable<TreeNodeDto<T>> ToTree<T>(
+        this IEnumerable<T> source,
+        Func<T, object> keySelector,
+        Func<T, object> parentKeySelector
+    )
     {
         var nodes = source.Select(value => new TreeNodeDto<T>(value)).ToList();
         var lookup = nodes.ToLookup(node => parentKeySelector(node.Value), node => node);
@@ -73,9 +79,10 @@ public static class TreeExtensions
             node.Children.AddRange(lookup[keySelector(node.Value)]);
         }
 
-        return nodes.Where(node => parentKeySelector(node.Value) is null
-                                   || !nodes.Any(n =>
-                                       keySelector(n.Value)?.Equals(parentKeySelector(node.Value)) == true));
+        return nodes.Where(node =>
+            parentKeySelector(node.Value) is null
+            || !nodes.Any(n => keySelector(n.Value)?.Equals(parentKeySelector(node.Value)) == true)
+        );
     }
 
     /// <summary>
@@ -101,8 +108,13 @@ public static class TreeExtensions
     /// <param name="child">子节点对象</param>
     /// <param name="keySelector">主键选择器</param>
     /// <param name="parentKeySelector">父级主键选择器</param>
-    public static void AddChild<T>(this IEnumerable<TreeNodeDto<T>> source, T parent, T child,
-        Func<T, object> keySelector, Func<T, object> parentKeySelector)
+    public static void AddChild<T>(
+        this IEnumerable<TreeNodeDto<T>> source,
+        T parent,
+        T child,
+        Func<T, object> keySelector,
+        Func<T, object> parentKeySelector
+    )
     {
         if (parent is null)
         {
@@ -114,10 +126,12 @@ public static class TreeExtensions
             throw new ArgumentNullException(nameof(child), "子节点不能为空");
         }
 
-        var parentNode = source
-                             .DepthFirstTraversal()
-                             .FirstOrDefault(node => keySelector(node.Value)?.Equals(keySelector(parent)) == true)
-                         ?? throw new InvalidOperationException("在树中未找到父节点");
+        var parentNode =
+            source
+                .DepthFirstTraversal()
+                .FirstOrDefault(node =>
+                    keySelector(node.Value)?.Equals(keySelector(parent)) == true
+                ) ?? throw new InvalidOperationException("在树中未找到父节点");
 
         _ = parentKeySelector.Invoke(child).SetPropertyValue("Children", keySelector(parent));
         parentNode.Children.Add(new TreeNodeDto<T>(child));
@@ -184,7 +198,9 @@ public static class TreeExtensions
     /// <typeparam name="T"></typeparam>
     /// <param name="source"></param>
     /// <returns></returns>
-    public static IEnumerable<TreeNodeDto<T>> DepthFirstTraversal<T>(this IEnumerable<TreeNodeDto<T>> source)
+    public static IEnumerable<TreeNodeDto<T>> DepthFirstTraversal<T>(
+        this IEnumerable<TreeNodeDto<T>> source
+    )
     {
         if (source is null)
         {
@@ -237,7 +253,8 @@ public static class TreeExtensions
     /// <returns></returns>
     public static TreeNodeDto<T>? FindNode<T>(this TreeNodeDto<T> root, T value)
     {
-        return root.DepthFirstTraversal().FirstOrDefault(node => EqualityComparer<T>.Default.Equals(node.Value, value));
+        return root.DepthFirstTraversal()
+            .FirstOrDefault(node => EqualityComparer<T>.Default.Equals(node.Value, value));
     }
 
     /// <summary>
@@ -261,7 +278,9 @@ public static class TreeExtensions
     /// <returns></returns>
     public static int GetHeight<T>(this TreeNodeDto<T> root)
     {
-        return root is null ? 0 : 1 + root.Children.Select(child => child.GetHeight()).DefaultIfEmpty(0).Max();
+        return root is null
+            ? 0
+            : 1 + root.Children.Select(child => child.GetHeight()).DefaultIfEmpty(0).Max();
     }
 
     /// <summary>

@@ -12,9 +12,7 @@ public class AsyncReaderWriterLock : IDisposable
     /// <summary>
     /// 初始化异步读写锁
     /// </summary>
-    public AsyncReaderWriterLock()
-    {
-    }
+    public AsyncReaderWriterLock() { }
 
     #region 读锁
 

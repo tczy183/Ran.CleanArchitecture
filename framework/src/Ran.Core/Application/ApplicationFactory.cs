@@ -16,7 +16,8 @@ public static class ApplicationFactory
     /// <param name="optionsAction"></param>
     /// <returns></returns>
     public static async Task<IApplicationWithInternalServiceProvider> CreateAsync<TStartupModule>(
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
         where TStartupModule : IModule
     {
         var app = await CreateAsync<TStartupModule>(options =>
@@ -36,13 +37,17 @@ public static class ApplicationFactory
     /// <returns></returns>
     public static async Task<IApplicationWithInternalServiceProvider> CreateAsync(
         Type startupModuleType,
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
     {
-        ApplicationWithInternalServiceProvider app = new(startupModuleType, options =>
-        {
-            options.SkipConfigureServices = true;
-            optionsAction?.Invoke(options);
-        });
+        ApplicationWithInternalServiceProvider app = new(
+            startupModuleType,
+            options =>
+            {
+                options.SkipConfigureServices = true;
+                optionsAction?.Invoke(options);
+            }
+        );
         await app.ConfigureServicesAsync();
         return app;
     }
@@ -54,7 +59,8 @@ public static class ApplicationFactory
     /// <param name="optionsAction"></param>
     /// <returns></returns>
     public static IApplicationWithInternalServiceProvider Create<TStartupModule>(
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
         where TStartupModule : IModule
     {
         return Create(typeof(TStartupModule), optionsAction);
@@ -68,7 +74,8 @@ public static class ApplicationFactory
     /// <returns></returns>
     public static IApplicationWithInternalServiceProvider Create(
         Type startupModuleType,
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
     {
         return new ApplicationWithInternalServiceProvider(startupModuleType, optionsAction);
     }
@@ -86,7 +93,8 @@ public static class ApplicationFactory
     /// <returns></returns>
     public static async Task<IApplicationWithExternalServiceProvider> CreateAsync<TStartupModule>(
         IServiceCollection services,
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
         where TStartupModule : IModule
     {
         return await CreateAsync(typeof(TStartupModule), services, optionsAction);
@@ -102,13 +110,18 @@ public static class ApplicationFactory
     public static async Task<IApplicationWithExternalServiceProvider> CreateAsync(
         Type startupModuleType,
         IServiceCollection services,
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
     {
-        var app = new ApplicationWithExternalServiceProvider(startupModuleType, services, options =>
-        {
-            options.SkipConfigureServices = true;
-            optionsAction?.Invoke(options);
-        });
+        var app = new ApplicationWithExternalServiceProvider(
+            startupModuleType,
+            services,
+            options =>
+            {
+                options.SkipConfigureServices = true;
+                optionsAction?.Invoke(options);
+            }
+        );
         await app.ConfigureServicesAsync();
         return app;
     }
@@ -122,7 +135,8 @@ public static class ApplicationFactory
     /// <returns></returns>
     public static IApplicationWithExternalServiceProvider Create<TStartupModule>(
         IServiceCollection services,
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
         where TStartupModule : IModule
     {
         return Create(typeof(TStartupModule), services, optionsAction);
@@ -138,9 +152,14 @@ public static class ApplicationFactory
     public static IApplicationWithExternalServiceProvider Create(
         Type startupModuleType,
         IServiceCollection services,
-        Action<ApplicationCreationOptions>? optionsAction = null)
+        Action<ApplicationCreationOptions>? optionsAction = null
+    )
     {
-        return new ApplicationWithExternalServiceProvider(startupModuleType, services, optionsAction);
+        return new ApplicationWithExternalServiceProvider(
+            startupModuleType,
+            services,
+            optionsAction
+        );
     }
 
     #endregion 创建外部服务应用

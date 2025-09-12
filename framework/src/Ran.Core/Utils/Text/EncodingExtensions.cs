@@ -115,8 +115,11 @@ public static partial class EncodingExtensions
     /// <returns>解码后的字符串</returns>
     public static string UnicodeDecode(this string data)
     {
-        return UnicodeRegex().Replace(data,
-            match => ((char)int.Parse(match.Groups[1].Value, NumberStyles.HexNumber)).ToString());
+        return UnicodeRegex()
+            .Replace(
+                data,
+                match => ((char)int.Parse(match.Groups[1].Value, NumberStyles.HexNumber)).ToString()
+            );
     }
 
     /// <summary>
@@ -199,7 +202,6 @@ public static class Base32
             return sb.ToString();
         }
 
-
         const int mask = 0x1f;
         var currentBase32ValueDemo = accumulatedBits & mask;
         _ = sb.Append(Base32Alphabet[currentBase32ValueDemo]);
@@ -231,7 +233,11 @@ public static class Base32
         var bitCount = 0;
         var accumulatedBits = 0;
         var bufferIndex = 0;
-        foreach (var currentCharValue in base32String.Select(currentChar => Base32Alphabet.IndexOf(currentChar)))
+        foreach (
+            var currentCharValue in base32String.Select(currentChar =>
+                Base32Alphabet.IndexOf(currentChar)
+            )
+        )
         {
             if (currentCharValue is < 0 or > 31)
             {

@@ -92,7 +92,10 @@ public static class CollectionExtensions
     /// <param name="items">要检查并添加的项的集合</param>
     /// <typeparam name="T">集合中项的类型</typeparam>
     /// <returns>返回添加的项的集合</returns>
-    public static IEnumerable<T> AddIfNotContains<T>(this ICollection<T> source, IEnumerable<T> items)
+    public static IEnumerable<T> AddIfNotContains<T>(
+        this ICollection<T> source,
+        IEnumerable<T> items
+    )
     {
         _ = CheckHelper.NotNull(source, nameof(source));
         var enumerable = items as T[] ?? items.ToArray();
@@ -122,7 +125,11 @@ public static class CollectionExtensions
     /// <param name="itemFactory">返回项的工厂函数</param>
     /// <typeparam name="T">集合中项的类型</typeparam>
     /// <returns>如果添加了项，则返回真(True)；如果没有添加（即项已存在）则返回假(False)</returns>
-    public static bool AddIfNotContains<T>(this ICollection<T> source, Func<T, bool> predicate, Func<T> itemFactory)
+    public static bool AddIfNotContains<T>(
+        this ICollection<T> source,
+        Func<T, bool> predicate,
+        Func<T> itemFactory
+    )
     {
         _ = CheckHelper.NotNull(source, nameof(source));
 
