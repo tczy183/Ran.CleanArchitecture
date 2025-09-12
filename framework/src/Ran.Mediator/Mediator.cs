@@ -1,11 +1,12 @@
 ﻿using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using Ran.Mediator.Exceptions;
+using Ran.Mediator.Requests;
 using Ran.Mediator.Requests.Notification;
 using Ran.Mediator.Requests.Send;
 using Ran.Mediator.Requests.Stream;
 
-namespace Ran.Mediator.Requests;
+namespace Ran.Mediator;
 
 public sealed class Mediator(IServiceProvider serviceProvider) : IMediator
 {

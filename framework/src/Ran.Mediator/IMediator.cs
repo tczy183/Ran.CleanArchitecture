@@ -1,8 +1,9 @@
-﻿using Ran.Mediator.Requests.Notification;
+﻿using System.ComponentModel.DataAnnotations;
+using Ran.Mediator.Requests.Notification;
 using Ran.Mediator.Requests.Send;
 using Ran.Mediator.Requests.Stream;
 
-namespace Ran.Mediator.Requests;
+namespace Ran.Mediator;
 
 public interface IMediator
 {
