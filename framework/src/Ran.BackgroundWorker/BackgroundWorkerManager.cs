@@ -11,6 +11,7 @@ public class BackgroundWorkerManager : IBackgroundWorkerManager, ISingletonDepen
     protected bool IsRunning { get; private set; }
 
     private bool _isDisposed;
+    private readonly object _sync = new();
 
     private readonly List<IBackgroundWorker> _backgroundWorkers;
 
@@ -27,9 +28,20 @@ public class BackgroundWorkerManager : IBackgroundWorkerManager, ISingletonDepen
         CancellationToken cancellationToken = default
     )
     {
-        _backgroundWorkers.Add(worker);
+        bool shouldStart;
+        lock (_sync)
+        {
+            ObjectDisposedException.ThrowIf(_isDisposed, this);
+            if (_backgroundWorkers.Contains(worker))
+            {
+                return;
+            }
 
-        if (IsRunning)
+            _backgroundWorkers.Add(worker);
+            shouldStart = IsRunning;
+        }
+
+        if (shouldStart)
         {
             await worker.StartAsync(cancellationToken);
         }
@@ -37,21 +49,45 @@ public class BackgroundWorkerManager : IBackgroundWorkerManager, ISingletonDepen
 
     public virtual void Dispose()
     {
-        if (_isDisposed)
+        List<IBackgroundWorker> workers;
+        lock (_sync)
         {
-            return;
+            if (_isDisposed)
+            {
+                return;
+            }
+
+            _isDisposed = true;
+            IsRunning = false;
+            workers = [.. _backgroundWorkers];
+            _backgroundWorkers.Clear();
         }
 
-        _isDisposed = true;
-
-        //TODO: ???
+        foreach (var worker in workers)
+        {
+            if (worker is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
+        }
     }
 
     public virtual async Task StartAsync(CancellationToken cancellationToken = default)
     {
-        IsRunning = true;
+        List<IBackgroundWorker> workers;
+        lock (_sync)
+        {
+            ObjectDisposedException.ThrowIf(_isDisposed, this);
+            if (IsRunning)
+            {
+                return;
+            }
 
-        foreach (var worker in _backgroundWorkers)
+            IsRunning = true;
+            workers = [.. _backgroundWorkers];
+        }
+
+        foreach (var worker in workers)
         {
             await worker.StartAsync(cancellationToken);
         }
@@ -59,11 +95,21 @@ public class BackgroundWorkerManager : IBackgroundWorkerManager, ISingletonDepen
 
     public virtual async Task StopAsync(CancellationToken cancellationToken = default)
     {
-        IsRunning = false;
-
-        foreach (var worker in _backgroundWorkers)
+        List<IBackgroundWorker> workers;
+        lock (_sync)
         {
-            await worker.StopAsync(cancellationToken);
+            if (!IsRunning)
+            {
+                return;
+            }
+
+            IsRunning = false;
+            workers = [.. _backgroundWorkers];
+        }
+
+        for (var index = workers.Count - 1; index >= 0; index--)
+        {
+            await workers[index].StopAsync(cancellationToken);
         }
     }
 }

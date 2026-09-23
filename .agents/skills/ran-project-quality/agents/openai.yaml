@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ran Project Quality"
+  short_description: "Build, format, test, and validate repository changes"
+  default_prompt: "Use $ran-project-quality to validate the current repository changes."

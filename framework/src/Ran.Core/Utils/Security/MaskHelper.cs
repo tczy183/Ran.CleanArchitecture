@@ -109,29 +109,19 @@ public static partial class MaskHelper
     /// <returns>脱敏后的邮箱地址</returns>
     public static string MaskEmail(string email)
     {
-        var emailRegex = RegexHelper.EmailRegex();
-        var match = emailRegex.Match(email);
-        if (!match.Success)
+        if (!RegexHelper.IsEmail(email))
         {
             return email;
         }
 
-        var userName = match.Groups[1].Value;
-        var domain = match.Groups[2].Value;
-        var suffix = match.Groups[3].Value;
-
-        if (userName.Length <= 3)
-        {
-            userName += new string('*', 3 - userName.Length);
-        }
-        else
-        {
-            userName = userName[..3] + new string('*', userName.Length - 3);
-        }
-
-        domain = domain[..3] + new string('*', domain.Length - 3);
-
-        return $"{userName}@{domain}.{suffix}";
+        var atIndex = email.IndexOf('@', StringComparison.Ordinal);
+        var userName = email[..atIndex];
+        var visibleLength = Math.Min(2, userName.Length);
+        return string.Concat(
+            userName.AsSpan(0, visibleLength),
+            new string('*', userName.Length - visibleLength),
+            email.AsSpan(atIndex)
+        );
     }
 
     /// <summary>
@@ -228,26 +218,32 @@ public static partial class MaskHelper
             return json;
         }
 
-        var patterns = new (string, string)[]
+        var maskers = new (string PropertyName, Func<string, string> Mask)[]
         {
-            ("\"name\"\\s*:\\s*\"([^\"]+)\"", $"\"name\": \"{MaskChineseName("$1")}\""),
-            ("\"phone\"\\s*:\\s*\"([^\"]+)\"", $"\"phone\": \"{MaskPhone("$1")}\""),
-            ("\"idCard\"\\s*:\\s*\"([^\"]+)\"", $"\"idCard\": \"{MaskIdCard("$1")}\""),
-            ("\"bankCard\"\\s*:\\s*\"([^\"]+)\"", $"\"bankCard\": \"{MaskBankCard("$1")}\""),
-            ("\"email\"\\s*:\\s*\"([^\"]+)\"", $"\"email\": \"{MaskEmail("$1")}\""),
-            ("\"password\"\\s*:\\s*\"([^\"]+)\"", $"\"password\": \"{MaskPassword("$1")}\""),
-            ("\"address\"\\s*:\\s*\"([^\"]+)\"", $"\"address\": \"{MaskAddress("$1")}\""),
-            (
-                "\"licensePlate\"\\s*:\\s*\"([^\"]+)\"",
-                $"\"licensePlate\": \"{MaskLicensePlate("$1")}\""
-            ),
-            ("\"url\"\\s*:\\s*\"([^\"]+)\"", $"\"url\": \"{MaskUrlParams("$1")}\""),
+            ("name", MaskChineseName),
+            ("phone", MaskPhone),
+            ("idCard", MaskIdCard),
+            ("bankCard", MaskBankCard),
+            ("email", MaskEmail),
+            ("password", MaskPassword),
+            ("address", MaskAddress),
+            ("licensePlate", MaskLicensePlate),
+            ("url", MaskUrlParams),
         };
 
-        foreach (var (pattern, replacement) in patterns)
+        foreach (var (propertyName, mask) in maskers)
         {
-            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
-            json = regex.Replace(json, replacement);
+            var pattern = $"(\"{Regex.Escape(propertyName)}\"\\s*:\\s*\")([^\"]+)(\")";
+            json = Regex.Replace(
+                json,
+                pattern,
+                match => string.Concat(
+                    match.Groups[1].Value,
+                    mask(match.Groups[2].Value),
+                    match.Groups[3].Value
+                ),
+                RegexOptions.IgnoreCase
+            );
         }
 
         return json;
@@ -276,6 +272,6 @@ public static partial class MaskHelper
 
     public static string MaskUrlParams(Uri url)
     {
-        throw new NotImplementedException();
+        return MaskUrlParams(url.ToString());
     }
 }

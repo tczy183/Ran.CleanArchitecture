@@ -136,7 +136,7 @@ public static partial class RegexHelper
     public static bool IsNumberPeople15(string checkValue)
     {
         // 数字验证
-        if (long.TryParse(checkValue, out var n) || n < Math.Pow(10, 14))
+        if (!long.TryParse(checkValue, out var n) || n < 100_000_000_000_000)
         {
             return false;
         }
@@ -189,8 +189,7 @@ public static partial class RegexHelper
     /// <returns></returns>
     public static bool IsInt(string source)
     {
-        return IntRegex().Match(source).Success
-            && long.Parse(source) is <= 0x7fffffffL and >= -2147483648L;
+        return IntRegex().IsMatch(source) && int.TryParse(source, out _);
     }
 
     /// <summary>
@@ -407,7 +406,7 @@ public static partial class RegexHelper
     /// <returns></returns>
     public static bool IsChinese(string checkValue)
     {
-        return ChineseRegex().Matches(checkValue).Count == checkValue.Length;
+        return ChineseRegex().Count(checkValue) == checkValue.Length;
     }
 
     #endregion 是否汉字

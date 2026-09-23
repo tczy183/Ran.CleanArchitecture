@@ -18,35 +18,13 @@ public static class LoggerExtensions
     /// <param name="message"></param>
     public static void LogWithLevel(this ILogger logger, LogLevel logLevel, string message)
     {
-        switch (logLevel)
+        var selectedLevel = NormalizeLogLevel(logLevel);
+        if (!logger.IsEnabled(selectedLevel))
         {
-            case LogLevel.Critical:
-                logger.LogCritical("{Message}", message);
-                break;
-
-            case LogLevel.Error:
-                logger.LogError("{Message}", message);
-                break;
-
-            case LogLevel.Warning:
-                logger.LogWarning("{Message}", message);
-                break;
-
-            case LogLevel.Information:
-                logger.LogInformation("{Message}", message);
-                break;
-
-            case LogLevel.Trace:
-                logger.LogTrace("{Message}", message);
-                break;
-
-            // LogLevel.Debug || LogLevel.None
-            // case LogLevel.Debug:
-            // case LogLevel.None:
-            default:
-                logger.LogDebug("{Message}", message);
-                break;
+            return;
         }
+
+        logger.Log(selectedLevel, "{Message}", message);
     }
 
     /// <summary>
@@ -63,35 +41,13 @@ public static class LoggerExtensions
         Exception exception
     )
     {
-        switch (logLevel)
+        var selectedLevel = NormalizeLogLevel(logLevel);
+        if (!logger.IsEnabled(selectedLevel))
         {
-            case LogLevel.Critical:
-                logger.LogCritical(exception, "发生致命错误：{Message}", message);
-                break;
-
-            case LogLevel.Error:
-                logger.LogError(exception, "发生致命错误：{Message}", message);
-                break;
-
-            case LogLevel.Warning:
-                logger.LogWarning(exception, "发生致命错误：{Message}", message);
-                break;
-
-            case LogLevel.Information:
-                logger.LogInformation(exception, "发生致命错误：{Message}", message);
-                break;
-
-            case LogLevel.Trace:
-                logger.LogTrace(exception, "发生致命错误：{Message}", message);
-                break;
-
-            // LogLevel.Debug || LogLevel.None
-            // case LogLevel.Debug:
-            // case LogLevel.None:
-            default:
-                logger.LogDebug(exception, "发生致命错误：{Message}", message);
-                break;
+            return;
         }
+
+        logger.Log(selectedLevel, exception, "发生异常：{Message}", message);
     }
 
     /// <summary>
@@ -185,5 +141,12 @@ public static class LoggerExtensions
         {
             ex.Log(logger);
         }
+    }
+
+    private static LogLevel NormalizeLogLevel(LogLevel logLevel)
+    {
+        return logLevel is >= LogLevel.Trace and <= LogLevel.Critical
+            ? logLevel
+            : LogLevel.Debug;
     }
 }

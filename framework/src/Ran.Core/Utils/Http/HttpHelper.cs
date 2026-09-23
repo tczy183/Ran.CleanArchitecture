@@ -30,7 +30,7 @@ public static class HttpHelper
         using var request = new HttpRequestMessage(HttpMethod.Get, url);
         AddHeaders(request, headers);
 
-        var response = await HttpClient.SendAsync(request);
+        using var response = await HttpClient.SendAsync(request);
         return await HandleResponse<T>(response);
     }
 
@@ -52,7 +52,7 @@ public static class HttpHelper
         request.Content = SerializeJson(data);
         AddHeaders(request, headers);
 
-        var response = await HttpClient.SendAsync(request);
+        using var response = await HttpClient.SendAsync(request);
         return await HandleResponse<T>(response);
     }
 
@@ -74,7 +74,7 @@ public static class HttpHelper
         request.Content = SerializeJson(data);
         AddHeaders(request, headers);
 
-        var response = await HttpClient.SendAsync(request);
+        using var response = await HttpClient.SendAsync(request);
         return await HandleResponse<T>(response);
     }
 
@@ -93,7 +93,7 @@ public static class HttpHelper
         using var request = new HttpRequestMessage(HttpMethod.Delete, url);
         AddHeaders(request, headers);
 
-        var response = await HttpClient.SendAsync(request);
+        using var response = await HttpClient.SendAsync(request);
         return await HandleResponse<T>(response);
     }
 
@@ -158,7 +158,7 @@ public static class HttpHelper
 
     public static Task<T?> GetAsync<T>(Uri url, Dictionary<string, string>? headers = null)
     {
-        throw new NotImplementedException();
+        return GetAsync<T>(url.ToString(), headers);
     }
 
     public static Task<T?> PostAsync<T>(
@@ -167,7 +167,7 @@ public static class HttpHelper
         Dictionary<string, string>? headers = null
     )
     {
-        throw new NotImplementedException();
+        return PostAsync<T>(url.ToString(), data, headers);
     }
 
     public static Task<T?> PutAsync<T>(
@@ -176,12 +176,12 @@ public static class HttpHelper
         Dictionary<string, string>? headers = null
     )
     {
-        throw new NotImplementedException();
+        return PutAsync<T>(url.ToString(), data, headers);
     }
 
     public static Task<T?> DeleteAsync<T>(Uri url, Dictionary<string, string>? headers = null)
     {
-        throw new NotImplementedException();
+        return DeleteAsync<T>(url.ToString(), headers);
     }
 
     #endregion 私有方法

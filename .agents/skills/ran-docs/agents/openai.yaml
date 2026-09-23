@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ran Documentation"
+  short_description: "Maintain bilingual MkDocs content and navigation"
+  default_prompt: "Use $ran-docs to update this project documentation."

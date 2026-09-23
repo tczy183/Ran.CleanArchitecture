@@ -1,59 +1,83 @@
-﻿<Solution>
-  <Folder Name="/.github/" />
+<Solution>
+  <Folder Name="/.github/"/>
   <Folder Name="/.github/workflows/">
-    <File Path=".github/workflows/doc.yml" />
+    <File Path=".github/workflows/doc.yml"/>
   </Folder>
   <Folder Name="/.solution Items/">
-    <File Path=".gitignore" />
-    <File Path="Directory.Build.props" />
-    <File Path="Directory.Packages.props" />
-    <File Path="README.md" />
-    <File Path="README_CN.md" />
-    <File Path="global.json" />
-    <File Path=".editorconfig" />
-    <File Path="nuget.config" />
+    <File Path=".gitignore"/>
+    <File Path="Directory.Build.props"/>
+    <File Path="Directory.Packages.props"/>
+    <File Path="README.md"/>
+    <File Path="README_CN.md"/>
+    <File Path=".editorconfig"/>
+    <File Path="nuget.config"/>
   </Folder>
   <Folder Name="/docs/">
-    <File Path="docs/mkdocs.yml" />
+    <File Path="docs/mkdocs.yml"/>
   </Folder>
   <Folder Name="/docs/content/">
-    <File Path="docs/content/index.md" />
-    <File Path="docs/content/about.md" />
+    <File Path="docs/content/index.md"/>
+    <File Path="docs/content/about.md"/>
   </Folder>
-  <Folder Name="/docs/content/en/" />
+  <Folder Name="/docs/content/en/"/>
+  <Folder Name="/docs/content/en/framework/">
+    <File Path="docs/content/en/framework/background-jobs.md"/>
+    <File Path="docs/content/en/framework/basic-module.md"/>
+  </Folder>
   <Folder Name="/docs/content/en/quick-start/">
-    <File Path="docs/content/en/quick-start/quick-start.md" />
+    <File Path="docs/content/en/quick-start/quick-start.md"/>
   </Folder>
-  <Folder Name="/docs/content/zh/" />
+  <Folder Name="/docs/content/zh/"/>
+  <Folder Name="/docs/content/zh/framework/">
+    <File Path="docs/content/zh/framework/background-jobs.md"/>
+    <File Path="docs/content/zh/framework/basic-module.md"/>
+  </Folder>
   <Folder Name="/docs/content/zh/quick-start/">
-    <File Path="docs/content/zh/quick-start/quick-start.md" />
+    <File Path="docs/content/zh/quick-start/quick-start.md"/>
   </Folder>
-  <Folder Name="/framework/" />
+  <Folder Name="/framework/"/>
   <Folder Name="/framework/src/">
-    <Project Path="framework/src/Quartz.EntityFrameworkCore.MySql/Quartz.EntityFrameworkCore.MySql.csproj" />
-    <Project Path="framework/src/Quartz.EntityFrameworkCore/Quartz.EntityFrameworkCore.csproj" />
-    <Project Path="framework/src/Ran.BackgroundJob/Ran.BackgroundJob.csproj" />
-    <Project Path="framework/src/Ran.BackgroundWorker/Ran.BackgroundWorker.csproj" />
-    <Project Path="framework/src/Ran.Core.AspNetCore/Ran.Core.AspNetCore.csproj" />
-    <Project Path="framework/src/Ran.Core/Ran.Core.csproj" />
-    <Project Path="framework/src/Ran.Ddd.Application.Abstraction/Ran.Ddd.Application.Abstraction.csproj" />
-    <Project Path="framework/src/Ran.Ddd.Application/Ran.Ddd.Application.csproj" />
-    <Project Path="framework/src/Ran.Ddd.Domain.Abstraction/Ran.Ddd.Domain.Abstraction.csproj" />
-    <Project Path="framework/src/Ran.Ddd.Domain/Ran.Ddd.Domain.csproj" />
-    <Project Path="framework/src/Ran.Ddd.EntityFramework/Ran.Ddd.EntityFramework.csproj" />
-    <Project Path="framework/src/Ran.EventBus.Abstractions/Ran.EventBus.Abstractions.csproj" />
-    <Project Path="framework/src/Ran.EventBus/Ran.EventBus.csproj" />
-    <Project Path="framework/src/Ran.Mediator/Ran.Mediator.csproj" />
+    <Project Path="framework/src/Quartz.EntityFrameworkCore.MySql/Quartz.EntityFrameworkCore.MySql.csproj"/>
+    <Project Path="framework/src/Quartz.EntityFrameworkCore/Quartz.EntityFrameworkCore.csproj"/>
+    <Project Path="framework/src/Ran.BackgroundJob/Ran.BackgroundJob.csproj"/>
+    <Project Path="framework/src/Ran.BackgroundWorker/Ran.BackgroundWorker.csproj"/>
+    <Project Path="framework/src/Ran.Core.AspNetCore/Ran.Core.AspNetCore.csproj"/>
+    <Project Path="framework/src/Ran.Core/Ran.Core.csproj"/>
+    <Project Path="framework/src/Ran.Ddd.Application.Abstraction/Ran.Ddd.Application.Abstraction.csproj"/>
+    <Project Path="framework/src/Ran.Ddd.Application/Ran.Ddd.Application.csproj"/>
+    <Project Path="framework/src/Ran.Ddd.Domain.Abstraction/Ran.Ddd.Domain.Abstraction.csproj"/>
+    <Project Path="framework/src/Ran.Ddd.Domain/Ran.Ddd.Domain.csproj"/>
+    <Project Path="framework/src/Ran.Ddd.EntityFramework/Ran.Ddd.EntityFramework.csproj"/>
+    <Project Path="framework/src/Ran.EventBus.Abstractions/Ran.EventBus.Abstractions.csproj"/>
+    <Project Path="framework/src/Ran.EventBus/Ran.EventBus.csproj"/>
+    <Project Path="framework/src/Ran.Mediator/Ran.Mediator.csproj"/>
   </Folder>
-  <Folder Name="/modules/" />
-  <Folder Name="/services/" />
+  <Folder Name="/framework/test/">
+    <Project Path="framework/test/Ran.BackgroundJob.Tests/Ran.BackgroundJob.Tests.csproj"/>
+  </Folder>
+  <Folder Name="/modules/"/>
+  <Folder Name="/modules/basic/"/>
+  <Folder Name="/modules/basic/src/">
+    <Project Path="modules/basic/src/Ran.Basic.Application/Ran.Basic.Application.csproj"/>
+    <Project Path="modules/basic/src/Ran.Basic.AspNetCore/Ran.Basic.AspNetCore.csproj"/>
+    <Project Path="modules/basic/src/Ran.Basic.Domain/Ran.Basic.Domain.csproj"/>
+    <Project Path="modules/basic/src/Ran.Basic.EntityFrameworkCore/Ran.Basic.EntityFrameworkCore.csproj"/>
+  </Folder>
+  <Folder Name="/modules/basic/test/">
+    <Project Path="modules/basic/test/Ran.Basic.Application.Tests/Ran.Basic.Application.Tests.csproj"/>
+  </Folder>
+  <Folder Name="/modules/background-jobs/"/>
+  <Folder Name="/modules/background-jobs/src/">
+    <Project Path="modules/background-jobs/src/Ran.BackgroundJob.EntityFrameworkCore/Ran.BackgroundJob.EntityFrameworkCore.csproj"/>
+  </Folder>
+  <Folder Name="/services/"/>
   <Folder Name="/services/src/">
-    <Project Path="services/src/Application/Application.csproj" />
-    <Project Path="services/src/ApplicationAbstraction/ApplicationAbstraction.csproj" />
-    <Project Path="services/src/Domain/Domain.csproj" />
-    <Project Path="services/src/DomainAbstraction/DomainAbstraction.csproj" />
-    <Project Path="services/src/Infrastructure/Infrastructure.csproj" />
-    <Project Path="services/src/Web/Web.csproj" />
+    <Project Path="services/src/Application/Application.csproj"/>
+    <Project Path="services/src/ApplicationAbstraction/ApplicationAbstraction.csproj"/>
+    <Project Path="services/src/Domain/Domain.csproj"/>
+    <Project Path="services/src/DomainAbstraction/DomainAbstraction.csproj"/>
+    <Project Path="services/src/Infrastructure/Infrastructure.csproj"/>
+    <Project Path="services/src/Web/Web.csproj"/>
   </Folder>
-  <Folder Name="/services/test/" />
+  <Folder Name="/services/test/"/>
 </Solution>

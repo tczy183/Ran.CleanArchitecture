@@ -12,7 +12,7 @@
 
 ### 安装 .NET SDK
 
-- [.NET 9 SDK](https://dot.net)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
 
 ### 安装 Docker 环境
 

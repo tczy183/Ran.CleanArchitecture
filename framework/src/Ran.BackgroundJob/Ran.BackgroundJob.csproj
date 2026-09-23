@@ -1,1 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk"></Project>
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Ran.BackgroundWorker\Ran.BackgroundWorker.csproj" />
+    <ProjectReference Include="..\Ran.Core\Ran.Core.csproj" />
+  </ItemGroup>
+</Project>

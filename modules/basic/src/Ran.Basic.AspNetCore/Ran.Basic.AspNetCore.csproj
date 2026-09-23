@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../../framework/src/Ran.Core.AspNetCore/Ran.Core.AspNetCore.csproj" />
+    <ProjectReference Include="../Ran.Basic.Application/Ran.Basic.Application.csproj" />
+  </ItemGroup>
+</Project>

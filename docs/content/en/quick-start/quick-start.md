@@ -1,22 +1,21 @@
-# 入门
+# Getting Started
 
-## 环境准备
+## Prerequisites
 
-### 安装编程工具
+### Install a development environment
 
-选择下列其中一种编程工具
+Choose one of the following development tools:
 
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Visual Studio](https://visualstudio.microsoft.com/)
 - [JetBrains Rider](https://www.jetbrains.com/rider/)
 
-### 安装 .NET SDK
+### Install the .NET SDK
 
-- [.NET 9 SDK](https://dot.net)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
 
-### 安装 Docker 环境
+### Install Docker
 
-拥有Docker环境，用于自动化单元测试和集成测试。
+Docker is required to run automated unit and integration tests that depend on containerized services.
 
-Docker Desktop下载地址： （https://www.docker.com/products/docker-desktop/)
-
+- [Download Docker Desktop](https://www.docker.com/products/docker-desktop/)

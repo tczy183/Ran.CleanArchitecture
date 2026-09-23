@@ -13,7 +13,7 @@ using Ran.EventBus.Local;
 
 namespace Ran.EventBus;
 
-[DependsOn(typeof(EventBusAbstractionsModule))]
+[DependsOn(typeof(EventBusAbstractionsModule), typeof(Ran.BackgroundWorker.BackgroundWorkerModule))]
 public class EventBusModule : DddModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

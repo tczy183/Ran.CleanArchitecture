@@ -4,5 +4,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ran.EventBus.Abstractions\Ran.EventBus.Abstractions.csproj" />
+    <ProjectReference Include="..\Ran.BackgroundWorker\Ran.BackgroundWorker.csproj" />
   </ItemGroup>
 </Project>

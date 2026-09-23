@@ -28,7 +28,6 @@ markdown_extensions:
   # Call-outs and note boxes ('admonition')
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
 
 theme:
   name: material
@@ -41,28 +40,27 @@ theme:
     - navigation.prune #导航修剪
     - navigation.top #导航顶部
   language: zh
-  theme:
-    palette:
+  palette:
 
-      # Palette toggle for automatic mode
-      - media: "(prefers-color-scheme)"
-        toggle:
-          icon: material/brightness-auto
-          name: Switch to light mode
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
 
-      # Palette toggle for light mode
-      - media: "(prefers-color-scheme: light)"
-        scheme: default
-        toggle:
-          icon: material/brightness-7
-          name: Switch to dark mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
 
-      # Palette toggle for dark mode
-      - media: "(prefers-color-scheme: dark)"
-        scheme: slate
-        toggle:
-          icon: material/brightness-4
-          name: Switch to system preference
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
 
 plugins:
   - search
@@ -80,7 +78,13 @@ nav:
   - 中文文档:
       - 入门:
           - 创建项目: zh/quick-start/quick-start.md
+      - 框架:
+          - 后台任务: zh/framework/background-jobs.md
+          - 基础权限模块: zh/framework/basic-module.md
   - English Docs:
       - Getting Started:
           - Create Project: en/quick-start/quick-start.md
+      - Framework:
+          - Background Jobs: en/framework/background-jobs.md
+          - Basic Authorization Module: en/framework/basic-module.md
   - 关于: about.md

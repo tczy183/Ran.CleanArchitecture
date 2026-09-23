@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../../framework/src/Ran.Ddd.EntityFramework/Ran.Ddd.EntityFramework.csproj" />
+    <ProjectReference Include="../Ran.Basic.Domain/Ran.Basic.Domain.csproj" />
+  </ItemGroup>
+</Project>

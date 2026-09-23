@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../../../../framework/src/Ran.Ddd.Application/Ran.Ddd.Application.csproj" />
+    <ProjectReference Include="../Ran.Basic.Domain/Ran.Basic.Domain.csproj" />
+  </ItemGroup>
+</Project>

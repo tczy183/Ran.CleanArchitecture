@@ -36,13 +36,21 @@ public abstract class BackgroundWorkerBase : IBackgroundWorker
 
     public virtual Task StartAsync(CancellationToken cancellationToken = default)
     {
-        Logger.LogDebug("Stopped background worker: {Message}", ToString());
+        if (Logger.IsEnabled(LogLevel.Debug))
+        {
+            Logger.LogDebug("Started background worker: {Message}", ToString());
+        }
+
         return Task.CompletedTask;
     }
 
     public virtual async Task StopAsync(CancellationToken cancellationToken = default)
     {
-        Logger.LogDebug("Stopped background worker: {Message}", ToString());
+        if (Logger.IsEnabled(LogLevel.Debug))
+        {
+            Logger.LogDebug("Stopped background worker: {Message}", ToString());
+        }
+
         await StoppingTokenSource.CancelAsync();
         StoppingTokenSource.Dispose();
     }

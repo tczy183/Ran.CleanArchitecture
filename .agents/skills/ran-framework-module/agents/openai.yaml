@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ran Framework Module"
+  short_description: "Extend reusable Ran framework modules and packages"
+  default_prompt: "Use $ran-framework-module to add or change a framework module safely."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ran Service Feature"
+  short_description: "Implement features across service architecture layers"
+  default_prompt: "Use $ran-service-feature to implement a service feature in this repository."
