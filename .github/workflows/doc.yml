@@ -3,30 +3,34 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "docs/**"
+      - ".github/workflows/doc.yml"
+  workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: docs-pages
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Check commit message
-        run: |
-          if ! git log -1 --pretty=%B | grep -q "docs:"; then
-            echo "Commit message must include 'docs:'"
-            exit 1
-          fi
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
         with:
-          python-version: 3.x
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mkdocs-material
-          pip install mkdocs-awesome-pages-plugin
-          pip install mkdocs-git-revision-date-localized-plugin
-      - name: Build
+          pip install mkdocs-material mkdocs-awesome-pages-plugin mkdocs-git-revision-date-localized-plugin
+      - name: Build and deploy
+        working-directory: docs
         run: |
-          cd docs
+          mkdocs build --strict
           mkdocs gh-deploy --force
